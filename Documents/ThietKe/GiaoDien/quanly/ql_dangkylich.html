@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hiển thị lịch</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<script type="text/javascript" src="../js/calendar.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12"><img src="../img/img-hd.png" width="100%"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<nav aria-label="Page navigation" style="font-weight: bold;">
+				  	<ul class="pagination">
+					    <li style="width: 25%"><a href="../trangchu.html">TRANG CHỦ</a></li>
+					    <li style="width: 25%"><a href="../quanly/ql_phongthuchanh.html">PHÒNG THỰC HÀNH</a></li>
+					    <li style="width: 25%"><a href="../quanly/ql_nhomhocphan.html">CÁC NHÓM HỌC PHẦN</a></li>
+					    <li style="width: 25%"><a href="../quanly/ql_monthuchanh.html">MÔN THỰC HÀNH</a></li>
+					    <li style="width: 25%"><a href="../quanly/ql_lichthuchanh.html">LỊCH THỰC HÀNH</a></li>
+					    <li style="width: 25%"><a href="../quanly/ql_taovande.html">TẠO VẤN ĐỀ</a></li>
+					    <li style="width: 25%"><a href="../quanly/ql_nhatkysudung.html">NHẬT KÝ SỬ DỤNG</a></li>
+				  	</ul>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<button class="btn btn-primary" style="width: 100%; margin-bottom: 10px">ĐĂNG NHẬP</button>
+				<div class="panel panel-primary">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">HÌNH ẢNH</h3>
+				  	</div>
+				  	<div class="panel-body">
+					  	<img src="../img/hoa.jpg" class="img-responsive">
+				  	</div>
+				</div>
+
+				<div class="panel panel-primary">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">TIN TỨC- THÔNG BÁO</h3>
+				  	</div>
+				  	<div class="panel-body">
+				    	<li><a href="#">Tin 1</a></li>
+				    	<li><a href="#">Tin 1</a></li>
+				    	<li><a href="#">Tin 1</a></li>
+				    	<li><a href="#">Tin 1</a></li>
+				    	<li><a href="#">Tin 1</a></li>
+				    	<li><a href="#">Tin 1</a></li>
+				    	<li><a href="#">Tin 1</a></li>
+				  	</div>
+				</div>
+
+				<div class="panel panel-primary">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">LỊCH</h3>
+				  	</div>
+				  	<div class="panel-body">
+				    	<div style="width: 100%;">
+				    		<script type="text/javascript">
+								var cal = createCal();
+								document.write(cal);
+							</script>
+				    	</div>
+				  	<br>
+				  	</div>
+				  	
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div class="panel panel-primary" style="height: auto;">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">LỊCH THỰC HÀNH</h3>
+				  	</div>
+				  	<div class="panel-body">
+				  		<div class="panel panel-info">
+				  			<div class="panel-heading">
+				  				<h4 class="panel-title">Đăng ký lịch thực hành</h4>
+				  			</div>
+				  			<div class="panel-body">
+				  				<div class="row">
+						  			<form method="POST" class="form-inline">
+						  				<div class="col-md-8 col-md-offset-2">
+						  					<div class="col-md-4">
+						  						<label>Mã học phần</label>
+						  					</div>
+						  					<div class="col-md-8">
+						  						<input class="form-control" type="text" name="MaMH">
+						  					</div>
+						  					<div class="col-md-4">
+						  						<label>Tên học phần</label>
+						  					</div>
+						  					<div class="col-md-8">
+						  						<input class="form-control" type="text" name="MaHP">
+						  					</div>
+						  					<div class="col-md-4">
+						  						<label>Số lượng sinh viên</label>
+						  					</div>
+						  					<div class="col-md-8">
+						  						<input class="form-control" type="text" name="SoLuong">
+						  					</div>
+						  					<div class="col-md-4">
+						  						<label>Tên giáo viên</label>
+						  					</div>
+						  					<div class="col-md-8">
+						  						<input class="form-control name="MaGV">
+						  					</div>
+						  				</div>
+						  			</form>
+
+						  			<form method="POST">
+						  				<table class="table table-bordered table-striped">
+						  					<tr>
+						  						<th>Buổi</th>
+						  						<th>Phòng</th>
+						  						<th>Thứ 2</th>
+						  						<th>Thứ 3</th>
+						  						<th>Thứ 4</th>
+						  						<th>Thứ 5</th>
+						  						<th>Thứ 6</th>
+						  						<th>Thứ 7</th>
+						  						<th>Chủ nhật</th>
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 1</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 2</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 3</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 4</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  				</table>
+						  			</form>
+						  		</div>
+				  			</div>
+				  		</div>
+				  	</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="tab">
+					  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '1')">1</a>
+					  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '2')">2</a>
+					  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '3')">3</a>
+					  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '4')">4</a>
+					  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '5')">5</a>
+					  <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, '6')">6</a>
+					</div>
+
+					<div id="1" class="tabcontent">
+					  <h3>London</h3>
+					  <form method="POST">
+						  				<table class="table table-bordered table-striped">
+						  					<tr>
+						  						<th>Buổi</th>
+						  						<th>Phòng</th>
+						  						<th>Thứ 2</th>
+						  						<th>Thứ 3</th>
+						  						<th>Thứ 4</th>
+						  						<th>Thứ 5</th>
+						  						<th>Thứ 6</th>
+						  						<th>Thứ 7</th>
+						  						<th>Chủ nhật</th>
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 1</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 2</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 3</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 4</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  				</table>
+						  			</form>
+					</div>
+
+					<div id="2" class="tabcontent">
+					  <h3>Paris</h3>
+					  <p>Paris is the capital of France.</p> 
+					</div>
+
+					<div id="3" class="tabcontent">
+					  <h3>Tokyo</h3>
+					  <p>Tokyo is the capital of Japan.</p>
+					</div>
+
+					<div id="4" class="tabcontent">
+					  <h3>London</h3>
+					  <form method="POST">
+						  				<table class="table table-bordered table-striped">
+						  					<tr>
+						  						<th>Buổi</th>
+						  						<th>Phòng</th>
+						  						<th>Thứ 2</th>
+						  						<th>Thứ 3</th>
+						  						<th>Thứ 4</th>
+						  						<th>Thứ 5</th>
+						  						<th>Thứ 6</th>
+						  						<th>Thứ 7</th>
+						  						<th>Chủ nhật</th>
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 1</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 2</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 3</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  					<tr>
+						  						<td>Sáng</td>
+						  						<td>Phòng 4</td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></td>
+						  						<td><input type="checkbox" aria-label="..."></th>				  			
+						  					</tr>
+						  				</table>
+						  			</form>
+					</div>
+
+					<div id="5" class="tabcontent">
+					  <h3>Paris</h3>
+					  <p>Paris is the capital of France.</p> 
+					</div>
+
+					<div id="6" class="tabcontent">
+					  <h3>Tokyo</h3>
+					  <p>Tokyo is the capital of Japan.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12" style="background-color: rgb(51, 122, 183); border-color: #337ab7; color: white; height: 30px; font-size: 16px; padding: 5px;">
+			<center><strong>HỆ THỐNG QUẢN LÝ LỊCH THỰC HÀNH KHOA CÔNG NGHỆ THÔNG TIN & TRUYỀN THÔNG</strong></center>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+	</script>
+</body>
+</html>
