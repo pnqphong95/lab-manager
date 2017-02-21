@@ -16,6 +16,8 @@ use App\ChucVu;
 use App\Phong;
 use App\GiaoVien;
 use App\PhanMem;
+use App\Lich;
+use App\LopHocPhan;
 
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
@@ -70,13 +72,11 @@ Route::get('test1', function(){
 	}
 });
 
+
+
 Route::get('test2', function(){
-	$phong = Phong::find(2);
-	foreach ($phong->phong_phanmem as $phong_phanmem) {
-		$id = $phong_phanmem->idPhanMem;
-		$phanmem = PhanMem::find($id);
-		echo $phanmem->TenPM."<br>";
-	}
+	$lophocphan = LopHocPhan::find(1)->first();
+	echo $lophocphan->TenLop;
 });
 
 

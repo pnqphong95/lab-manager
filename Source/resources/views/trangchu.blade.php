@@ -1,3 +1,7 @@
+<?php
+use App\LopHocPhan;
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,19 +150,18 @@
 							        	<th>Thứ 7</th>
 							      	</tr>
 						    	</thead>
-							    <tbody>		
-							    <?php $idphong = 1; ?>				
+							    <tbody>									    				
 								@foreach($phong as $phong)
 							      	<tr>						        								        	
 										<td>{{$phong->TenPhong}}</td>
-										<td id="{{$idphong}}2"></td>
-							        	<td id="{{$idphong}}3">aaa</td>
-							        	<td id="{{$idphong}}4"></td>
-							        	<td id="{{$idphong}}5"></td>
-							        	<td id="{{$idphong}}6"></td>
-							        	<td id="{{$idphong}}7"></td>
-							        	<?php $idphong++; ?>									        	
+										<td id="{{$phong->id}}2"></td>
+							        	<td id="{{$phong->id}}3">aaa</td>
+							        	<td id="{{$phong->id}}4"></td>
+							        	<td id="{{$phong->id}}5"></td>
+							        	<td id="{{$phong->id}}6"></td>
+							        	<td id="{{$phong->id}}7"></td> 
 						     	 	</tr>
+
 					     	 	@endforeach												      	
 							    </tbody>
 						  	</table>
@@ -196,4 +199,20 @@
 	});
 	
 
+						     	 	
+						     	 	
+
+</script>
+
+<script type="text/javascript">
+ 	$(document).ready(function(){ 	
+ 		@foreach ($lich as $lich) 
+ 			var cell = $('#' + {{$lich->idPhong}} + {{$lich->idThu}});
+ 			<?php
+ 			$lophocphan = LopHocPhan::find(1)->first();
+ 			?>
+ 			var val = "{{$lophocphan->TenLop}}";
+ 			cell.html(val);
+ 		@endforeach
+ 	});
 </script>
