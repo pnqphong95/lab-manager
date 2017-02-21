@@ -1,5 +1,7 @@
 <?php
 use App\LopHocPhan;
+use App\GiaoVien;
+$soLuongPhong = 0;
 ?>
 
 <!DOCTYPE html>
@@ -130,10 +132,10 @@ use App\LopHocPhan;
 										Buổi
 									</label>
 					    			<label class="btn btn-default active">
-										<input type="radio" name="radioBuoi" value="0" checked/>Sáng
+										<input type="radio" name="radioBuoi" value="1" checked/>Sáng
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioBuoi" value="1"/>Chiều
+										<input type="radio" name="radioBuoi" value="2"/>Chiều
 									</label>
 								</div>
 							</div>
@@ -141,13 +143,14 @@ use App\LopHocPhan;
 							<table id="ViewTable" class="table table-bordered" style="background-color: white;">
 							    <thead>
 							      	<tr>							        	
-							        	<th>Phòng</th>
-							        	<th>Thứ 2</th>
-							        	<th>Thứ 3</th>
-							        	<th>Thứ 4</th>
-							        	<th>Thứ 5</th>
-							        	<th>Thứ 6</th>
-							        	<th>Thứ 7</th>
+							        	<th width="9%">Phòng</th>
+							        	<th width="13%">Thứ 2</th>
+							        	<th width="13%">Thứ 3</th>
+							        	<th width="13%">Thứ 4</th>
+							        	<th width="13%">Thứ 5</th>
+							        	<th width="13%">Thứ 6</th>
+							        	<th width="13%">Thứ 7</th>
+							        	<th width="13%">Chủ nhật</th>
 							      	</tr>
 						    	</thead>
 							    <tbody>									    				
@@ -155,13 +158,14 @@ use App\LopHocPhan;
 							      	<tr>						        								        	
 										<td>{{$phong->TenPhong}}</td>
 										<td id="{{$phong->id}}2"></td>
-							        	<td id="{{$phong->id}}3">aaa</td>
+							        	<td id="{{$phong->id}}3"></td>
 							        	<td id="{{$phong->id}}4"></td>
 							        	<td id="{{$phong->id}}5"></td>
 							        	<td id="{{$phong->id}}6"></td>
 							        	<td id="{{$phong->id}}7"></td> 
+							        	<td id="{{$phong->id}}8"></td> 
 						     	 	</tr>
-
+						     	 	<?php $phong++;?>
 					     	 	@endforeach												      	
 							    </tbody>
 						  	</table>
@@ -183,8 +187,13 @@ use App\LopHocPhan;
 </html>
 
 <script type="text/javascript">
-
-
+	$(document).ready(function(){
+		$("input[name=radioBuoi]").change(function () {
+			var a = $("input[name=radioBuoi]:checked").val();
+       		alert(a); 
+       		emptyLich();
+    	});
+	});
 	//get val() radioFormTuan
 	$('#myForm input').on('change', function() {
 	   var nameTuan = $('input[name=radioName]:checked', '#myForm').val();
@@ -197,11 +206,27 @@ use App\LopHocPhan;
 		alert(a);
 		@endfor
 	});
-	
 
-						     	 	
-						     	 	
-
+	function emptyLich() {
+		$(document).ready(function(){
+		<?php for($i = 1; $i <= $soLuongPhong; $i++) {?>
+			var t = $('#' + {{ $i }} + 2);
+			t.html('');
+	    	t = $('#' + {{ $i }} + 3);
+	    	t.html('');
+	    	t = $('#' + {{ $i }} + 4);
+	    	t.html('');
+	    	t = $('#' + {{ $i }} + 5);
+	    	t.html('');
+	    	t = $('#' + {{ $i }} + 6);
+	    	t.html('');
+	    	t = $('#' + {{ $i }} + 7);
+	    	t.html(''); 
+	    	t = $('#' + {{ $i }} + 8);
+	    	t.html('');
+	    <?php }?>
+	    });
+	}
 </script>
 
 <script type="text/javascript">
@@ -209,9 +234,10 @@ use App\LopHocPhan;
  		@foreach ($lich as $lich) 
  			var cell = $('#' + {{$lich->idPhong}} + {{$lich->idThu}});
  			<?php
- 			$lophocphan = LopHocPhan::find(1)->first();
+ 			$lophocphan = LopHocPhan::find( $lich->idLopHocPhan);
+ 			$giaovien = GiaoVien::find( $lich->idGiaoVien);
  			?>
- 			var val = "{{$lophocphan->TenLop}}";
+ 			var val = "{{$lophocphan->TenLop}} - Thầy {{$giaovien->TenGV}}";
  			cell.html(val);
  		@endforeach
  	});

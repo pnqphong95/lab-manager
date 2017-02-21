@@ -75,7 +75,7 @@ Route::get('test1', function(){
 
 
 Route::get('test2', function(){
-	$lophocphan = LopHocPhan::find(1)->first();
+	$lophocphan = LopHocPhan::find(3);
 	echo $lophocphan->TenLop;
 });
 
