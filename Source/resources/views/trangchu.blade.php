@@ -165,7 +165,7 @@ $soLuongPhong = 0;
 							        	<td id="{{$phong->id}}7"></td> 
 							        	<td id="{{$phong->id}}8"></td> 
 						     	 	</tr>
-						     	 	<?php $phong++;?>
+						     	 	<?php $soLuongPhong++;?>
 					     	 	@endforeach												      	
 							    </tbody>
 						  	</table>
@@ -189,9 +189,22 @@ $soLuongPhong = 0;
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("input[name=radioBuoi]").change(function () {
-			var a = $("input[name=radioBuoi]:checked").val();
-       		alert(a); 
+			var buoiLich = $("input[name=radioBuoi]:checked").val();
        		emptyLich();
+
+       		$.ajax({
+
+	            type: "get",
+	            url: "ajax/getLich/" + buoiLich,
+	            success: function (data) {
+	                console.log(data);
+	            	showLich(data);
+	                //alert(data.length);
+	            },
+	            error: function (data) {
+	                console.log('Error:', data);
+	            }
+	        });
     	});
 	});
 	//get val() radioFormTuan
@@ -209,36 +222,52 @@ $soLuongPhong = 0;
 
 	function emptyLich() {
 		$(document).ready(function(){
-		<?php for($i = 1; $i <= $soLuongPhong; $i++) {?>
-			var t = $('#' + {{ $i }} + 2);
+			var i = 1;
+			for (i = 1; i < {{$soLuongPhong}}; i++)
+			{
+			var t = $('#' + i + 2);
 			t.html('');
-	    	t = $('#' + {{ $i }} + 3);
+	    	t = $('#' + i + 3);
 	    	t.html('');
-	    	t = $('#' + {{ $i }} + 4);
+	    	t = $('#' + i + 4);
 	    	t.html('');
-	    	t = $('#' + {{ $i }} + 5);
+	    	t = $('#' + i + 5);
 	    	t.html('');
-	    	t = $('#' + {{ $i }} + 6);
+	    	t = $('#' + i + 6);
 	    	t.html('');
-	    	t = $('#' + {{ $i }} + 7);
+	    	t = $('#' + i + 7);
 	    	t.html(''); 
-	    	t = $('#' + {{ $i }} + 8);
+	    	t = $('#' + i + 8);
 	    	t.html('');
-	    <?php }?>
+	    	}
 	    });
+	}
+
+	function showLich(data) {
+		var jsonLich = '{ "lich" :' + data + '}';
+		var obj = JSON.parse(jsonLich);
+		//alert(obj.lich.length);
+		
+		for(i = 0; i < obj.lich.length; i++)
+		{
+			
+			var cell = $('#' + obj.lich[i].idPhong + obj.lich[i].idThu);
+			var noidung = obj.lich[i].idLopHocPhan;
+			
+			cell.text(noidung);
+			
+		}
 	}
 </script>
 
 <script type="text/javascript">
  	$(document).ready(function(){ 	
  		@foreach ($lich as $lich) 
- 			var cell = $('#' + {{$lich->idPhong}} + {{$lich->idThu}});
  			<?php
  			$lophocphan = LopHocPhan::find( $lich->idLopHocPhan);
  			$giaovien = GiaoVien::find( $lich->idGiaoVien);
  			?>
- 			var val = "{{$lophocphan->TenLop}} - Thầy {{$giaovien->TenGV}}";
- 			cell.html(val);
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}}).html("{{$lophocphan->TenLop}} - Thầy {{$giaovien->TenGV}}");
  		@endforeach
  	});
 </script>

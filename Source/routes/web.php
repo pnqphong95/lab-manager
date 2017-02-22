@@ -79,6 +79,12 @@ Route::get('test2', function(){
 	echo $lophocphan->TenLop;
 });
 
+Route::get('ajax/getLich/{buoiLich?}',function($buoiLich){
+    $lich = DB::table('lich')->where('idBuoi', $buoiLich)->get();
+    return json_encode($lich);
+});
+
+
 
 Route::get('login', 'DangNhapController@getDangNhap')->name('getLogin');
 Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
