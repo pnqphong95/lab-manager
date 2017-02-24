@@ -31,34 +31,8 @@ $soLuongPhong = 0;
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<a href="{{route('getLogin')}}" class="btn btn-primary"><center>Đăng nhập</center></a>
 
-				<div class="panel panel-primary">
-				  	<div class="panel-heading">
-				    	<h3 class="panel-title">ĐĂNG NHẬP</h3>
-				  	</div>
-				  	<div class="panel-body">
-				    	<label>Tài khoản</label>
-				    	<input class="form-control" type="text" name="TaiKhoan">
-				    	<label>Mật khẩu</label>
-				    	<input class="form-control" type="text" name="TaiKhoan">
-				  	</div>
-				  	<center><button class="btn btn-primary">Đăng nhập</center></button>
-				  	<br>
-				</div>
-
-				<div class="panel panel-primary">
-				  	<div class="panel-heading">
-				    	<h3 class="panel-title">ĐĂNG NHẬP</h3>
-				  	</div>
-				  	<div class="panel-body">
-				    	<div id="calendar"></div>
-				  	</div>				  	
-				</div>				
-			</div>
-
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="panel panel-primary">
 				  	<div class="panel-heading">
 				    	<h3 class="panel-title"><center>THÔNG TIN LỊCH THỰC HÀNH</center></h3>
@@ -73,59 +47,17 @@ $soLuongPhong = 0;
 					    			<label class="btn btn-default active">
 										<input type="radio" name="radioTuan" value="1" checked/>1
 									</label>
+
+									@for($i = 2; $i <= 18; $i++)
+
 									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="2" />2
+										<input type="radio" name="radioTuan" value="{{$i}}" />{{$i}}
 									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="3" />3
-									</label>
-									<label class="btn btn-default ">
-										<input type="radio" name="radioTuan" value="4" />4
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="5" />5
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="6" />6
-									</label>
-									<label class="btn btn-default ">
-										<input type="radio" name="radioTuan" value="7" />7
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="8" />8
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="9" />9
-									</label>
-									<label class="btn btn-default ">
-										<input type="radio" name="radioTuan" value="10" />10
-									</label>
-									<label class="btn btn-default ">
-										<input type="radio" name="radioTuan" value="11" />11
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="12" />12
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="13" />13
-									</label>
-									<label class="btn btn-default ">
-										<input type="radio" name="radioTuan" value="14" />14
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="15" />15
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="16" />16
-									</label>
-									<label class="btn btn-default ">
-										<input type="radio" name="radioTuan" value="17" />17
-									</label>
-									<label class="btn btn-default">
-										<input type="radio" name="radioTuan" value="18" />18
-									</label>
+
+									@endfor
+
 								</div>
-					
+								<br>
 							
 								<div style="margin-top: 10px;" class="btn-group" data-toggle="buttons">
 									<label class="btn btn-default">

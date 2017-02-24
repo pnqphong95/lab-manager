@@ -22,6 +22,13 @@ use App\LopHocPhan;
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
 //Route::post('dangnhap', ['as'=> 'dangnhap', 'uses'=> 'TaiKhoanCTL@dangnhap']);
+Route::group(['prefix' => 'admin'], function(){
+	Route::group(['prefix' => 'giaovien'], function(){
+		Route::get('danhsach', 'GiaoVienController@getDanhSach');
+		Route::get('sua', 'GiaoVienController@getSua');
+		Route::get('them', 'GiaoVienController@getThem');
+	});
+});
 
 Route::get('test/{id}', function($id){
 	$tk = TaiKhoan::add($id);
@@ -92,5 +99,7 @@ Route::get('ajax/getLich/{buoi?}/{tuan}',function($buoi, $tuan){
 
 Route::get('login', 'DangNhapController@getDangNhap')->name('getLogin');
 Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
+
+Route::get('user', 'UserController@trangchu');
 
 
