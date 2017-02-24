@@ -79,8 +79,12 @@ Route::get('test2', function(){
 	echo $lophocphan->TenLop;
 });
 
-Route::get('ajax/getLich/{buoiLich?}',function($buoiLich){
-    $lich = DB::table('lich')->where('idBuoi', $buoiLich)->get();
+Route::get('ajax/getLich/{buoi?}/{tuan}',function($buoi, $tuan){
+    $lich = DB::table('lich')		->join('lophocphan','lophocphan.id', '=', 'idLopHocPhan')
+    								->join('giaovien','giaovien.id', '=', 'idGiaoVien')
+    								->where('idBuoi', $buoi)
+    								->where('Tuan', $tuan)
+    								->get();
     return json_encode($lich);
 });
 
