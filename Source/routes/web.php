@@ -19,7 +19,7 @@ use App\PhanMem;
 use App\Lich;
 use App\LopHocPhan;
 
-Route::get('/', 'TrangChuController@getTrangChu')->name('root');
+Route::get('trangchu', 'TrangChuController@getTrangChu')->name('root');
 
 //Route::post('dangnhap', ['as'=> 'dangnhap', 'uses'=> 'TaiKhoanCTL@dangnhap']);
 Route::group(['prefix' => 'admin'], function(){
@@ -103,3 +103,31 @@ Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
 Route::get('user', 'UserController@trangchu');
 
 
+Route::get('admin/lich/them', 'LichController@getThem');
+
+Route::post('admin/lich/them', 'LichController@postThem');
+
+Route::group(['prefix'=>'admin'], function(){
+	Route::group(['prefix'=>'lophocphan'], function(){
+		//admin/theloai/danhsach
+		Route::get('danhsach', 'LopHocPhanController@getDanhSach');
+
+		Route::get('sua', 'LopHocPhanController@getSua');
+
+		Route::get('them', 'LopHocPhanController@getThem');
+
+		Route::post('them', 'LopHocPhanController@postThem');
+	});
+
+	Route::group(['prefix'=>'monhoc'], function(){
+		//admin/theloai/danhsach
+		Route::get('danhsach', 'MonHocController@getDanhSach');
+
+		Route::get('sua/{id}', 'MonHocController@getSua');
+		Route::post('sua/{id}', 'MonHocController@postSua');
+
+		Route::get('them', 'MonHocController@getThem');
+		Route::post('them', 'MonHocController@postThem');
+	});
+	
+});
