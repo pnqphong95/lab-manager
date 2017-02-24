@@ -7,30 +7,30 @@ $soLuongPhong = 0;
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Trang nhất</title>
-	<link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.min.css') }}">
-	<base href="{{asset('')}}">
+    <title>Trang nhất</title>
+    <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.min.css') }}">
+    <base href="{{asset('')}}">
 </head>
 <body>
-	<div class="container">
-		@include('admin.layout.anhbia')
+    <div class="container">
+        @include('admin.layout.anhbia')
 
-		@include('admin.layout.header')	
-		
-		<div class="row">
-			
-			@include('admin.layout.col3')
+        @include('admin.layout.header')	
+        
+        <div class="row">
+            
+            @include('admin.layout.col3')
 
-			@yield('content')
-		</div>
+            @yield('content')
+        </div>
 
-		@include('admin.layout.footer')
-	</div>
-	
-	<script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>
+        @include('admin.layout.footer')
+    </div>
+    
+    <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>
 
-	@yield('script')
+    @yield('script')
 </body>
 </html>
 

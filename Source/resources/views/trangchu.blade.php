@@ -32,7 +32,7 @@ $soLuongPhong = 0;
 		</div>
 		<div class="row">
 			<div class="col-md-3">
-				<button class="btn btn-primary" style="font-weight: bolder;width: 100%">ĐĂNG NHẬP</button>
+				<a href="{{route('getLogin')}}" class="btn btn-primary"><center>Đăng nhập</center></a>
 
 				<div class="panel panel-primary">
 				  	<div class="panel-heading">
@@ -44,7 +44,7 @@ $soLuongPhong = 0;
 				    	<label>Mật khẩu</label>
 				    	<input class="form-control" type="text" name="TaiKhoan">
 				  	</div>
-				  	<center><button class="btn btn-primary">Đăng nhập</button></center>
+				  	<center><button class="btn btn-primary">Đăng nhập</center></button>
 				  	<br>
 				</div>
 
@@ -71,58 +71,58 @@ $soLuongPhong = 0;
 										Tuần
 									</label>
 					    			<label class="btn btn-default active">
-										<input type="radio" name="radioName" value="1" checked/>1
+										<input type="radio" name="radioTuan" value="1" checked/>1
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="2" />2
+										<input type="radio" name="radioTuan" value="2" />2
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="3" />3
+										<input type="radio" name="radioTuan" value="3" />3
 									</label>
 									<label class="btn btn-default ">
-										<input type="radio" name="radioName" value="4" />4
+										<input type="radio" name="radioTuan" value="4" />4
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="5" />5
+										<input type="radio" name="radioTuan" value="5" />5
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="6" />6
+										<input type="radio" name="radioTuan" value="6" />6
 									</label>
 									<label class="btn btn-default ">
-										<input type="radio" name="radioName" value="7" />7
+										<input type="radio" name="radioTuan" value="7" />7
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="8" />8
+										<input type="radio" name="radioTuan" value="8" />8
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="9" />9
+										<input type="radio" name="radioTuan" value="9" />9
 									</label>
 									<label class="btn btn-default ">
-										<input type="radio" name="radioName" value="10" />10
+										<input type="radio" name="radioTuan" value="10" />10
 									</label>
 									<label class="btn btn-default ">
-										<input type="radio" name="radioName" value="11" />11
+										<input type="radio" name="radioTuan" value="11" />11
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="12" />12
+										<input type="radio" name="radioTuan" value="12" />12
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="13" />13
+										<input type="radio" name="radioTuan" value="13" />13
 									</label>
 									<label class="btn btn-default ">
-										<input type="radio" name="radioName" value="14" />14
+										<input type="radio" name="radioTuan" value="14" />14
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="15" />15
+										<input type="radio" name="radioTuan" value="15" />15
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="16" />16
+										<input type="radio" name="radioTuan" value="16" />16
 									</label>
 									<label class="btn btn-default ">
-										<input type="radio" name="radioName" value="17" />17
+										<input type="radio" name="radioTuan" value="17" />17
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" name="radioName" value="18" />18
+										<input type="radio" name="radioTuan" value="18" />18
 									</label>
 								</div>
 					
@@ -140,7 +140,7 @@ $soLuongPhong = 0;
 								</div>
 							</div>
 							<br>
-							<table id="ViewTable" class="table table-bordered" style="background-color: white;">
+							<table id="lichTable" class="table table-bordered" style="background-color: white;">
 							    <thead>
 							      	<tr>							        	
 							        	<th width="9%">Phòng</th>
@@ -188,37 +188,51 @@ $soLuongPhong = 0;
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		//ajax theo buoi
 		$("input[name=radioBuoi]").change(function () {
 			var buoiLich = $("input[name=radioBuoi]:checked").val();
+			var tuanLich = $("input[name=radioTuan]:checked").val();
+			//alert(tuanLich);
        		emptyLich();
 
        		$.ajax({
 
 	            type: "get",
-	            url: "ajax/getLich/" + buoiLich,
+	            url: "ajax/getLich/" + buoiLich + "/" + tuanLich,
 	            success: function (data) {
 	                console.log(data);
-	            	showLich(data);
-	                //alert(data.length);
+	            	showLich(data);	               
 	            },
 	            error: function (data) {
 	                console.log('Error:', data);
 	            }
 	        });
     	});
-	});
-	//get val() radioFormTuan
-	$('#myForm input').on('change', function() {
-	   var nameTuan = $('input[name=radioName]:checked', '#myForm').val();
-	   $('#nameTuan').html(nameTuan);
-	});
 
-	$('body').on('load', function(){
-		@for($i = 0; $i<1; $i++)
-		var a = $('#13').val();
-		alert(a);
-		@endfor
+    	//ajax theo tuan
+		$("input[name=radioTuan]").change(function () {
+			var buoiLich = $("input[name=radioBuoi]:checked").val();
+			var tuanLich = $("input[name=radioTuan]:checked").val();
+			//alert(tuanLich);
+       		emptyLich();
+
+       		$.ajax({
+
+	            type: "get",
+	            url: "ajax/getLich/" + buoiLich + "/" + tuanLich,
+	            success: function (data) {
+	                console.log(data);
+	            	showLich(data);	               
+	            },
+	            error: function (data) {
+	                console.log('Error:', data);
+	            }
+	        });
+    	});
+
 	});
+	
 
 	function emptyLich() {
 		$(document).ready(function(){
@@ -249,13 +263,10 @@ $soLuongPhong = 0;
 		//alert(obj.lich.length);
 		
 		for(i = 0; i < obj.lich.length; i++)
-		{
-			
+		{			
 			var cell = $('#' + obj.lich[i].idPhong + obj.lich[i].idThu);
-			var noidung = obj.lich[i].idLopHocPhan;
-			
-			cell.text(noidung);
-			
+			var noidung = obj.lich[i].TenLop + " - Thầy " + obj.lich[i].TenGV;			
+			cell.text(noidung);			
 		}
 	}
 </script>
