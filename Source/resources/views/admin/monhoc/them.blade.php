@@ -4,7 +4,7 @@
 <!-- Page Content -->
 
 <div class="col-md-9">
-    <h1 class="page-header">Thể loại
+    <h1 class="page-header">Môn học
         <small>thêm</small>
     </h1>
 	
@@ -25,11 +25,21 @@
 	    <form action="admin/monhoc/them" method="POST">
 	        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 	        <div class="form-group">
-	            <label>Tên thể loại</label>
-	            <input class="form-control" name="Ten" placeholder="Nhập tên thể loại" />
+	            <label>Mã môn học</label>
+	            <input class="form-control" name="Ten" placeholder="Nhập tên mã môn học" />
+	        </div>
+
+	        <div class="form-group">
+	            <label>Tên môn học</label>
+	            <input class="form-control" name="Ten" placeholder="Nhập tên môn học" />
+	        </div>
+
+	        <div class="form-group">
+	            <label>Số tín chỉ</label>
+	            <input class="form-control" name="Ten" placeholder="Nhập số tín chỉ" />
 	        </div>
 	        
-	        <button type="submit" class="btn btn-default">Category Add</button>
+	        <button type="submit" class="btn btn-default">Thêm môn học</button>
 	        <button type="reset" class="btn btn-default">Reset</button>
 	    <form>
 	</div>

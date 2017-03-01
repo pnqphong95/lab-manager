@@ -13,8 +13,8 @@ class GiaoVien extends Model
     	return $this->belongsTo('App\GiaoVien', 'idBoMon', 'id');
     }
 
-    public function giaovien_chucvu(){
-    	return $this->hasMany('App\GiaoVien_ChucVu', 'idGiaoVien', 'id');
+    public function chucvu(){
+    	return $this->belongsTo('App\ChucVu', 'idChucVu', 'id');
     }
 
     public function lich(){

@@ -8,8 +8,9 @@ $soLuongPhong = 0;
 <html>
 <head>
     <title>Trang nhất</title>
-    <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.min.css') }}">
     <base href="{{asset('')}}">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    
 </head>
 <body>
     <div class="container">
@@ -27,8 +28,8 @@ $soLuongPhong = 0;
         @include('admin.layout.footer')
     </div>
     
-    <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
     @yield('script')
 </body>

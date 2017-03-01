@@ -9,7 +9,7 @@ class ChucVu extends Model
     protected $table = 'ChucVu';
     public $timestamps = false;
 
-    public function giaovien_chucvu(){
-    	return $this->hasMany('App\GiaoVien_ChucVu', 'idChucVu', 'id');
+    public function giaovien(){
+    	return $this->hasMany('App\GiaoVien', 'idChucVu', 'id');
     }
 }

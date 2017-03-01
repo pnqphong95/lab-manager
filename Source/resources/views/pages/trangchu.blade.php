@@ -121,30 +121,6 @@
 
     	<div class="col-md-3 sidebar">
 
-    		<div class="panel panel-primary thong-tin">
-					<div class="panel-heading">
-						<center>THÔNG TIN NGƯỜI DÙNG</center>
-					</div>
-					<div class="panel-body">
-						<table class="table borderless table-borderless" style="border: none;">
-							<tr>
-								<th><span>Họ và tên:</span></th>
-								<td><span>Phạm Duy Hậu</span></td>
-							</tr>
-							<tr>
-								<th><span>Giới tính:</span></th>
-								<td><span>Nam</span></td>
-							</tr>
-							<tr>
-								<th><span>Chức vụ:</span></th>
-								<td><span>Giảng Vien</span></td>
-							</tr>
-						</table>				 
-						
-						<br><center><button class="btn btn-default">Đăng xuất</button></center>
-					</div>
-			</div> <!-- /thong-tin -->
-
 			<div class="panel panel-primary lich">
 					<div class="panel-heading">
 						<span><center>LỊCH</center></span>
