@@ -3,7 +3,7 @@
 @section('content')
 <!-- Page Content -->
 
-<div class="col-md-9">
+<div class="col-md-12">
     <h1 class="page-header">Môn học
         <small>{{$monhoc->TenMH}}</small>
     </h1>
@@ -36,7 +36,7 @@
 	            <label>Số tín chỉ</label>
 	            <input class="form-control" name="SoTinChi" placeholder="Nhập số tín chỉ" value="{{$monhoc->SoTinChi}}" />
 	        </div>
-	        <button type="submit" class="btn btn-default">Sửa</button>
+	        <button type="submit" class="btn btn-warning">Sửa</button>
 	        <button type="reset" class="btn btn-default">Làm mới</button>
 	    <form>
 	</div>

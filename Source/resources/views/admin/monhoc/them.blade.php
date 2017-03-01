@@ -3,8 +3,8 @@
 @section('content')
 <!-- Page Content -->
 
-<div class="col-md-9">
-    <h1 class="page-header">Môn học
+<div class="col-md-12">
+    <h1 class="page-header">Thể loại
         <small>thêm</small>
     </h1>
 	
@@ -26,20 +26,18 @@
 	        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 	        <div class="form-group">
 	            <label>Mã môn học</label>
-	            <input class="form-control" name="Ten" placeholder="Nhập tên mã môn học" />
+	            <input class="form-control" name="MaMH" placeholder="Nhập mã môn học" />
 	        </div>
-
 	        <div class="form-group">
 	            <label>Tên môn học</label>
-	            <input class="form-control" name="Ten" placeholder="Nhập tên môn học" />
+	            <input class="form-control" name="TenMH" placeholder="Nhập tên môn học" />
 	        </div>
-
 	        <div class="form-group">
 	            <label>Số tín chỉ</label>
-	            <input class="form-control" name="Ten" placeholder="Nhập số tín chỉ" />
+	            <input class="form-control" name="SoTinChi" placeholder="Số tín chỉ" />
 	        </div>
 	        
-	        <button type="submit" class="btn btn-default">Thêm môn học</button>
+	        <button type="submit" class="btn btn-primary">Thêm</button>
 	        <button type="reset" class="btn btn-default">Reset</button>
 	    <form>
 	</div>

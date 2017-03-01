@@ -3,7 +3,7 @@
 @section('content')
 <!-- Page Content -->
 
-<div class="col-md-9">
+<div class="col-md-12">
     <h1 class="page-header">Môn học
         <small>Danh sách</small>
         <a href="admin/monhoc/them" class="btn btn-primary">Thêm</a>
@@ -20,12 +20,17 @@
 	        </tr>
 	    </thead>
 	    <tbody>
+	    	@if(session('thongbao'))
+	    		<div class="alert alert-success">
+	    			{{session('thongbao')}}
+	    		</div>
+	    	@endif	
 	        @foreach($monhoc as $mh)
 	            <tr class="odd gradeX" align="center">
 	                <td>{{$mh->MaMH}}</td>
 	                <td>{{$mh->TenMH}}</td>
 	                <td>{{$mh->SoTinChi}}</td>
-	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/monhoc/xoa"> Xóa</a></td>
+	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/monhoc/xoa/{{$mh->id}}"> Xóa</a></td>
 	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/monhoc/sua/{{$mh->id}}">Sửa</a></td>
 	            </tr>
 	        @endforeach
