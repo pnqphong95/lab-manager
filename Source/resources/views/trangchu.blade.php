@@ -7,8 +7,14 @@ $soLuongPhong = 0;
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 	<title>Trang nhất</title>
-	<link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.min.css') }}">
+	<base href="{{asset("/")}}" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">	
 </head>
 <body>
 	<div class="container">
@@ -31,7 +37,6 @@ $soLuongPhong = 0;
 			</div>
 		</div>
 		<div class="row">
-
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 				  	<div class="panel-heading">
@@ -113,8 +118,8 @@ $soLuongPhong = 0;
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>
 

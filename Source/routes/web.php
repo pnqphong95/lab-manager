@@ -21,19 +21,12 @@ use App\LopHocPhan;
 
 Route::get('trangchu', 'TrangChuController@getTrangChu')->name('root');
 
-//Route::post('dangnhap', ['as'=> 'dangnhap', 'uses'=> 'TaiKhoanCTL@dangnhap']);
-Route::group(['prefix' => 'admin'], function(){
-	Route::group(['prefix' => 'giaovien'], function(){
-		Route::get('danhsach', 'GiaoVienController@getDanhSach');
-		Route::get('sua', 'GiaoVienController@getSua');
-		Route::get('them', 'GiaoVienController@getThem');
-	});
+Route::get('/', function(){
+	return view('welcome');
 });
 
-Route::get('test/{id}', function($id){
-	$tk = TaiKhoan::add($id);
-	
-	echo "oke! ".$id;
+Route::get('thu9', function(){
+	return view('pages.trangchu');
 });
 
 Route::get('xoa/{id}', function($id){
@@ -65,8 +58,8 @@ Route::get('allbm', function(){
 });
 
 Route::get('test', function(){
-	$bomon = BoMon::find(1);
-	foreach ($bomon->giaovien as $giaovien) {
+	$cv = ChucVu::find(1);
+	foreach ($cv->giaovien as $giaovien) {
 		echo $giaovien->TenGV;
 	}
 });
@@ -111,23 +104,27 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'lophocphan'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'LopHocPhanController@getDanhSach');
-
 		Route::get('sua', 'LopHocPhanController@getSua');
-
 		Route::get('them', 'LopHocPhanController@getThem');
-
 		Route::post('them', 'LopHocPhanController@postThem');
 	});
 
 	Route::group(['prefix'=>'monhoc'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'MonHocController@getDanhSach');
-
 		Route::get('sua/{id}', 'MonHocController@getSua');
 		Route::post('sua/{id}', 'MonHocController@postSua');
-
 		Route::get('them', 'MonHocController@getThem');
 		Route::post('them', 'MonHocController@postThem');
 	});
 	
+	Route::group(['prefix' => 'giaovien'], function(){
+		Route::get('danhsach', 'GiaoVienController@getDanhSach');
+		Route::get('sua', 'GiaoVienController@getSua');
+		Route::get('them', 'GiaoVienController@getThem');
+	});
+});
+
+Route::group(['prefix'=>'user'], function(){
+	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
 });

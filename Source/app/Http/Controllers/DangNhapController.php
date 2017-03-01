@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DangNhapRequest;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\GiaoVien_ChucVu;
+use DB;
 
 class DangNhapController extends Controller
 {
@@ -19,8 +21,12 @@ class DangNhapController extends Controller
     					'password' => $request->Password
     				];
     	if (Auth::attempt($login)) {
-            // Authentication passed...
-            return redirect()->route('root');
+            $user = Auth::user();            
+            if($user->idChucVu === 1)
+                return redirect()->route('userTrangChu');
+            else if($user->idChucVu === 2)
+                return redirect()->route('managerTrangChu');
+            else return redirect()->route('adminTrangChu');
         } else {
         	return redirect()->back()->withErrors(['Username hoặc Password không đúng!']);
         }

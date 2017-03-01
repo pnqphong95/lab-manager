@@ -1,0 +1,51 @@
+.box {
+  margin: 10px;
+  background-color: #fff;
+  border: 1px solid;
+}
+.box-body {
+  padding: 15px;
+}
+.box-heading {
+  padding: 5px 15px;
+  border-bottom: 1px solid transparent;
+  text-align: center;
+  font-weight: bold;
+}
+.box-heading > .dropdown .dropdown-toggle {
+  color: inherit;
+}
+.box-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+}
+
+
+.box-default {
+  border-color: #1a8cff;
+}
+.box-default > .box-heading {
+  color: #fff;
+  background-color: #1a8cff;
+  border-color: #1a8cff;
+}
+.box-default > .box-heading + .box-collapse > .box-body {
+  border-top-color: #1a8cff;
+}
+.box-default > .box-heading .badge {
+  color: #1a8cff;
+  background-color: #fff;
+}
+.box-default > .box-footer + .box-collapse > .box-body {
+  border-bottom-color: #1a8cff;
+}
+
+input{
+  width: 100%;
+    border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
