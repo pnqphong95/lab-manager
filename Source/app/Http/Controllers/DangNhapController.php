@@ -31,4 +31,9 @@ class DangNhapController extends Controller
         	return redirect()->back()->withErrors(['Username hoặc Password không đúng!']);
         }
     }
+
+    public function getDangXuat() {
+        Auth::logout();
+        return redirect()->route('root');
+    }
 }

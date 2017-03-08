@@ -1,3 +1,6 @@
+@section('title')
+Trang chủ
+@endsection
 @extends('layout.index')
 
 
@@ -128,8 +131,12 @@
 					<div class="panel-body">
 						<table class="table borderless table-borderless" style="border: none;">
 							<tr>
+								<th><span>Mã cán bộ:</span></th>
+								<td><span>{{Auth::user()->MaGV}}</span></td>
+							</tr>
+							<tr>
 								<th><span>Họ và tên:</span></th>
-								<td><span>Phạm Duy Hậu</span></td>
+								<td><span>{{Auth::user()->HoGV}} {{Auth::user()->TenGV}}</span></td>
 							</tr>
 							<tr>
 								<th><span>Giới tính:</span></th>
@@ -141,7 +148,7 @@
 							</tr>
 						</table>				 
 						
-						<br><center><button class="btn btn-default">Đăng xuất</button></center>
+						<br><center><a class="btn btn-default" href="{{route('logout')}}">Đăng xuất</a></center>
 					</div>
 			</div> <!-- /thong-tin -->
 

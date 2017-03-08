@@ -25,4 +25,9 @@ class TrangChuController extends Controller
     								->get();   	
     	return view('user.trangchu',['phong' => $phong, 'lich' => $lich]);
     }
+
+    public function getDangKyPhong() {
+        $phong = Phong::all();
+        return view('user.dangkyphong', ['phong' => $phong]);
+    }
 }
