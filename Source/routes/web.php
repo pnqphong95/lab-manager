@@ -19,6 +19,11 @@ use App\PhanMem;
 use App\Lich;
 use App\LopHocPhan;
 
+// Route::get('test3', function(){
+// 	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+// 	echo $idHocKyNienKhoa->id;
+// });
+
 Route::get('trangchu', 'TrangChuController@getTrangChu')->name('root');
 
 Route::get('/', function(){
@@ -80,10 +85,12 @@ Route::get('test2', function(){
 });
 
 Route::get('ajax/getLich/{buoi?}/{tuan}',function($buoi, $tuan){
-    $lich = DB::table('lich')		->join('lophocphan','lophocphan.id', '=', 'idLopHocPhan')
+	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+    $lich = DB::table('lich')		->join('monhoc','monhoc.id', '=', 'idMonHoc')
     								->join('giaovien','giaovien.id', '=', 'idGiaoVien')
     								->where('idBuoi', $buoi)
-    								->where('Tuan', $tuan)
+    								->where('idTuan', $tuan)
+    								->where('idHocKyNienKhoa', $idHocKyNienKhoa->id)
     								->get();
     return json_encode($lich);
 });
@@ -166,5 +173,9 @@ Route::group(['prefix'=>'admin'], function(){
 
 Route::group(['prefix'=>'user'], function(){
 	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
+
 	Route::get('dangkyphong', 'TrangChuController@getDangKyPhong')->name('dangKyPhong');
+	Route::post('dangkyphong', 'TrangChuController@postDangKyPhong');
+
+	Route::get('vande', 'TrangChuController@getVanDe')->name('vanDe');
 });

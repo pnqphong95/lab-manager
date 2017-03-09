@@ -13,12 +13,16 @@ class Lich extends Model
     	return $this->belongsTo('App\GiaoVien', 'idGiaoVien', 'id');
     }
 
-    public function lophocphan(){
-    	return $this->belongsTo('App\LopHocPhan', 'idLopHocPhan', 'id');
+    public function monhoc(){
+    	return $this->belongsTo('App\MonHoc', 'idMonHoc', 'id');
     }
 
     public function thu(){
     	return $this->belongsTo('App\Thu', 'idThu', 'id');
+    }
+
+    public function tuan(){
+        return $this->belongsTo('App\Tuan', 'idTuan', 'id');
     }
 
     public function phong(){

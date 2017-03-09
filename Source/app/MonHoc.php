@@ -14,6 +14,6 @@ class MonHoc extends Model
     }
 
     public function lich(){
-    	return $this->hasManyThrough('App\Lich', 'App\LopHocPhan', 'idMonHoc', 'idLopHocPhan', 'id');
+    	return $this->hasMany('App\Lich', 'idMonHoc', 'id');
     }
 }

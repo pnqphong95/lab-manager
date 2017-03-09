@@ -8,7 +8,7 @@
     	<div class="col-md-9 sidebar">
     		<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4><center>LỊCH THỰC HÀNH</center></h4>
+						<h4><center>LỊCH THỰC HÀNH HỌC KỲ {{$hknk->HocKy}} ({{$hknk->NienKhoa}})</center></h4>
 					</div>
 					<div class="panel-body">
 						<div style="margin-top: 10px;" class="btn-group" data-toggle="buttons">
@@ -152,7 +152,7 @@
 
 	$(document).ready(function(){ 	
  		@foreach ($lich as $lich) 			
- 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}}).html("{{$lich->TenLop}} - Thầy {{$lich->TenGV}}");
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}}).html("{{$lich->MaMH}}-{{$lich->Nhom}} Thầy {{$lich->TenGV}}");
  		@endforeach
 
 		//ajax theo buoi
@@ -227,7 +227,7 @@
 		for(i = 0; i < obj.lich.length; i++)
 		{			
 			var cell = $('#' + obj.lich[i].idPhong + obj.lich[i].idThu);
-			var noidung = obj.lich[i].TenLop + " - Thầy " + obj.lich[i].TenGV;			
+			var noidung = obj.lich[i].MaMH + " - Thầy " + obj.lich[i].TenGV;			
 			cell.text(noidung);			
 		}
 	}
