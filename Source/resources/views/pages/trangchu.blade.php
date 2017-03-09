@@ -222,8 +222,6 @@
 	function showLich(data) {
 		var jsonLich = '{ "lich" :' + data + '}';
 		var obj = JSON.parse(jsonLich);
-		//alert(obj.lich.length);
-		
 		for(i = 0; i < obj.lich.length; i++)
 		{			
 			var cell = $('#' + obj.lich[i].idPhong + obj.lich[i].idThu);

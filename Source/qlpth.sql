@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 01, 2017 lúc 06:37 SA
+-- Thời gian đã tạo: Th3 09, 2017 lúc 09:17 SA
 -- Phiên bản máy phục vụ: 10.1.21-MariaDB
 -- Phiên bản PHP: 5.6.30
 
@@ -123,23 +123,24 @@ CREATE TABLE `giaovien` (
   `idBoMon` int(11) NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `KichHoat` int(11) NOT NULL,
-  `idChucVu` int(11) NOT NULL
+  `idChucVu` int(11) NOT NULL,
+  `remember_token` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `giaovien`
 --
 
-INSERT INTO `giaovien` (`id`, `MaGV`, `HoGV`, `TenGV`, `NgaySinh`, `GioiTinh`, `SDT`, `idBoMon`, `password`, `KichHoat`, `idChucVu`) VALUES
-(1, '0001', 'Phạm Duy', 'Hậu', '1995-02-01', 0, '0987123456', 1, '$2y$10$eaQyy.xQcw5eyzpp5kq/he.Ip4o0DF2.o9EW/oKjOpTSgQitWXQG.', 0, 1),
-(2, '0002', 'Nguyễn Văn', 'Ten', '1995-02-01', 0, '0987123456', 1, '$2y$10$CUZ/OGjn.Q/WLQmX10CtDeheMJTlct2UCs/EeCzQYEVSJ.JCYZGr6', 0, 2),
-(3, '0003', 'Trần Thới', 'Lên', '1995-02-01', 1, '0987123456', 2, '', 0, 3),
-(4, '0004', 'Lê Lộc', 'Ba', '1995-02-01', 0, '0987123456', 2, '', 0, 1),
-(5, '0005', 'Hồ Anh', 'Tư', '1995-02-01', 0, '0987123456', 2, '', 0, 2),
-(6, '0006', 'Phan Ca', 'Bình', '1995-02-01', 1, '0987123456', 3, '', 0, 1),
-(7, '0007', 'Ninh Lâm', 'Hai', '1995-02-01', 1, '0987123456', 3, '', 0, 2),
-(8, '0008', 'Thái Anh', 'Nhàn', '1995-02-01', 1, '0987123456', 4, '', 0, 1),
-(9, '0009', 'Hoàng Quá', 'Kiệt', '1995-02-01', 1, '0987123456', 5, '', 0, 2);
+INSERT INTO `giaovien` (`id`, `MaGV`, `HoGV`, `TenGV`, `NgaySinh`, `GioiTinh`, `SDT`, `idBoMon`, `password`, `KichHoat`, `idChucVu`, `remember_token`) VALUES
+(1, '0001', 'Phạm Duy', 'Hậu', '1995-02-01', 0, '0987123456', 1, '$2y$10$eaQyy.xQcw5eyzpp5kq/he.Ip4o0DF2.o9EW/oKjOpTSgQitWXQG.', 0, 1, '32yCabsAeKYig4PsqGm48OnsBE9LhU8bSWzHVtsWj7Y6OxGUOBfMyx5tFPWA'),
+(2, '0002', 'Nguyễn Văn', 'Ten', '1995-02-01', 0, '0987123456', 1, '$2y$10$CUZ/OGjn.Q/WLQmX10CtDeheMJTlct2UCs/EeCzQYEVSJ.JCYZGr6', 0, 2, ''),
+(3, '0003', 'Trần Thới', 'Lên', '1995-02-01', 1, '0987123456', 2, '', 0, 3, ''),
+(4, '0004', 'Lê Lộc', 'Ba', '1995-02-01', 0, '0987123456', 2, '', 0, 1, ''),
+(5, '0005', 'Hồ Anh', 'Tư', '1995-02-01', 0, '0987123456', 2, '', 0, 2, ''),
+(6, '0006', 'Phan Ca', 'Bình', '1995-02-01', 1, '0987123456', 3, '', 0, 1, ''),
+(7, '0007', 'Ninh Lâm', 'Hai', '1995-02-01', 1, '0987123456', 3, '', 0, 2, ''),
+(8, '0008', 'Thái Anh', 'Nhàn', '1995-02-01', 1, '0987123456', 4, '', 0, 1, ''),
+(9, '0009', 'Hoàng Quá', 'Kiệt', '1995-02-01', 1, '0987123456', 5, '', 0, 2, '');
 
 -- --------------------------------------------------------
 
@@ -173,6 +174,26 @@ INSERT INTO `giaovien_chucvu` (`id`, `idGiaoVien`, `idChucVu`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `hocky_nienkhoa`
+--
+
+CREATE TABLE `hocky_nienkhoa` (
+  `id` int(11) NOT NULL,
+  `HocKy` varchar(255) NOT NULL,
+  `NienKhoa` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `hocky_nienkhoa`
+--
+
+INSERT INTO `hocky_nienkhoa` (`id`, `HocKy`, `NienKhoa`) VALUES
+(1, '1', '2016-2017'),
+(2, '2', '2016-2017');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `lich`
 --
 
@@ -180,20 +201,25 @@ CREATE TABLE `lich` (
   `id` int(11) NOT NULL,
   `idGiaoVien` int(11) NOT NULL,
   `idPhong` int(11) NOT NULL,
-  `idLopHocPhan` int(11) NOT NULL,
+  `idMonHoc` int(11) NOT NULL,
+  `Nhom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `idThu` int(11) NOT NULL,
   `idBuoi` int(11) NOT NULL,
-  `Tuan` int(11) NOT NULL
+  `idTuan` int(11) NOT NULL,
+  `idHocKyNienKhoa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `lich`
 --
 
-INSERT INTO `lich` (`id`, `idGiaoVien`, `idPhong`, `idLopHocPhan`, `idThu`, `idBuoi`, `Tuan`) VALUES
-(1, 1, 1, 1, 2, 1, 1),
-(2, 1, 2, 3, 2, 1, 1),
-(3, 1, 2, 3, 3, 1, 1);
+INSERT INTO `lich` (`id`, `idGiaoVien`, `idPhong`, `idMonHoc`, `Nhom`, `idThu`, `idBuoi`, `idTuan`, `idHocKyNienKhoa`) VALUES
+(1, 1, 1, 1, '02', 2, 1, 1, 2),
+(2, 1, 2, 3, '03', 2, 1, 1, 2),
+(3, 1, 2, 3, '02', 3, 1, 1, 2),
+(4, 1, 2, 1, '02', 8, 2, 2, 2),
+(5, 1, 2, 1, '02', 2, 2, 1, 2),
+(6, 1, 1, 1, '02', 2, 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -315,18 +341,18 @@ CREATE TABLE `phong` (
 --
 
 INSERT INTO `phong` (`id`, `TenPhong`, `idCauHinh`, `idBoMon`) VALUES
-(1, 'Phòng 1', 1, 1),
-(2, 'Phòng 2', 2, 1),
-(3, 'Phòng 3', 3, 1),
-(4, 'Phòng 4', 4, 1),
-(5, 'Phòng 5', 1, 2),
-(6, 'Phòng 6', 2, 2),
-(7, 'Phòng 7', 3, 2),
-(8, 'Phòng 8', 4, 2),
-(9, 'Phòng 9', 1, 3),
-(10, 'Phòng 10', 2, 3),
-(11, 'Phòng 11', 3, 3),
-(12, 'Phòng 12', 4, 3);
+(1, 'P01', 1, 1),
+(2, 'P02', 2, 1),
+(3, 'P03', 3, 1),
+(4, 'P04', 4, 1),
+(5, 'P05', 1, 2),
+(6, 'P06', 2, 2),
+(7, 'P07', 3, 2),
+(8, 'P08', 4, 2),
+(9, 'P09', 1, 3),
+(10, 'P10', 2, 3),
+(11, 'P11', 3, 3),
+(12, 'P12', 4, 3);
 
 -- --------------------------------------------------------
 
@@ -389,6 +415,43 @@ INSERT INTO `thu` (`id`, `TenThu`) VALUES
 (6, 'Thứ sáu'),
 (7, 'Thứ bảy');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tuan`
+--
+
+CREATE TABLE `tuan` (
+  `id` int(11) NOT NULL,
+  `TenTuan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `tuan`
+--
+
+INSERT INTO `tuan` (`id`, `TenTuan`) VALUES
+(1, '01'),
+(2, '02'),
+(3, '03'),
+(4, '04'),
+(5, '05'),
+(6, '06'),
+(7, '07'),
+(8, '08'),
+(9, '09'),
+(10, '10'),
+(11, '11'),
+(12, '12'),
+(13, '13'),
+(14, '14'),
+(15, '15'),
+(16, '16'),
+(17, '17'),
+(18, '18'),
+(19, '19'),
+(20, '20');
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -428,6 +491,12 @@ ALTER TABLE `giaovien`
 -- Chỉ mục cho bảng `giaovien_chucvu`
 --
 ALTER TABLE `giaovien_chucvu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `hocky_nienkhoa`
+--
+ALTER TABLE `hocky_nienkhoa`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -473,6 +542,12 @@ ALTER TABLE `thu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `tuan`
+--
+ALTER TABLE `tuan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -507,10 +582,15 @@ ALTER TABLE `giaovien`
 ALTER TABLE `giaovien_chucvu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
+-- AUTO_INCREMENT cho bảng `hocky_nienkhoa`
+--
+ALTER TABLE `hocky_nienkhoa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT cho bảng `lich`
 --
 ALTER TABLE `lich`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `lophocphan`
 --
@@ -541,6 +621,11 @@ ALTER TABLE `phong_phanmem`
 --
 ALTER TABLE `thu`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT cho bảng `tuan`
+--
+ALTER TABLE `tuan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
