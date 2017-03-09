@@ -121,6 +121,18 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
+                <a href="admin/giaovien/danhsach"><i class="fa fa-cube fa-fw"></i> QUẢN LÝ GIÁO VIÊN<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="admin/giaovien/danhsach">Danh sách</a>
+                    </li>
+                    <li>
+                        <a href="admin/giaovien/them">Thêm</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
                 <a href="admin/taikhoan/danhsach"><i class="fa fa-cube fa-fw"></i> QUẢN LÝ TÀI KHOẢN<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
