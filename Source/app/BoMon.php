@@ -12,4 +12,8 @@ class BoMon extends Model
     public function giaovien(){
     	return $this->hasMany('App\GiaoVien', 'idBoMon', 'id');
     }
+
+    public function phong(){
+    	return $this->hasMany('App\Phong', 'idBoMon', 'id');
+    }
 }

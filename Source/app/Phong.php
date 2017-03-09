@@ -16,4 +16,8 @@ class Phong extends Model
     public function lich(){
     	return $this->hasMany('App\Lich', 'idPhong', 'id');
     }
+
+    public function bomon(){
+    	return $this->belongsTo('App\BoMon', 'idBoMon', 'id');
+    }
 }

@@ -31,7 +31,10 @@ Route::get('/', function(){
 });
 
 Route::get('thu9', function(){
-	return view('pages.trangchu');
+	$phong = DB::table('phong') ->join('bomon', 'idBoMon', '=', 'bomon.id')
+                                    ->where('phong.id',2)
+                                    ->get();
+                                    echo $phong;
 });
 
 Route::get('xoa/{id}', function($id){
@@ -127,10 +130,15 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('sua/{id}', 'PhongController@getSua');
 		Route::post('sua/{id}', 'PhongController@postSua');
 
+		Route::get('suacauhinh/{id}', 'PhongController@getSuaCauHinh');
+		Route::post('suacauhinh/{id}', 'PhongController@postSuaCauHinh');
+
 		Route::get('chitiet/{id}', 'PhongController@getChiTiet');
 
 		Route::get('them', 'PhongController@getThem');
 		Route::post('them', 'PhongController@postThem');
+
+		Route::get('xoa/{id}', 'PhongController@getXoa');
 	});
 
 	Route::group(['prefix'=>'lophocphan'], function(){
