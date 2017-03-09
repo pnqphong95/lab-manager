@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <base href="{{asset('/')}}">
 
-    <title>Laravel Khoa Pham</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

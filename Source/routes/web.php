@@ -95,6 +95,7 @@ Route::get('ajax/getLich/{buoi?}/{tuan}',function($buoi, $tuan){
 
 Route::get('login', 'DangNhapController@getDangNhap')->name('getLogin');
 Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
+Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
 
 Route::get('user', 'UserController@trangchu');
 
@@ -173,4 +174,5 @@ Route::group(['prefix'=>'admin'], function(){
 
 Route::group(['prefix'=>'user'], function(){
 	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
+	Route::get('dangkyphong', 'TrangChuController@getDangKyPhong')->name('dangKyPhong');
 });
