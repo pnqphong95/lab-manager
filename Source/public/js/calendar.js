@@ -26,9 +26,9 @@ function createCal()
     var cell = 1/7;
     var TR_start = '<TR>';
     var TR_end = '</TR>';
-    var highlight_start = '<TD WIDTH="15.5%"><TABLE CELLSPACING=0 BORDER=1 BGCOLOR=DEDEFF BORDERCOLOR=CCCCCC><TR><TD WIDTH="20%"><B><CENTER>';
-    var highlight_end   = '</CENTER></TD></TR></TABLE></B>';
-    var TD_start = '<TD WIDTH="15.5%"><CENTER>';
+    var highlight_start = '<TD ><B><CENTER>';
+    var highlight_end   = '</CENTER></B>';
+    var TD_start = '<TD ><CENTER>';
     var TD_end = '</CENTER></TD>';
 
     /* BEGIN CODE FOR CALENDAR

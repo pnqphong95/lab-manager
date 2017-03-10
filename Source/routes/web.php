@@ -30,63 +30,6 @@ Route::get('/', function(){
 	return view('welcome');
 });
 
-Route::get('thu9', function(){
-	$phong = DB::table('phong') ->join('bomon', 'idBoMon', '=', 'bomon.id')
-                                    ->where('phong.id',2)
-                                    ->get();
-                                    echo $phong;
-});
-
-Route::get('xoa/{id}', function($id){
-	TaiKhoan::xoa($id);
-	
-	echo "oke! ".$id;
-});
-
-Route::get('all', function(){
-	$i = 0;
-    $arr = TaiKhoan::get();
-    // foreach ($arr as $key => $value) {
-    // 	echo $value;
-    // }
-    
-    return view('taikhoan', ['data' => $arr]);
-    //view('taikhoan')->with('data', $data);
-});
-
-Route::get('allbm', function(){
-	$i = 0;
-    $arr = BoMon::get();
-    // foreach ($arr as $key => $value) {
-    // 	echo $value;
-    // }
-    
-    return view('taikhoan', ['data' => $arr]);
-    //view('taikhoan')->with('data', $data);
-});
-
-Route::get('test', function(){
-	$cv = ChucVu::find(1);
-	foreach ($cv->giaovien as $giaovien) {
-		echo $giaovien->TenGV;
-	}
-});
-
-Route::get('test1', function(){
-	$chucvu = ChucVu::find(1);
-	foreach ($chucvu->giaovien_chucvu as $giaovien_chucvu) {
-		$giaovien = GiaoVien::find($giaovien_chucvu->idGiaoVien);
-		echo $giaovien->TenGV."<br>";
-	}
-});
-
-
-
-Route::get('test2', function(){
-	$lophocphan = LopHocPhan::find(3);
-	echo $lophocphan->TenLop;
-});
-
 Route::get('ajax/getLich/{buoi?}/{tuan}',function($buoi, $tuan){
 	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
     $lich = DB::table('lich')		->join('monhoc','monhoc.id', '=', 'idMonHoc')

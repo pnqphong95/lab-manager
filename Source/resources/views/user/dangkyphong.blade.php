@@ -10,6 +10,7 @@
 		<div class="white-well">
 
 			<h2>Đăng ký phòng thực hành</h2>
+			<hr>
 			@if(count($errors)>0)
 		        <div class="alert alert-danger">
 		            @foreach($errors->all() as $err)

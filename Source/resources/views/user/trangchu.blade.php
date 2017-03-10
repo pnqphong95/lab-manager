@@ -5,6 +5,7 @@ Trang chủ
 
 
 @section('main')
+	<?php $thisPage = 'trangchu';?>
 <div id="main">
     	
 	<div class="row">	    		
@@ -183,7 +184,7 @@ Trang chủ
 
 	$(document).ready(function(){ 	
  		@foreach ($lich as $lich) 			
- 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}}).html("{{$lich->TenLop}} - Thầy {{$lich->TenGV}}");
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}}).html("{{$lich->MaMH}} - Thầy {{$lich->TenGV}}");
  		@endforeach
 
 		//ajax theo buoi
@@ -258,9 +259,11 @@ Trang chủ
 		for(i = 0; i < obj.lich.length; i++)
 		{			
 			var cell = $('#' + obj.lich[i].idPhong + obj.lich[i].idThu);
-			var noidung = obj.lich[i].TenLop + " - Thầy " + obj.lich[i].TenGV;			
+			var noidung = obj.lich[i].MaMH + " - Thầy " + obj.lich[i].TenGV;			
 			cell.text(noidung);			
 		}
 	}
+
+	
 </script>
 @endsection

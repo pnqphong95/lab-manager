@@ -28,13 +28,16 @@ class TrangChuController extends Controller
 
     public function getUserTrangChu() {
     	$phong = Phong::all();
+        $allTuan = Tuan::all();
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
     	$lich = DB::table('lich')	->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
                                     ->join('monhoc', 'idMonHoc', '=', 'monhoc.id')
                                     ->where('idTuan', '1')
                                     ->where('idBuoi', '1')
                                     ->where('idHocKyNienKhoa', $idLastHKNK)
                                     ->get();   	
-    	return view('user.trangchu',['phong' => $phong, 'lich' => $lich]);
+    	return view('user.trangchu',['phong' => $phong, 'lich' => $lich, 'allTuan' => $allTuan]);
     }
 
     public function getDangKyPhong() {
