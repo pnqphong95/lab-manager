@@ -34,7 +34,7 @@
 						</label>
 						@foreach($allTuan as $tuan)
 		    			<label class="btn btn-default">
-							<input type="radio" name="idTuan" value="{{$tuan->id}}"/>{{$tuan->TenTuan}}
+							<input type="checkbox" name="idTuan" value="{{$tuan->id}}"/>{{$tuan->TenTuan}}
 						</label>
 						@endforeach
 					</div>

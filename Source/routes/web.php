@@ -129,4 +129,15 @@ Route::group(['prefix'=>'user'], function(){
 	Route::post('dangkyphong', 'TrangChuController@postDangKyPhong');
 
 	Route::get('vande', 'TrangChuController@getVanDe')->name('vanDe');
+	Route::post('vande', 'TrangChuController@postVanDe');
+
+	Route::get('DKphongBMkhac', 'TrangChuController@getDKphongBMkhac');
+});
+
+Route::group(['prefix'=>'manager'], function(){
+	Route::get('trangchu', 'TrangChuController@getMagTrangChu');
+
+	Route::get('chinhsualich', 'TrangChuController@getDangKyPhong');
+
+	Route::get('thongke', 'TrangChuController@getVanDe');
 });

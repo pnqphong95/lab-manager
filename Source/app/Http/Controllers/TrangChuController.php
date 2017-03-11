@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Phong;
 use App\MonHoc;
 use App\Tuan;
 use App\Buoi;
 use App\Thu;
 use App\Lich;
+use App\VanDe;
 use DB;
 
 class TrangChuController extends Controller
@@ -27,7 +29,8 @@ class TrangChuController extends Controller
     }
 
     public function getUserTrangChu() {
-    	$phong = Phong::all();
+    	$phong = DB::table('phong')     ->where('idBoMon', Auth::user()->idBoMon)
+                                        ->get();
         $allTuan = Tuan::all();
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
@@ -41,7 +44,8 @@ class TrangChuController extends Controller
     }
 
     public function getDangKyPhong() {
-        $phong = Phong::all();
+        $phong = DB::table('phong')     ->where('idBoMon', Auth::user()->idBoMon)
+                                        ->get();
         $allMonHoc = MonHoc::all();
         $allTuan = Tuan::all();
         $allBuoi = Buoi::all();
@@ -90,8 +94,50 @@ class TrangChuController extends Controller
         return redirect('user/dangkyphong')->with('thongbao','Đăng ký phòng thành công');
     }
 
+    public function getDKphongBMkhac(){
+        $phong = DB::table('phong')     ->where('idBoMon', '!=', Auth::user()->idBoMon)
+                                        ->get();
+        $allMonHoc = MonHoc::all();
+        $allTuan = Tuan::all();
+        $allBuoi = Buoi::all();
+        $allThu = Thu::all();
+        return view('user.DKphongBMkhac', 
+            [   'phong' => $phong,
+                'allMonHoc' => $allMonHoc, 
+                'allTuan' => $allTuan,
+                'allThu' => $allThu,
+                'allBuoi' => $allBuoi
+            ]
+        );
+        
+    }
+
     public function getVanDe() {
-        $phong = Phong::all();
-        return view('user.vande');
+        $allPhong = Phong::all();
+        return view('user.vande',['allPhong' => $allPhong]);
+    }
+
+    public function postVanDe(Request $request) {
+        $this->validate( $request,
+            [
+                'idPhong' => 'required',
+                'tomTatVD' => 'required|max:50',
+                'chiTietVD' => 'required|max:255'
+            ],
+            [
+                'idPhong.required' => 'Phòng không được bỏ trống!',
+                'tomTatVD.required' => 'Tóm tắt vấn đề không được bỏ trống!',
+                'tomTatVD.max' => 'Tóm tăt vấn đề tối đa 50 kí tự!',
+                'chiTietVD.required' => 'Chi tiết vấn đề không được bỏ trống!',
+                'chiTietVD.max' => 'Chi tiết vấn đề tối đa 255 kí tự!'
+            ]
+            );
+        $vande = new VanDe();
+        $vande->idPhong = $request->idPhong;
+        $vande->TomTatVD = $request->tomTatVD;
+        $vande->ChiTietVD = $request->chiTietVD;
+        $vande->NguoiTao = Auth::user()->id;
+        $vande->save();
+        return redirect('user/vande')->with('thongbao','Vấn đề đã gửi!');
     }
 }

@@ -7,43 +7,54 @@ Vấn đề
 @section('main')
 <?php $thisPage = 'vande';?>
 <div class="row">
-	<div class="col-lg-8">
+	<div class="col-lg-12">
 		<div class="white-well">
-			<h2>Tạo vấn đề</h2>
+			<div class="row">
+				<div class="col-lg-6">
+					<h2>Tạo vấn đề</h2>
+				</div>
+				
+			</div>
 			<hr>
-			<form>
+			@if(count($errors)>0)
+		        <div class="alert alert-danger">
+		            @foreach($errors->all() as $err)
+		                {{$err}}<br>
+		            @endforeach
+		        </div>
+		    @endif
+			
+			@if(session('thongbao'))
+		        <div class="alert alert-success">
+		            {{session('thongbao')}}
+		        </div>
+		    @endif
+			<form action="user/vande" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label>Phòng</label>
-							<select class="form-control">
-								<option>Phần cứng</option>
-								<option>Phần mềm</option>
+							<select class="form-control" name="idPhong">
+								@foreach($allPhong as $p)
+								<option value="{{$p->id}}">{{$p->TenPhong}}</option>
+								@endforeach
 							</select>
 						</div>
 					</div>
 					<div class="col-lg-8">
 						<div class="form-group">
-							<label>Loại vấn đề</label>
-							<select class="form-control">
-								<option>Phần cứng</option>
-								<option>Phần mềm</option>
-							</select>
-						</div>
-					</div>
-				
-					<div class="col-lg-12">
-						<div class="form-group">
 							<label>Tóm tắt vấn đề</label>
-							<input class="form-control" type="text" />
+							<input class="form-control" type="text" name="tomTatVD" />
 								
 						</div>
-					</div>
+					</div>			
+					
 				
 					<div class="col-lg-12">
 						<div class="form-group">
 							<label>Chi tiết vấn đề</label>
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" rows="3" name="chiTietVD"></textarea>
 						</div>
 					</div>
 				</div>
