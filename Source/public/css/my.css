@@ -1,53 +1,9 @@
 /*Custom menubar fron bootstrap*/
-
-/*End Custom menubar fron bootstrap*/
-
-.marin-bot-1px{
-	margin-bottom: 1px;
-}
-
-body{
-	padding-top: 10px;
-	background-color: #b3c6ff;
-}
-
-th {
-	text-align: center;
-}
-
-#footer {
-	background-color: #809fff;
-}
-
-.borderless td, .borderless th {
-    border: none;
-}
-
-.table-borderless tbody tr td,
-.table-borderless tbody tr th,
-.table-borderless thead tr th,
-.table-borderless thead tr td,
-.table-borderless tfoot tr th,
-.table-borderless tfoot tr td {
-    border: none;
-}
-
-.blank{
-  margin-bottom: 10px;
-}
-
-.panel {
-  border-radius: 0px;
-}
-
-.row {
-  margin-top: 10px;
-}
-
 .menubar {
   background-color: rgb(67, 150, 202);
   border-color: rgb(67, 150, 202);
   color: white;
+  padding: 0px;
 }
 
 .navbar-fixed-top .navbar-collapse,
@@ -67,6 +23,8 @@ th {
   color: white;
 }
 .navbar-inverse .navbar-nav > li > a {
+  font-size: 15px;
+  font-weight: bold;
   color: white;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
@@ -154,6 +112,57 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #444;
 }
 
+.navbar-collapse {
+  padding-left: 0px;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+/*End Custom menubar fron bootstrap*/
+
+.marin-bot-1px{
+	margin-bottom: 1px;
+}
+
+body{
+	padding-top: 10px;
+	background-color: #b3c6ff;
+}
+
+th {
+	text-align: center;
+}
+
+#footer {
+	background-color: #809fff;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+    border: none;
+}
+
+.blank{
+  margin-bottom: 10px;
+}
+
+.panel {
+  border-radius: 0px;
+}
+
+.row {
+  margin-top: 10px;
+}
+
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
@@ -161,6 +170,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-top-right-radius: 0px;
 }
 
+/*custom well*/
 .white-well {
   min-height: 20px;
   padding: 19px;
@@ -174,4 +184,23 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .white-well blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, .15);
+}
+/*end custom well*/
+
+/*anh nen banner*/
+#banner {
+  width: 100%;
+  height: 134px;
+  background-image: url("/img/banner.png");
+  background-size:     cover;                      
+  background-position: center;
+}
+/*end anh nen banner*/
+
+.bg-xam{
+  background-color: #e3e3e3;
+}
+
+.bg-trang{
+  background-color: #fff;
 }
