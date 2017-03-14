@@ -16,4 +16,8 @@ class MonHoc extends Model
     public function lich(){
     	return $this->hasMany('App\Lich', 'idMonHoc', 'id');
     }
+
+    public function monhoc_phanmem(){
+    	return $this->hasMany('App\MonHoc_PhanMem', 'idMonHoc', 'id');
+    }
 }

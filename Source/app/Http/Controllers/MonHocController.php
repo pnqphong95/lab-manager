@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MonHoc;
+use App\MonHoc_PhanMem;
 
 class MonHocController extends Controller
 {
@@ -11,7 +12,8 @@ class MonHocController extends Controller
     public function getDanhSach()
     {
         $monhoc = MonHoc::all();
-        return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc]);
+        $monhoc_phanmem = MonHoc_PhanMem::all();
+        return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc, 'monhoc_phanmem'=>$monhoc_phanmem]);
     }
 
     public function getThem()
