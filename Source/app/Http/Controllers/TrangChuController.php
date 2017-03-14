@@ -29,8 +29,6 @@ class TrangChuController extends Controller
     }
 
     public function getUserTrangChu() {
-    	$phong = DB::table('phong')     ->where('idBoMon', Auth::user()->idBoMon)
-                                        ->get();
         $allTuan = Tuan::all();
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
@@ -51,7 +49,7 @@ class TrangChuController extends Controller
         $allBuoi = Buoi::all();
         $allThu = Thu::all();
         return view('user.dangkyphong', 
-            [   'phong' => $phong,
+            [   
                 'allMonHoc' => $allMonHoc, 
                 'allTuan' => $allTuan,
                 'allThu' => $allThu,
@@ -61,37 +59,41 @@ class TrangChuController extends Controller
     }
 
     public function postDangKyPhong(Request $request) {
-        $this->validate($request,
-            [
-                'idTuan'=>'required',
-                'idThu' => 'required',
-                'idBuoi' => 'required',
-                'idPhong' => 'required',
-                'nhom' => 'required'
-            ],
-            [
-                'TenMH.required'=>'Bạn chưa nhập tên môn học',
-                'TenMH.min'=>'Tên môn học có ít nhất 3 ký tự',
-                'TenMH.max'=>'Tên môn học có nhiều nhất 50 ký tự',
-                'idTuan.required' => 'Bạn chưa chọn Tuần',
-                'idThu.required' => 'Bạn chưa chọn Thứ',
-                'idBuoi.required' => 'Bạn chưa chọn Buổi',
-                'idPhong.required' => 'Bạn chưa chọn Phòng',
-                'nhom.required' => 'Bạn chưa nhập nhóm'
-            ]);
+        // $this->validate($request,
+        //     [
+        //         'idTuan'=>'required',
+        //         'idThu' => 'required',
+        //         'idBuoi' => 'required',
+        //         'idPhong' => 'required',
+        //         'nhom' => 'required'
+        //     ],
+        //     [
+        //         'TenMH.required'=>'Bạn chưa nhập tên môn học',
+        //         'TenMH.min'=>'Tên môn học có ít nhất 3 ký tự',
+        //         'TenMH.max'=>'Tên môn học có nhiều nhất 50 ký tự',
+        //         'idTuan.required' => 'Bạn chưa chọn Tuần',
+        //         'idThu.required' => 'Bạn chưa chọn Thứ',
+        //         'idBuoi.required' => 'Bạn chưa chọn Buổi',
+        //         'idPhong.required' => 'Bạn chưa chọn Phòng',
+        //         'nhom.required' => 'Bạn chưa nhập nhóm'
+        //     ]);
         
-        $lich = new Lich;
-        $lich->idGiaoVien =$request->idGiaoVien;
-        $lich->idPhong =$request->idPhong;
-        $lich->idMonHoc =$request->idMonHoc;
-        $lich->nhom = $request->nhom;
-        $lich->idThu = $request->idThu;
-        $lich->idBuoi = $request->idBuoi;
-        $lich->idTuan = $request->idTuan;
-        $lich->idHocKyNienKhoa = 2;
-        $lich->save();
+        // $lich = new Lich;
+        // $lich->idGiaoVien =$request->idGiaoVien;
+        // $lich->idPhong =$request->idPhong;
+        // $lich->idMonHoc =$request->idMonHoc;
+        // $lich->nhom = $request->nhom;
+        // $lich->idThu = $request->idThu;
+        // $lich->idBuoi = $request->idBuoi;
+        // $lich->idTuan = $request->idTuan;
+        // $lich->idHocKyNienKhoa = 2;
+        // $lich->save();
 
-        return redirect('user/dangkyphong')->with('thongbao','Đăng ký phòng thành công');
+        // return redirect('user/dangkyphong')->with('thongbao','Đăng ký phòng thành công');
+
+        foreach ($request->lich as $l) {
+            echo $l;
+        }
     }
 
     public function getDKphongBMkhac(){
