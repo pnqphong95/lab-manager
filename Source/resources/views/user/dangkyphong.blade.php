@@ -19,11 +19,10 @@
 		        </div>
 		    @endif
 			
-			@if(session('success'))
-		        <div class="alert alert-success">
-		            @foreach($success->all() as $suc)
-		                {{$suc}}<br>
-		            @endforeach
+			@if(session('thongbao'))
+		        <div class="alert alert-success">		      
+	                {!!session('thongbao')!!}
+		           
 		        </div>
 		    @endif
 			<form action="user/dangkyphong" method="post">

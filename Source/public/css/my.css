@@ -134,6 +134,10 @@ th {
 	text-align: center;
 }
 
+tr {
+  text-align: center;
+}
+
 #footer {
 	background-color: #809fff;
 }
@@ -203,4 +207,9 @@ th {
 
 .bg-trang{
   background-color: #fff;
+}
+
+/*dinh nghia class ẩn*/
+.my-hidden {
+  display: none;
 }
