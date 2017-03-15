@@ -85,6 +85,18 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
+                <a href="admin/bomon/danhsach"><i class="fa fa-cube fa-fw"></i> BỘ MÔN<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="admin/bomon/danhsach">Danh sách</a>
+                    </li>
+                    <li>
+                        <a href="admin/bomon/them">Thêm</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
                 <a href="admin/monhoc/danhsach"><i class="fa fa-cube fa-fw"></i> MÔN HỌC<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -92,18 +104,6 @@
                     </li>
                     <li>
                         <a href="admin/monhoc/them">Thêm</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="admin/lophocphan/danhsach"><i class="fa fa-cube fa-fw"></i> LỚP HỌC PHẦN<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="admin/lophocphan/danhsach">Danh sách</a>
-                    </li>
-                    <li>
-                        <a href="admin/lophocphan/them">Thêm</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

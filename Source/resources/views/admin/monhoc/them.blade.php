@@ -36,6 +36,10 @@
 	            <label>Số tín chỉ</label>
 	            <input class="form-control" name="SoTinChi" placeholder="Số tín chỉ" />
 	        </div>
+	        <div class="form-group">
+	            <label>Yêu cầu phần mềm</label>
+	            
+	        </div>
 	        
 	        <button type="submit" class="btn btn-primary">Thêm</button>
 	        <button type="reset" class="btn btn-default">Reset</button>

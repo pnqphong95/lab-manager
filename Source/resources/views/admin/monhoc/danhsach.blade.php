@@ -15,6 +15,7 @@
 	            <th>Mã môn học</th>
 	            <th>Tên môn học</th>
 	            <th>Số tín chỉ</th>
+	            <th>Yêu cầu</th>
 	            <th>Delete</th>
 	            <th>Edit</th>
 	        </tr>
@@ -30,6 +31,7 @@
 	                <td>{{$mh->MaMH}}</td>
 	                <td>{{$mh->TenMH}}</td>
 	                <td>{{$mh->SoTinChi}}</td>
+	                <td><a href="admin/monhoc/monhoc_phanmem/{{$mh->id}}">Chi tiết</a></td>
 	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/monhoc/xoa/{{$mh->id}}"> Xóa</a></td>
 	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/monhoc/sua/{{$mh->id}}">Sửa</a></td>
 	            </tr>

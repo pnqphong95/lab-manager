@@ -18,6 +18,8 @@ use App\GiaoVien;
 use App\PhanMem;
 use App\Lich;
 use App\LopHocPhan;
+use App\Pages;
+use App\MonHoc_PhanMem;
 
 // Route::get('test3', function(){
 // 	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
@@ -106,6 +108,21 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::post('them', 'MonHocController@postThem');
 
 		Route::get('xoa/{id}', 'MonHocController@getXoa');
+
+		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSach');
+	});
+
+	Route::group(['prefix'=>'bomon'], function(){
+		//admin/theloai/danhsach
+		Route::get('danhsach', 'BoMonController@getDanhSach');
+
+		Route::get('sua/{id}', 'BoMonController@getSua');
+		Route::post('sua/{id}', 'BoMonController@postSua');
+
+		Route::get('them', 'BoMonController@getThem');
+		Route::post('them', 'BoMonController@postThem');
+
+		Route::get('xoa/{id}', 'BoMonController@getXoa');
 	});
 
 	Route::group(['prefix'=>'giaovien'], function(){
