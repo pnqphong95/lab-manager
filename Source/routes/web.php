@@ -20,6 +20,7 @@ use App\Lich;
 use App\LopHocPhan;
 use App\Pages;
 use App\MonHoc_PhanMem;
+use App\ThongKe;
 
 // Route::get('test3', function(){
 // 	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
@@ -137,6 +138,20 @@ Route::group(['prefix'=>'admin'], function(){
 
 		Route::get('xoa/{id}', 'GiaoVienController@getXoa');
 	});
+
+	Route::group(['prefix'=>'thongke'], function(){
+		//admin/theloai/danhsach
+		Route::get('danhsach', 'ThongKeController@getDanhSach');
+		Route::get('danhsach', 'ThongKeController@chartjs');
+
+		Route::get('sua/{id}', 'ThongKeController@getSua');
+		Route::post('sua/{id}', 'ThongKeController@postSua');
+
+		Route::get('them', 'ThongKeController@getThem');
+		Route::post('them', 'ThongKeController@postThem');
+
+		Route::get('xoa/{id}', 'ThongKeController@getXoa');
+	});
 });
 
 Route::group(['prefix'=>'user'], function(){
@@ -159,3 +174,6 @@ Route::group(['prefix'=>'manager'], function(){
 
 	Route::get('thongke', 'TrangChuController@getVanDe');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

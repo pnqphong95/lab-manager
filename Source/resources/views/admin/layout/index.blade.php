@@ -8,31 +8,30 @@ $soLuongPhong = 0;
 <html>
 <head>
     <title>Trang nhất</title>
-    <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.min.css') }}">
     <base href="{{asset('')}}">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
     
     <!-- Bootstrap Core CSS -->
-    <link href="admin_asset/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="admin_asset/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="admin_asset/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="css/dataTables.responsive.css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
@@ -47,20 +46,20 @@ $soLuongPhong = 0;
         @include('admin.layout.footer')
     </div>
     
-    <script src="admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="admin_asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="admin_asset/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="js/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="admin_asset/dist/js/sb-admin-2.js"></script>
+    <script src="js/sb-admin-2.js"></script>
 
     <!-- DataTables JavaScript -->
-    <script src="admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>

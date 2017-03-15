@@ -10,7 +10,7 @@ class GiaoVien extends Model
     public $timestamps = false;
 
     public function bomon(){
-    	return $this->belongsTo('App\GiaoVien', 'idBoMon', 'id');
+    	return $this->belongsTo('App\BoMon', 'idBoMon', 'id');
     }
 
     public function chucvu(){

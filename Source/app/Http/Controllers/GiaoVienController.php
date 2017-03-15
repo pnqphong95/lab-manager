@@ -13,10 +13,13 @@ class GiaoVienController extends Controller
 
     public function getDanhSach()
     {
-        $giaovien = DB::table('giaovien')   ->join('bomon', 'idBoMon', '=', 'bomon.id')
-                                    ->get();
+        // $giaovien = DB::table('giaovien')   ->join('bomon', 'idBoMon', '=', 'bomon.id')
+        //                             ->get();
+        // $chucvu = ChucVu::all();
+        $giaovien = GiaoVien::all();
+        $bomon = BoMon::all();
         $chucvu = ChucVu::all();
-        return view('admin.giaovien.danhsach', ['giaovien'=>$giaovien, 'chucvu'=>$chucvu]);
+        return view('admin.giaovien.danhsach', ['giaovien'=>$giaovien, 'bomon'=>$bomon, 'chucvu'=>$chucvu]);
     }
 
     public function getThem()
@@ -70,7 +73,8 @@ class GiaoVienController extends Controller
         $giaovien->GioiTinh =$request->GioiTinh;
         $giaovien->SDT =$request->SDT;
         $giaovien->idBoMon =$request->idBoMon;
-        $giaovien->password =$request->password;
+        $pw = password_hash("password", PASSWORD_DEFAULT);
+        $giaovien->password =$request->pw;
         $giaovien->idChucVu =$request->idChucVu;
         $giaovien->KichHoat =$request->KichHoat;
         $giaovien->remember_token = '';
@@ -82,11 +86,15 @@ class GiaoVienController extends Controller
     public function getSua($id)
     {
         $giaovien = GiaoVien::find($id);
-        return view('admin.giaovien.them', ['giaovien'=>$giaovien]);
+        $chucvu = ChucVu::all();
+        $bomon = BoMon::all();
+        return view('admin.giaovien.sua', ['giaovien'=>$giaovien,'chucvu'=>$chucvu,'bomon'=>$bomon]);
     }
 
     public function postSua(Request $request, $id)
     {
+        $giaovien = GiaoVien::find($id);
+        $chucvu = ChucVu::all();
         $this->validate($request,
             [
                 'MaGV'=>'required|max:255'
@@ -128,7 +136,8 @@ class GiaoVienController extends Controller
         $giaovien->GioiTinh =$request->GioiTinh;
         $giaovien->SDT =$request->SDT;
         $giaovien->idBoMon =$request->idBoMon;
-        $giaovien->password =$request->password;
+        $pw = password_hash("password", PASSWORD_DEFAULT);
+        $giaovien->password =$pw;
         $giaovien->idChucVu =$request->idChucVu;
         $giaovien->KichHoat =$request->KichHoat;
         // $giaovien->remember_token = '';
