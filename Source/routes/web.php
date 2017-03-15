@@ -132,6 +132,7 @@ Route::group(['prefix'=>'user'], function(){
 	Route::post('vande', 'TrangChuController@postVanDe');
 
 	Route::get('DKphongBMkhac', 'TrangChuController@getDKphongBMkhac');
+	Route::get('lichthuchanh', 'TrangChuController@getLichThucHanh');
 });
 
 Route::group(['prefix'=>'manager'], function(){

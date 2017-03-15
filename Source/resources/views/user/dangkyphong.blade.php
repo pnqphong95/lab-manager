@@ -11,13 +11,28 @@
 			<!-- Dang ky -->
 			<h3>Đăng ký phòng</h3>
 			<hr>
+			@if(count($errors)>0)
+		        <div class="alert alert-danger">
+		            @foreach($errors->all() as $err)
+		                {{$err}}<br>
+		            @endforeach
+		        </div>
+		    @endif
+			
+			@if(session('success'))
+		        <div class="alert alert-success">
+		            @foreach($success->all() as $suc)
+		                {{$suc}}<br>
+		            @endforeach
+		        </div>
+		    @endif
 			<form action="user/dangkyphong" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row">
 					<div class="col-lg-6">		
 						<div class="form-group">
 							<label>Môn học</label>
-							<select class="form-control">
+							<select class="form-control" name="idMonHoc">
 							@foreach($allMonHoc as $mh)
 								<option value="{{$mh->id}}">{{$mh->TenMH}}</option>
 							@endforeach
@@ -27,7 +42,7 @@
 					<div class="col-lg-3">
 						<div class="form-group">
 							<label>Nhóm</label>
-							<input type="text" name="" class="form-control">
+							<input type="text" name="nhomHoc" class="form-control" required>
 						</div>
 					</div>
 				</div>
@@ -118,7 +133,7 @@
                 $("#dataLich").append(dataLich);
             }
             else if($(this).prop("checked") == false){
-     			$('#tr'+id).remove();
+     			$('#tr'+idTuan).remove();
             }	        
 		});
 	});

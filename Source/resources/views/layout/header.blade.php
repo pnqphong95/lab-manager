@@ -26,7 +26,10 @@
                     </li>
                     <li>
                         <a href="user/DKphongBMkhac">Đăng ký phòng khác</a>
-                    </li>                   
+                    </li> 
+                    <li>
+                        <a href="user/lichthuchanh">Lịch thực hành</a>
+                    </li>                  
                    
                 @endif
                 </ul>
