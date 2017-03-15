@@ -11,6 +11,7 @@ use App\Buoi;
 use App\Thu;
 use App\Lich;
 use App\VanDe;
+use App\Lich_ChoDuyet;
 use DB;
 
 class TrangChuController extends Controller
@@ -61,6 +62,9 @@ class TrangChuController extends Controller
 
     public function postDangKyPhong(Request $request) {
 
+        //Tao bien gui thong diep cho trang chu
+        $mes = ' ';
+
         //Kiem tra du lieu nhap vao
         $this->validate( $request,
             [
@@ -94,13 +98,19 @@ class TrangChuController extends Controller
         //Lay tat ca phong trong bo mon
         $allPhongBM = DB::table('phong')    ->where('idBoMon', Auth::user()->idBoMon)
                                             ->get();
+
+        //Lay tat ca phong tu bo mon khac
+        $allPhongBMkhac = DB::table('phong')    ->where('idBoMon', '!=', Auth::user()->idBoMon)
+                                            ->get();
         //Duyet tung lich
-        foreach ($request->lich as $l) {
+        foreach ($request->lich as $l) 
+        {
             $tuan = $thu = $buoi = '';
             $lich = coverData($l);
 
             //Duyet kiem tra tung phong trong bo mon
-            foreach ($allPhongBM as $p) {
+            foreach ($allPhongBM as $p) 
+            {
 
                 //kiem tra phong con trong khong
                 $check = DB::table('lich')  ->where('idPhong', $p->id)
@@ -115,6 +125,8 @@ class TrangChuController extends Controller
                                                                 ->select('idPhanMem')
                                                                 ->get();
                     $arrayPMPhong = array();
+
+                    //Cover array(object) to array(idPhanMem)
                     foreach ($phongPhanMem as $pm1) 
                     {
                         array_push($arrayPMPhong, $pm1->idPhanMem);
@@ -133,22 +145,74 @@ class TrangChuController extends Controller
                         $lichDB->idTuan = $lich['tuan'];
                         $lichDB->idHocKyNienKhoa = $idLastHKNK;
                         $lichDB->save();   
+                        $mes = $mes . '<br>Đăng ky thành công!';
                         break;                     
                     }
                     else
                     {
-                        echo 'phong khong co phan mem can thiet <br>';
-                        print_r($arrayPM); 
-                        print_r($arrayPMPhong);
+                        $mes = $mes . '<br>Khong tìm được phòng phù hợp!';
                     }
                 }
                 else                //Khong co phong trong
                 {
-                    echo 'not oki <br>';
+                    //Duyet kiem tra phong tu bo mon khac 
+                    foreach ($allPhongBMkhac as $pk) 
+                    {
+
+                        //kiem tra phong con trong khong
+                        $check = DB::table('lich')  ->where('idPhong', $pk->id)
+                                                    ->where('idTuan', $lich['tuan'])
+                                                    ->where('idThu', $lich['thu'])
+                                                    ->where('idBuoi', $lich['buoi'])
+                                                    ->count();
+                        if ($check === 0)  //Neu phong con trong
+                        {
+                            //Lay cac phan mem co cai trong phong
+                            $phongPhanMem = DB::table('phong_phanmem')  ->where('idPhong', $pk->id)
+                                                                        ->select('idPhanMem')
+                                                                        ->get();
+                            $arrayPMPhong = array();
+
+                            //Cover array(object) to array(idPhanMem)
+                            foreach ($phongPhanMem as $pm1) 
+                            {
+                                array_push($arrayPMPhong, $pm1->idPhanMem);
+                            }
+
+                            //Kiem tra phong co pm yeu cau khongs
+                            if(checkParentArray($arrayPM, $arrayPMPhong)) 
+                            {
+                                $lichCD = new Lich_ChoDuyet();
+                                $lichCD->idGiaoVien =$idGiaoVien;
+                                $lichCD->idPhong =$pk->id;
+                                $lichCD->idMonHoc =$idMonHoc;
+                                $lichCD->nhom = $nhom;
+                                $lichCD->idThu = $lich['thu'];
+                                $lichCD->idBuoi = $lich['buoi'];
+                                $lichCD->idTuan = $lich['tuan'];
+                                $lichCD->idHocKyNienKhoa = $idLastHKNK;
+                                $lichCD->TrangThai = 0;
+                                $lichCD->save();   
+                                $mes = $mes . '<br>Yêu cầu sẽ chuyển sang bộ môn khác đợi duyệt';
+                                break;                     
+                            }
+                            else
+                            {
+                                $mes = $mes . '<br>Không tìm được phòng phù hợp!';
+                            }
+                        }
+                        else                //Khong co phong trong
+                        {
+                            $mes = $mes . '<br>Không có phòng trống!';
+                        }
+                    }
                 }
             }
+
+           
+
         }
-        return redirect('user/dangkyphong')->with('success','Đăng ký phòng thành công');
+        return redirect('user/dangkyphong')->with('thongbao', $mes);
     }
 
     public function getDKphongBMkhac(){
@@ -200,7 +264,27 @@ class TrangChuController extends Controller
 
     public function getLichThucHanh() 
     {
+        //Lay hoc ky nien khoa hien tai
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
 
-        return view('user.lichthuchanh');
+        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->get();
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+        return view('user.lichthuchanh', 
+                    [
+                        'lich' => $lich,
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan
+                    ]);
     }
 }

@@ -15,53 +15,96 @@ Lịch thực hành
 				
 			</div>
 			<hr>
-			
-			
-		</div>
-	</div>
-	<div class="col-lg-4">
-		<div class="panel panel-primary thong-tin">
-			<div class="panel-heading">
-				<center>THÔNG TIN NGƯỜI DÙNG</center>
+			<h4>Chỉ hiển thị tuần</h4>
+			<div class="checkbox">
+				@foreach($allTuan as $tu1)
+				  	<label class="checkbox-inline">
+					  	<input type="checkbox" class="selectTuan" value="{{$tu1->id}}"> {{$tu1->TenTuan}}
+					</label>				
+				@endforeach
 			</div>
-			<div class="panel-body">
-				<table class="table borderless table-borderless" style="border: none;">
+			<table class="table table-bordered">
+				<thead>	
 					<tr>
-						<th><span>Mã cán bộ:</span></th>
-						<td><span>{{Auth::user()->MaGV}}</span></td>
+						<th>Tuần</th>		
+						<th>Thứ</th>
+						<th>Mã HP</th>
+						<th>Nhóm</th>
+						<th>Tên học phần</th>
+						<th>Buổi</th>
+						<th>Phòng</th>
+					</tr>	
+				</thead>
+				<tbody>
+				@foreach($lich as $l)
+					<tr class="tuan{{$l->idTuan}} trLich">
+						<td>
+							@foreach($allTuan as $tu)
+								@if($tu->id == $l->idTuan)
+									{{$tu->TenTuan}}
+								@endif
+							@endforeach
+						</td>
+						<td>
+							@foreach($allThu as $thu)
+								@if($thu->id == $l->idThu)
+									{{$thu->TenThu}}
+								@endif
+							@endforeach
+						</td>
+						<td>
+							@foreach($allMonHoc as $mh)
+								@if($mh->id == $l->idMonHoc)
+									{{$mh->MaMH}}
+								@endif
+							@endforeach
+						</td>
+						<td>{{$l->Nhom}}</td>
+						<td>
+							@foreach($allMonHoc as $mh)
+								@if($mh->id == $l->idMonHoc)
+									{{$mh->TenMH}}
+								@endif
+							@endforeach
+						</td>
+						<td>
+							@foreach($allBuoi as $b)
+								@if($b->id == $l->idBuoi)
+									{{$b->TenBuoi}}
+								@endif
+							@endforeach
+						</td>
+						<td>
+							@foreach($allPhong as $p)
+								@if($p->id == $l->idPhong)
+									{{$p->TenPhong}}
+								@endif
+							@endforeach
+						</td>
 					</tr>
-					<tr>
-						<th><span>Họ và tên:</span></th>
-						<td><span>{{Auth::user()->HoGV}} {{Auth::user()->TenGV}}</span></td>
-					</tr>
-					<tr>
-						<th><span>Giới tính:</span></th>
-						<td><span>Nam</span></td>
-					</tr>
-					<tr>
-						<th><span>Chức vụ:</span></th>
-						<td><span>Giảng Vien</span></td>
-					</tr>
-				</table>				 
-				
-				<br><center><a class="btn btn-default" href="{{route('logout')}}">Đăng xuất</a></center>
-			</div>
-	</div> <!-- /thong-tin -->
+				@endforeach
+				</tbody>				
+			</table>
 
-	<div class="panel panel-primary lich">
-			<div class="panel-heading">
-				<span><center>LỊCH</center></span>
-			</div>
-			<div class="panel-body" style="padding: 1px;">
-				<script type="text/javascript">  								
-					document.write(printCal());  								
-				</script>
-			</div>
-	</div> <!-- /lich -->
+		</div>
 	</div>
 </div>
 @endsection
 
 @section('script')
-
+<script type="text/javascript">
+	$(document).ready(function (){
+		$('.selectTuan').on("click", function () {
+			var idTuan = $(this).val();
+			if($(this).prop("checked") == true){
+                $(".trLich").addClass('my-hidden');
+                $('.tuan'+ idTuan).removeClass('my-hidden')
+            }
+            else 
+        	if($(this).prop("checked") == false){
+     			$(".trLich").removeClass('my-hidden');
+            }
+		});
+	});
+</script>
 @endsection
