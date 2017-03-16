@@ -20,6 +20,7 @@ use App\Lich;
 use App\LopHocPhan;
 use App\Pages;
 use App\MonHoc_PhanMem;
+use App\VanDe;
 
 // Route::get('test3', function(){
 // 	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
@@ -32,15 +33,14 @@ Route::get('/', function(){
 	return view('welcome');
 });
 
-Route::get('ajax/getLich/{buoi?}/{tuan}',function($buoi, $tuan){
-	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
-    $lich = DB::table('lich')		->join('monhoc','monhoc.id', '=', 'idMonHoc')
-    								->join('giaovien','giaovien.id', '=', 'idGiaoVien')
-    								->where('idBuoi', $buoi)
-    								->where('idTuan', $tuan)
-    								->where('idHocKyNienKhoa', $idHocKyNienKhoa->id)
-    								->get();
-    return json_encode($lich);
+
+
+Route::group(['prefix'=>'ajax'], function(){
+
+	Route::get('getLich/{buoi?}/{tuan}','AjaxController@getLich');
+
+	Route::get('suaLoi/{id?}', 'AjaxController@suaLoi');
+
 });
 
 
@@ -145,17 +145,11 @@ Route::group(['prefix'=>'user'], function(){
 	Route::get('dangkyphong', 'TrangChuController@getDangKyPhong')->name('dangKyPhong');
 	Route::post('dangkyphong', 'TrangChuController@postDangKyPhong');
 
-	Route::get('vande', 'TrangChuController@getVanDe')->name('vanDe');
-	Route::post('vande', 'TrangChuController@postVanDe');
+	Route::get('vande', 'VanDeController@getVanDe');
+	Route::post('vande', 'VanDeController@postVanDe');
 
 	Route::get('DKphongBMkhac', 'TrangChuController@getDKphongBMkhac');
 	Route::get('lichthuchanh', 'TrangChuController@getLichThucHanh');
-});
 
-Route::group(['prefix'=>'manager'], function(){
-	Route::get('trangchu', 'TrangChuController@getMagTrangChu');
-
-	Route::get('chinhsualich', 'TrangChuController@getDangKyPhong');
-
-	Route::get('thongke', 'TrangChuController@getVanDe');
+	Route::get('danhsachloi', 'VanDeController@getDanhSachLoi');
 });

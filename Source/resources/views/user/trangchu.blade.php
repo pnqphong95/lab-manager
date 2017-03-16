@@ -190,15 +190,13 @@ Trang chủ
 		$("input[name=radioBuoi]").change(function () {
 			var buoiLich = $("input[name=radioBuoi]:checked").val();
 			var tuanLich = $("input[name=radioTuan]:checked").val();
-			//alert(tuanLich);
        		emptyLich();
 
        		$.ajax({
-
 	            type: "get",
 	            url: "ajax/getLich/" + buoiLich + "/" + tuanLich,
 	            success: function (data) {
-	                console.log(data);
+	                //console.log(data);
 	            	showLich(data);	               
 	            },
 	            error: function (data) {
@@ -211,15 +209,13 @@ Trang chủ
 		$("input[name=radioTuan]").change(function () {
 			var buoiLich = $("input[name=radioBuoi]:checked").val();
 			var tuanLich = $("input[name=radioTuan]:checked").val();
-			//alert(tuanLich);
        		emptyLich();
 
        		$.ajax({
-
 	            type: "get",
 	            url: "ajax/getLich/" + buoiLich + "/" + tuanLich,
 	            success: function (data) {
-	                console.log(data);
+	                //console.log(data);
 	            	showLich(data);	               
 	            },
 	            error: function (data) {

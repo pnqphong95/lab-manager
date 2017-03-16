@@ -17,9 +17,12 @@ Lịch thực hành
 			<hr>
 			<h4>Chỉ hiển thị tuần</h4>
 			<div class="checkbox">
+					<label class="radio-inline">
+					  	<input type="radio" name="selectTuan" class="selectTuan" id="all" value="all" checked> Tất cả
+					</label>
 				@foreach($allTuan as $tu1)
-				  	<label class="checkbox-inline">
-					  	<input type="checkbox" class="selectTuan" value="{{$tu1->id}}"> {{$tu1->TenTuan}}
+				  	<label class="radio-inline">
+					  	<input type="radio" name="selectTuan" class="selectTuan" value="{{$tu1->id}}"> {{$tu1->TenTuan}}
 					</label>				
 				@endforeach
 			</div>
@@ -95,15 +98,23 @@ Lịch thực hành
 <script type="text/javascript">
 	$(document).ready(function (){
 		$('.selectTuan').on("click", function () {
-			var idTuan = $(this).val();
-			if($(this).prop("checked") == true){
-                $(".trLich").addClass('my-hidden');
-                $('.tuan'+ idTuan).removeClass('my-hidden')
-            }
-            else 
-        	if($(this).prop("checked") == false){
-     			$(".trLich").removeClass('my-hidden');
-            }
+			if( $(this).val() == 'all')
+			{
+				$(".trLich").removeClass('my-hidden');
+			}
+			else
+			{
+				var idTuan = $(this).val();
+				if($(this).prop("checked") == true){
+	                $(".trLich").addClass('my-hidden');
+	                $('.tuan'+ idTuan).removeClass('my-hidden')
+	            }
+	            else 
+	        	if($(this).prop("checked") == false){
+	     			$(".trLich").removeClass('my-hidden');
+	            }            	
+			}        
+            
 		});
 	});
 </script>

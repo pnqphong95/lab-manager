@@ -182,18 +182,17 @@ class TrangChuController extends Controller
                             //Kiem tra phong co pm yeu cau khongs
                             if(checkParentArray($arrayPM, $arrayPMPhong)) 
                             {
-                                $lichCD = new Lich_ChoDuyet();
-                                $lichCD->idGiaoVien =$idGiaoVien;
-                                $lichCD->idPhong =$pk->id;
-                                $lichCD->idMonHoc =$idMonHoc;
-                                $lichCD->nhom = $nhom;
-                                $lichCD->idThu = $lich['thu'];
-                                $lichCD->idBuoi = $lich['buoi'];
-                                $lichCD->idTuan = $lich['tuan'];
-                                $lichCD->idHocKyNienKhoa = $idLastHKNK;
-                                $lichCD->TrangThai = 0;
-                                $lichCD->save();   
-                                $mes = $mes . '<br>Yêu cầu sẽ chuyển sang bộ môn khác đợi duyệt';
+                                $lichDB = new Lich();
+                                $lichDB->idGiaoVien =$idGiaoVien;
+                                $lichDB->idPhong =$pk->id;
+                                $lichDB->idMonHoc =$idMonHoc;
+                                $lichDB->nhom = $nhom;
+                                $lichDB->idThu = $lich['thu'];
+                                $lichDB->idBuoi = $lich['buoi'];
+                                $lichDB->idTuan = $lich['tuan'];
+                                $lichDB->idHocKyNienKhoa = $idLastHKNK;
+                                $lichDB->TrangThai = 0;
+                                $lichDB->save();
                                 break;                     
                             }
                             else
@@ -231,36 +230,7 @@ class TrangChuController extends Controller
             ]
         );
         
-    }
-
-    public function getVanDe() {
-        $allPhong = Phong::all();
-        return view('user.vande',['allPhong' => $allPhong]);
-    }
-
-    public function postVanDe(Request $request) {
-        $this->validate( $request,
-            [
-                'idPhong' => 'required',
-                'tomTatVD' => 'required|max:50',
-                'chiTietVD' => 'required|max:255'
-            ],
-            [
-                'idPhong.required' => 'Phòng không được bỏ trống!',
-                'tomTatVD.required' => 'Tóm tắt vấn đề không được bỏ trống!',
-                'tomTatVD.max' => 'Tóm tăt vấn đề tối đa 50 kí tự!',
-                'chiTietVD.required' => 'Chi tiết vấn đề không được bỏ trống!',
-                'chiTietVD.max' => 'Chi tiết vấn đề tối đa 255 kí tự!'
-            ]
-            );
-        $vande = new VanDe();
-        $vande->idPhong = $request->idPhong;
-        $vande->TomTatVD = $request->tomTatVD;
-        $vande->ChiTietVD = $request->chiTietVD;
-        $vande->NguoiTao = Auth::user()->id;
-        $vande->save();
-        return redirect('user/vande')->with('thongbao','Vấn đề đã gửi!');
-    }
+    }       
 
     public function getLichThucHanh() 
     {
@@ -271,6 +241,7 @@ class TrangChuController extends Controller
         $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
                                     ->where('idHocKyNienKhoa', $idLastHKNK)
                                     ->orderBy('idTuan')
+                                    ->orderBy('idThu')
                                     ->get();
         $allThu = Thu::all();
         $allMonHoc = MonHoc::all();
