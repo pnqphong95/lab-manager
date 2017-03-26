@@ -8,12 +8,7 @@ Lịch thực hành
 <div class="row">
 	<div class="col-lg-12">
 		<div class="white-well">
-			<div class="row">
-				<div class="col-lg-6">
-					<h2>Lịch dạy thực hành</h2>
-				</div>
-				
-			</div>
+			<h2>Lịch dạy thực hành</h2>
 			<hr>
 			<h4>Chỉ hiển thị tuần</h4>
 			<div class="checkbox">

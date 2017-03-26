@@ -27,11 +27,7 @@ use App\VanDe;
 // 	echo $idHocKyNienKhoa->id;
 // });
 
-Route::get('trangchu', 'TrangChuController@getTrangChu')->name('root');
-
-Route::get('/', function(){
-	return view('welcome');
-});
+Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
 
 
@@ -142,8 +138,8 @@ Route::group(['prefix'=>'admin'], function(){
 Route::group(['prefix'=>'user'], function(){
 	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
 
-	Route::get('dangkyphong', 'TrangChuController@getDangKyPhong')->name('dangKyPhong');
-	Route::post('dangkyphong', 'TrangChuController@postDangKyPhong');
+	Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhong')->name('dangKyPhong');
+	Route::post('dangkyphong', 'DangKyPhongController@postDangKyPhong');
 
 	Route::get('vande', 'VanDeController@getVanDe');
 	Route::post('vande', 'VanDeController@postVanDe');
@@ -152,4 +148,5 @@ Route::group(['prefix'=>'user'], function(){
 	Route::get('lichthuchanh', 'TrangChuController@getLichThucHanh');
 
 	Route::get('danhsachloi', 'VanDeController@getDanhSachLoi');
+	Route::get('danhsachlichCD', 'DangKyPhongController@getDSLichCD');
 });
