@@ -52,7 +52,6 @@ Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
 
 Route::get('user', 'UserController@trangchu');
 
-
 Route::get('admin/lich/them', 'LichController@getThem');
 
 Route::post('admin/lich/them', 'LichController@postThem');
@@ -141,8 +140,14 @@ Route::group(['prefix'=>'admin'], function(){
 
 	Route::group(['prefix'=>'thongke'], function(){
 		//admin/theloai/danhsach
-		Route::get('danhsach', 'ThongKeController@getDanhSach');
-		Route::get('danhsach', 'ThongKeController@chartjs');
+
+		Route::get('danhsach', 'ThongKeController@getChart');
+		Route::get('thang1', 'ThongKeController@getThang1');
+		Route::get('thang2', 'ThongKeController@getThang2');
+		Route::get('thang3', 'ThongKeController@getThang3');
+		Route::get('thang4', 'ThongKeController@getThang4');
+		Route::get('thang5', 'ThongKeController@getThang5');
+		Route::get('tuan', 'ThongKeController@getTuan');		
 
 		Route::get('sua/{id}', 'ThongKeController@getSua');
 		Route::post('sua/{id}', 'ThongKeController@postSua');
@@ -174,6 +179,4 @@ Route::group(['prefix'=>'manager'], function(){
 
 	Route::get('thongke', 'TrangChuController@getVanDe');
 });
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');

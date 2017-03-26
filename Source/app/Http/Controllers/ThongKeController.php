@@ -6,36 +6,73 @@ use Illuminate\Http\Request;
 use App\Lich;
 use App\Phong;
 use App\BoMon;
-use App\ThongKe;
+use App\Tuan;
+use DB;
 
 class ThongKeController extends Controller
 {
     //
     public function getDanhSach()
     {
-        $lich = Lich::all();
-        $phong = Phong::all();
-        $bomon = BoMon::all();
-        return view('admin.thongke.danhsach', ['lich'=>$lich, 'phong'=>$phong, 'bomon'=>$bomon]);
+
     }
 
-    public function chartjs()
+    public function getChart()
     {
-        $viewer = View::select(DB::raw("SUM(numberofview) as count"))
-            ->orderBy("created_at")
-            ->groupBy(DB::raw("year(created_at)"))
-            ->get()->toArray();
-        $viewer = array_column($viewer, 'count');
-        
-        $click = Click::select(DB::raw("SUM(numberofclick) as count"))
-            ->orderBy("created_at")
-            ->groupBy(DB::raw("year(created_at)"))
-            ->get()->toArray();
-        $click = array_column($click, 'count');
-        
-        return view('chartjs')
-                ->with('viewer',json_encode($viewer,JSON_NUMERIC_CHECK))
-                ->with('click',json_encode($click,JSON_NUMERIC_CHECK));
+    	$allPhong = Phong::all();
+    	$allTuan = Tuan::all();
+        $toanHK = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
+						                ->groupBy('idPhong')
+						                ->get();
+		$thang1 = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
+										->where('idTuan', '<=',10)->where('idTuan', '>=',4)
+						                ->groupBy('idPhong')
+						                ->get();
+
+        return view('admin.thongke.danhsach', ['toanHK'=>$toanHK,'thang1'=>$thang1,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
     }
+
+    public function getThang1()
+    {
+    	$allPhong = Phong::all();
+    	$allTuan = Tuan::all();
+
+        $toanHK = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
+						                ->groupBy('idPhong')
+						                ->get();
+		$thang1 = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
+										->where('idTuan', '<=',4)->where('idTuan', '>=',1)
+						                ->groupBy('idPhong')
+						                ->get();
+
+        return view('admin.thongke.thang1', ['toanHK'=>$toanHK,'thang1'=>$thang1,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
+    }
+
+    public function getThang2()
+    {
+    	$allPhong = Phong::all();
+        $toanHK = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
+						                ->groupBy('idPhong')
+						                ->get();
+		$thang2 = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
+										->where('idTuan', '<=',8)->where('idTuan', '>=',5)
+						                ->groupBy('idPhong')
+						                ->get();
+
+        return view('admin.thongke.thang2', ['toanHK'=>$toanHK,'thang2'=>$thang2,'allPhong'=>$allPhong]);
+    }
+
+    public function getTuan()
+    {
+    	$allPhong = Phong::all();
+        $allTuan = Tuan::all();
+
+		$tuan = DB::table('lich')	 	->select('idTuan', DB::raw('count(*) as total'))
+						                ->groupBy('idTuan')
+						                ->get();
+
+        return view('admin.thongke.tuan', ['allTuan'=>$allTuan,'tuan'=>$tuan,'allPhong'=>$allPhong]);
+    }
+
 
 }

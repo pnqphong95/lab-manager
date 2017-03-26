@@ -69,6 +69,8 @@ $soLuongPhong = 0;
         });
     });
     </script>
+
+    @yield('script')
 </body>
 </html>
 

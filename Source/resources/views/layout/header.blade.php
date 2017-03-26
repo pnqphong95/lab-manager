@@ -36,7 +36,7 @@
                 
                 <ul class="nav navbar-nav navbar-right">
                 @if(!Auth::user())                
-                    <li><a href="{{route('getLogin')}}"></span>Đăng nhập</a></li>                
+                    <li><a href="login"></span>Đăng nhập</a></li>                
                 @else
                     <li>
                         <a>
