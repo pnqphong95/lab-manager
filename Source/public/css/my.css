@@ -192,10 +192,18 @@ tr {
 /*end custom well*/
 
 /*anh nen banner*/
-#banner {
+#bg-banner {
   width: 100%;
-  height: 134px;
+  height: 130px;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
   background: #096ecd url("/img/banner.png") repeat-y scroll 0px 0px / 100% 111%;
+}
+#banner {
+  position: relative;
+  width: 981px;
+  height: 130px;
+  margin: 0px auto;
 }
 /*end anh nen banner*/
 
@@ -217,3 +225,15 @@ tr {
 .error-template {padding: 40px 15px;text-align: center;}
 .error-actions {margin-top:15px;margin-bottom:15px;}
 .error-actions .btn { margin-right:10px; }
+
+/*login tren header*/
+#header-login {
+    position: relative;
+    line-height: 1.7em;
+    font-size: 100%;
+    margin: 0.3em 0.3em 0.3em 0;
+    right: 0.3em;
+    float: right;
+    text-align: right;
+    color: white ;
+}

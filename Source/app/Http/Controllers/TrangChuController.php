@@ -62,31 +62,4 @@ class TrangChuController extends Controller
         
     }       
 
-    public function getLichThucHanh() 
-    {
-        //Lay hoc ky nien khoa hien tai
-        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
-        $idLastHKNK = $lastHKNK->id;
-
-        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
-                                    ->where('idHocKyNienKhoa', $idLastHKNK)
-                                    ->orderBy('idTuan')
-                                    ->orderBy('idThu')
-                                    ->orderBy('idBuoi')
-                                    ->get();
-        $allThu = Thu::all();
-        $allMonHoc = MonHoc::all();
-        $allPhong = Phong::all();
-        $allBuoi = Buoi::all();
-        $allTuan = Tuan::all();
-        return view('user.lichthuchanh', 
-                    [
-                        'lich' => $lich,
-                        'allMonHoc' => $allMonHoc,
-                        'allBuoi' => $allBuoi,
-                        'allPhong' => $allPhong,
-                        'allThu' => $allThu,
-                        'allTuan' => $allTuan
-                    ]);
-    }
 }

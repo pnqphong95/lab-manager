@@ -153,7 +153,7 @@ Route::group(['prefix'=>'admin'], function(){
 	});
 });
 
-Route::group(['prefix'=>'user'], function(){
+Route::group(['prefix'=>'user', 'middleware' => 'dangNhap'], function(){
 	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
 
 	Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhong')->name('dangKyPhong');
@@ -162,9 +162,10 @@ Route::group(['prefix'=>'user'], function(){
 	Route::get('vande', 'VanDeController@getVanDe');
 	Route::post('vande', 'VanDeController@postVanDe');
 
-	Route::get('DKphongBMkhac', 'TrangChuController@getDKphongBMkhac');
-	Route::get('lichthuchanh', 'TrangChuController@getLichThucHanh');
+	Route::get('lichthuchanh', 'LichController@getLichThucHanh');
 
-	Route::get('danhsachloi', 'VanDeController@getDanhSachLoi');
+	Route::get('cacyeucau', 'LichController@getLichChoDuyet');
+
+	Route::get('danhsachvande', 'VanDeController@getDanhSachLoi');
 	Route::get('danhsachlichCD', 'DangKyPhongController@getDSLichCD');
 });

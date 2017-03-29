@@ -2,7 +2,6 @@
 
 @section('content')
 <!-- Page Content -->
-
 <div class="col-md-12">
     <h1 class="page-header">Giáo viên
         <small>Danh sách</small>
