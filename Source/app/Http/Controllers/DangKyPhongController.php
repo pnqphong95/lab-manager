@@ -221,15 +221,4 @@ class DangKyPhongController extends Controller
         }
         return redirect('user/dangkyphong')->with('thongbao', $mes);
     }
-
-    public function getDSLichCD ()
-    {
-    	$lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
-        $idLastHKNK = $lastHKNK->id;
-    	$allLichCD = DB::table('Lich_ChoDuyet')
-                        ->where('idHocKyNienKhoa', $idLastHKNK)
-                        ->get();
-
-        return view ('user.lichchoduyet.danhsach', ['allLichCD' => $allLichCD]);
-    }
 }

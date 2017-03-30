@@ -56,7 +56,11 @@
 		        </div>
 		        <div class="form-group">
 		            <label>Chức vụ</label>
-		            <input type="text" class="form-control" name="idChucVu"/>
+		            <select class="form-control" name="idChucVu">
+		            	<option value="1">Administrator</option>
+		            	<option selected value="2">Người dùng bình thường</option>
+		            	<option value="3">Người dùng quản lí</option>
+		            </select>
 		        </div>
 		        <div class="form-group">
 		            <label>Bộ môn</label>

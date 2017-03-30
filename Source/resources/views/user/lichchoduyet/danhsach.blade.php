@@ -22,7 +22,6 @@ Danh sách các vấn đề
 						<th width="13%">Thứ</th>
 						<th width="13%">Buổi</th>
 						<th width="13%">Tuần</th>
-						<th width="13%">Trạng Thái</th>   
 						<th width="13%">Phòng</th>     								
 					</tr>
 				</thead>
@@ -35,8 +34,12 @@ Danh sách các vấn đề
 			        	<td>{{$lichCD->idThu}}</td>
 			        	<td>{{$lichCD->idBuoi}}</td>
 			        	<td>{{$lichCD->idTuan}}</td> 
-			        	<td>{{$lichCD->TrangThai}}</td>
-			        	<td><select class="form-control"><option>P01</option> <option>P02</option></select></td>
+			        	<td>
+			        		<form action="" type="post">
+			        			<input type="hidden" name="idLichCD" value="{{$lichCD->id}}">
+			        			<button class="btn btn-info btn-xs btn-xepphong" type="button">Xếp phòng</button>
+			        		</form>
+			        	</td>
 		     	 	</tr>
 		     	 	@endforeach
 		     	 </tbody>
@@ -50,6 +53,15 @@ Danh sách các vấn đề
 
 @section('script')
 <script type="text/javascript">
-	
+	$(document).ready (function (){
+		$('.btn-xepphong').click(function () {
+			var select = $('<select><option>1</option></select>');
+			var btnOK = $('<button>OK</button>');
+			var parentEle = $(this).parent();
+			$(this).remove();
+			parentEle.append(select);
+			parentEle.append(btnOK);
+		});
+	});
 </script>
 @endsection
