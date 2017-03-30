@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\VanDe;
 use DB;
+use App\User;
+use App\Role;
 
 class AjaxController extends Controller
 {
@@ -26,5 +28,19 @@ class AjaxController extends Controller
 		$vande->trangThai = 1;
 		$vande->save();
 		return ['status' => '200'];
+	}
+
+	public function addRole ($magv, $roleName)
+	{
+		$giaovien = User::where ('id', '=', $magv)->first();
+		$role = Role::where('name', '=', $roleName)->first();
+		$giaovien->attachRole($role);
+	}
+
+	public function removeRole ($magv, $roleName)
+	{
+		$user = User::where('MaGV', '=', $magv)->first();
+		$role = Role::where('name', '=', $roleName)->first();
+		$user->detachRole($role);
 	}
 }
