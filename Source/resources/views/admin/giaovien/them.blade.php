@@ -52,7 +52,7 @@
 		    <div class="col-md-6">
 		    	<div class="form-group">
 		            <label>Số điện thoại</label>
-		            <input type="number" class="form-control" name="SDT" placeholder="Nhập Số điện thoại" />
+		            <input type="text" class="form-control" name="SDT" placeholder="Nhập Số điện thoại" />
 		        </div>
 		        <div class="form-group">
 		            <label>Chức vụ</label>

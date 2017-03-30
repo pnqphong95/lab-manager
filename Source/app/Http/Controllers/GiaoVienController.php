@@ -13,9 +13,6 @@ class GiaoVienController extends Controller
 
     public function getDanhSach()
     {
-        // $giaovien = DB::table('giaovien')   ->join('bomon', 'idBoMon', '=', 'bomon.id')
-        //                             ->get();
-        // $chucvu = ChucVu::all();
         $giaovien = GiaoVien::all();
         $bomon = BoMon::all();
         $chucvu = ChucVu::all();
@@ -34,49 +31,36 @@ class GiaoVienController extends Controller
     {
         $this->validate($request,
             [
-                'MaGV'=>'required|max:255'
+                'MaGV'=>'required|max:255',
+                'HoGV'=>'required|max:255',
+                'TenGV'=>'required|max:255',
+                'SDT'=>'required|max:11|min:10'
+
             ],
             [
                 'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
-                'MaGV.max'=>'Mã giáo viên có nhiều nhất 255 ký tự'
-            ]);
-        $this->validate($request,
-            [
-                'HoGV'=>'required|max:255'
-            ],
-            [
+                'MaGV.max'=>'Mã giáo viên có nhiều nhất 255 ký tự',
                 'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
                 'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
-            ]);
-        $this->validate($request,
-            [
-                'TenGV'=>'required|max:255'
-            ],
-            [
                 'TenGV.required'=>'Bạn chưa nhập tên giáo viên',
                 'TenGV.max'=>'Tên giáo viên có nhiều nhất 255 ký tự',
-            ]);
-        $this->validate($request,
-            [
-                'SDT'=>'required|max:11|min:10'
-            ],
-            [
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
                 'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số'
             ]);
+
         $giaovien = new GiaoVien;
-        $giaovien->MaGV =$request->MaGV;
-        $giaovien->HoGV =$request->HoGV;
-        $giaovien->TenGV =$request->TenGV;
-        $giaovien->NgaySinh =$request->NgaySinh;
-        $giaovien->GioiTinh =$request->GioiTinh;
-        $giaovien->SDT =$request->SDT;
-        $giaovien->idBoMon =$request->idBoMon;
+        $giaovien->MaGV = $request->MaGV;
+        $giaovien->HoGV = $request->HoGV;
+        $giaovien->TenGV = $request->TenGV;
+        $giaovien->NgaySinh = $request->NgaySinh;
+        $giaovien->GioiTinh = $request->GioiTinh;
+        $giaovien->SDT = $request->SDT;
+        $giaovien->idBoMon = $request->idBoMon;
         $pw = password_hash("password", PASSWORD_DEFAULT);
-        $giaovien->password =$request->pw;
-        $giaovien->idChucVu =$request->idChucVu;
-        $giaovien->KichHoat =$request->KichHoat;
+        $giaovien->password = $pw;
+        $giaovien->idChucVu = $request->idChucVu;
+        $giaovien->KichHoat = $request->KichHoat;
         $giaovien->remember_token = '';
         $giaovien->save();
 

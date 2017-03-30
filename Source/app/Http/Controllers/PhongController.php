@@ -50,25 +50,23 @@ class PhongController extends Controller
     {
         $this->validate($request,
             [
-                'TenPhong'=>'required|max:255'
+                'TenPhong'=>'required|max:255',
+                'TenPhong' => 'unique:phong,TenPhong',
+                'DLRam'=>'required',
+                'DLOCung'=>'required',
+                'CPU'=>'required|max:255',
+                'GPU'=>'required|max:255'
             ],
             [
                 'TenPhong.required'=>'Bạn chưa nhập tên phòng',
                 'TenPhong.max'=>'Tên phòng có nhiều nhất 255 ký tự',
-            ]);
-        $this->validate($request,
-            [
-                'DLRam'=>'required'
-            ],
-            [
-                'DLRam.required'=>'Bạn chưa nhập dung lượng ram'
-            ]);
-        $this->validate($request,
-            [
-                'DLOCung'=>'required'
-            ],
-            [
-                'DLOCung.required'=>'Bạn chưa nhập dung lượng ổ cứng'
+                'DLRam.required'=>'Bạn chưa nhập dung lượng ram',
+                'DLOCung.required'=>'Bạn chưa nhập dung lượng ổ cứng',
+                'CPU.required'=>'Bạn chưa nhập thông tin CPU',
+                'CPU.max'=>'Thông tin CPU có nhiều nhất 255 ký tự',
+                'GPU.required'=>'Bạn chưa nhập thông tin GPU',
+                'GPU.max'=>'Thông tin GPU có nhiều nhất 255 ký tự',
+                'TenPhong.unique' => 'Tên phòng đã tồn tại'
             ]);
 
         $phong = new Phong;
@@ -98,39 +96,20 @@ class PhongController extends Controller
 
         $this->validate($request,
             [
-                'TenPhong'=>'required|max:255'
-            ],
-            [
-                'TenPhong.required'=>'Bạn chưa nhập tên phòng',
-                'TenPhong.max'=>'Tên phòng có nhiều nhất 255 ký tự'
-            ]);
-        $this->validate($request,
-            [
-                'DLRam'=>'required'
-            ],
-            [
-                'DLRam.required'=>'Bạn chưa nhập dung lượng ram'
-            ]);
-        $this->validate($request,
-            [
-                'DLOCung'=>'required'
-            ],
-            [
-                'DLOCung.required'=>'Bạn chưa nhập dung lượng ổ cứng'
-            ]);
-        $this->validate($request,
-            [
-                'CPU'=>'required|max:255'
-            ],
-            [
-                'CPU.required'=>'Bạn chưa nhập thông tin CPU',
-                'CPU.max'=>'Thông tin CPU có nhiều nhất 255 ký tự'
-            ]);
-        $this->validate($request,
-            [
+                'TenPhong'=>'required|max:255',
+                //'TenPhong' => 'unique:phong,TenPhong,',
+                'DLRam'=>'required',
+                'DLOCung'=>'required',
+                'CPU'=>'required|max:255',
                 'GPU'=>'required|max:255'
             ],
             [
+                'TenPhong.required'=>'Bạn chưa nhập tên phòng',
+                'TenPhong.max'=>'Tên phòng có nhiều nhất 255 ký tự',
+                'DLRam.required'=>'Bạn chưa nhập dung lượng ram',
+                'DLOCung.required'=>'Bạn chưa nhập dung lượng ổ cứng',
+                'CPU.required'=>'Bạn chưa nhập thông tin CPU',
+                'CPU.max'=>'Thông tin CPU có nhiều nhất 255 ký tự',
                 'GPU.required'=>'Bạn chưa nhập thông tin GPU',
                 'GPU.max'=>'Thông tin GPU có nhiều nhất 255 ký tự'
             ]);

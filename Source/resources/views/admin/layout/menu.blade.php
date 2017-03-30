@@ -14,7 +14,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="trangchu"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
+                <a href="user/trangchu"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
             </li>
             <li>
                 <a href="admin/lich/danhsach"><i class="fa fa-bar-chart-o fa-fw"></i> LỊCH THỰC HÀNH<span class="fa arrow"></span></a>
@@ -59,7 +59,11 @@
                         <a href="admin/monhoc/danhsach">Danh sách</a>
                     </li>
                     <li>
-                        <a href="admin/monhoc/them">Thêm</a>
+                        <a href="admin/monhoc/them">Thêm môn học</a>
+                    </li>
+
+                    <li>
+                        <a href="admin/monhoc/danhsachphanmem">Danh sách phần mềm</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

@@ -4,7 +4,7 @@
 <!-- Page Content -->
 
 <div class="col-md-12">
-    <h1 class="page-header">Lớp học phần
+    <h1 class="page-header">Phần mềm
         <small>thêm</small>
     </h1>
 	
@@ -22,23 +22,15 @@
 	            {{session('thongbao')}}
 	        </div>
 	    @endif
-	    <form action="admin/lophocphan/them" method="POST">
+	    <form action="admin/phanmem/them" method="POST">
 	        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 	        <div class="form-group">
-	            <label>Mã môn học</label>
-	            <input class="form-control" name="idMonHoc" placeholder="Nhập mã môn học" />
+	            <label>Tên phần mềm</label>
+	            <input class="form-control" name="TenPM" placeholder="Nhập tên phần mềm" />
 	        </div>
 	        <div class="form-group">
-	            <label>Mã lớp</label>
-	            <input class="form-control" name="MaLop" placeholder="Nhập mã lớp" />
-	        </div>
-	        <div class="form-group">
-	            <label>Tên lớp</label>
-	            <input class="form-control" name="TenLop" placeholder="Nhập tên lớp" />
-	        </div>
-	        <div class="form-group">
-	            <label>Sỉ Số</label>
-	            <input class="form-control" name="SiSo" placeholder="Sỉ Số" />
+	            <label>Phiên bản</label>
+	            <input class="form-control" name="PhienBan" placeholder="Nhập phiên bản" />
 	        </div>
 	        
 	        <button type="submit" class="btn btn-primary">Thêm</button>

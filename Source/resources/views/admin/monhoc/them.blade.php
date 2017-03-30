@@ -4,11 +4,11 @@
 <!-- Page Content -->
 
 <div class="col-md-12">
-    <h1 class="page-header">Thể loại
+    <h1 class="page-header">Môn học
         <small>thêm</small>
     </h1>
-	
-	<div class="col-md-9" style="padding-bottom:120px">
+</div>
+	<div class="col-md-12">
 	    @if(count($errors)>0)
 	        <div class="alert alert-danger">
 	            @foreach($errors->all() as $err)
@@ -34,17 +34,12 @@
 	        </div>
 	        <div class="form-group">
 	            <label>Số tín chỉ</label>
-	            <input class="form-control" name="SoTinChi" placeholder="Số tín chỉ" />
-	        </div>
-	        <div class="form-group">
-	            <label>Yêu cầu phần mềm</label>
-	            
+	            <input type="number" class="form-control" name="SoTinChi" placeholder="Số tín chỉ" />
 	        </div>
 	        
 	        <button type="submit" class="btn btn-primary">Thêm</button>
 	        <button type="reset" class="btn btn-default">Reset</button>
 	    <form>
 	</div>
-</div>
 
 @endsection

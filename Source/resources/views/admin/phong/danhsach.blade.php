@@ -7,8 +7,9 @@
     <h1 class="page-header">Phòng thực hành
         <small>Danh sách</small>
     </h1>
-
-    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+</div>
+<div class="col-md-12">
+	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	    <thead>
 	        <tr align="center">
 	            <th>Tên phòng</th>	            
@@ -37,7 +38,7 @@
                 </td>
 	                <!-- <td><a href="admin/phong/chitiet/{{$p->id}}">Chi tiết</a></td> -->
 	                <td>{{$p->DLRam}} - {{$p->DLOCung}} - {{$p->CPU}} - {{$p->GPU}}</td>
-	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/phong/xoa/{{$p->id}}"> Xóa</a></td>
+	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/phong/xoa/{{$p->id}}" onclick="return confirm('Bạn có muốn xóa phòng {{$p->TenPhong}}');"> Xóa</a></td>
 	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/phong/sua/{{$p->id}}">Sửa</a></td>
 	            </tr>
 	        @endforeach

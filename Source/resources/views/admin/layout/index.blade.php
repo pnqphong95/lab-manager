@@ -35,14 +35,10 @@ $soLuongPhong = 0;
 </head>
 <body>
     <div id="wrapper">
-       <!--  @include('admin.layout.anhbia') -->
-
         @include('admin.layout.header') 
-        
         <div id="page-wrapper">
             @yield('content')
         </div>
-
         @include('admin.layout.footer')
     </div>
     

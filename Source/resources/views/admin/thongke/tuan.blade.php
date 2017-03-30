@@ -8,24 +8,42 @@
     </h1>
 </div>
 
-<div class="col-md-3">
+<div class="col-md-4">
 	<select class="form-control" onchange="location = this.value;">
+		<option selected value="0">------------</option>
 	 	<option value="admin/thongke/danhsach">Toàn học kỳ</option>
-	 	<option value="admin/thongke/thang1">Tuần 1-4</option>
-	 	<option value="admin/thongke/thang2">Tuần 5-8</option>
-	 	<option value="admin/thongke/thang3">Tuần 9-12</option>
-	 	<option value="admin/thongke/thang4">Tuần 13-16</option>
-	 	<option value="admin/thongke/thang5">Tuần 17-20</option>
-	 	<option selected value="admin/thongke/tuan">Tình trạng sử dung qua các tuần</option>
+	 	<option value="admin/thongke/tuan">Tình trạng sử dung qua các tuần</option>
 	</select>
+</div>
+<div class="col-md-8">
+	<form method="POST" action="admin/thongke/xemthongke">
+		<input type="hidden" name="_token" value="{{csrf_token()}}" />
+		<div class="col-md-2"><label>Từ tuần</label></div>
+		<div class="col-md-2">
+			<select class="form-control" name="tuanBD">
+				@foreach($allTuan as $at)
+					<option value="{{$at->id}}">{{$at->id}}</option>
+				@endforeach
+			</select>
+		</div>	
+		<div class="col-md-2"><label>Đến tuần</label></div>
+		<div class="col-md-2">
+			<select class="form-control" name="tuanKT">
+				@foreach($allTuan as $at)
+					<option value="{{$at->id}}">{{$at->id}}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="col-md-2">
+			<button class="btn btn-primary" type="submit">Xem</button>
+		</div>
+	</form>
+	<br><br>
 </div>
 
 <div class="col-md-12">
 	<div id="tuan"></div>
-	<h2><center>Tháng 2</center></h2>
-
-	<!-- <div id="T1"></div>
-	<h2><content>THỐNG KÊ TÌNH TRẠNG SỬ DỤNG PHÒNG THÁNG 1</content></h2> -->
+	<h2><center>THỐNG KÊ SỐ LẦN SỬ DỤNG PHÒNG THEO TUẦN</center></h2>
 </div>
 @endsection
 
@@ -53,10 +71,12 @@
 				}
 			?>
 		],
-		xkey: 'y',
+		xkey: ['y'],
 		ykeys: ['a'],
-		labels: ['Sáng']
-	});
+		labels: ['Số buổi']
+	}).on('click', function(i, row){
+  console.log(i, row);
+});
 </script>
 @endsection
 
