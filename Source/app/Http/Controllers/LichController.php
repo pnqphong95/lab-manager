@@ -16,13 +16,42 @@ use DB;
 
 class LichController extends Controller
 {
+    public function getChinhSuaLich ()
+    {
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+
+        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->orderBy('idThu')
+                                    ->orderBy('idBuoi')
+                                    ->get();
+
+        return view('user.chinhsualich', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'lich' => $lich
+                    ]);
+    }
+
     public function getDanhSach()
     {
         $lich = Lich::all();
         $phong = Phong::all();
         $monhoc = MonHoc::all();
         $bomon = BoMon::all();
-        return view('admin.lich.danhsach', ['lich'=>$lich, 'phong'=>$phong, 'monhoc'=>$monhoc, 'bomon'=>$bomon]);
+        return view('admin.chinhsualich', ['lich'=>$lich, 'phong'=>$phong, 'monhoc'=>$monhoc, 'bomon'=>$bomon]);
     }
     
     public function getThem()

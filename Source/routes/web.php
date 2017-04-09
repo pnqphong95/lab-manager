@@ -21,10 +21,6 @@ use App\LopHocPhan;
 use App\Pages;
 use App\MonHoc_PhanMem;
 use App\ThongKe;
-// Route::get('test3', function(){
-// 	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
-// 	echo $idHocKyNienKhoa->id;
-// });
 
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
@@ -186,6 +182,7 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal-user|manager']], f
 	Route::post('vande', 'VanDeController@postVanDe');
 
 	Route::get('lichthuchanh', 'LichController@getLichThucHanh');
+	Route::get('chinhsualich', 'LichController@getChinhSuaLich');
 
 	Route::get('cacyeucau', ['middleware' => ['permission:manager'], 'uses' => 'LichController@getLichChoDuyet']);
 

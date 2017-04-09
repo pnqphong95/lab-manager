@@ -13,6 +13,7 @@ class TaoBangGiaoVien extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('giaovien');
         Schema::create('giaovien', function (Blueprint $table) {
             $table->increments('id');
             $table->string('MaGV');
