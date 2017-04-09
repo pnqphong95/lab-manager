@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="wrapper">
-
+    @include('admin.layout.header')
         <div id="page-wrapper">
             @yield('content')
         </div>

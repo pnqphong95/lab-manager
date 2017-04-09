@@ -22,14 +22,12 @@ class BoMonController extends Controller
     {
         $this->validate($request,
             [
-                'TenBM'=>'required|min:3|max:50',
-                'TenBM'=>'unique:bomon,TenBM'
+                'TenBM'=>'required|min:3|max:50'
             ],
             [
                 'TenBM.required'=>'Bạn chưa nhập tên bộ môn',
                 'TenBM.min'=>'Tên bộ môn có ít nhất 3 ký tự',
-                'TenBM.max'=>'Tên bộ môn có nhiều nhất 50 ký tự',
-                'TenBM.unique'=>'Tên bộ môn không được trùng'
+                'TenBM.max'=>'Tên bộ môn có nhiều nhất 50 ký tự'
             ]);
         
         $bomon = new BoMon;
@@ -58,6 +56,7 @@ class BoMonController extends Controller
                 'TenBM.max'=>'Tên bộ môn có nhiều nhất 50 ký tự'
             ]);
         
+        $bomon = new BoMon;
         $bomon->TenBM =$request->TenBM;
         $bomon->save();        
 

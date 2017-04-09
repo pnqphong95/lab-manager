@@ -12,17 +12,73 @@ use App\BoMon;
 use App\Thu;
 use App\Buoi;
 use App\Tuan;
+use App\GiaoVien;
 use DB;
 
 class LichController extends Controller
 {
+    public function getChinhSuaLich ()
+    {
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+
+        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->orderBy('idThu')
+                                    ->orderBy('idBuoi')
+                                    ->get();
+
+        return view('user.chinhsualich', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'lich' => $lich
+                    ]);
+    }
+
     public function getDanhSach()
     {
-        $lich = Lich::all();
-        $phong = Phong::all();
-        $monhoc = MonHoc::all();
-        $bomon = BoMon::all();
-        return view('admin.lich.danhsach', ['lich'=>$lich, 'phong'=>$phong, 'monhoc'=>$monhoc, 'bomon'=>$bomon]);
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $lich = DB::table('lich')   
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->orderBy('idThu')
+                                    ->orderBy('idBuoi')
+                                    ->get();
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+
+        $allLichCD = DB::table('Lich_ChoDuyet')
+                        
+                        ->where ('idHocKyNienKhoa', $idLastHKNK)
+                        ->where ('TrangThai', 0)
+                        ->get();
+
+        return view('admin.lich.danhsach', 
+                    [
+                        'lich' => $lich,
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'allLichCD' => $allLichCD
+                    ]);
     }
     
     public function getThem()
@@ -93,6 +149,7 @@ class LichController extends Controller
         $allPhong = Phong::all();
         $allBuoi = Buoi::all();
         $allTuan = Tuan::all();
+        $allGiaoVien = GiaoVien::all();
 
         $allLichCD = DB::table('Lich_ChoDuyet')
                         ->where ('idGiaoVien', Auth::user()->id)
@@ -107,8 +164,69 @@ class LichController extends Controller
                         'allPhong' => $allPhong,
                         'allThu' => $allThu,
                         'allTuan' => $allTuan,
-                        'allLichCD' => $allLichCD
+                        'allLichCD' => $allLichCD,
+                        'allGiaoVien' =>$allGiaoVien
                     ]);
     }
 
+    public function getChinhSuaLichAdmin ()
+    {
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+
+        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->orderBy('idThu')
+                                    ->orderBy('idBuoi')
+                                    ->get();
+
+        return view('admin.lich.chinhsualich', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'lich' => $lich
+                    ]);
+    }
+
+    public function getLichChoDuyetAdmin()
+    {
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+        $allGiaoVien = GiaoVien::all();
+        $lich = Lich::all();
+
+        $allLichCD = DB::table('Lich_ChoDuyet')
+                        // ->where ('idGiaoVien', Auth::user()->id)
+                        ->where ('idHocKyNienKhoa', $idLastHKNK)
+                        ->where ('TrangThai', 0)
+                        ->get();
+
+        return view('admin.lich.danhsach', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'allLichCD' => $allLichCD,
+                        'allGiaoVien' => $allGiaoVien,
+                        'lich' => $lich
+                    ]);
+    }
 }

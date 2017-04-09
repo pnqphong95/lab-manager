@@ -44,6 +44,8 @@ Vấn đề
 								
 						</div>
 					</div>			
+					
+				
 					<div class="col-lg-12">
 						<div class="form-group">
 							<label>Chi tiết vấn đề</label>

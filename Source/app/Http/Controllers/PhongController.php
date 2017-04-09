@@ -12,32 +12,32 @@ class PhongController extends Controller
 {
     public function getDanhSach()
     {
-    	$phong = Phong::all();
+        $phong = Phong::all();
         $bomon = BoMon::all();
         return view('admin.phong.danhsach', ['phong'=>$phong, 'bomon'=>$bomon]);
     }
 
     public function getChiTiet($id){
-    	$phong = Phong::find($id);
-    	return view('admin.phong.chitiet', ['phong'=>$phong]);
+        $phong = Phong::find($id);
+        return view('admin.phong.chitiet', ['phong'=>$phong]);
     }
 
     public function getSuaCauHinh($id){
-    	$phong = Phong::find($id);
-    	return view('admin.phong.suacauhinh', ['phong'=>$phong]);
+        $phong = Phong::find($id);
+        return view('admin.phong.suacauhinh', ['phong'=>$phong]);
     }
 
     public function postSuaCauHinh(Request $request, $id)
     {
-    	$phong = Phong::find($id);
+        $phong = Phong::find($id);
 
-    	$phong->DLRam = $request->DLRam;
-    	$phong->DLOCung = $request->DLOCung;
-    	$phong->CPU = $request->CPU;
-    	$phong->GPU = $request->GPU;
-		$phong->save();    	
+        $phong->DLRam = $request->DLRam;
+        $phong->DLOCung = $request->DLOCung;
+        $phong->CPU = $request->CPU;
+        $phong->GPU = $request->GPU;
+        $phong->save();     
 
-		return redirect('admin/phong/suacauhinh/'.$id)->with('thongbao','Sửa thành công');
+        return redirect('admin/phong/suacauhinh/'.$id)->with('thongbao','Sửa thành công');
     }
 
     public function getThem()
