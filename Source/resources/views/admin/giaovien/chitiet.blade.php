@@ -80,12 +80,12 @@
 				  		<li class="list-group-item">
 		                    Người dùng bình thường
 		                    <div class="material-switch pull-right">
-		                    	@if ($normal_user == true)
-		                        <input checked id="normal-user" name="normal-user" type="checkbox"/>
+		                    	@if ($normal == true)
+		                        <input checked id="normal" name="normal-user" type="checkbox"/>
 		                        @else
-		                        <input id="normal-user" name="normal-user" type="checkbox"/>
+		                        <input id="normal" name="normal-user" type="checkbox"/>
 		                        @endif
-		                        <label for="normal-user" class="label-success"></label>
+		                        <label for="normal" class="label-success"></label>
 		                    </div>
 		                </li>
 		                <li class="list-group-item">
@@ -133,8 +133,7 @@
 		            type: "get",
 		            url: "ajax/addRole/" +magv+ "/" + roleName,
 		            success: function (data) {
-		                console.log(data);
-		            	//showLich(data);	               
+		                console.log(data);		            	          
 		            },
 		            error: function (data) {
 		                console.log('Error:', data);

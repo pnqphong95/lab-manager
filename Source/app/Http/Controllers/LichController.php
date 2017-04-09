@@ -48,37 +48,11 @@ class LichController extends Controller
 
     public function getDanhSach()
     {
-        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
-        $idLastHKNK = $lastHKNK->id;
-
-        $lich = DB::table('lich')   
-                                    ->where('idHocKyNienKhoa', $idLastHKNK)
-                                    ->orderBy('idTuan')
-                                    ->orderBy('idThu')
-                                    ->orderBy('idBuoi')
-                                    ->get();
-        $allThu = Thu::all();
-        $allMonHoc = MonHoc::all();
-        $allPhong = Phong::all();
-        $allBuoi = Buoi::all();
-        $allTuan = Tuan::all();
-
-        $allLichCD = DB::table('Lich_ChoDuyet')
-                        
-                        ->where ('idHocKyNienKhoa', $idLastHKNK)
-                        ->where ('TrangThai', 0)
-                        ->get();
-
-        return view('admin.lich.danhsach', 
-                    [
-                        'lich' => $lich,
-                        'allMonHoc' => $allMonHoc,
-                        'allBuoi' => $allBuoi,
-                        'allPhong' => $allPhong,
-                        'allThu' => $allThu,
-                        'allTuan' => $allTuan,
-                        'allLichCD' => $allLichCD
-                    ]);
+        $lich = Lich::all();
+        $phong = Phong::all();
+        $monhoc = MonHoc::all();
+        $bomon = BoMon::all();
+        return view('admin.chinhsualich', ['lich'=>$lich, 'phong'=>$phong, 'monhoc'=>$monhoc, 'bomon'=>$bomon]);
     }
     
     public function getThem()

@@ -17,27 +17,39 @@ class DatabaseSeeder extends Seeder
         $admin = new Role();
 		$admin->name         = 'admin';
 		$admin->display_name = 'Administrator';
-		$admin->description  = 'User is allowed to manage and edit other users';
+		$admin->description  = 'Nhóm tài khoản quản trị hệ thống';
 		$admin->save();
 
-		$user = User::where('MaGV', '=', '0001')->first();
+		$manager = new Role();
+		$manager->name         = 'manager';
+		$manager->display_name = 'Quản lý';
+		$manager->description  = 'Nhóm tài khoản quản lý hệ thống';
+		$manager->save();
 
-		$user->attachRole($admin);
+		$normal = new Role();
+		$normal->name         = 'normal';
+		$normal->display_name = 'Người dùng bình thường';
+		$normal->description  = 'Nhóm tài khoản bình thường';
+		$normal->save();
 
-		$quanLiNguoiDung = new Permission();
-		$quanLiNguoiDung->name         = 'quanlinguoidung';
-		$quanLiNguoiDung->display_name = 'Quản lí người dùng';
-		// Allow a user to...
-		$quanLiNguoiDung->description  = 'quan li nguoi dung';
-		$quanLiNguoiDung->save();
+		// $user = User::where('MaGV', '=', '0001')->first();
 
-		$quanLiDanhMuc = new Permission();
-		$quanLiDanhMuc->name         = 'quanlidanhmuc';
-		$quanLiDanhMuc->display_name = 'Quản lí danh mục';
-		// Allow a user to...
-		$quanLiDanhMuc->description  = 'quan li danh muc';
-		$quanLiDanhMuc->save();
+		// $user->attachRole($admin);
 
-		$admin->attachPermission ($quanLiNguoiDung);
+		// $quanLiNguoiDung = new Permission();
+		// $quanLiNguoiDung->name         = 'quanlinguoidung';
+		// $quanLiNguoiDung->display_name = 'Quản lí người dùng';
+		// // Allow a user to...
+		// $quanLiNguoiDung->description  = 'quan li nguoi dung';
+		// $quanLiNguoiDung->save();
+
+		// $quanLiDanhMuc = new Permission();
+		// $quanLiDanhMuc->name         = 'quanlidanhmuc';
+		// $quanLiDanhMuc->display_name = 'Quản lí danh mục';
+		// // Allow a user to...
+		// $quanLiDanhMuc->description  = 'quan li danh muc';
+		// $quanLiDanhMuc->save();
+
+		// $admin->attachPermission ($quanLiNguoiDung);
     }
 }

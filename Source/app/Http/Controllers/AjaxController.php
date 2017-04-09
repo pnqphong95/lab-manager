@@ -32,9 +32,10 @@ class AjaxController extends Controller
 
 	public function addRole ($magv, $roleName)
 	{
-		$giaovien = User::where ('id', '=', $magv)->first();
-		$role = Role::where('name', '=', $roleName)->first();
+		$giaovien = User::where ('MaGV', '=', $magv)->first();
+		$role = Role::where('name', '=', $roleName)->first();		
 		$giaovien->attachRole($role);
+		return header("HTTP/1.1 200 OK");
 	}
 
 	public function removeRole ($magv, $roleName)

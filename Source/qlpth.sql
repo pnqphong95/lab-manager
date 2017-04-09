@@ -2,10 +2,10 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 17, 2017 at 01:26 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th4 09, 2017 lúc 08:08 SA
+-- Phiên bản máy phục vụ: 10.1.21-MariaDB
+-- Phiên bản PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `qlpth`
+-- Cơ sở dữ liệu: `qlpth`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bomon`
+-- Cấu trúc bảng cho bảng `bomon`
 --
 
 CREATE TABLE `bomon` (
@@ -32,7 +32,7 @@ CREATE TABLE `bomon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `bomon`
+-- Đang đổ dữ liệu cho bảng `bomon`
 --
 
 INSERT INTO `bomon` (`id`, `TenBM`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `bomon` (`id`, `TenBM`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buoi`
+-- Cấu trúc bảng cho bảng `buoi`
 --
 
 CREATE TABLE `buoi` (
@@ -56,7 +56,7 @@ CREATE TABLE `buoi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `buoi`
+-- Đang đổ dữ liệu cho bảng `buoi`
 --
 
 INSERT INTO `buoi` (`id`, `TenBuoi`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `buoi` (`id`, `TenBuoi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cauhinh`
+-- Cấu trúc bảng cho bảng `cauhinh`
 --
 
 CREATE TABLE `cauhinh` (
@@ -78,7 +78,7 @@ CREATE TABLE `cauhinh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `cauhinh`
+-- Đang đổ dữ liệu cho bảng `cauhinh`
 --
 
 INSERT INTO `cauhinh` (`id`, `DLRam`, `DLOCung`, `CPU`, `GPU`) VALUES
@@ -90,7 +90,7 @@ INSERT INTO `cauhinh` (`id`, `DLRam`, `DLOCung`, `CPU`, `GPU`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chucvu`
+-- Cấu trúc bảng cho bảng `chucvu`
 --
 
 CREATE TABLE `chucvu` (
@@ -99,7 +99,7 @@ CREATE TABLE `chucvu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `chucvu`
+-- Đang đổ dữ liệu cho bảng `chucvu`
 --
 
 INSERT INTO `chucvu` (`id`, `TenCV`) VALUES
@@ -110,72 +110,36 @@ INSERT INTO `chucvu` (`id`, `TenCV`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `giaovien`
+-- Cấu trúc bảng cho bảng `giaovien`
 --
 
 CREATE TABLE `giaovien` (
-  `id` int(11) NOT NULL,
-  `MaGV` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `HoGV` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `TenGV` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `MaGV` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `HoGV` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TenGV` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `GioiTinh` int(11) NOT NULL,
-  `SDT` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `idBoMon` int(11) NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `KichHoat` int(11) NOT NULL,
-  `idChucVu` int(11) NOT NULL,
-  `remember_token` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `GioiTinh` tinyint(1) NOT NULL,
+  `SDT` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idBoMon` int(10) UNSIGNED NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `KichHoat` tinyint(1) NOT NULL,
+  `idChucVu` int(10) UNSIGNED NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `giaovien`
+-- Đang đổ dữ liệu cho bảng `giaovien`
 --
 
 INSERT INTO `giaovien` (`id`, `MaGV`, `HoGV`, `TenGV`, `NgaySinh`, `GioiTinh`, `SDT`, `idBoMon`, `password`, `KichHoat`, `idChucVu`, `remember_token`) VALUES
-(1, '0001', 'Phạm Duy', 'Hậu', '1995-02-01', 0, '0987123456', 1, '$2y$10$eaQyy.xQcw5eyzpp5kq/he.Ip4o0DF2.o9EW/oKjOpTSgQitWXQG.', 0, 1, 'Z2OWSmKXY9ZCxbMqhvyfcuGekitmAGeNSIawqQANuoB43SWKyEmDBOHzkhFF'),
-(2, '0002', 'Nguyễn Văn', 'Ten', '1995-02-01', 0, '0987123456', 1, '$2y$10$CUZ/OGjn.Q/WLQmX10CtDeheMJTlct2UCs/EeCzQYEVSJ.JCYZGr6', 0, 2, '9Gqa5wBkJ1tsQWklhJ5qeiZ8NgL5M4Kdm1jSC6jAfioSg5PvbUpDKhpRyHvX'),
-(3, '0003', 'Trần Thới', 'Lên', '1995-02-01', 1, '0987123456', 2, '', 0, 3, ''),
-(4, '0004', 'Lê Lộc', 'Ba', '1995-02-01', 0, '0987123456', 2, '', 0, 1, ''),
-(5, '0005', 'Hồ Anh', 'Tư', '1995-02-01', 0, '0987123456', 2, '', 0, 2, ''),
-(6, '0006', 'Phan Ca', 'Bình', '1995-02-01', 1, '0987123456', 3, '', 0, 1, ''),
-(7, '0007', 'Ninh Lâm', 'Hai', '1995-02-01', 1, '0987123456', 3, '', 0, 2, ''),
-(8, '0008', 'Thái Anh', 'Nhàn', '1995-02-01', 1, '0987123456', 4, '', 0, 1, ''),
-(9, '0009', 'Hoàng Quá', 'Kiệt', '1995-02-01', 1, '0987123456', 5, '', 0, 2, '');
+(1, '0000', 'Account', 'Admin', '2017-04-07', 1, '0971234567', 1, '$2y$10$PlaEXm7J69pmQMyHZR5wlexbzi3szTgRVHIq6OVY3jSBLhsj0hrWe', 1, 1, 'lRCj8DeLmnt1EqLcLPZRsKU5CASmBAqQD4aebvGlzMR0bcNw9OcM59JT43Cf'),
+(2, '0001', 'Phạm Duy', 'Hậu', '2017-04-15', 0, '0972578963', 1, '$2y$10$4dUE9W4hRnK9q4LTyMf8bOBugz43UkrEYsEsbJ8SmzxXM07riHGk6', 1, 2, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `giaovien_chucvu`
---
-
-CREATE TABLE `giaovien_chucvu` (
-  `id` int(11) NOT NULL,
-  `idGiaoVien` int(11) NOT NULL,
-  `idChucVu` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `giaovien_chucvu`
---
-
-INSERT INTO `giaovien_chucvu` (`id`, `idGiaoVien`, `idChucVu`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 2, 1),
-(5, 3, 1),
-(6, 4, 1),
-(7, 5, 1),
-(8, 6, 1),
-(9, 7, 1),
-(10, 8, 1),
-(11, 9, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hocky_nienkhoa`
+-- Cấu trúc bảng cho bảng `hocky_nienkhoa`
 --
 
 CREATE TABLE `hocky_nienkhoa` (
@@ -185,7 +149,7 @@ CREATE TABLE `hocky_nienkhoa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hocky_nienkhoa`
+-- Đang đổ dữ liệu cho bảng `hocky_nienkhoa`
 --
 
 INSERT INTO `hocky_nienkhoa` (`id`, `HocKy`, `NienKhoa`) VALUES
@@ -195,7 +159,7 @@ INSERT INTO `hocky_nienkhoa` (`id`, `HocKy`, `NienKhoa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lich`
+-- Cấu trúc bảng cho bảng `lich`
 --
 
 CREATE TABLE `lich` (
@@ -211,7 +175,7 @@ CREATE TABLE `lich` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `lich`
+-- Đang đổ dữ liệu cho bảng `lich`
 --
 
 INSERT INTO `lich` (`id`, `idGiaoVien`, `idPhong`, `idMonHoc`, `Nhom`, `idThu`, `idBuoi`, `idTuan`, `idHocKyNienKhoa`) VALUES
@@ -234,12 +198,18 @@ INSERT INTO `lich` (`id`, `idGiaoVien`, `idPhong`, `idMonHoc`, `Nhom`, `idThu`, 
 (17, 1, 1, 1, '3', 2, 1, 20, 2),
 (18, 1, 1, 1, '3', 3, 2, 20, 2),
 (19, 1, 1, 1, '3', 7, 1, 20, 2),
-(20, 1, 1, 1, '3', 8, 2, 20, 2);
+(20, 1, 1, 1, '3', 8, 2, 20, 2),
+(21, 1, 1, 1, '3', 2, 1, 1, 2),
+(22, 1, 1, 1, '3', 3, 1, 1, 2),
+(23, 1, 1, 1, '3', 4, 1, 1, 2),
+(24, 1, 1, 1, '3', 2, 1, 3, 2),
+(25, 1, 1, 1, '3', 3, 1, 3, 2),
+(26, 1, 1, 1, '3', 4, 1, 3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lich_choduyet`
+-- Cấu trúc bảng cho bảng `lich_choduyet`
 --
 
 CREATE TABLE `lich_choduyet` (
@@ -258,7 +228,7 @@ CREATE TABLE `lich_choduyet` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lophocphan`
+-- Cấu trúc bảng cho bảng `lophocphan`
 --
 
 CREATE TABLE `lophocphan` (
@@ -270,7 +240,7 @@ CREATE TABLE `lophocphan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `lophocphan`
+-- Đang đổ dữ liệu cho bảng `lophocphan`
 --
 
 INSERT INTO `lophocphan` (`id`, `idMonHoc`, `MaLop`, `TenLop`, `SiSo`) VALUES
@@ -281,7 +251,7 @@ INSERT INTO `lophocphan` (`id`, `idMonHoc`, `MaLop`, `TenLop`, `SiSo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Cấu trúc bảng cho bảng `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -290,7 +260,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Đang đổ dữ liệu cho bảng `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -307,12 +277,14 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2017_02_14_060713_Lich', 1),
 ('2017_02_14_060719_Phong', 1),
 ('2017_02_14_060730_Phong_PhanMem', 1),
-('2017_03_16_051900_taoBangVanDe', 2);
+('2017_03_16_051900_taoBangVanDe', 2),
+('2017_03_16_053725_taoBangGiaoVien', 3),
+('2017_03_29_085238_entrust_setup_tables', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `monhoc`
+-- Cấu trúc bảng cho bảng `monhoc`
 --
 
 CREATE TABLE `monhoc` (
@@ -323,7 +295,7 @@ CREATE TABLE `monhoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `monhoc`
+-- Đang đổ dữ liệu cho bảng `monhoc`
 --
 
 INSERT INTO `monhoc` (`id`, `MaMH`, `TenMH`, `SoTinChi`) VALUES
@@ -338,7 +310,7 @@ INSERT INTO `monhoc` (`id`, `MaMH`, `TenMH`, `SoTinChi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `monhoc_phanmem`
+-- Cấu trúc bảng cho bảng `monhoc_phanmem`
 --
 
 CREATE TABLE `monhoc_phanmem` (
@@ -348,7 +320,7 @@ CREATE TABLE `monhoc_phanmem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `monhoc_phanmem`
+-- Đang đổ dữ liệu cho bảng `monhoc_phanmem`
 --
 
 INSERT INTO `monhoc_phanmem` (`id`, `idMonHoc`, `idPhanMem`) VALUES
@@ -360,7 +332,33 @@ INSERT INTO `monhoc_phanmem` (`id`, `idMonHoc`, `idPhanMem`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phanmem`
+-- Cấu trúc bảng cho bảng `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `permission_role`
+--
+
+CREATE TABLE `permission_role` (
+  `permission_id` int(10) UNSIGNED NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `phanmem`
 --
 
 CREATE TABLE `phanmem` (
@@ -370,7 +368,7 @@ CREATE TABLE `phanmem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `phanmem`
+-- Đang đổ dữ liệu cho bảng `phanmem`
 --
 
 INSERT INTO `phanmem` (`id`, `TenPM`, `PhienBan`) VALUES
@@ -384,7 +382,7 @@ INSERT INTO `phanmem` (`id`, `TenPM`, `PhienBan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phong`
+-- Cấu trúc bảng cho bảng `phong`
 --
 
 CREATE TABLE `phong` (
@@ -398,7 +396,7 @@ CREATE TABLE `phong` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `phong`
+-- Đang đổ dữ liệu cho bảng `phong`
 --
 
 INSERT INTO `phong` (`id`, `TenPhong`, `idBoMon`, `DLRam`, `DLOCung`, `CPU`, `GPU`) VALUES
@@ -420,7 +418,7 @@ INSERT INTO `phong` (`id`, `TenPhong`, `idBoMon`, `DLRam`, `DLOCung`, `CPU`, `GP
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phong_phanmem`
+-- Cấu trúc bảng cho bảng `phong_phanmem`
 --
 
 CREATE TABLE `phong_phanmem` (
@@ -430,7 +428,7 @@ CREATE TABLE `phong_phanmem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `phong_phanmem`
+-- Đang đổ dữ liệu cho bảng `phong_phanmem`
 --
 
 INSERT INTO `phong_phanmem` (`id`, `idPhong`, `idPhanMem`) VALUES
@@ -458,7 +456,51 @@ INSERT INTO `phong_phanmem` (`id`, `idPhong`, `idPhanMem`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thu`
+-- Cấu trúc bảng cho bảng `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'Administrator', 'Nhóm tài khoản quản trị hệ thống', '2017-04-05 23:49:24', '2017-04-05 23:49:24'),
+(2, 'manager', 'Quản lý', 'Nhóm tài khoản quản lý hệ thống', '2017-04-05 23:49:24', '2017-04-05 23:49:24'),
+(3, 'normal', 'Người dùng bình thường', 'Nhóm tài khoản bình thường', '2017-04-05 23:49:25', '2017-04-05 23:49:25');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `role_user`
+--
+
+CREATE TABLE `role_user` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `role_user`
+--
+
+INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thu`
 --
 
 CREATE TABLE `thu` (
@@ -467,7 +509,7 @@ CREATE TABLE `thu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `thu`
+-- Đang đổ dữ liệu cho bảng `thu`
 --
 
 INSERT INTO `thu` (`id`, `TenThu`) VALUES
@@ -482,7 +524,7 @@ INSERT INTO `thu` (`id`, `TenThu`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tuan`
+-- Cấu trúc bảng cho bảng `tuan`
 --
 
 CREATE TABLE `tuan` (
@@ -491,7 +533,7 @@ CREATE TABLE `tuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tuan`
+-- Đang đổ dữ liệu cho bảng `tuan`
 --
 
 INSERT INTO `tuan` (`id`, `TenTuan`) VALUES
@@ -519,7 +561,7 @@ INSERT INTO `tuan` (`id`, `TenTuan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vande`
+-- Cấu trúc bảng cho bảng `vande`
 --
 
 CREATE TABLE `vande` (
@@ -531,7 +573,7 @@ CREATE TABLE `vande` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `vande`
+-- Đang đổ dữ liệu cho bảng `vande`
 --
 
 INSERT INTO `vande` (`id`, `idPhong`, `tomTatVD`, `chiTietVD`, `trangThai`) VALUES
@@ -540,212 +582,256 @@ INSERT INTO `vande` (`id`, `idPhong`, `tomTatVD`, `chiTietVD`, `trangThai`) VALU
 (3, 9, 'Bị hỏng chuột', 'Bị hỏng chuột mays 40 40 40 404 070 40 0', 1);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `bomon`
+-- Chỉ mục cho bảng `bomon`
 --
 ALTER TABLE `bomon`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `buoi`
+-- Chỉ mục cho bảng `buoi`
 --
 ALTER TABLE `buoi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cauhinh`
+-- Chỉ mục cho bảng `cauhinh`
 --
 ALTER TABLE `cauhinh`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chucvu`
+-- Chỉ mục cho bảng `chucvu`
 --
 ALTER TABLE `chucvu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `giaovien`
+-- Chỉ mục cho bảng `giaovien`
 --
 ALTER TABLE `giaovien`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `MaGV` (`MaGV`);
-
---
--- Indexes for table `giaovien_chucvu`
---
-ALTER TABLE `giaovien_chucvu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hocky_nienkhoa`
+-- Chỉ mục cho bảng `hocky_nienkhoa`
 --
 ALTER TABLE `hocky_nienkhoa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `lich`
+-- Chỉ mục cho bảng `lich`
 --
 ALTER TABLE `lich`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `lich_choduyet`
+-- Chỉ mục cho bảng `lich_choduyet`
 --
 ALTER TABLE `lich_choduyet`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `lophocphan`
+-- Chỉ mục cho bảng `lophocphan`
 --
 ALTER TABLE `lophocphan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `monhoc`
+-- Chỉ mục cho bảng `monhoc`
 --
 ALTER TABLE `monhoc`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `monhoc_phanmem`
+-- Chỉ mục cho bảng `monhoc_phanmem`
 --
 ALTER TABLE `monhoc_phanmem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `phanmem`
+-- Chỉ mục cho bảng `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_unique` (`name`);
+
+--
+-- Chỉ mục cho bảng `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `permission_role_role_id_foreign` (`role_id`);
+
+--
+-- Chỉ mục cho bảng `phanmem`
 --
 ALTER TABLE `phanmem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `phong`
+-- Chỉ mục cho bảng `phong`
 --
 ALTER TABLE `phong`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `phong_phanmem`
+-- Chỉ mục cho bảng `phong_phanmem`
 --
 ALTER TABLE `phong_phanmem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `thu`
+-- Chỉ mục cho bảng `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_unique` (`name`);
+
+--
+-- Chỉ mục cho bảng `role_user`
+--
+ALTER TABLE `role_user`
+  ADD PRIMARY KEY (`user_id`,`role_id`),
+  ADD KEY `role_user_role_id_foreign` (`role_id`);
+
+--
+-- Chỉ mục cho bảng `thu`
 --
 ALTER TABLE `thu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tuan`
+-- Chỉ mục cho bảng `tuan`
 --
 ALTER TABLE `tuan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `vande`
+-- Chỉ mục cho bảng `vande`
 --
 ALTER TABLE `vande`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `bomon`
+-- AUTO_INCREMENT cho bảng `bomon`
 --
 ALTER TABLE `bomon`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `buoi`
+-- AUTO_INCREMENT cho bảng `buoi`
 --
 ALTER TABLE `buoi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `cauhinh`
+-- AUTO_INCREMENT cho bảng `cauhinh`
 --
 ALTER TABLE `cauhinh`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `chucvu`
+-- AUTO_INCREMENT cho bảng `chucvu`
 --
 ALTER TABLE `chucvu`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `giaovien`
+-- AUTO_INCREMENT cho bảng `giaovien`
 --
 ALTER TABLE `giaovien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `giaovien_chucvu`
---
-ALTER TABLE `giaovien_chucvu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `hocky_nienkhoa`
+-- AUTO_INCREMENT cho bảng `hocky_nienkhoa`
 --
 ALTER TABLE `hocky_nienkhoa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `lich`
+-- AUTO_INCREMENT cho bảng `lich`
 --
 ALTER TABLE `lich`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
--- AUTO_INCREMENT for table `lich_choduyet`
+-- AUTO_INCREMENT cho bảng `lich_choduyet`
 --
 ALTER TABLE `lich_choduyet`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `lophocphan`
+-- AUTO_INCREMENT cho bảng `lophocphan`
 --
 ALTER TABLE `lophocphan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `monhoc`
+-- AUTO_INCREMENT cho bảng `monhoc`
 --
 ALTER TABLE `monhoc`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `monhoc_phanmem`
+-- AUTO_INCREMENT cho bảng `monhoc_phanmem`
 --
 ALTER TABLE `monhoc_phanmem`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `phanmem`
+-- AUTO_INCREMENT cho bảng `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `phanmem`
 --
 ALTER TABLE `phanmem`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `phong`
+-- AUTO_INCREMENT cho bảng `phong`
 --
 ALTER TABLE `phong`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `phong_phanmem`
+-- AUTO_INCREMENT cho bảng `phong_phanmem`
 --
 ALTER TABLE `phong_phanmem`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT for table `thu`
+-- AUTO_INCREMENT cho bảng `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `thu`
 --
 ALTER TABLE `thu`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `tuan`
+-- AUTO_INCREMENT cho bảng `tuan`
 --
 ALTER TABLE `tuan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT for table `vande`
+-- AUTO_INCREMENT cho bảng `vande`
 --
 ALTER TABLE `vande`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `role_user`
+--
+ALTER TABLE `role_user`
+  ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `giaovien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

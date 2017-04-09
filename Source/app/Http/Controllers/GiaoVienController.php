@@ -33,7 +33,7 @@ class GiaoVienController extends Controller
     public function getChiTietById($id)
     {
         $admin = false;
-        $normal_user = false;
+        $normal = false;
         $manager = false;
         $giaovien = User::where ('id', '=', $id)->first();
         $bomon = BoMon::all();
@@ -41,22 +41,16 @@ class GiaoVienController extends Controller
         foreach ($role_user as $ru) 
         {
             if ($ru->role_id == 1) $admin = true;
-            else if ($ru->role_id == 2) $normal_user = true;
-            else $manager = true;
+            else if ($ru->role_id == 2) $manager = true;
+            else $normal = true;
         }
-        // $role = Role::where('id', '=', 3)->first();
-
-        // echo $giaovien;
-        // echo $role;
-
-        // $giaovien->attachRole($role);
 
         return view ('admin.giaovien.chitiet',  [   
                                                     'giaovien' => $giaovien, 
                                                     'bomon' => $bomon, 
                                                     'role_user' => $role_user,
                                                     'admin' => $admin,
-                                                    'normal_user' => $normal_user,
+                                                    'normal' => $normal,
                                                     'manager' => $manager
                                                 ]);
     }
