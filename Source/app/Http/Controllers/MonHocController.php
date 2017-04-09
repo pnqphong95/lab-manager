@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MonHoc;
 use App\MonHoc_PhanMem;
+use DB;
 
 class MonHocController extends Controller
 {
@@ -12,9 +13,10 @@ class MonHocController extends Controller
     public function getDanhSach()
     {
         $monhoc = MonHoc::all();
-        $monhoc_phanmem = MonHoc_PhanMem::all();
-        return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc, 'monhoc_phanmem'=>$monhoc_phanmem]);
+        return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc]);
     }
+
+
 
     public function getThem()
     {
@@ -25,38 +27,31 @@ class MonHocController extends Controller
     {
         $this->validate($request,
             [
-                'TenMH'=>'required|min:3|max:50'
+                'TenMH'=>'required|min:3|max:255',
+                'MaMH'=>'required|min:5|max:5',
+                'MaMH'=>'unique: monhoc, MaMH',
+                'SoTinChi'=>'required'
             ],
             [
                 'TenMH.required'=>'Bạn chưa nhập tên môn học',
                 'TenMH.min'=>'Tên môn học có ít nhất 3 ký tự',
-                'TenMH.max'=>'Tên môn học có nhiều nhất 50 ký tự'
-            ]);
-        $this->validate($request,
-            [
-                'MaMH'=>'required|min:5|max:5'
-            ],
-            [
+                'TenMH.max'=>'Tên môn học có nhiều nhất 255 ký tự',
                 'MaMH.required'=>'Bạn chưa nhập mã môn học',
-                'MaMH.min'=>'Mã môn học có ít nhất 5 ký tự',
+                'MaMH.min'=>'Mã môn học có độ dài 5 ký tự',
+                'MaMH.max'=>'Mã môn học có độ dài 5 ký tự',
+                'MaMH.unique'=>'Mã môn học không được trùng',
+                'SoTinChi.required'=>'Bạn chưa nhập số tín chỉ'
             ]);
-        $this->validate($request,
-            [
-                'SoTinChi'=>'required|max:10'
-                // |number
-            ],
-            [
-                'SoTinChi.required'=>'Bạn chưa nhập số tín chỉ',
-                //'SoTinChi.number'=>'Bạn phải nhập số',
-                'SoTinChi.max'=>'Số tín chỉ không quá 10'
-            ]);
-        $monhoc = new MonHoc;
+
+        $monhoc = new MonHoc();
         $monhoc->MaMH =$request->MaMH;
         $monhoc->TenMH =$request->TenMH;
         $monhoc->SoTinChi =$request->SoTinChi;
-        $monhoc->save();
+        //$monhoc->save();
 
-        return redirect('admin/monhoc/them')->with('thongbao','Thêm thành công');
+        echo $monhoc;
+
+        
     }
 
     public function getSua($id)
@@ -70,32 +65,21 @@ class MonHocController extends Controller
         $monhoc = MonHoc::find($id);
         $this->validate($request,
             [
-                'TenMH'=>'required|min:3|max:50'
+                'TenMH'=>'required|min:3|max:255',
+                'MaMH'=>'required|min:5|max:5',
+                'MaMH'=>'unique: monhoc, MaMH',
+                'SoTinChi'=>'required'
             ],
             [
                 'TenMH.required'=>'Bạn chưa nhập tên môn học',
                 'TenMH.min'=>'Tên môn học có ít nhất 3 ký tự',
-                'TenMH.max'=>'Tên môn học có nhiều nhất 50 ký tự'
-            ]);
-        $this->validate($request,
-            [
-                'MaMH'=>'required|min:5|max:5'
-            ],
-            [
+                'TenMH.max'=>'Tên môn học có nhiều nhất 255 ký tự',
                 'MaMH.required'=>'Bạn chưa nhập mã môn học',
-                'MaMH.min'=>'Mã môn học có ít nhất 5 ký tự',
+                'MaMH.min'=>'Mã môn học có độ dài 5 ký tự',
+                'MaMH.max'=>'Mã môn học có độ dài 5 ký tự',
+                'MaMH.unique'=>'Mã môn học không được trùng',
+                'SoTinChi.required'=>'Bạn chưa nhập số tín chỉ'
             ]);
-        $this->validate($request,
-            [
-                'SoTinChi'=>'required|max:10'
-                // |number
-            ],
-            [
-                'SoTinChi.required'=>'Bạn chưa nhập số tín chỉ',
-                // 'SoTinChi.number'=>'Bạn phải nhập số',
-                'SoTinChi.max'=>'Số tín chỉ không quá 10'
-            ]);
-        //$this->validate($request,)
 
         $monhoc->MaMH = $request->MaMH;
         $monhoc->TenMH = $request->TenMH;
@@ -107,9 +91,14 @@ class MonHocController extends Controller
 
     public function getXoa($id)
     {
+        $mhpm = DB::table('monhoc_phanmem')->where('idMonHoc',$id)->get();
+        foreach ($mhpm as $mhpm) {
+            unset($mhpm);
+        }
         $monhoc = MonHoc::find($id);
         $monhoc->delete();
-
+        
         return redirect('admin/monhoc/danhsach')->with('thongbao','Xóa thành công');
     }
+
 }

@@ -14,23 +14,34 @@
 	</select>
 </div>
 <div class="col-md-8">
+		@foreach($xemThongKe as $x)
+			{{$a=$x->idTuan}}
+			@break
+		@endforeach
+
 	<form method="POST" action="admin/thongke/xemthongke">
 		<input type="hidden" name="_token" value="{{csrf_token()}}" />
 		<div class="col-md-2"><label>Từ tuần</label></div>
 		<div class="col-md-2">
 			<select class="form-control" name="tuanBD">
-					<option selected value=0>--</option>
 				@foreach($allTuan as $at)
-					<option value="{{$at->id}}">{{$at->id}}</option>
+					<option
+					@if($at->id == $a)
+                        {{"selected"}}
+                    @endif
+					value="{{$at->id}}">{{$at->id}}</option>
 				@endforeach
 			</select>
 		</div>	
 		<div class="col-md-2"><label>Đến tuần</label></div>
 		<div class="col-md-2">
 			<select class="form-control" name="tuanKT">
-				<option selected value=0>--</option>
 				@foreach($allTuan as $at)
-					<option value="{{$at->id}}">{{$at->id}}</option>
+					<option
+					@if($at->id == 0)
+                        {{"selected"}}
+                    @endif
+					value="{{$at->id}}">{{$at->id}}</option>
 				@endforeach
 			</select>
 		</div>
@@ -44,6 +55,7 @@
 <div class="col-md-12">
 	<div id="HK"></div>
 	<h2><center>THỐNG KÊ TÌNH TRẠNG SỬ DỤNG PHÒNG TUẦN</center></h2>
+
 </div>
 @endsection
 
@@ -59,7 +71,7 @@
 				$i=0;
 				foreach ($allPhong as $p) {
 					$b[$i] = 0;
-					foreach ($toanHK as $thk) {
+					foreach ($xemThongKe as $thk) {
 						if ($thk->idPhong == $p->id) {
 							$b[$i] = $thk->total;
 						}

@@ -16,9 +16,6 @@ class GiaoVienController extends Controller
 
     public function getDanhSach()
     {
-        // $giaovien = DB::table('giaovien')   ->join('bomon', 'idBoMon', '=', 'bomon.id')
-        //                             ->get();
-        // $chucvu = ChucVu::all();
         $giaovien = GiaoVien::all();
         $bomon = BoMon::all();
         $chucvu = ChucVu::all();

@@ -23,7 +23,7 @@
     		</div>
     	@endif
 	    <form action="admin/monhoc/sua/{{$monhoc->id}}" method="POST">
-	    	 <input type="hidden" name="_token" value="{{csrf_token()}}" />
+	    	<input type="hidden" name="_token" value="{{csrf_token()}}" />
 	        <div class="form-group">
 	            <label>Mã môn học</label>
 	            <input class="form-control" name="MaMH" placeholder="Nhập mã môn học" value="{{$monhoc->MaMH}}" />

@@ -32,36 +32,6 @@ class ThongKeController extends Controller
         return view('admin.thongke.danhsach', ['toanHK'=>$toanHK,'thang1'=>$thang1,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
     }
 
-    public function getThang1()
-    {
-    	$allPhong = Phong::all();
-    	$allTuan = Tuan::all();
-
-        $toanHK = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
-						                ->groupBy('idPhong')
-						                ->get();
-		$thang1 = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
-										->where('idTuan', '<=',4)->where('idTuan', '>=',1)
-						                ->groupBy('idPhong')
-						                ->get();
-
-        return view('admin.thongke.thang1', ['toanHK'=>$toanHK,'thang1'=>$thang1,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
-    }
-
-    public function getThang2()
-    {
-    	$allPhong = Phong::all();
-        $toanHK = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
-						                ->groupBy('idPhong')
-						                ->get();
-		$thang2 = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
-										->where('idTuan', '<=',8)->where('idTuan', '>=',5)
-						                ->groupBy('idPhong')
-						                ->get();
-
-        return view('admin.thongke.thang2', ['toanHK'=>$toanHK,'thang2'=>$thang2,'allPhong'=>$allPhong]);
-    }
-
     public function getTuan()
     {
     	$allPhong = Phong::all();
@@ -72,6 +42,22 @@ class ThongKeController extends Controller
 						                ->get();
 
         return view('admin.thongke.tuan', ['allTuan'=>$allTuan,'tuan'=>$tuan,'allPhong'=>$allPhong]);
+    }
+
+    public function postXemThongKe (Request $request)
+    {
+        $allPhong = Phong::all();
+        $allTuan = Tuan::all();
+        $tuanBD = $request->tuanBD;
+        $tuanKT = $request->tuanKT;
+        $xemThongKe = DB::table('lich')    ->select('idTuan','idPhong', DB::raw('count(*) as total'))
+                                            ->where('idTuan', '<=', $tuanKT)
+                                            ->where('idTuan', '>=', $tuanBD)
+                                            ->groupBy('idTuan','idPhong')
+                                            ->get();
+        return view('admin.thongke.xemthongke', ['xemThongKe'=>$xemThongKe, 
+                                                'allTuan'=>$allTuan, 'allPhong'=>$allPhong,
+                                                'a'=>$tuanBD,'b'=>$tuanKT]);     
     }
 
 
