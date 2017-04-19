@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\MonHoc;
-use App\MonHoc_PhanMem;
-use App\PhanMem;
 
 class PhanMemController extends Controller
 {
-        public function getDanhSach()
+    public function getDanhSach()
     {
         $phanmem = PhanMem::all();
         return view('admin.phanmem.danhsach', ['phanmem'=>$phanmem]);

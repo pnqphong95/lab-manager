@@ -157,4 +157,11 @@ class GiaoVienController extends Controller
         return redirect('admin/giaovien/sua/'.$id)->with('thongbao','Sửa thành công');
     }
 
+    public function getXoa($id)
+    {
+        $giaovien = GiaoVien::find($id);
+        $giaovien->delete();
+
+        return redirect('admin/giaovien/danhsach')->with('thongbao','Xóa thành công');
+    }
 }

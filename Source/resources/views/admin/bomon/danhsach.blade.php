@@ -27,7 +27,7 @@
 	            <tr class="odd gradeX" align="center">
 	                <td>{{$bm->id}}</td>
 	                <td>{{$bm->TenBM}}</td>
-	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/bomon/xoa/{{$bm->id}}" onclick="return confirm('Bạn có muốn xóa bộ môn {{$bm->TenBM}} không?');"> Xóa</a></td>
+	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/bomon/xoa/{{$bm->id}}"> Xóa</a></td>
 	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/bomon/sua/{{$bm->id}}">Sửa</a></td>
 	            </tr>
 	        @endforeach

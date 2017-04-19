@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use App\MonHoc;
 use App\PhanMem;
 use App\MonHoc_PhanMem;
-use App\Phong;
 use DB;
 
 class MonHoc_PhanMemController extends Controller
 {
-    public function getPhanMem($id)
+    public function getDanhSach($id)
     {
         $monhoc = MonHoc::all();
         $phanmem = PhanMem::all();

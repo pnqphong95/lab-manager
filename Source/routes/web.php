@@ -38,27 +38,30 @@ Route::group(['prefix'=>'ajax'], function(){
 });
 
 
+
 Route::get('login', 'DangNhapController@getDangNhap')->name('getLogin');
 Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
 Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
 
 Route::get('user', 'UserController@trangchu');
 
-Route::get('admin/lich/them', 'LichController@getThem');
-
-Route::post('admin/lich/them', 'LichController@postThem');
-
-
-Route::group(['prefix'=>'admin', 'middleware' => ['role:admin']], function(){
+Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'lich'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'LichController@getDanhSach');
+		Route::get('danhsach', 'LichController@getLichChoDuyetAdmin');
 
-		Route::get('sua/{id}', 'LichController@getSua');
-		Route::post('sua/{id}', 'LichController@postSua');
+		Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhongAdmin');
+		Route::post('dangkyphong', 'DangKyPhongController@postDangKyPhongAdmin');
+	});
 
-		Route::get('them', 'LichController@getThem');
-		Route::post('them', 'LichController@postThem');
+	Route::group(['prefix'=>'vande'], function(){
+		Route::get('danhsach', 'VanDeController@getDanhSachAdmin');
+
+		Route::get('them', 'VanDeController@getThemAdmin');
+		Route::post('them', 'VanDeController@postThemAdmin');
+
+		Route::get('xoa/{id}', 'VanDeController@getXoa');
 	});
 
 	Route::group(['prefix'=>'phong'], function(){
@@ -94,12 +97,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:admin']], function(){
 		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSach');
 	});
 
-
 	Route::group(['prefix'=>'vaitro'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'VaiTroController@getDanhSach');
-		Route::get('monhoc_phanmem', 'MonHoc_PhanMemController@getPhanMem');
-		
+
 		Route::get('sua/{id}', 'VaiTroController@getSua');
 		Route::post('sua/{id}', 'VaiTroController@postSua');
 
@@ -122,19 +123,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:admin']], function(){
 		Route::post('them', 'VaiTroController@postThem');
 
 		Route::get('xoa/{id}', 'MonHocController@getXoa');
-	});
 
-
-	Route::group(['prefix'=>'phanmem'], function(){
-		Route::get('danhsach', 'PhanMemController@getDanhSach');
-		
-		Route::get('them', 'PhanMemController@getThem');
-		Route::post('them', 'PhanMemController@postThem');
-
-		Route::get('sua/{id}', 'PhanMemController@getSua');
-		Route::post('sua/{id}', 'PhanMemController@postSua');
-
-		Route::get('xoa/{id}', 'PhanMemController@getXoa');
+		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSach');
 	});
 
 	Route::group(['prefix'=>'bomon'], function(){
@@ -168,16 +158,18 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:admin']], function(){
 		//admin/theloai/danhsach
 
 		Route::get('danhsach', 'ThongKeController@getChart');
-
 		Route::get('tuan', 'ThongKeController@getTuan');		
 
-		Route::get('xoa/{id}', 'ThongKeController@getXoa');
+		Route::get('sua/{id}', 'ThongKeController@getSua');
+		Route::post('sua/{id}', 'ThongKeController@postSua');
 
+		Route::get('them', 'ThongKeController@getThem');
+		Route::post('them', 'ThongKeController@postThem');
+
+		Route::get('xoa/{id}', 'ThongKeController@getXoa');
 		Route::get('xemthongke', 'ThongKeController@getXemThongKe');
 		Route::post('xemthongke', 'ThongKeController@postXemThongKe');
 	});
-
-
 });
 
 Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager']], function(){

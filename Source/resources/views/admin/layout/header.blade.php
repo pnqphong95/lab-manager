@@ -31,7 +31,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="user/lichthuchanh"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
+                    <a href="admin/lich/danhsach"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
                 </li>
                 <li>
                     <a href="admin/lich/danhsach"><i class="fa fa-bar-chart-o fa-fw"></i> LỊCH THỰC HÀNH<span class="fa arrow"></span></a>
@@ -40,7 +40,7 @@
                             <a href="admin/lich/danhsach">Danh sách</a>
                         </li>
                         <li>
-                            <a href="admin/lich/them">Thêm</a>
+                            <a href="admin/lich/dangkyphong">Đăng ký phòng</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -106,13 +106,13 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="admin/taovande/danhsach"><i class="fa fa-cube fa-fw"></i> TẠO VẤN ĐỀ<span class="fa arrow"></span></a>
+                    <a href="admin/taovande/danhsach"><i class="fa fa-cube fa-fw"></i> VẤN ĐỀ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="admin/taovande/danhsach">Danh sách</a>
+                            <a href="admin/vande/danhsach">Danh sách</a>
                         </li>
                         <li>
-                            <a href="admin/taovande/them">Thêm</a>
+                            <a href="admin/vande/them">Thêm</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

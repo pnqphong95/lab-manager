@@ -12,34 +12,29 @@ use DB;
 class ThongKeController extends Controller
 {
     //
-    public function getDanhSach()
-    {
-
-    }
-
     public function getChart()
     {
-    	$allPhong = Phong::all();
-    	$allTuan = Tuan::all();
-        $toanHK = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
-						                ->groupBy('idPhong')
-						                ->get();
-		$thang1 = DB::table('lich')	 	->select('idPhong', DB::raw('count(*) as total'))
-										->where('idTuan', '<=',10)->where('idTuan', '>=',4)
-						                ->groupBy('idPhong')
-						                ->get();
+        $allPhong = Phong::all();
+        $allTuan = Tuan::all();
+        $toanHK = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as total'))
+                                        ->groupBy('idPhong')
+                                        ->get();
+        $thang1 = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as total'))
+                                        ->where('idTuan', '<=',10)->where('idTuan', '>=',4)
+                                        ->groupBy('idPhong')
+                                        ->get();
 
         return view('admin.thongke.danhsach', ['toanHK'=>$toanHK,'thang1'=>$thang1,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
     }
 
     public function getTuan()
     {
-    	$allPhong = Phong::all();
+        $allPhong = Phong::all();
         $allTuan = Tuan::all();
 
-		$tuan = DB::table('lich')	 	->select('idTuan', DB::raw('count(*) as total'))
-						                ->groupBy('idTuan')
-						                ->get();
+        $tuan = DB::table('lich')       ->select('idTuan', DB::raw('count(*) as total'))
+                                        ->groupBy('idTuan')
+                                        ->get();
 
         return view('admin.thongke.tuan', ['allTuan'=>$allTuan,'tuan'=>$tuan,'allPhong'=>$allPhong]);
     }

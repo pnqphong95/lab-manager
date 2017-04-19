@@ -1,10 +1,9 @@
 @section('title')
 Vấn đề
 @endsection
-@extends('layout.index')
+@extends('admin.layout.index')
 
-
-@section('main')
+@section('content')
 <?php $thisPage = 'vande';?>
 <div class="row">
 	<div class="col-lg-12">
@@ -24,7 +23,7 @@ Vấn đề
 		            {{session('thongbao')}}
 		        </div>
 		    @endif
-			<form action="user/vande" method="post">
+			<form action="admin/vande/them" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 				<div class="row">
 					<div class="col-lg-4">
@@ -41,7 +40,6 @@ Vấn đề
 						<div class="form-group">
 							<label>Tóm tắt vấn đề</label>
 							<input class="form-control" type="text" name="tomTatVD" />
-								
 						</div>
 					</div>			
 					<div class="col-lg-12">
