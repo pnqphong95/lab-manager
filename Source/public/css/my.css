@@ -62,7 +62,7 @@
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
   color: #e6e6e6;
-  background-color: #080808;
+  background-color: #225677;
 }
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
@@ -208,7 +208,7 @@ tr {
 /*end anh nen banner*/
 
 .bg-xam{
-  background-color: #e3e3e3;
+  background-color: #ffa;
 }
 
 .bg-trang{
@@ -288,4 +288,31 @@ tr {
 .table-show-data tr td{
     text-align: left;
     padding-bottom: 10px;
+}
+
+.td-data{
+    padding-left: 50px;
+}
+
+
+/*hien thi data trong bang*/
+
+/*end hien thi data trong bang*/
+
+/*custom dropdown-menu*/
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #fff;
+    white-space: nowrap;
+    background-color: #4396ca;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #225677;
 }

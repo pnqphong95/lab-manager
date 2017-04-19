@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Lich;
 use App\Phong;
@@ -13,9 +14,64 @@ use App\Thu;
 use App\Buoi;
 use App\Tuan;
 use DB;
+use App\GiaoVien;
+use App\Lich_ChoDuyet;
 
 class LichController extends Controller
 {
+    public function getDoiPhong ($id)
+    {
+        $i = 0;
+        $nullPhong = array();
+        $allPhong = Phong::all();
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $lichCD = DB::table('Lich')
+                        ->where ('id', $id)
+                        ->first();
+        $allPhongBM = Phong::where ('idBoMon', Auth::user()->idBoMon)->get();
+        foreach ($allPhongBM as $ph) 
+        {
+            $checkLich = DB::table('Lich') -> where ('idTuan', $lichCD->idTuan)
+                                -> where ('idThu', $lichCD->idThu)
+                                -> where ('idBuoi', $lichCD->idBuoi)
+                                -> where ('idPhong', $ph->id)
+                                -> first();
+            if (is_null ($checkLich))
+            {
+                $nullPhong[$i] = $ph->id;
+                $i++;
+            }            
+        }
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+        $allGiaoVien = GiaoVien::all();
+
+
+
+        return view('user.doiphong', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'nullPhong' => $nullPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'lichCD' => $lichCD,
+                        'allGiaoVien' => $allGiaoVien,
+                        'allPhong' => $allPhong
+                    ]);
+    }
+
+    public function postDoiPhong ($id, Request $req)
+    {
+        $lich = Lich::find($id);
+
+        $lich->idPhong = $req->idPhong;
+        $lich->save();
+
+        return redirect('user/chinhsualich')->with('thongbao','Đã đổi phòng thành công');
+    }
+
     public function getChinhSuaLich ()
     {
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
@@ -27,12 +83,22 @@ class LichController extends Controller
         $allBuoi = Buoi::all();
         $allTuan = Tuan::all();
 
+        $phongBM = Phong::select('id')  ->where ('idBoMon', Auth::user()->idBoMon)
+                                        ->get();
+        $idPhongBM = array();
+
+        foreach ($phongBM as $pbm) {
+            array_push($idPhongBM, $pbm->id);
+        }
+
         $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
                                     ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->whereIn('idPhong', $idPhongBM)
                                     ->orderBy('idTuan')
                                     ->orderBy('idThu')
                                     ->orderBy('idBuoi')
                                     ->get();
+        echo $lich;
 
         return view('user.chinhsualich', 
                     [
@@ -122,9 +188,9 @@ class LichController extends Controller
         $allPhong = Phong::all();
         $allBuoi = Buoi::all();
         $allTuan = Tuan::all();
+        $allGiaoVien = GiaoVien::all();
 
         $allLichCD = DB::table('Lich_ChoDuyet')
-                        ->where ('idGiaoVien', Auth::user()->id)
                         ->where ('idHocKyNienKhoa', $idLastHKNK)
                         ->where ('TrangThai', 0)
                         ->get();
@@ -136,7 +202,99 @@ class LichController extends Controller
                         'allPhong' => $allPhong,
                         'allThu' => $allThu,
                         'allTuan' => $allTuan,
-                        'allLichCD' => $allLichCD
+                        'allLichCD' => $allLichCD,
+                        'allGiaoVien' => $allGiaoVien
+                    ]);
+    }
+
+    public function getXepPhong ($idLichCD)
+    {
+        $idLichCD = Crypt::decrypt($idLichCD);
+        $lichCD = DB::table('Lich_ChoDuyet')
+                        ->where ('id', $idLichCD)
+                        ->first();
+        if (is_null ($lichCD)) return redirect('user/cacyeucau');
+        
+        if ($lichCD->TrangThai == 0)
+        {
+            $i = 0;
+            $nullPhong = array();
+            $allPhong = Phong::all();
+            $allThu = Thu::all();
+            $allMonHoc = MonHoc::all();
+            
+            $allPhongBM = Phong::where ('idBoMon', Auth::user()->idBoMon)->get();
+            foreach ($allPhongBM as $ph) 
+            {
+                $checkLich = DB::table('Lich') -> where ('idTuan', $lichCD->idTuan)
+                                    -> where ('idThu', $lichCD->idThu)
+                                    -> where ('idBuoi', $lichCD->idBuoi)
+                                    -> where ('idPhong', $ph->id)
+                                    -> first();
+                if (is_null ($checkLich))
+                {
+                    $nullPhong[$i] = $ph->id;
+                    $i++;
+                }            
+            }
+            $allBuoi = Buoi::all();
+            $allTuan = Tuan::all();
+            $allGiaoVien = GiaoVien::all();
+
+
+
+            return view('user.lichchoduyet.xepphong', 
+                        [
+                            'allMonHoc' => $allMonHoc,
+                            'allBuoi' => $allBuoi,
+                            'nullPhong' => $nullPhong,
+                            'allThu' => $allThu,
+                            'allTuan' => $allTuan,
+                            'lichCD' => $lichCD,
+                            'allGiaoVien' => $allGiaoVien,
+                            'allPhong' => $allPhong
+                        ]);
+        } else
+        {
+            return redirect('user/cacyeucau')->with('thongbao','Phòng đã có người duyệt!');
+        }
+    }
+
+    public function postXepPhong ($idLichCD, Request $req)
+    {
+        $lichCD = Lich_ChoDuyet::find($idLichCD);
+
+        $lichCD->TrangThai = 1;
+        $lichCD->idPhong = $req->idPhong;
+        $lichCD->save(); 
+
+        $lich = new Lich();
+        $lich->idGiaoVien = $lichCD->idGiaoVien;
+        $lich->idPhong = $lichCD->idPhong;
+        $lich->idMonHoc = $lichCD->idMonHoc;
+        $lich->Nhom = $lichCD->Nhom;
+        $lich->idThu = $lichCD->idThu;
+        $lich->idBuoi = $lichCD->idBuoi;
+        $lich->idTuan = $lichCD->idTuan;
+        $lich->idHocKyNienKhoa = $lichCD->idHocKyNienKhoa;
+        $lich->save();
+
+
+        return redirect('user/cacyeucau')->with('thongbao','Đã duyệt lịch thành công');
+    }
+
+    public function getDieuChinh ()
+    {
+        return view('user.lichchoduyet.dieuchinh', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'nullPhong' => $nullPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'lichCD' => $lichCD,
+                        'allGiaoVien' => $allGiaoVien,
+                        'allPhong' => $allPhong
                     ]);
     }
 

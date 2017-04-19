@@ -14,8 +14,10 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 
     <link href="css/my.css" rel="stylesheet">  
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 
     
     <script src="js/my.js"></script>

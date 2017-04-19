@@ -98,9 +98,13 @@
 			var idTuan = $(this).val();
 			var idThu = 2;
 			var T2 = start_td_div
-					+'<label class="checkbox-inline"><input name="lich[]" type="checkbox" value="'+idTuan+',2,1">S</label>'
-					+'<label class="checkbox-inline"><input name="lich[]" type="checkbox" value="'+idTuan+',2,2">C</label>'
-					+end_div_td;
+				+'<label class="checkbox-inline">'
+				+'<input name="lich[]" type="checkbox" class="selectLich" id="'+idTuan+',2,1" value="'+idTuan+',2,1">S'
+				+'</label>'
+				+'<label class="checkbox-inline">'
+				+'<input name="lich[]" type="checkbox" class="selectLich" id="'+idTuan+',2,2" value="'+idTuan+',2,2">C'
+				+'</label>'
+				+end_div_td;
 			var T3 = start_td_div
 					+'<label class="checkbox-inline"><input name="lich[]" type="checkbox" value="'+idTuan+',3,1">S</label>'
 					+'<label class="checkbox-inline"><input name="lich[]" type="checkbox" value="'+idTuan+',3,2">C</label>'
@@ -134,7 +138,7 @@
             else if($(this).prop("checked") == false){
      			$('#tr'+idTuan).remove();
             }	        
-		});
+		});		
 	});
 </script>
 @endsection

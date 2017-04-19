@@ -15,7 +15,6 @@ class AjaxController extends Controller
     	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
 	    $lich = DB::table('lich')		->join('monhoc','monhoc.id', '=', 'idMonHoc')
 	    								->join('giaovien','giaovien.id', '=', 'idGiaoVien')
-	    								->where('idBuoi', $buoi)
 	    								->where('idTuan', $tuan)
 	    								->where('idHocKyNienKhoa', $idHocKyNienKhoa->id)
 	    								->get();

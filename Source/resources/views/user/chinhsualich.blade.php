@@ -12,6 +12,13 @@ Chỉnh sửa lịch phòng
 			<h3>Điều chỉnh lịch thực hành</h3>
 			<hr>
 
+			@if(session('thongbao'))
+		        <div class="alert alert-success">		      
+	                {!!session('thongbao')!!}
+		           
+		        </div>
+		    @endif
+
 			<h4>Tuần</h4>
 			<div class="checkbox">
 				<label class="radio-inline">
@@ -84,7 +91,7 @@ Chỉnh sửa lịch phòng
 									@endforeach
 								</td>
 								<td>
-									<a class="btn btn-info btn-xs" href="#">Đổi phòng</a>
+									<a class="btn btn-info btn-xs" href="user/chinhsualich/{{$l->id}}">Đổi phòng</a>
 									<a class="btn btn-danger btn-xs" href="#">Xóa</a>
 								</td>
 							</tr>
