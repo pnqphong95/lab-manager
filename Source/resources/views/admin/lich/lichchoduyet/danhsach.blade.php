@@ -3,9 +3,6 @@
 @section('content')
 <div class="row">
 	<div class="col-lg-12">
-
-		
-
 	    <div class="white-well">			
 			<ul class="nav nav-tabs">
 			    <li class="active"><a href="admin/lich/danhsach#lich"><h4>Lịch thực hành</h4></a></li>

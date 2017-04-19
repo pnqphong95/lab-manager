@@ -1,39 +1,41 @@
 @extends('admin.layout.index')
-
+@section('title')
+Bộ môn - Danh sách
+@endsection
 @section('content')
 <!-- Page Content -->
 
+<div class="col-md-12" style="padding-top: 10px">
+	<a style="width: 20%" class="btn btn-primary" href="admin/bomon/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+	<a style="width: 20%" class="btn btn-success" href="admin/bomon/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+</div>
 <div class="col-md-12">
-    <h1 class="page-header">Bộ môn
-        <small>Danh sách</small>
-    </h1>
-
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-	    <thead>
-	        <tr align="center">
-	            <th>Mã bộ môn</th>
-	            <th>Tên bộ môn</th>
-	            <th>Delete</th>
-	            <th>Edit</th>
-	        </tr>
-	    </thead>
-	    <tbody>
+		<thead>
+            <tr>
+                <th><center>STT</center></th>
+                <th><center>Tên bộ môn</center></th>
+                <th><center>Xóa</center></th>
+                <th><center>Sửa</center></th>
+            </tr>
+        </thead>
+        <tbody>
 	    	@if(session('thongbao'))
 	    		<div class="alert alert-success">
 	    			{{session('thongbao')}}
 	    		</div>
 	    	@endif	
 	        @foreach($bomon as $bm)
-	            <tr class="odd gradeX" align="center">
+	            <tr class="odd gradeX">
 	                <td>{{$bm->id}}</td>
 	                <td>{{$bm->TenBM}}</td>
-	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/bomon/xoa/{{$bm->id}}"> Xóa</a></td>
-	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/bomon/sua/{{$bm->id}}">Sửa</a></td>
+	                <td><i class="fa fa-trash-o  fa-fw"></i><a href="admin/bomon/xoa/{{Crypt::encrypt($bm->id)}}" onclick="return confirm('Bạn có muốn xóa bộ môn {{$bm->TenBM}} không?');"> Xóa</a></td>
+	                <td><i class="fa fa-pencil fa-fw"></i> <a href="admin/bomon/sua/{{Crypt::encrypt($bm->id)}}">Sửa</a></td>
 	            </tr>
 	        @endforeach
 	    </tbody>
-	</table>
+    </table>
+
 </div>
 
 @endsection
-

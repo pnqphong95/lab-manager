@@ -22,9 +22,8 @@ use App\Pages;
 use App\MonHoc_PhanMem;
 use App\ThongKe;
 
+
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');
-
-
 
 Route::group(['prefix'=>'ajax'], function(){
 
@@ -37,8 +36,6 @@ Route::group(['prefix'=>'ajax'], function(){
 
 });
 
-
-
 Route::get('login', 'DangNhapController@getDangNhap')->name('getLogin');
 Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
 Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
@@ -46,6 +43,7 @@ Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
 Route::get('user', 'UserController@trangchu');
 
 Route::group(['prefix'=>'admin'], function(){
+	Route::get('trangchu','TrangChuController@getTrangChuAdmin');
 	Route::group(['prefix'=>'lich'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'LichController@getDanhSach');
@@ -53,6 +51,16 @@ Route::group(['prefix'=>'admin'], function(){
 
 		Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhongAdmin');
 		Route::post('dangkyphong', 'DangKyPhongController@postDangKyPhongAdmin');
+
+		Route::get('danhsachemail', 'MailController@getDanhSach');
+		
+	});
+
+	Route::group(['prefix'=>'mail'], function(){
+		Route::get('danhsach', 'MailController@getDanhSach');
+
+		Route::get('mail/{id}', 'MailController@getMail');
+		Route::post('blanks', 'MailController@postMail');
 	});
 
 	Route::group(['prefix'=>'vande'], function(){
@@ -71,15 +79,16 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('sua/{id}', 'PhongController@getSua');
 		Route::post('sua/{id}', 'PhongController@postSua');
 
-		Route::get('suacauhinh/{id}', 'PhongController@getSuaCauHinh');
-		Route::post('suacauhinh/{id}', 'PhongController@postSuaCauHinh');
-
 		Route::get('chitiet/{id}', 'PhongController@getChiTiet');
+		Route::post('chitiet/{id}', 'PhongController@postThemPM');
 
 		Route::get('them', 'PhongController@getThem');
 		Route::post('them', 'PhongController@postThem');
+		Route::get('themPM', 'PhongController@getThemPM');
+		Route::post('themPM', 'PhongController@postThemPM');
 
 		Route::get('xoa/{id}', 'PhongController@getXoa');
+		Route::get('chitiet/xoaPM/{idPM}/{idPhong}', 'PhongController@getXoaPM');
 	});
 
 	Route::group(['prefix'=>'monhoc'], function(){
@@ -94,7 +103,25 @@ Route::group(['prefix'=>'admin'], function(){
 
 		Route::get('xoa/{id}', 'MonHocController@getXoa');
 
-		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSach');
+		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSachPM');
+
+		Route::get('monhoc_phanmem/xoa/{id}', 'MonHoc_PhanMemController@getXoaPM');
+
+		Route::get('themphanmem/{id}','MonHoc_PhanMemController@getThemPM');
+		Route::post('themphanmem/{id}','MonHoc_PhanMemController@postThemPM');
+	});
+
+	Route::group(['prefix'=>'phanmem'], function(){
+		//admin/theloai/danhsach
+		Route::get('danhsach', 'PhanMemController@getDanhSach');
+
+		Route::get('sua/{id}', 'PhanMemController@getSua');
+		Route::post('sua/{id}', 'PhanMemController@postSua');
+
+		Route::get('them', 'PhanMemController@getThem');
+		Route::post('them', 'PhanMemController@postThem');
+
+		Route::get('xoa/{id}', 'PhanMemController@getXoa');
 	});
 
 	Route::group(['prefix'=>'vaitro'], function(){
@@ -155,24 +182,18 @@ Route::group(['prefix'=>'admin'], function(){
 	});
 
 	Route::group(['prefix'=>'thongke'], function(){
-		//admin/theloai/danhsach
+		//admin/thongke/danhsach
 
 		Route::get('danhsach', 'ThongKeController@getChart');
 		Route::get('tuan', 'ThongKeController@getTuan');		
 
-		Route::get('sua/{id}', 'ThongKeController@getSua');
-		Route::post('sua/{id}', 'ThongKeController@postSua');
-
-		Route::get('them', 'ThongKeController@getThem');
-		Route::post('them', 'ThongKeController@postThem');
-
-		Route::get('xoa/{id}', 'ThongKeController@getXoa');
 		Route::get('xemthongke', 'ThongKeController@getXemThongKe');
 		Route::post('xemthongke', 'ThongKeController@postXemThongKe');
 	});
 });
 
-Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager']], function(){
+
+Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], function(){
 	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
 
 	Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhong')->name('dangKyPhong');

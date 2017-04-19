@@ -10,9 +10,11 @@
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	    <thead>
 	        <tr align="center">
+	        	<th>STT</th>
 	            <th>Tên vai trò</th>
 	            <th>Tên dùng hiển thị</th>
-	            <th>Mô tả</th>         
+	            <th>Mô tả</th>  
+	            <th>Chi tiết</th>       
 	            <th>Xóa</th>	
 	            <th>Sửa</th>
 	        </tr>
@@ -23,8 +25,11 @@
 	    			{{session('thongbao')}}
 	    		</div>
 	    	@endif	
+	    	<?php $i=0; ?>
 	        @foreach($roles as $role)
+	        	<?php $i++; ?>
 	            <tr class="odd gradeX" align="center">
+	            	<td>{{$i}}</td>
 	                <td>{{$role->name}}</td>
 	                <td>{{$role->display_name}}</td>	                
 	                <td>{{$role->description}}</td>

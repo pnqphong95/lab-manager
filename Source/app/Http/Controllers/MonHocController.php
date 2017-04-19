@@ -16,8 +16,6 @@ class MonHocController extends Controller
         return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc]);
     }
 
-
-
     public function getThem()
     {
         return view('admin.monhoc.them');
@@ -29,7 +27,7 @@ class MonHocController extends Controller
             [
                 'TenMH'=>'required|min:3|max:255',
                 'MaMH'=>'required|min:5|max:5',
-                'MaMH'=>'unique: monhoc, MaMH',
+                //'MaMH'=>'unique: monhoc, MaMH',
                 'SoTinChi'=>'required'
             ],
             [
@@ -39,7 +37,7 @@ class MonHocController extends Controller
                 'MaMH.required'=>'Bạn chưa nhập mã môn học',
                 'MaMH.min'=>'Mã môn học có độ dài 5 ký tự',
                 'MaMH.max'=>'Mã môn học có độ dài 5 ký tự',
-                'MaMH.unique'=>'Mã môn học không được trùng',
+                //'MaMH.unique'=>'Mã môn học không được trùng',
                 'SoTinChi.required'=>'Bạn chưa nhập số tín chỉ'
             ]);
 
@@ -47,11 +45,9 @@ class MonHocController extends Controller
         $monhoc->MaMH =$request->MaMH;
         $monhoc->TenMH =$request->TenMH;
         $monhoc->SoTinChi =$request->SoTinChi;
-        //$monhoc->save();
+        $monhoc->save();
 
-        echo $monhoc;
-
-        
+        return redirect('admin/monhoc/them')->with('thongbao','Thêm thành công');        
     }
 
     public function getSua($id)

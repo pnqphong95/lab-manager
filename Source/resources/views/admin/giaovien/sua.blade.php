@@ -1,13 +1,14 @@
 @extends('admin.layout.index')
-
+@section('title')
+Giáo viên - Sửa
+@endsection
 @section('content')
 <!-- Page Content -->
-
+<div class="col-md-12" style="padding-top: 10px">
+	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+</div>
 <div class="col-md-12">
-    <h1 class="page-header">Chỉnh sửa Giáo viên
-        <small>{{$giaovien->TenGV}}</small>
-    </h1>
-
     <div class="col-lg-7" style="padding-bottom:120px">
     	@if(count($errors)>0)
     		<div class="alert alert-danger">
@@ -102,7 +103,7 @@
 		        </div>
 		    </div>
 
-	        <button type="submit" class="btn btn-primary">Thêm</button>
+	        <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn cập nhật thông tin giáo viên {{$giaovien->TenGV}} không?');">Cập nhật</button>
 	        <button type="reset" class="btn btn-default">Reset</button>
 	    <form>
 	</div>
