@@ -1,13 +1,14 @@
 @extends('admin.layout.index')
-
+@section('title')
+Giáo viên - Thêm
+@endsection
 @section('content')
 <!-- Page Content -->
-
+<div class="col-md-12" style="padding-top: 10px">
+	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+</div>
 <div class="col-md-12">
-    <h1 class="page-header">Giáo viên
-        <small>thêm</small>
-    </h1>
-	
 	<div class="col-md-9" style="padding-bottom:120px">
 	    @if(count($errors)>0)
 	        <div class="alert alert-danger">
@@ -53,6 +54,10 @@
 		    	<div class="form-group">
 		            <label>Số điện thoại</label>
 		            <input type="text" class="form-control" name="SDT" placeholder="Nhập Số điện thoại" />
+		        </div>
+		        <div class="form-group">
+		            <label>Email</label>
+		            <input type="text" class="form-control" name="Email" placeholder="Nhập email" />
 		        </div>
 		        <div class="form-group">
 		            <label>Chức vụ</label>

@@ -60,6 +60,11 @@ class TrangChuController extends Controller
             ]
         );
         
-    }       
+    }  
+
+    public function getTrangChuAdmin() 
+    {
+        return view('admin.trangchu');
+    }     
 
 }

@@ -38,7 +38,7 @@ class ThongKeController extends Controller
 
         return view('admin.thongke.tuan', ['allTuan'=>$allTuan,'tuan'=>$tuan,'allPhong'=>$allPhong]);
     }
-
+    
     public function postXemThongKe (Request $request)
     {
         $allPhong = Phong::all();

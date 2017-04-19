@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Trang nhất</title>
+    <title>@yield('title')</title>
     <base href="{{asset('')}}">   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,11 +24,15 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="css/dataTables.responsive.css" rel="stylesheet">
-    
+    <!-- CKeditor và CKFindor-->
+    <!-- <script type="text/javascript" language="javascript" src="ckeditor/ckeditor.js" ></script> -->
+    <!-- <script type="text/javascript" language="javascript" src="ckeditor/ckfinder.js" ></script>
+   
+    <script type="text/javascript" language="javascript" src="ckeditor/ckfinder.js" ></script> -->
 </head>
 <body>
     <div id="wrapper">
-    @include('admin.layout.header')
+        @include('admin.layout.header')
         <div id="page-wrapper">
             @yield('content')
         </div>

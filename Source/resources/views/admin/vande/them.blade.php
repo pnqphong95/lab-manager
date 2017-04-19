@@ -1,14 +1,21 @@
-@section('title')
-Vấn đề
-@endsection
 @extends('admin.layout.index')
-
+@section('title')
+Vấn đề - Danh sách
+@endsection
 @section('content')
-<?php $thisPage = 'vande';?>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="white-well">
-				<h3>Tạo vấn đề</h3>
+<!-- Page Content -->
+
+<div class="col-md-12" style="padding-top: 10px">
+	<a style="width: 20%" class="btn btn-primary" href="admin/vande/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+	<a style="width: 20%" class="btn btn-success" href="admin/vande/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+</div>
+<div class="col-md-12" style="padding-top: 10px">
+	<div class="panel panel-primary">
+		<div class="panel-heading text-center">
+			THÊM VẤN ĐỀ
+		</div>
+		<div class="panel-body">
+			<h3>Tạo vấn đề</h3>
 			<hr>
 			@if(count($errors)>0)
 		        <div class="alert alert-danger">
@@ -49,11 +56,10 @@ Vấn đề
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-info">Gửi vấn đề</button>
+				<button type="submit" class="btn btn-primary">Gửi vấn đề</button>
 			</form>
 		</div>
 	</div>
-
 </div>
 @endsection
 

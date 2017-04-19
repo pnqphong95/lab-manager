@@ -59,21 +59,25 @@ class GiaoVienController extends Controller
     {
         $this->validate($request,
             [
-                'MaGV'=>'required|max:255',
+                'MaGV'=>'required|min:4|max:4|unique:giaovien',
                 'HoGV'=>'required|max:255',
                 'TenGV'=>'required|max:255',
-                'SDT'=>'required|max:11|min:10'
+                'Email'=>'required|max:255',
+                'SDT'=>'required|max:11|min:10',
+
             ],
             [
                 'TenGV.required'=>'Bạn chưa nhập tên giáo viên',
                 'TenGV.max'=>'Tên giáo viên có nhiều nhất 255 ký tự',
                 'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
+                'MaGV.unique'=>'Mật khẩu có độ dài 4 ký tự',
                 'MaGV.max'=>'Mã giáo viên có nhiều nhất 255 ký tự',
                 'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
                 'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
-                'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số'
+                'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số',
+                'Email.required'=>'Bạn chưa nhập email'
             ]);
 
         $giaovien = new GiaoVien;
@@ -83,6 +87,7 @@ class GiaoVienController extends Controller
         $giaovien->NgaySinh = $request->NgaySinh;
         $giaovien->GioiTinh = $request->GioiTinh;
         $giaovien->SDT = $request->SDT;
+        $giaovien->Email = $request->Email;
         $giaovien->idBoMon = $request->idBoMon;
         $pw = password_hash($request->password, PASSWORD_DEFAULT);
         $giaovien->password = $pw;
@@ -90,13 +95,16 @@ class GiaoVienController extends Controller
         $giaovien->KichHoat = $request->KichHoat;
         $giaovien->remember_token = '';
         $giaovien->save();
-
-        return redirect('admin/giaovien/them')->with('thongbao','Thêm thành công');
+        if ($giaovien->MaGV==null) {
+            return redirect('admin/giaovien/them')->with('thongbao','Thêm không thành công');
+        }
+        else return redirect('admin/giaovien/them')->with('thongbao','Thêm thành công');
     }
 
     public function getSua($id)
     {
         $giaovien = GiaoVien::find($id);
+        if( is_null($giaovien)) return redirect('admin/giaovien/danhsach');
         $chucvu = ChucVu::all();
         $bomon = BoMon::all();
         return view('admin.giaovien.sua', ['giaovien'=>$giaovien,'chucvu'=>$chucvu,'bomon'=>$bomon]);
@@ -108,36 +116,24 @@ class GiaoVienController extends Controller
         $chucvu = ChucVu::all();
         $this->validate($request,
             [
-                'MaGV'=>'required|max:255'
-            ],
-            [
-                'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
-                'MaGV.max'=>'Mã giáo viên có nhiều nhất 255 ký tự'
-            ]);
-        $this->validate($request,
-            [
-                'HoGV'=>'required|max:255'
-            ],
-            [
-                'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
-                'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
-            ]);
-        $this->validate($request,
-            [
-                'TenGV'=>'required|max:255'
+                'MaGV'=>'required|min:4|max:4',
+                'HoGV'=>'required|max:255',
+                'TenGV'=>'required|max:255',
+                'Email'=>'required|max:255',
+                'SDT'=>'required|max:11|min:10',
+
             ],
             [
                 'TenGV.required'=>'Bạn chưa nhập tên giáo viên',
                 'TenGV.max'=>'Tên giáo viên có nhiều nhất 255 ký tự',
-            ]);
-        $this->validate($request,
-            [
-                'SDT'=>'required|max:11|min:10'
-            ],
-            [
+                'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
+                'MaGV.max'=>'Mã giáo viên có 4 ký tự',
+                'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
+                'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
-                'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số'
+                'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số',
+                'Email.required'=>'Bạn chưa nhập email'
             ]);
 
         $giaovien->MaGV =$request->MaGV;
@@ -146,6 +142,7 @@ class GiaoVienController extends Controller
         $giaovien->NgaySinh =$request->NgaySinh;
         $giaovien->GioiTinh =$request->GioiTinh;
         $giaovien->SDT =$request->SDT;
+        $giaovien->Email = $request->Email;
         $giaovien->idBoMon =$request->idBoMon;
         $pw = password_hash($request->password, PASSWORD_DEFAULT);
         $giaovien->password =$pw;
@@ -160,8 +157,8 @@ class GiaoVienController extends Controller
     public function getXoa($id)
     {
         $giaovien = GiaoVien::find($id);
+        if(is_null($giaovien)) return redirect('admin/giaovien/danhsach');
         $giaovien->delete();
-
         return redirect('admin/giaovien/danhsach')->with('thongbao','Xóa thành công');
     }
 }

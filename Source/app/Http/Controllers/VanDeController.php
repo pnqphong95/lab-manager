@@ -82,7 +82,7 @@ class VanDeController extends Controller
         $vande->ngayBaoCao = date('Y-m-d');
         $vande->ngaySua = date('Y-m-d');
         $vande->save();
-        return redirect('admin/lich/danhsach#vande')->with('thongbao', 'Vấn đề đã gửi!');
+        return redirect('admin/vande/danhsach')->with('thongbao', 'Vấn đề đã gửi!');
     }
 
     public function getDanhSachLoiAdmin()

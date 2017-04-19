@@ -1,12 +1,20 @@
 @extends('admin.layout.index')
-
+@section('title')
+Vấn đề - Danh sách
+@endsection
 @section('content')
+<!-- Page Content -->
 
-<?php $thisPage = 'vande';?>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="white-well">
-			<h3>Danh sách các lỗi được gửi</h3>
+<div class="col-md-12" style="padding-top: 10px">
+	<a style="width: 20%" class="btn btn-primary" href="admin/vande/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+	<a style="width: 20%" class="btn btn-success" href="admin/vande/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+</div>
+<div class="col-md-12" style="padding-top: 10px">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			DANH SÁCH CÁC LỖI ĐÃ GỬI
+		</div>
+		<div class="panel-body">
 			<hr>
 			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 			    <thead>
@@ -74,40 +82,9 @@
 			        @endforeach
 			    </tbody>
 			</table>
-
-			@foreach($allVanDe as $vd)
-			@if($vd->trangThai == 0)
-			<div class="alert alert-danger my-error">
-				<label>Phòng 
-				@foreach($allPhong as $p)
-					@if($p->id == $vd->idPhong)
-						{{$p->TenPhong}}
-					@endif
-				@endforeach
-					{{$vd->tomTatVD}}
-				</label>
-			    <div class="panel-body">{{$vd->chiTietVD}}</div>
-			    <button class="btn btn-default my-fix" id="{{$vd->id}}">Đã sửa</button>
-		  	</div>
-		  	@else
-		  	<div class="alert alert-success my-error-fixxed">
-				<label>Phòng 
-				@foreach($allPhong as $p)
-					@if($p->id == $vd->idPhong)
-						{{$p->TenPhong}}
-					@endif
-				@endforeach
-					{{$vd->tomTatVD}}
-				</label>
-			    <div class="panel-body">{{$vd->chiTietVD}}</div>
-		  	</div>
-		  	@endif
-			@endforeach
-
-		</div> {{-- <div class="white-well"> --}}
-	</div> {{-- <div class="col-lg-12"> --}}
-
-</div> {{-- <div class="row"> --}}
+		</div>
+	</div>
+</div>
 @endsection
 
 @section('script')
