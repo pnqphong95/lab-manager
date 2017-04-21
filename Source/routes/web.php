@@ -47,6 +47,7 @@ Route::group(['prefix'=>'admin'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'LichController@getDanhSach');
 		Route::get('danhsach', 'LichController@getLichChoDuyetAdmin');
+		Route::get('thoikhoabieu', 'LichController@getThoiKhoaBieu');
 
 		Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhongAdmin');
 		Route::post('dangkyphong', 'DangKyPhongController@postDangKyPhongAdmin');
@@ -57,6 +58,13 @@ Route::group(['prefix'=>'admin'], function(){
 
 	Route::group(['prefix'=>'mail'], function(){
 		Route::get('danhsach', 'MailController@getDanhSach');
+
+		Route::get('mail/{id}', 'MailController@getMail');
+		Route::post('blanks', 'MailController@postMail');
+	});
+
+	Route::group(['prefix'=>'task'], function(){
+		Route::get('danhsach', 'LichController@getLichChoDuyetAdminTask');
 
 		Route::get('mail/{id}', 'MailController@getMail');
 		Route::post('blanks', 'MailController@postMail');
@@ -138,21 +146,6 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSach');
 	});
 
-	Route::group(['prefix'=>'quyen'], function(){
-		//admin/theloai/danhsach
-		Route::get('danhsach', 'QuyenController@getDanhSach');
-
-		Route::get('sua/{id}', 'MonHocController@getSua');
-		Route::post('sua/{id}', 'MonHocController@postSua');
-
-		Route::get('them', 'VaiTroController@getThem');
-		Route::post('them', 'VaiTroController@postThem');
-
-		Route::get('xoa/{id}', 'MonHocController@getXoa');
-
-		Route::get('monhoc_phanmem/{id}', 'MonHoc_PhanMemController@getDanhSach');
-	});
-
 	Route::group(['prefix'=>'bomon'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'BoMonController@getDanhSach');
@@ -193,9 +186,9 @@ Route::group(['prefix'=>'admin'], function(){
 
 
 Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], function(){
-	Route::get('trangchu', 'TrangChuController@getUserTrangChu')->name('userTrangChu');
+	Route::get('trangchu', 'TrangChuController@getUserTrangChu');
 
-	Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhong')->name('dangKyPhong');
+	Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhong');
 	Route::post('dangkyphong', 'DangKyPhongController@postDangKyPhong');
 
 	Route::get('vande', 'VanDeController@getVanDe');

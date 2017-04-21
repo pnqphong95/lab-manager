@@ -15,7 +15,7 @@ class QuyenController extends Controller
 
     public function getThem()
     {
-        return view('admin.vaitro.them');
+        return view('admin.quyen.them');
     }
 
     public function postThem(Request $request)

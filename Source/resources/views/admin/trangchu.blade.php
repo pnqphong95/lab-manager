@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">    
 			<div class="panel panel-primary" style="height: auto;">
-				<div class="panel-title">Trang chủ</div>
+				<div class="panel-heading text-center">TRANG CHỦ</div>
 				<div class="panel-body">
 					<div class="row">
 						<!-- <div class="col-xs-6 col-md-3"> -->

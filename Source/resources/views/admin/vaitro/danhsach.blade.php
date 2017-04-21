@@ -1,12 +1,15 @@
 @extends('admin.layout.index')
-
+@section('title')
+Vai trò - Danh sách
+@endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12">
-    <h1 class="page-header">Vai trò
-        <small>Danh sách</small>
-    </h1>
-
+<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH VAI TRÒ</h2></div>
+<div class="col-md-12 text-center" style="padding-top: 10px">
+	<a style="width: 20%" class="btn btn-primary" href="admin/vaitro/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+	<a style="width: 20%" class="btn btn-success" href="admin/vaitro/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+</div>
+<div class="col-md-12" style="padding-top: 10px">
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	    <thead>
 	        <tr align="center">
