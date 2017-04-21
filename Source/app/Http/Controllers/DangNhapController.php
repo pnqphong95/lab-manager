@@ -22,9 +22,9 @@ class DangNhapController extends Controller
     				];
     	if (Auth::attempt($login)) {
             $user = Auth::user();            
-            if($user->idChucVu !== 3)
-                return redirect()->route('userTrangChu');            
-            else return redirect()->route('adminTrangChu');
+            
+            return redirect('user/trangchu');     
+            
         } else {
         	return redirect()->back()->withErrors(['Username hoặc Password không đúng!']);
         }

@@ -204,9 +204,13 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], 
 
 	Route::get('lichthuchanh', 'LichController@getLichThucHanh');
 
-	Route::get('chinhsualich', ['middleware' => ['role:manager'], 'uses' => 'LichController@getChinhSuaLich']);
-	Route::get('chinhsualich/{id?}', ['middleware' => ['role:manager'], 'uses' => 'LichController@getDoiPhong']);
-	Route::post('chinhsualich/{id?}', ['middleware' => ['role:manager'], 'uses' => 'LichController@postDoiPhong']);
+	Route::group (['prefix' => 'chinhsualich', 'middleware' => ['role:manager']], function (){
+		Route::get('', ['middleware' => ['role:manager'], 'uses' => 'LichController@getChinhSuaLich']);
+		Route::get('{id?}', ['middleware' => ['role:manager'], 'uses' => 'LichController@getDoiPhong']);
+		Route::post('{id?}', ['middleware' => ['role:manager'], 'uses' => 'LichController@postDoiPhong']);
+		Route::get ('xoa/{id}', ['middleware' => ['role:manager'], 'uses' => 'LichController@getXoaLich']);
+	});
+	
 
 	Route::get('cacyeucau', ['middleware' => ['role:manager'], 'uses' => 'LichController@getLichChoDuyet']);
 

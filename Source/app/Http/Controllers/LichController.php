@@ -15,11 +15,32 @@ use App\Buoi;
 use App\Tuan;
 use App\GiaoVien;
 use DB;
-use App\GiaoVien;
 use App\Lich_ChoDuyet;
 
 class LichController extends Controller
 {
+    public function getXoaLich ($id)
+    {
+        
+        $lich = Lich::find($id);
+        if (is_null($lich))
+        {
+            return redirect('user/chinhsualich')->with('thongbao', 'Có lỗi khi xóa, mong bạn kiểm tra lại!');
+        }
+        else
+        {
+            if ($lich->delete())
+            {
+                return redirect('user/chinhsualich')->with('thongbao', 'Đã xóa thành công lịch!');
+            }
+            else
+            {
+                return redirect('user/chinhsualich')->with('thongbao', 'Có lỗi khi xóa, mong bạn kiểm tra lại!');
+            }
+        }
+        
+    }
+
     public function getDoiPhong ($id)
     {
         $i = 0;
@@ -92,14 +113,14 @@ class LichController extends Controller
             array_push($idPhongBM, $pbm->id);
         }
 
-        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+        $lich = DB::table('lich')
                                     ->where('idHocKyNienKhoa', $idLastHKNK)
                                     ->whereIn('idPhong', $idPhongBM)
                                     ->orderBy('idTuan')
                                     ->orderBy('idThu')
                                     ->orderBy('idBuoi')
                                     ->get();
-        echo $lich;
+        //echo $lich;
 
         return view('user.chinhsualich', 
                     [
@@ -184,6 +205,11 @@ class LichController extends Controller
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
 
+        $giaovien = GiaoVien::select('id')->where ('idBoMon', Auth::user()->idBoMon) ->get();
+        $idGVinBM = array();
+        foreach ($giaovien as $gv) {
+            array_push($idGVinBM, $gv->id);
+        }
         $allThu = Thu::all();
         $allMonHoc = MonHoc::all();
         $allPhong = Phong::all();
@@ -194,7 +220,9 @@ class LichController extends Controller
         $allLichCD = DB::table('Lich_ChoDuyet')
                         ->where ('idHocKyNienKhoa', $idLastHKNK)
                         ->where ('TrangThai', 0)
+                        ->whereIn ('idGiaoVien', $idGVinBM)
                         ->get();
+                        //echo $allLichCD;
 
         return view('user.lichchoduyet.danhsach', 
                     [
