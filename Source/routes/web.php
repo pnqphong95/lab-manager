@@ -40,6 +40,7 @@ Route::get('login', 'DangNhapController@getDangNhap')->name('getLogin');
 Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
 Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
 
+
 Route::group(['prefix'=>'admin'], function(){
 	Route::get('trangchu','TrangChuController@getTrangChuAdmin');
 	Route::group(['prefix'=>'lich'], function(){
