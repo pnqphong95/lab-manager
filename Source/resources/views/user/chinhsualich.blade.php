@@ -12,6 +12,13 @@ Chỉnh sửa lịch phòng
 			<h3>Điều chỉnh lịch thực hành</h3>
 			<hr>
 
+			@if(session('thongbao'))
+		        <div class="alert alert-success">		      
+	                {!!session('thongbao')!!}
+		           
+		        </div>
+		    @endif
+
 			<h4>Tuần</h4>
 			<div class="checkbox">
 				<label class="radio-inline">
@@ -29,11 +36,11 @@ Chỉnh sửa lịch phòng
 							<tr>
 								<th>Tuần</th>		
 								<th>Thứ</th>
+								<th>Buổi</th>
+								<th>Phòng</th>
 								<th>Mã HP</th>
 								<th>Nhóm</th>
 								<th>Tên học phần</th>
-								<th>Buổi</th>
-								<th>Phòng</th>
 								<th>Hành động</th>
 							</tr>	
 						</thead>
@@ -55,6 +62,20 @@ Chỉnh sửa lịch phòng
 									@endforeach
 								</td>
 								<td>
+									@foreach($allBuoi as $b)
+										@if($b->id == $l->idBuoi)
+											{{$b->TenBuoi}}
+										@endif
+									@endforeach
+								</td>
+								<td>
+									@foreach($allPhong as $p)
+										@if($p->id == $l->idPhong)
+											{{$p->TenPhong}}
+										@endif
+									@endforeach
+								</td>
+								<td>
 									@foreach($allMonHoc as $mh)
 										@if($mh->id == $l->idMonHoc)
 											{{$mh->MaMH}}
@@ -70,22 +91,9 @@ Chỉnh sửa lịch phòng
 									@endforeach
 								</td>
 								<td>
-									@foreach($allBuoi as $b)
-										@if($b->id == $l->idBuoi)
-											{{$b->TenBuoi}}
-										@endif
-									@endforeach
-								</td>
-								<td>
-									@foreach($allPhong as $p)
-										@if($p->id == $l->idPhong)
-											{{$p->TenPhong}}
-										@endif
-									@endforeach
-								</td>
-								<td>
-									<a class="btn btn-info btn-xs" href="#">Đổi phòng</a>
-									<a class="btn btn-danger btn-xs" href="#">Xóa</a>
+									<a class="btn btn-info btn-xs" href="user/chinhsualich/{{$l->id}}">Đổi phòng</a>		
+									<a class="btn btn-warning btn-xs" href="user/chinhsualich/thuhoi/{{$l->id}}">Thu hồi</a>
+									<a class="btn btn-danger btn-xs" href="user/chinhsualich/xoa/{{$l->id}}">Xóa</a>
 								</td>
 							</tr>
 						@endforeach

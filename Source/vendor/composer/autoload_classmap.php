@@ -11,7 +11,6 @@ return array(
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
-    'GiaoVienSeeder' => $baseDir . '/database/seeds/GiaoVienSeeder.php',
     'Hamcrest\\Arrays\\IsArray' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
     'Hamcrest\\Arrays\\IsArrayContaining' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
     'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',
@@ -539,6 +538,7 @@ return array(
     'SebastianBergmann\\ResourceOperations\\ResourceOperations' => $vendorDir . '/sebastian/resource-operations/src/ResourceOperations.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TaoBangGiaoVien' => $baseDir . '/database/migrations/2017_03_16_053725_taoBangGiaoVien.php',
+    'TaoBangHopThu' => $baseDir . '/database/migrations/2017_04_14_074848_TaoBangHopThu.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'Zizaco\\Entrust\\MigrationCommand' => $vendorDir . '/zizaco/entrust/src/commands/MigrationCommand.php',
 );

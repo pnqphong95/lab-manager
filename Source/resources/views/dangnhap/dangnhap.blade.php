@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Đăng nhập</title>
-	<link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{ url('css/mystyle.css')}}">
-</head>
-<body>
+@section('title')
+Trang chủ
+@endsection
+@extends('layout.index')
+
+
+@section('main')
 	<div class = "container">
 
 		<div class="wrapper">
@@ -22,5 +21,4 @@
 			</form>			
 		</div>
 	</div>
-</body>
-</html>
+@endsection

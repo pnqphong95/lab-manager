@@ -21,8 +21,10 @@ class DangNhapController extends Controller
     					'password' => $request->Password
     				];
     	if (Auth::attempt($login)) {
-            $user = Auth::user();                      
-            return redirect('user/trangchu');            
+            $user = Auth::user();            
+            
+            return redirect('user/trangchu');     
+            
         } else {
         	return redirect()->back()->withErrors(['Username hoặc Password không đúng!']);
         }

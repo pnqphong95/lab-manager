@@ -30,28 +30,62 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
+                    @if(!Auth::user())
                     <li>
-                        <a href="user/trangchu">Trang chủ</a>
+                        <a href="/">TRANG CHỦ</a>
                     </li>
+                    @endif
+
                     @if(Auth::user())
                     <li>
-                        <a href="user/dangkyphong">Đăng ký phòng BM</a>
+                        <a href="/user/trangchu">TRANG CHỦ</a>
                     </li>
-                    <li>
-                        <a href="user/vande">Tạo và gửi vấn đề</a>
+                    @endif
+                    @role('normal')                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">TÍNH NĂNG
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="user/dangkyphong">ĐĂNG KÝ PHÒNG</a>
+                            </li>
+                            <li>
+                                <a href="user/vande">PHẢN HỒI PHÒNG</a>
+                            </li>                    
+                            <li>
+                                <a href="user/lichthuchanh">LỊCH DẠY & LỊCH CHỜ DUYỆT</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="user/cacyeucau">Các yêu cầu phòng</a>
-                    </li> 
-                    <li>
-                        <a href="user/lichthuchanh">Lịch thực hành</a>
+                    @endrole
+                    @role('manager')
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUẢN LÝ
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="user/cacyeucau">YÊU CẦU PHÒNG</a>
+                            </li> 
+                            <li>
+                                <a href="user/chinhsualich">ĐIỀU CHỈNH LỊCH</a>
+                            </li>
+                        </ul>
                     </li>
-
-                   
-                @endif
+                                        
+                    @endrole
+                    @role ('admin')
+                    <li>
+                        <a href="admin/">ADMIN-PAGE</a>
+                    </li>
+                    @endrole
                 </ul>
-                
-                
+                @if(Auth::user())
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="user/hopthu">THÔNG BÁO</a>
+                    </li>
+                </ul>
+                @endif
             </div>
             <!-- /.navbar-collapse -->
     </nav>

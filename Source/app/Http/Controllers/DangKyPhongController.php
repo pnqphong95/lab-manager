@@ -122,8 +122,12 @@ class DangKyPhongController extends Controller
                         $lichDB->idHocKyNienKhoa = $idLastHKNK;
                         $lichDB->save();
                         $dk_suc = true;
-                        //$mes = $mes . '<br>Đăng ky thành công!';
+                        $phong = Phong::find ($lichDB->idPhong);
+                        $buoi = Buoi::find ($lichDB->idBuoi);
+                        $thu = Thu::find ($lichDB->idThu);
+                        $tuan = Tuan::find ($lichDB->idTuan);
                         $daDK = 1;
+                        $mes = $mes . 'Đã đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- tại phòng: '.$phong->TenPhong .'<br>';
                         break;                     
                     }
                     else
@@ -205,18 +209,12 @@ class DangKyPhongController extends Controller
                 $lichCD->idHocKyNienKhoa = $idLastHKNK;
                 $lichCD->TrangThai = 0;
                 $lichCD->save();
+                $buoi = Buoi::find ($lichCD->idBuoi);
+                $thu = Thu::find ($lichCD->idThu);
+                $tuan = Tuan::find ($lichCD->idTuan);
+                $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.'<br>';
            	}
-        }
-
-        if($dk_suc)
-        {
-        	$mes = $mes. "<br>Đăng ký phòng thành công!";
-        }
-
-        if($coLichCD)
-        {
-        	$mes = $mes. "<br>Một vài buổi thực hành chưa được xếp phòng! Vui lòng liên hệ quản lí để";
-        }
+        }        
         return redirect('user/dangkyphong')->with('thongbao', $mes);
     }
 

@@ -9,9 +9,16 @@ Danh sách các vấn đề
 <div class="row">
 	<div class="col-lg-12">
 		<div class="white-well">
-			<h3>Danh sách các yêu cầu phòng đăng ký phòng chưa được xếp</h3>
+			<h3>Danh sách các yêu cầu chưa được xếp phòng</h3>
 			<hr>
 
+			@if(session('thongbao'))
+		        <div class="alert alert-success">		      
+	                {!!session('thongbao')!!}
+		           
+		        </div>
+		    @endif
+			
 			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr>
@@ -28,19 +35,46 @@ Danh sách các vấn đề
 				<tbody>
 					@foreach ($allLichCD as $lichCD)
 			      	<tr>						        								        	
-						<td>{{$lichCD->idGiaoVien}}</td>
-			        	<td>{{$lichCD->idMonHoc}}</td>
-			        	<td>{{$lichCD->Nhom}}</td>
-			        	<td>{{$lichCD->idThu}}</td>
-			        	<td>{{$lichCD->idBuoi}}</td>
-			        	<td>{{$lichCD->idTuan}}</td> 
+						<td>
+							@foreach ($allGiaoVien as $gv)
+								@if ($gv->id == $lichCD->idGiaoVien)
+									{{$gv->TenGV}} ({{$gv->MaGV}})
+								@endif
+							@endforeach
+						</td>
 			        	<td>
-			        		<form action="" type="post">
-			        			<input type="hidden" name="idLichCD" value="{{$lichCD->id}}">
-			        			<button class="btn btn-info btn-xs btn-xepphong" type="button">Xếp phòng</button>
-			        		</form>
+			        		@foreach ($allMonHoc as $mh)
+			        			@if ($mh->id == $lichCD->idMonHoc)
+			        				{{$mh->TenMH}}
+			        			@endif
+		        			@endforeach
+	        			</td>
+			        	<td>{{$lichCD->Nhom}}</td>
+			        	<td>
+			        		@foreach ($allThu as $th)
+			        			@if ($th->id == $lichCD->idThu)
+			        				{{$th->TenThu}}
+			        			@endif
+		        			@endforeach
 			        	</td>
-		     	 	</tr>
+			        	<td>
+			        		@foreach ($allBuoi as $bu)
+			        			@if ($bu->id == $lichCD->idBuoi)
+			        				{{$bu->TenBuoi}}
+			        			@endif
+		        			@endforeach
+			        	</td>
+			        	<td>
+			        		@foreach ($allTuan as $tu)
+			        			@if ($tu->id == $lichCD->idTuan)
+			        				{{$tu->TenTuan}}
+			        			@endif
+		        			@endforeach
+			        	</td> 
+			        	<td>			        		
+		        			<a href="user/xepphong/{{Crypt::encrypt($lichCD->id)}}" class="btn btn-info btn-xs btn-xepphong">Xếp phòng</a>	
+	        			</td>
+	     	 		</tr>
 		     	 	@endforeach
 		     	 </tbody>
 		    </table>
@@ -53,15 +87,6 @@ Danh sách các vấn đề
 
 @section('script')
 <script type="text/javascript">
-	$(document).ready (function (){
-		$('.btn-xepphong').click(function () {
-			var select = $('<select><option>1</option></select>');
-			var btnOK = $('<button>OK</button>');
-			var parentEle = $(this).parent();
-			$(this).remove();
-			parentEle.append(select);
-			parentEle.append(btnOK);
-		});
-	});
+	
 </script>
 @endsection

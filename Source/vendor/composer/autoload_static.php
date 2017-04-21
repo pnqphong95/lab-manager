@@ -294,7 +294,6 @@ class ComposerStaticInit588a6ec2b4383a371d18ab4b0374273e
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
-        'GiaoVienSeeder' => __DIR__ . '/../..' . '/database/seeds/GiaoVienSeeder.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
         'Hamcrest\\Arrays\\IsArrayContaining' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
         'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',
@@ -822,6 +821,7 @@ class ComposerStaticInit588a6ec2b4383a371d18ab4b0374273e
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TaoBangGiaoVien' => __DIR__ . '/../..' . '/database/migrations/2017_03_16_053725_taoBangGiaoVien.php',
+        'TaoBangHopThu' => __DIR__ . '/../..' . '/database/migrations/2017_04_14_074848_TaoBangHopThu.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'Zizaco\\Entrust\\MigrationCommand' => __DIR__ . '/..' . '/zizaco/entrust/src/commands/MigrationCommand.php',
     );
