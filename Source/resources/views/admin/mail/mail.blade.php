@@ -7,6 +7,11 @@
     </h1>
 
 	<form action="admin/mail/blanks" method="POST">
+		<select name="idGV">
+			@foreach($giaovien as $gv)
+				<option value="{{$gv->id}}">{{$gv->MaGV}}-{{$gv->HoGV}} {{$gv->TebGV}}</option>
+			@endforeach
+		</select>
 		<input type="hidden" name="_token" value="{{csrf_token()}}" />
 		<div class="row">
 			<div class="col-md-2">

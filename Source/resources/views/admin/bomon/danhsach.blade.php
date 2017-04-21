@@ -4,10 +4,10 @@ Bộ môn - Danh sách
 @endsection
 @section('content')
 <!-- Page Content -->
-
-<div class="col-md-12" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-primary" href="admin/bomon/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-	<a style="width: 20%" class="btn btn-success" href="admin/bomon/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH BỘ MÔN</h2></div>
+<div class="col-md-12 text-center" style="padding-top: 10px">
+	<!-- <a style="width: 20%" class="btn btn-primary" href="admin/bomon/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a> -->
+	<a style="width: 20%" class="btn btn-success btn-responsive" href="admin/bomon/them"><span class="glyphicon glyphicon-plus"></span>  THÊM MỚI</a>
 </div>
 <div class="col-md-12">
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">

@@ -1,17 +1,20 @@
 @extends('admin.layout.index')
 @section('title')
-Phòng - Sửa
+Phòng- Sửa
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12" style="padding-top: 10px">
+<div class="col-md-12 text-center" style="color: blue"><h2>SỬA PHÒNG</h2></div>
+<div class="col-md-12 text-center" style="padding-top: 10px">
     <a style="width: 20%" class="btn btn-primary" href="admin/phong/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
     <a style="width: 20%" class="btn btn-success" href="admin/phong/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
 <div class="col-md-8" style="padding-top: 10px">
-        <div class="panel panel-primary">
-            <div class="panel-heading text-center">SỬA PHÒNG {{$phong->TenPhong}}</div>
-            <div class="panel-body">
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            SỬA PHÒNG - {{$phong->TenPhong}}
+        </div>
+        <div class="panel-body">
                 <form action="admin/phong/sua/{{$phong->id}}" method="POST">
                     @if(session('thongbao'))
                         <div class="alert alert-success">
@@ -56,34 +59,39 @@ Phòng - Sửa
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary" onclick="return confirm('Bạn có muốn cập nhật {{$phong->TenPhong}}  không?');">Cập nhật</button>
-                        <button type="reset" class="btn btn-default">Làm mới</button>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn cập nhật {{$phong->TenPhong}}  không?');"><span class="glyphicon glyphicon-edit"> </span> Cập nhật</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
                     </div>
                 <form>
             </div>
         </div>
     </div>
     <div class="col-md-4" style="padding-top: 10px">
-        <form >
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <tr>
-                    <th>STT</th>
-                    <th>Tên phần mềm</th>
-                    <th>Phiên bản</th>
-                    <th>Xóa</th>
-                </tr>
-                <?php $i=0; ?>
-                @foreach($phong_phanmem as $pm)
-                <?php $i++; ?>
-                <tr>
-                    <td>{{$i}}</td>
-                    <td>{{$pm->TenPM}}</td>
-                    <td>{{$pm->PhienBan}}</td>
-                    <td><a href="admin/phong/chitiet/xoaPM/{{$pm->id}}/{{$pm->idPhong}}">Xóa</a></td>
-                </tr>
-                @endforeach
-            </table>
-        </form>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                Danh sách phần mềm
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên phần mềm</th>
+                        <th>Phiên bản</th>
+                        <th>Xóa</th>
+                    </tr>
+                    <?php $i=0; ?>
+                    @foreach($phong_phanmem as $pm)
+                    <?php $i++; ?>
+                    <tr>
+                        <td>{{$i}}</td>
+                        <td>{{$pm->TenPM}}</td>
+                        <td>{{$pm->PhienBan}}</td>
+                        <td><a href="admin/phong/chitiet/xoaPM/{{$pm->id}}/{{$pm->idPhong}}">Xóa</a></td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>        
     </div>
 @endsection

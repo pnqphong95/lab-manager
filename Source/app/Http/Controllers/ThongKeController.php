@@ -19,10 +19,6 @@ class ThongKeController extends Controller
         $toanHK = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as total'))
                                         ->groupBy('idPhong')
                                         ->get();
-        $thang1 = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as total'))
-                                        ->where('idTuan', '<=',10)->where('idTuan', '>=',4)
-                                        ->groupBy('idPhong')
-                                        ->get();
 
         return view('admin.thongke.danhsach', ['toanHK'=>$toanHK,'thang1'=>$thang1,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
     }

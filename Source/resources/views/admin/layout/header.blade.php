@@ -85,13 +85,13 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="admin/taikhoan/danhsach"><i class="fa fa-cube fa-fw"></i> TÀI KHOẢN<span class="fa arrow"></span></a>
+                    <a href="admin/vaitro/danhsach"><i class="fa fa-cube fa-fw"></i> VAI TRÒ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="admin/taikhoan/danhsach">Danh sách</a>
+                            <a href="admin/vaitro/danhsach">Danh sách</a>
                         </li>
                         <li>
-                            <a href="admin/taikhoan/them">Thêm</a>
+                            <a href="admin/vaitro/them">Thêm</a>
                         </li>
                     </ul>
                 </li>

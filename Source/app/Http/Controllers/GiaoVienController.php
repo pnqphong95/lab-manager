@@ -62,7 +62,7 @@ class GiaoVienController extends Controller
                 'MaGV'=>'required|min:4|max:4|unique:giaovien',
                 'HoGV'=>'required|max:255',
                 'TenGV'=>'required|max:255',
-                'Email'=>'required|max:255',
+                'Email'=>'required|unique:giaovien|max:255',
                 'SDT'=>'required|max:11|min:10',
 
             ],
@@ -70,14 +70,15 @@ class GiaoVienController extends Controller
                 'TenGV.required'=>'Bạn chưa nhập tên giáo viên',
                 'TenGV.max'=>'Tên giáo viên có nhiều nhất 255 ký tự',
                 'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
-                'MaGV.unique'=>'Mật khẩu có độ dài 4 ký tự',
+                'MaGV.unique'=>'Mã giáo viên không được phép trùng',
                 'MaGV.max'=>'Mã giáo viên có nhiều nhất 255 ký tự',
                 'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
                 'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
                 'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số',
-                'Email.required'=>'Bạn chưa nhập email'
+                'Email.required'=>'Bạn chưa nhập email',
+                'Email.unique'=>'Email bị trùng'
             ]);
 
         $giaovien = new GiaoVien;

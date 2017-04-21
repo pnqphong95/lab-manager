@@ -5,7 +5,7 @@ Giáo viên - Chi tiết
 @section('content')
 <!-- Page Content -->
 
-<div class="col-md-12" style="padding-top: 10px">
+<div class="col-md-12 text-center" style="padding-top: 10px">
 	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
 	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>

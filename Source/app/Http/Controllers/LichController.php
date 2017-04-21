@@ -203,4 +203,44 @@ class LichController extends Controller
                         'lich' => $lich
                     ]);
     }
+
+    public function getLichChoDuyetAdminTask()
+    {
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $allThu = Thu::all();
+        $allMonHoc = MonHoc::all();
+        $allPhong = Phong::all();
+        $allBuoi = Buoi::all();
+        $allTuan = Tuan::all();
+        $allGiaoVien = GiaoVien::all();
+        $lich = Lich::all();
+
+        $allLichCD = DB::table('Lich_ChoDuyet')
+                        // ->where ('idGiaoVien', Auth::user()->id)
+                        ->where ('idHocKyNienKhoa', $idLastHKNK)
+                        ->where ('TrangThai', 0)
+                        ->get();
+
+        return view('admin.task.danhsach', 
+                    [
+                        'allMonHoc' => $allMonHoc,
+                        'allBuoi' => $allBuoi,
+                        'allPhong' => $allPhong,
+                        'allThu' => $allThu,
+                        'allTuan' => $allTuan,
+                        'allLichCD' => $allLichCD,
+                        'allGiaoVien' => $allGiaoVien,
+                        'lich' => $lich
+                    ]);
+    }
+
+    public function getThoiKhoaBieu ()
+    {
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+        $tkb = Lich::where('idGiaoVien',2)->get();
+        return view('admin.lich.thoikhoabieu',compact('tkb'));
+    }
 }

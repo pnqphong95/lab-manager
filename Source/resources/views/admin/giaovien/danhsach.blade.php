@@ -4,7 +4,8 @@ Giáo viên - Danh sách
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12" style="padding-top: 10px">
+<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH GIÁO VIÊN</h2></div>
+<div class="col-md-12 text-center" style="padding-top: 10px">
 	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
 	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
@@ -16,7 +17,6 @@ Giáo viên - Danh sách
 	            <th>Họ tên</th>
 	            <th>Chức vụ</th>
 	            <th>Bộ môn</th>
-	            <th>Kích hoạt</th>
 	            <th>Chi tiết</th>
 	            <th>Delete</th>
 	            <th>Edit</th>
@@ -46,7 +46,6 @@ Giáo viên - Danh sách
 	                		@endif
 	                	@endforeach
 	                </td>
-	                <td>{{$gv->KichHoat}}</td>
 	                <td><a href="admin/giaovien/chitiet/{{$gv->id}}">Chi tiết</a></td>
 	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa giáo viên {{$gv->TenGV}} không?');"> Xóa</a></td>
 	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/giaovien/sua/{{$gv->id}}">Sửa</a></td>
