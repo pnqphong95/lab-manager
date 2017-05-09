@@ -12,36 +12,126 @@ Task- Danh sách
 
 </div>
 <div class="col-md-12">
+	@foreach($allTuan as $tu1)
+  	<label class="radio-inline">
+	  	<input type="radio" name="selectTuan" class="selectTuan" value="{{$tu1->id}}"> {{$tu1->TenTuan}}
+	</label>				
+	@endforeach
 	<table class="table table-striped table-bordered table-hover" id="dataTables-example" style="text-align: center;">
-		<thead>
-			<tr>
-				<th>STT</th>
-				<th>Thứ</th>
-				<th>Mã môn</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- <?php $i=0; ?>
-			@foreach($tkb as $tkb)
-				<?php $i++; ?>
-				<tr>
-					<td>{{$i}}</td>
-					<td>{{$tkb->idThu}}</td>
-					<td>{{$tkb->idMonHoc}}</td>
-				</tr>
-			@endforeach -->
-			<?php 
-				for($i=1; $i<=7; $i++){
-			?>
-			<tr>
-				<td></td>
-				<td>{{$tkb->idThu}}</td>
-				<td>{{$tkb->idMonHoc}}</td>
-			</tr>
-			<?php
-				}
-			 ?>
-	 	 </tbody>
+		<tr>
+			<th>Buổi</th>
+			<th>Thứ hai</th>
+			<th>Thứ ba</th>
+			<th>Thứ tư</th>
+			<th>Thứ năm</th>
+			<th>Thứ sáu</th>
+			<th>Thứ bảy</th>
+			<th>Chủ nhật</th>
+		</tr>
+		<tr>
+			<td>Sáng</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==2)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==2)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==2)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichSang as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+		</tr>
+		<tr>
+			<td>Chiều</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==2)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==2)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==2)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+			<td>
+			@foreach($lichChieu as $ls)
+				@if($ls->idThu==1)
+					Môn học: {{$ls->idMonHoc}}<br>Phòng: {{$ls->idPhong}}
+				@endif
+			@endforeach
+			</td>
+		</tr>
 	</table>	
 </div>
 @endsection

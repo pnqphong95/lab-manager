@@ -1,13 +1,12 @@
 @extends('admin.layout.index')
 @section('title')
-Vấn đề - Danh sách
+Vấn đề - Thêm
 @endsection
 @section('content')
 <!-- Page Content -->
 
 <div class="col-md-12" style="padding-top: 10px">
 	<a style="width: 20%" class="btn btn-primary" href="admin/vande/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-	<a style="width: 20%" class="btn btn-success" href="admin/vande/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
 <div class="col-md-12" style="padding-top: 10px">
 	<div class="panel panel-primary">
@@ -31,7 +30,8 @@ Vấn đề - Danh sách
 		        </div>
 		    @endif
 			<form action="admin/vande/them" method="post">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<!-- <input class="form-control" type="hidden" name="id" />  -->
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="form-group">
@@ -45,6 +45,18 @@ Vấn đề - Danh sách
 					</div>
 					<div class="col-lg-8">
 						<div class="form-group">
+							<label>Người nhận vấn đề</label>
+							<select class="form-control" name="nguoiNhan">
+								@foreach($allGiaoVien as $gv)
+									@if($gv->idChucVu ==4)
+										<option value="{{$gv->id}}">{{$gv->MaGV}} - {{$gv->HoGV}} {{$gv->TenGV}}</option>
+									@endif
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group">
 							<label>Tóm tắt vấn đề</label>
 							<input class="form-control" type="text" name="tomTatVD" />
 						</div>
@@ -56,7 +68,7 @@ Vấn đề - Danh sách
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">Gửi vấn đề</button>
+				<button type="submit" class="btn btn-primary" onclick="return confirm('Vấn đề này sẽ được thông báo đến người được yêu cầu qua email. Bạn có muốn tiếp tục?');">Gửi vấn đề</button>
 			</form>
 		</div>
 	</div>

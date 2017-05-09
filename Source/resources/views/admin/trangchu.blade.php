@@ -9,61 +9,54 @@
 				<div class="panel-heading text-center">TRANG CHỦ</div>
 				<div class="panel-body">
 					<div class="row">
-						<!-- <div class="col-xs-6 col-md-3"> -->
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="admin/lich/danhsach" class="thumbnail">
-					      		<img src="img/lich.png">
-					      		<center>LỊCH THỰC HÀNH</center>
-					    	</a>
-					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
+					  	<div class="col-md-3">
 					    	<a href="admin/phong/danhsach" class="thumbnail">
 					      		<img src="img/phong.png">
 					      		<center>PHÒNG THỰC HÀNH</center>
 					    	</a>
 					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
+					  	<div class="col-md-3">
 					    	<a href="admin/phanmem/danhsach" class="thumbnail">
-					      		<img src="img/phong.png">
+					      		<img src="img/phanmem.png">
 					      		<center>PHẦN MỀM</center>
 					    	</a>
 					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="#" class="thumbnail">
-					      		<img src="img/phanmem.png">
+					  	<div class="col-md-3">
+					    	<a href="admin/monhoc/danhsach" class="thumbnail">
+					      		<img src="img/monhoc.png">
 					      		<center>MÔN HỌC</center>
 					    	</a>
 					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="#" class="thumbnail">
-					      		<img src="img/nhatky.png">
-					      		<center>BỘ MÔN</center>
+					  	<div class="col-md-3">
+					    	<a href="admin/giaovien/danhsach" class="thumbnail">
+					      		<img src="img/user.png">
+					      		<center>NGƯỜI DÙNG</center>
 					    	</a>
 					  	</div>
 					</div>
 					<div class="row">
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="#" class="thumbnail">
-					      		<img src="img/user.png">
-					      		<center>QUẢN LÝ GIÁO VIÊN</center>
+						<div class="col-md-3">
+					    	<a href="admin/lichsu_choduyet/danhsach" class="thumbnail">
+					      		<img src="img/choduyet.png">
+					      		<center>DUYỆT LỊCH</center>
 					    	</a>
 					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="#" class="thumbnail">
+					  	<div class="col-md-3">
+					    	<a href="admin/vande/danhsach" class="thumbnail">
 					      		<img src="img/issue.png">
 					      		<center>VẤN ĐỀ</center>
 					    	</a>
 					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="#" class="thumbnail">
-					      		<img src="img/user.png">
-					      		<center>VAI TRÒ</center>
-					    	</a>
-					  	</div>
-					  	<div class="col-xs-3" style="width: 20%">
-					    	<a href="#" class="thumbnail">
+					  	<div class="col-md-3">
+					    	<a href="admin/thongke/danhsach" class="thumbnail">
 					      		<img src="img/thongke.png">
 					      		<center>THỐNG KÊ</center>
+					    	</a>
+					  	</div>
+					  	<div class="col-md-3">
+					    	<a href="admin/hocky/danhsach" class="thumbnail">
+					      		<img src="img/hocky.png">
+					      		<center>HỌC KỲ NIÊN KHÓA</center>
 					    	</a>
 					  	</div>
 					</div>

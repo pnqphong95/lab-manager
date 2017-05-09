@@ -4,9 +4,8 @@ Phòng - Thêm
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12" style="padding-top: 10px">
+<div class="col-md-12 text-center" style="padding-top: 10px">
     <a style="width: 20%" class="btn btn-primary" href="admin/phong/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-    <a style="width: 20%" class="btn btn-success" href="admin/phong/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
 <div class="col-md-12" style="padding-top: 10px">
     @if(count($errors)>0)
@@ -69,3 +68,26 @@ Phòng - Thêm
 </div>
 
 @endsection
+
+<!-- @section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+            
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div class="col-md-4 pull-left"><input class="form-control" type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                }
+            });
+            
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+    </script>
+@endsection -->

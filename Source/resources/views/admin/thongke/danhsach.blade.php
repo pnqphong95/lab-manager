@@ -4,15 +4,9 @@
 <!-- Page Content -->
 
 <div class="col-md-12">
-    <h1 class="page-header">Thống kê tình trạng sử dụng phòng thực hành
-    </h1>
+   	<h3 class="text-center" style="color: blue">THỐNG KÊ</h3>
 </div>
-<div class="col-md-4">
-	<select class="form-control" onchange="location = this.value;">
-	 	<option selected value="admin/thongke/danhsach">Toàn học kỳ</option>
-	 	<option value="admin/thongke/tuan">Tình trạng sử dung qua các tuần</option>
-	</select>
-</div>
+
 <div class="col-md-8">
 	<form method="POST" action="admin/thongke/xemthongke">
 		<input type="hidden" name="_token" value="{{csrf_token()}}" />
@@ -35,15 +29,15 @@
 			</select>
 		</div>
 		<div class="col-md-2">
-			<button class="btn btn-primary" type="submit">Xem</button>
+			<button class="btn btn-primary" type="submit">Xem thống kê</button>
 		</div>
 	</form>
 	<br><br>
 </div>
 
 <div class="col-md-12">
+	<h2><center>SỐ LẦN SỬ DỤNG THEO PHÒNG CỦA TOÀN HỌC KỲ</center></h2>
 	<div id="HK"></div>
-	<h2><center>THỐNG KÊ TÌNH TRẠNG SỬ DỤNG PHÒNG TUẦN</center></h2>
 </div>
 @endsection
 

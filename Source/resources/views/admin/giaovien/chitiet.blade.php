@@ -1,82 +1,94 @@
 @extends('admin.layout.index')
 @section('title')
-Giáo viên - Chi tiết
+Giảng viên - Chi tiết
 @endsection
 @section('content')
 <!-- Page Content -->
+<div class="col-md-12 text-center" style="color: blue"><h2>CHI TIẾT GIẢNG VIÊN</h2></div>
 
 <div class="col-md-12 text-center" style="padding-top: 10px">
 	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
-<div class="col-md-12">
+<div class="col-md-12" style="padding-top: 10px">
 	@if(count($errors)>0)
-	        <div class="alert alert-danger">
-	            @foreach($errors->all() as $err)
-	                {{$err}}<br>
-	            @endforeach
-	        </div>
-	    @endif
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $err)
+                {{$err}}<br>
+            @endforeach
+        </div>
+    @endif
 
-	    @if(session('thongbao'))
-	        <div class="alert alert-success">
-	            {{session('thongbao')}}
-	        </div>
-	    @endif
-	    
-    <div class="row">
-	    <div class="col-lg-7">
-	    	<div class="panel panel-primary text-center">
-		    	<div class="panel-heading">
-		    		<label>Thông tin giáo viên</label>
-		    	</div>
-		    	<div class="panel-body">
-		    		<table class="table-show-data" style="border: none;width: 100%;">
-		    			<tr>
-	    					<td>Mã giáo viên</td>
-	    					<td id="MaGV">{{$giaovien->MaGV}}</td>
-		    			</tr>
-		    			<tr>
-		    				<td>Họ và tên</td>
-		    				<td>
-		    					{{$giaovien->HoGV}}
-		    					{{$giaovien->TenGV}}
-		    				</td>
-		    			</tr>
-		    			<tr>
-	    					<td>Ngày sinh</td>
-	    					<td>{{$giaovien->NgaySinh}}</td>
-		    			</tr>
-		    			<tr>
-	    					<td>Giới tính</td>
-	    					<td>{{$giaovien->GioiTinh}}</td>
-		    			</tr>
-		    			<tr>
-	    					<td>Số điện thoại</td>
-	    					<td>{{$giaovien->SDT}}</td>
-		    			</tr>
-		    			<tr>
-	    					<td>Bộ môn</td>
-	    					<td>
-	    						@foreach ($bomon as $bm)
-	    							@if ($bm->id == $giaovien->idBoMon)
-	    							{{$bm->TenBM}}
-	    							@endif
-	    						@endforeach
-	    					</td>
-		    			</tr>
-		    		</table>
-		    	</div>
-		    </div>
-	    </div>
-	    <div class="col-lg-5">
-	    	<div class="panel panel-primary">
-			  	<div class="panel-heading text-center">
-			  		<label>Quyền người dùng</label>
-		  		</div>
-		  		<ul class="list-group">
+    @if(session('thongbao'))
+        <div class="alert alert-success">
+            {{session('thongbao')}}
+        </div>
+    @endif
+</div>	    
+
+<div class="col-md-12">
+	<div class="panel panel-primary text-center">
+    	<div class="panel-heading">
+    		<label>Thông tin giảng viên</label>
+    	</div>
+    	<div class="panel-body">
+	    	<div class="col-md-8">
+	    		<table class="table table-striped table-bordered table-hover" id="dataTables-example" style="width: 100%;">
+	    			<tr>
+    					<th class="text-center">Mã giảng viên</th>
+    					<td id="MaGV">{{$giaovien->MaGV}}</th>
+	    			</tr>
+	    			<tr>
+	    				<th class="text-center">Họ và tên</th>
+	    				<td>
+	    					{{$giaovien->HoGV}}
+	    					{{$giaovien->TenGV}}
+	    				</td>
+	    			</tr>
+	    			<tr>
+	    				<th class="text-center">Email</th>
+	    				<td>
+	    					{{$giaovien->Email}}
+	    				</td>
+	    			</tr>
+	    			<tr>
+    					<th class="text-center">Ngày sinh</th>
+    					<td>
+    						<?php
+								$date=date_create($giaovien->NgaySinh);
+								echo date_format($date,"d/m/Y");
+							?>	
+    					</td>
+	    			</tr>
+	    			<tr>
+    					<th class="text-center">Giới tính</th>
+    					<td>
+    						<?php  
+    							if($giaovien->GioiTinh==1) {  echo "Nam";}
+    							else {  echo "Nữ";}
+    						?>	
+    					</td>
+	    			</tr>
+	    			<tr>
+    					<th class="text-center">Số điện thoại</th>
+    					<td>{{$giaovien->SDT}}</td>
+	    			</tr>
+	    			<tr>
+    					<th class="text-center">Bộ môn</th>
+    					<td>
+    						@foreach ($bomon as $bm)
+    							@if ($bm->id == $giaovien->idBoMon)
+    							{{$bm->TenBM}}
+    							@endif
+    						@endforeach
+    					</td>
+	    			</tr>
+	    		</table>
+	    	</div>
+    		<div class="col-md-4">
+    			<h4><label>Quyền người dùng</label></h4>
+	    		<ul class="list-group">
 			  		<li class="list-group-item">
-	                    Người dùng bình thường
+	                    Giảng viên
 	                    <div class="material-switch pull-right">
 	                    	@if ($normal == true)
 	                        <input checked id="normal" name="normal-user" type="checkbox"/>
@@ -109,9 +121,9 @@ Giáo viên - Chi tiết
 	                    </div>
 	                </li>
 	            </ul>
-			</div>
-	    </div>
-	</div>
+    		</div>
+    	</div>
+    </div>
 </div>
 
 @endsection

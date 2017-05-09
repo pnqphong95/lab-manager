@@ -45,7 +45,7 @@ Trang chủ
 							<th colspan="8">Buổi sáng</th>
 						</tr>
 							<tr>
-							<th width="9%">Phòng</th>
+							<th width="9%">Phòng - Bộ môn</th>
 							<th width="13%">Thứ 2</th>
 							<th width="13%">Thứ 3</th>
 							<th width="13%">Thứ 4</th>
@@ -58,7 +58,13 @@ Trang chủ
 					<tbody>
 					@foreach($phong as $p)
 				      	<tr>						        								        	
-							<td>{{$p->TenPhong}}</td>
+							<td>{{$p->TenPhong}} - 
+							@foreach ($allBM as $bm)
+								@if ($bm->id == $p->idBoMon)
+									{{$bm->TenVietTat}}
+								@endif
+							@endforeach
+							</td>
 							<td id="{{$p->id}}2s"></td>
 				        	<td id="{{$p->id}}3s"></td>
 				        	<td id="{{$p->id}}4s"></td>

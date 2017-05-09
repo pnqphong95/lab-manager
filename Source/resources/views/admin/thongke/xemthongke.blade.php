@@ -4,21 +4,10 @@
 <!-- Page Content -->
 
 <div class="col-md-12">
-    <h1 class="page-header">Thống kê tình trạng sử dụng phòng thực hành
-    </h1>
+   	<h3 class="text-center" style="color: blue">THỐNG KÊ</h3>
 </div>
-<div class="col-md-4">
-	<select class="form-control" onchange="location = this.value;">
-	 	<option selected value="admin/thongke/danhsach">Toàn học kỳ</option>
-	 	<option value="admin/thongke/tuan">Tình trạng sử dung qua các tuần</option>
-	</select>
-</div>
-<div class="col-md-8">
-		@foreach($xemThongKe as $x)
-			{{$a=$x->idTuan}}
-			@break
-		@endforeach
 
+<div class="col-md-8">
 	<form method="POST" action="admin/thongke/xemthongke">
 		<input type="hidden" name="_token" value="{{csrf_token()}}" />
 		<div class="col-md-2"><label>Từ tuần</label></div>
@@ -38,7 +27,7 @@
 			<select class="form-control" name="tuanKT">
 				@foreach($allTuan as $at)
 					<option
-					@if($at->id == 0)
+					@if($at->id == $b)
                         {{"selected"}}
                     @endif
 					value="{{$at->id}}">{{$at->id}}</option>
@@ -53,9 +42,8 @@
 </div>
 
 <div class="col-md-12">
+	<h2><center>SỐ LẦN SỬ DỤNG PHÒNG TỪ TUẦN {{$a}} ĐẾN TUẦN {{$b}}</center></h2>
 	<div id="HK"></div>
-	<h2><center>THỐNG KÊ TÌNH TRẠNG SỬ DỤNG PHÒNG TUẦN</center></h2>
-
 </div>
 @endsection
 

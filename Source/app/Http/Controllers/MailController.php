@@ -7,6 +7,7 @@ use DB,Mail;
 use App\GiaoVien;
 use App\ChucVu;
 use App\BoMon;
+use Redirect; 
 
 class MailController extends Controller
 {
@@ -26,7 +27,7 @@ class MailController extends Controller
 
     public function postMail(Request $request)
     {
-    	$data = [
+    	$data = [   'idGV'=> $request->idGV,
     				'Email'=> $request->Email,
 					'MaGV'=> $request->MaGV,
 					'HoGV'=> $request->HoGV,
@@ -36,7 +37,7 @@ class MailController extends Controller
 					'from' => 'anmapmap2017@gmail.com', 
 					'from_name' => 'Admin'
     			];
-
+        $a = GiaoVien::select('id')->where('MaGV',$request->MaGV)->first();
     	Mail::send( 'admin.mail.blanks', $data, function( $message ) use ($data)
 		{
 		    $message	->to( $data['Email'], $data['HoGV'] )
@@ -44,9 +45,11 @@ class MailController extends Controller
 		    			->subject( $data['subject'] );
 		});
     	echo 
-    	"<script>
-    		alert('Bạn đã gửi mail thành công');
-    		window.location = '".url('admin/mail/danhsach')."'
-    	</script>";
+    	//return redirect('admin/giaovien/sua/'.$data['idGV']);
+        "<script>
+            alert('Bạn đã gửi mail thành công');
+            window.location = '".url('admin/mail/danhsach')."'
+        </script>";
+
     }
 }

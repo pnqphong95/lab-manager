@@ -4,12 +4,11 @@ Phần mềm - Thêm
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-primary" href="admin/phanmem/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH PHẦN MỀM</h2></div>
+<div class="col-md-12 text-center" style="padding-top: 10px">
 	<a style="width: 20%" class="btn btn-success" href="admin/phanmem/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
 <div class="col-md-12">
-    <h1 class="page-header">Danh sách phần mềm</h1>
    	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	    <thead>
 	        <tr align="center">
@@ -38,10 +37,9 @@ Phần mềm - Thêm
 	                <td>{{$pm->TenPM}}</td>
 	                <td>{{$pm->PhienBan}}</td>
 	                <td class="center">
-	                	<i class="fa fa-trash-o  fa-fw"></i>
-	                	<a href="admin/phanmem/xoa/{{$pm->id}}" onclick="return confirm('Bạn có muốn xóa phần mềm {{$pm->TenPM}} không?');"> Xóa</a>
+	                	<a href="admin/phanmem/xoa/{{$pm->id}}" onclick="return confirm('Bạn có muốn xóa phần mềm {{$pm->TenPM}} không?');" class="btn btn-danger"><i class="fa fa-trash-o  fa-fw"></i> Xóa</a>
 	                </td>
-	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/phanmem/sua/{{$pm->id}}">Sửa</a></td>
+	                <td class="center"><a href="admin/phanmem/sua/{{$pm->id}}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i> Sửa</a></td>
 	            </tr>
 	        @endforeach
 	    </tbody>

@@ -6,7 +6,6 @@ Giáo viên - Thêm
 <!-- Page Content -->
 <div class="col-md-12 text-center" style="padding-top: 10px">
 	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 </div>
 <div class="col-md-12" style="padding-top: 10px">
 	
@@ -26,78 +25,72 @@ Giáo viên - Thêm
 	<div class="panel panel-primary">
 		<div class="panel-heading text-center">THÊM MỚI GIÁO VIÊN</div>
 		<div class="panel-body"> 
+			<div class="col-md-10 col-md-offset-1 ">
 			<form action="admin/giaovien/them" method="POST">
 		        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 		        <div class="col-md-6">
-		        	<div class="form-group">
+		        	<div class="form-group form-inline">
 			            <label>Mã giáo viên</label>
-			            <input class="form-control" name="MaGV" placeholder="Nhập mã giáo viên" />
+			            <input class="form-control pull-right" name="MaGV" placeholder="Nhập mã giáo viên" />
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Họ</label>
-			            <input class="form-control" name="HoGV" placeholder="Nhập học giáo viên" />
+			            <input class="form-control pull-right" name="HoGV" placeholder="Nhập học giáo viên" />
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Tên</label>
-			            <input class="form-control" name="TenGV" placeholder="Nhập tên giáo viên" />
+			            <input class="form-control pull-right" name="TenGV" placeholder="Nhập tên giáo viên" />
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Ngày sinh</label>
-			            <input type="date" class="form-control" name="NgaySinh"/>
+			            <input type="date" class="form-control pull-right" name="NgaySinh"/>
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Giới tính</label>
-			            <select class="form-control" name="GioiTinh">
+			            <select class="form-control pull-right" name="GioiTinh">
 			            	<option value="1">Nam</option>
 			            	<option value="0">Nữ</option>
 			            </select>
 			        </div>
 		        </div>
 			    <div class="col-md-6">
-			    	<div class="form-group">
+			    	<div class="form-group form-inline">
 			            <label>Số điện thoại</label>
-			            <input type="text" class="form-control" name="SDT" placeholder="Nhập Số điện thoại" />
+			            <input type="text" class="form-control pull-right" name="SDT" placeholder="Nhập Số điện thoại" />
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Email</label>
-			            <input type="text" class="form-control" name="Email" placeholder="Nhập email" />
+			            <input type="text" class="form-control pull-right" name="Email" placeholder="Nhập email" />
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Chức vụ</label>
-			            <select class="form-control" name="idChucVu">
-			            	<option value="1">Administrator</option>
-			            	<option selected value="2">Người dùng bình thường</option>
-			            	<option value="3">Người dùng quản lí</option>
+			            <select class="form-control pull-right" name="idChucVu">
+			            	<option selected value="-1"></option>
+			            	@foreach($chucvu as $cv)
+			            		<option value="{{$cv->id}}">{{$cv->TenCV}}</option>
+			            	@endforeach
 			            </select>
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Bộ môn</label>
-			            <select class="form-control" name="idBoMon">
-			            	<option value="1">Công nghệ thông tin</option>
-			            	<option value="2">Hệ thống thông tin</option>
-			            	<option value="3">Khoa học máy tính</option>
-			            	<option value="4">Kỹ thuật phần mềm</option>
-			            	<option value="5">Truyền thông và mạng máy tính</option>
-			            	<option value="6">Tin học ứng dụng</option>
+			            <select class="form-control pull-right" name="idBoMon">
+			            	<option selected value="-1"></option>
+			            	@foreach($bomon as $bm)
+			            		<option value="{{$bm->id}}">{{$bm->TenBM}}</option>
+			            	@endforeach
 			            </select>
 			        </div>
-			        <div class="form-group">
+			        <div class="form-group form-inline">
 			            <label>Mật khẩu</label>
-			            <input type="text" class="form-control" name="password" placeholder="Nhập mật khẩu" />
-			        </div>
-			        <div class="form-group">
-			            <label>Kích hoạt</label>
-			            <select class="form-control" name="KichHoat">
-			            	<option value="1">Có</option>
-			            	<option value="0">Không</option>
-			            </select>
+			            <input type="text" class="form-control pull-right" name="password" placeholder="Nhập mật khẩu" />
 			        </div>
 			    </div>
 			    <div class="text-center">
                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"> </span> Thêm</button>
                     <button type="reset" class="btn btn-default">Reset</button>      
                 </div>
-		    <form>
+		    </form>
+		    </div>
 		</div>
 	</div>	
 </div>

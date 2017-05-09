@@ -6,33 +6,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/my.css" rel="stylesheet">
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- MetisMenu CSS -->
     <link href="css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-
     <!-- DataTables CSS -->
     <link href="css/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
     <link href="css/dataTables.responsive.css" rel="stylesheet">
-    <!-- CKeditor và CKFindor-->
-    <!-- <script type="text/javascript" language="javascript" src="ckeditor/ckeditor.js" ></script> -->
-    <!-- <script type="text/javascript" language="javascript" src="ckeditor/ckfinder.js" ></script>
-   
-    <script type="text/javascript" language="javascript" src="ckeditor/ckfinder.js" ></script> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+    <!-- <link href="css/my.css" rel="stylesheet">       -->
+    <script src="js/my.js"></script>
+    <script src="vendor/Chart/Chart.bundle.js"></script>
+    <script src="vendor/Chart/utils.js"></script>
+    @yield('header')
 </head>
 <body>
     <div id="wrapper">
         @include('admin.layout.header')
+        
         <div id="page-wrapper">
             @yield('content')
         </div>

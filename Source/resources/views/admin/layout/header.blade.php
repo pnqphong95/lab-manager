@@ -13,11 +13,10 @@
         <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw"></i> {{Auth::user()->HoGV}} {{Auth::user()->TenGV}} <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a></li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt</a></li>
+                <li><a href="admin/giaovien/chitiet/{{Auth::user()->id}}"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a></li>
                 <li class="divider"></li>
                 <li><a href="login"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
                 <li>
@@ -32,68 +31,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="admin/trangchu"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
-                </li>
-                <li><!--Lịch-->
-                    <a href="admin/lich/danhsach"><i class="fa fa-bar-chart-o fa-fw"></i> LỊCH THỰC HÀNH<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="admin/lich/danhsach#lich">Lịch</a>
-                        </li>
-                        <li>
-                            <a href="admin/lich/danhsach#choduyet">Yêu cầu chờ duyệt</a>
-                        </li>
-                        <li>
-                            <a href="admin/lich/danhsachemail">Email</a>
-                        </li>
-                        <li>
-                            <a href="admin/lich/dangkyphong">Đăng ký phòng</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><!--Bộ môn-->
-                    <a href="admin/bomon/danhsach"><i class="fa fa-cube fa-fw"></i> BỘ MÔN<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="admin/bomon/danhsach">Danh sách</a>
-                        </li>
-                        <li>
-                            <a href="admin/bomon/them">Thêm</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><!--chức vụ-->
-                    <a href="admin/chucvu/danhsach"><i class="fa fa-cube fa-fw"></i> CHỨC VỤ<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="admin/chucvu/danhsach">Danh sách</a>
-                        </li>
-                        <li>
-                            <a href="admin/chucvu/them">Thêm</a>
-                        </li>
-                    </ul>
-                </li>
-                <li><!--giáo viên-->
-                    <a href="admin/giaovien/danhsach"><i class="fa fa-cube fa-fw"></i> GIÁO VIÊN<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="admin/giaovien/danhsach">Danh sách</a>
-                        </li>
-                        <li>
-                            <a href="admin/giaovien/them">Thêm</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="admin/vaitro/danhsach"><i class="fa fa-cube fa-fw"></i> VAI TRÒ<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="admin/vaitro/danhsach">Danh sách</a>
-                        </li>
-                        <li>
-                            <a href="admin/vaitro/them">Thêm</a>
-                        </li>
-                    </ul>
+                    <a href="user/trangchu"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
                 </li>
                 <li> <!--phòng-->
                     <a href="admin/phong/danhsach"><i class="fa fa-cube fa-fw"></i> PHÒNG<span class="fa arrow"></span></a>
@@ -106,7 +44,19 @@
                         </li>
                     </ul>
                 </li>
-                <li> <!--môn học-->
+                <li><!--giáo viên-->
+                    <a href="admin/giaovien/danhsach"><i class="fa fa-cube fa-fw"></i> NGƯỜI DÙNG<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="admin/giaovien/danhsach">Danh sách</a>
+                        </li>
+                        <li>
+                            <a href="admin/giaovien/them">Thêm</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--môn học-->
+                <li> 
                     <a href="admin/monhoc/danhsach"><i class="fa fa-cube fa-fw"></i> MÔN HỌC<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -117,7 +67,8 @@
                         </li>
                     </ul>
                 </li>
-                <li> <!--phần mềm-->
+                <!--phần mềm-->
+                <li> 
                     <a href="admin/phanmem/danhsach"><i class="fa fa-cube fa-fw"></i> PHẦN MỀM<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -128,7 +79,8 @@
                         </li>
                     </ul>
                 </li>
-                <li> <!--vấn đề-->
+                <!--vấn đề-->
+                <li> 
                     <a href="admin/taovande/danhsach"><i class="fa fa-cube fa-fw"></i> VẤN ĐỀ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -139,17 +91,51 @@
                         </li>
                     </ul>
                 </li>
-                <li> <!--thống kê-->
-                    <a href="admin/thongke/danhsach"><i class="fa fa-cube fa-fw"></i> THỐNG KÊ<span class="fa arrow"></span></a>
+                <li> 
+                    <a href="admin/duyetlich/danhsach"><i class="fa fa-cube fa-fw"></i> DUYỆT LỊCH<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="admin/thongke/danhsach">Danh sách</a>
-                        </li>
-                        <li>
-                            <a href="admin/thongke/them">Thêm</a>
+                            <a href="admin/duyetlich/danhsach">Danh sách</a>
                         </li>
                     </ul>
                 </li>
+                <!--thống kê-->
+                <li> 
+                    <a href="admin/thongke/danhsach"><i class="fa fa-cube fa-fw"></i> THỐNG KÊ<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <!-- <li>
+                            <a href="admin/thongke/danhsach">Toàn học kỳ</a>
+                        </li>
+                        <li>
+                            <a href="admin/thongke/tuan">Số lần dùng phòng qua các tuần</a>
+                        </li> -->
+                        <li>
+                            <a href="admin/thongke/sosanhphong">So sánh theo phòng</a>
+                        </li>
+                        <li>
+                            <a href="admin/thongke/sosanhbomon">So sánh theo bộ môn</a>
+                        </li>
+                        <li>
+                            <a href="admin/thongke/sosanhhocky">So sánh theo học kỳ</a>
+                        </li>
+                        <!-- <li>
+                            <a href="admin/thongke/bieudotron/sosanh">So sánh</a>
+                        </li> -->
+                    </ul>
+                </li>
+                @role('admin')
+                <li> <!--phòng-->
+                    <a href="admin/phong/danhsach"><i class="fa fa-cube fa-fw"></i> HỌC KỲ-NIÊN KHÓA<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="admin/phong/danhsach">Danh sách</a>
+                        </li>
+                        <li>
+                            <a href="admin/phong/them">Thêm</a>
+                        </li>
+                    </ul>
+                </li>
+                @endrole
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

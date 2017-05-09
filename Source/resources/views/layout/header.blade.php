@@ -69,13 +69,16 @@
                             <li>
                                 <a href="user/chinhsualich">ĐIỀU CHỈNH LỊCH</a>
                             </li>
+                            <li>
+                                <a href="user/duyetlich/danhsach">ĐIỀU CHỈNH LỊCH</a>
+                            </li>
                         </ul>
                     </li>
                                         
                     @endrole
                     @role ('admin')
                     <li>
-                        <a href="admin/">ADMIN-PAGE</a>
+                        <a href="admin/trangchu">ADMIN-PAGE</a>
                     </li>
                     @endrole
                 </ul>

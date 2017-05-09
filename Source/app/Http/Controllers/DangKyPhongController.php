@@ -14,6 +14,7 @@ use App\Thu;
 use App\Lich;
 use App\VanDe;
 use App\Lich_ChoDuyet;
+use App\LichSu_ChoDuyet;
 
 class DangKyPhongController extends Controller
 {
@@ -207,12 +208,22 @@ class DangKyPhongController extends Controller
                 $lichCD->idBuoi = $lich['buoi'];
                 $lichCD->idTuan = $lich['tuan'];
                 $lichCD->idHocKyNienKhoa = $idLastHKNK;
+                $lichCD->idBMDuyet = Auth::user()->idBoMon;
                 $lichCD->TrangThai = 0;
                 $lichCD->save();
                 $buoi = Buoi::find ($lichCD->idBuoi);
                 $thu = Thu::find ($lichCD->idThu);
                 $tuan = Tuan::find ($lichCD->idTuan);
                 $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.'<br>';
+
+                $idCD = Lich_ChoDuyet::orderBy('id','desc')->first();
+                $ls_ChoDuyet = new LichSu_ChoDuyet();
+
+                $ls_ChoDuyet->idChoDuyet =$idCD->id;
+                $ls_ChoDuyet->idBMNhan = Auth::user()->idBoMon;
+                $ls_ChoDuyet->ghiChu = "Yêu cầu xếp phòng";
+                $ls_ChoDuyet->trangThai = 0;
+                $ls_ChoDuyet->save();
            	}
         }        
         return redirect('user/dangkyphong')->with('thongbao', $mes);

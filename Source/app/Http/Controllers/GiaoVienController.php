@@ -19,7 +19,30 @@ class GiaoVienController extends Controller
         $giaovien = GiaoVien::all();
         $bomon = BoMon::all();
         $chucvu = ChucVu::all();
-        return view('admin.giaovien.danhsach', ['giaovien'=>$giaovien, 'bomon'=>$bomon, 'chucvu'=>$chucvu]);
+        $admin = false;
+        $normal = false;
+        $manager = false;
+        $role_user = Role_User::all();
+        $role_user = DB::table('Role_User')->join('giaovien',
+                                                 'role_user.user_id',
+                                                 '=',
+                                                 'giaovien.id')->get();
+        $quyen_admin = Role_User::where('role_id',1);
+        $quyen_manager = Role_User::where('role_id',2);
+        $quyen_normal = Role_User::where('role_id',3);
+        foreach ($role_user as $ru) 
+        {
+            if ($ru->role_id == 1) $admin = true;
+            else if ($ru->role_id == 2) $manager = true;
+            else $normal = true;
+        }
+        return view('admin.giaovien.danhsach', compact('giaovien','bomon',
+                                                        'chucvu','role_user',
+                                                        'admin','normal','manager',
+                                                        'quyen_admin',
+                                                        'quyen_manager',
+                                                        'quyen_normal'
+                                                        ));
     }
 
     public function getThem()
@@ -57,28 +80,35 @@ class GiaoVienController extends Controller
 
     public function postThem(Request $request)
     {
+
         $this->validate($request,
             [
                 'MaGV'=>'required|min:4|max:4|unique:giaovien',
                 'HoGV'=>'required|max:255',
                 'TenGV'=>'required|max:255',
+                'NgaySinh'=>'required',
                 'Email'=>'required|unique:giaovien|max:255',
-                'SDT'=>'required|max:11|min:10',
-
+                'SDT'=>'required|unique:giaovien|max:11|min:10',
+                'password' => 'required'
             ],
-            [
-                'TenGV.required'=>'Bạn chưa nhập tên giáo viên',
-                'TenGV.max'=>'Tên giáo viên có nhiều nhất 255 ký tự',
-                'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
-                'MaGV.unique'=>'Mã giáo viên không được phép trùng',
-                'MaGV.max'=>'Mã giáo viên có nhiều nhất 255 ký tự',
-                'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
-                'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
+            [   
+                'HoGV.required'=>'Bạn chưa nhập tên người dùng',
+                'HoGV.max'=>'Tên người dùng có độ dài tối đa 255 ký tự',
+                'TenGV.required'=>'Bạn chưa nhập tên người dùng',
+                'TenGV.max'=>'Tên người dùng có độ dài tối đa 255 ký tự',
+                'NgaySinh.required'=>'Bạn chưa chọn ngày sinh',
+                'MaGV.required'=>'Bạn chưa nhập mã người dùng',
+                'MaGV.unique'=>'Mã người dùng không được phép trùng',
+                'MaGV.max'=>'Mã người dùng có nhiều nhất 255 ký tự',
+                'HoGV.required'=>'Bạn chưa nhập họ người dùng',
+                'HoGV.max'=>'Họ người dùng có nhiều nhất 255 ký tự',
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
                 'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số',
+                'SDT.unique'=>'Số điện thoại bị trùng',
                 'Email.required'=>'Bạn chưa nhập email',
-                'Email.unique'=>'Email bị trùng'
+                'Email.unique'=>'Email bị trùng',
+                'password.required'=>'Bạn phải nhập password'
             ]);
 
         $giaovien = new GiaoVien;
@@ -93,22 +123,38 @@ class GiaoVienController extends Controller
         $pw = password_hash($request->password, PASSWORD_DEFAULT);
         $giaovien->password = $pw;
         $giaovien->idChucVu = $request->idChucVu;
-        $giaovien->KichHoat = $request->KichHoat;
         $giaovien->remember_token = '';
         $giaovien->save();
-        if ($giaovien->MaGV==null) {
-            return redirect('admin/giaovien/them')->with('thongbao','Thêm không thành công');
-        }
-        else return redirect('admin/giaovien/them')->with('thongbao','Thêm thành công');
+
+        //$a = $phong->id;
+        return redirect('admin/giaovien/chitiet/'.$giaovien->id)->with('thongbao','Thêm người dùng thành công <br>hihi');
     }
 
     public function getSua($id)
     {
-        $giaovien = GiaoVien::find($id);
-        if( is_null($giaovien)) return redirect('admin/giaovien/danhsach');
-        $chucvu = ChucVu::all();
+        $admin = false;
+        $normal = false;
+        $manager = false;
+        $giaovien = User::where ('id', '=', $id)->first();
         $bomon = BoMon::all();
-        return view('admin.giaovien.sua', ['giaovien'=>$giaovien,'chucvu'=>$chucvu,'bomon'=>$bomon]);
+        $chucvu = ChucVu::all();
+        $role_user = Role_User::where('user_id', '=', $id)->get();
+        foreach ($role_user as $ru) 
+        {
+            if ($ru->role_id == 1) $admin = true;
+            else if ($ru->role_id == 2) $manager = true;
+            else $normal = true;
+        }
+
+        return view ('admin.giaovien.sua',  [   
+                                                    'giaovien' => $giaovien, 
+                                                    'bomon' => $bomon,
+                                                    'chucvu' =>$chucvu,
+                                                    'role_user' => $role_user,
+                                                    'admin' => $admin,
+                                                    'normal' => $normal,
+                                                    'manager' => $manager
+                                                ]);
     }
 
     public function postSua(Request $request, $id)
@@ -125,17 +171,33 @@ class GiaoVienController extends Controller
 
             ],
             [
-                'TenGV.required'=>'Bạn chưa nhập tên giáo viên',
-                'TenGV.max'=>'Tên giáo viên có nhiều nhất 255 ký tự',
-                'MaGV.required'=>'Bạn chưa nhập mã giáo viên',
-                'MaGV.max'=>'Mã giáo viên có 4 ký tự',
-                'HoGV.required'=>'Bạn chưa nhập họ giáo viên',
-                'HoGV.max'=>'Họ giáo viên có nhiều nhất 255 ký tự',
+                'TenGV.required'=>'Bạn chưa nhập tên người dùng',
+                'TenGV.max'=>'Tên người dùng có nhiều nhất 255 ký tự',
+                'MaGV.required'=>'Bạn chưa nhập mã người dùng',
+                'MaGV.max'=>'Mã người dùng có 4 ký tự',
+                'HoGV.required'=>'Bạn chưa nhập họ người dùng',
+                'HoGV.max'=>'Họ người dùng có nhiều nhất 255 ký tự',
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
                 'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số',
                 'Email.required'=>'Bạn chưa nhập email'
             ]);
+
+    if($request->changePass == "on")
+        {
+            $this->validate($request,[
+                'password'=>'required|min:6|max:8',
+                'matkhau2'=>'required|same:password'
+            ],[
+                'password.required'=>'Bạn chưa nhập mật khẩu !',
+                'password.min'=>'Mật khẩu phải độ dài ít nhất 6 ký tự và dài nhất 8 ký tự !',
+                'password.max'=>'Mật khẩu phải độ dài ít nhất 6 ký tự và dài nhất 8 ký tự !',
+                'matkhau2.required'=>'Bạn chưa nhập lại mật khẩu !',
+                'matkhau2.same'=>'Mật khẩu nhập lại chưa khớp !',
+            ]);
+
+            $giaovien->password = bcrypt($request->matkhau);
+        }
 
         $giaovien->MaGV =$request->MaGV;
         $giaovien->HoGV =$request->HoGV;
@@ -145,11 +207,7 @@ class GiaoVienController extends Controller
         $giaovien->SDT =$request->SDT;
         $giaovien->Email = $request->Email;
         $giaovien->idBoMon =$request->idBoMon;
-        $pw = password_hash($request->password, PASSWORD_DEFAULT);
-        $giaovien->password =$pw;
         $giaovien->idChucVu =$request->idChucVu;
-        $giaovien->KichHoat =$request->KichHoat;
-        // $giaovien->remember_token = '';
         $giaovien->save();
 
         return redirect('admin/giaovien/sua/'.$id)->with('thongbao','Sửa thành công');
@@ -161,5 +219,34 @@ class GiaoVienController extends Controller
         if(is_null($giaovien)) return redirect('admin/giaovien/danhsach');
         $giaovien->delete();
         return redirect('admin/giaovien/danhsach')->with('thongbao','Xóa thành công');
+    }
+
+    public function getDoiMK($id)
+    {
+        $giaovien = GiaoVien::find($id);
+        return view('admin.giaovien.doiMK', ['giaovien'=>$giaovien]);
+    }
+
+    public function postDoiMK(Request $request)
+    {
+        $giaovien = $request->id;
+
+        $this->validate($request,
+            [
+                'password'=>'required|min:6|max:8',
+                're_password'=>'required|same:password'
+            ],
+            [
+                'password.required'=>'Bạn chưa nhập mật khẩu mới',
+                'password.min'=>'Mật khẩu ngắn nhất có 6 ký tự và dài nhất 8 ký tự',
+                'password.max'=>'Mật khẩu ngắn nhất có 6 ký tự và dài nhất 8 ký tự',
+                're_password.required'=>'Bạn chưa nhập lại mật khẩu mới',
+                'password.same'=>'Mật khẩu không khớp'
+            ]
+        );
+        $giaovien = $request->password;
+        $giaovien->save();
+
+        return redirect('admin/giaovien/doiMK/'.$id)->with('thongbao','Đổi mật khẩu thành công');
     }
 }

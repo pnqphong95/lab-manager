@@ -32,4 +32,8 @@ class Lich extends Model
     public function buoi() {
         return $this->belongsTo('App\Buoi', 'idBuoi', 'id');
     }
+
+    public function hocky_nienkhoa() {
+        return $this->belongsTo('App\HocKy_NienKhoa', 'idHocKyNienKhoa', 'id');
+    }
 }

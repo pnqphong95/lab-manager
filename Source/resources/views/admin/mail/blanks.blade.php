@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>hihi</title>
+	<title>Xác nhận email</title>
 </head>
 <body>
-Nội dung email {{$noidung}}
+{{$noidung}}
+
 </body>
 </html>

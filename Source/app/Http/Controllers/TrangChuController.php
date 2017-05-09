@@ -12,6 +12,7 @@ use App\Thu;
 use App\Lich;
 use App\VanDe;
 use App\Lich_ChoDuyet;
+use App\BoMon;
 use DB;
 
 class TrangChuController extends Controller
@@ -43,6 +44,7 @@ class TrangChuController extends Controller
 
     public function getUserTrangChu() {
         $allTuan = Tuan::all();
+        $allBM = BoMon::all();
         $phong = Phong::all();
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
@@ -62,7 +64,8 @@ class TrangChuController extends Controller
                                             'phong' => $phong, 
                                             'lich' => $lich, 
                                             'allTuan' => $allTuan,
-                                            'lichChieu' => $lichChieu
+                                            'lichChieu' => $lichChieu,
+                                            'allBM'=>$allBM
                                         ]);
     }
 
@@ -87,7 +90,7 @@ class TrangChuController extends Controller
 
     public function getTrangChuAdmin() 
     {
-        return view('user.trangchu');
+        return view('admin.trangchu');
     }     
 
 }

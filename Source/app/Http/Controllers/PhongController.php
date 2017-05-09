@@ -16,7 +16,8 @@ class PhongController extends Controller
     {
         $phong = Phong::all();
         $bomon = BoMon::all();
-        return view('admin.phong.danhsach', ['phong'=>$phong, 'bomon'=>$bomon]);
+        $phong_phanmem = DB::table('phong_phanmem')->join('phanmem','phong_phanmem.idPhanMem','phanmem.id')->get();
+        return view('admin.phong.danhsach', ['phong'=>$phong, 'bomon'=>$bomon,'phong_phanmem'=>$phong_phanmem]);
     }
 
     public function getChiTiet($id){
@@ -45,7 +46,8 @@ class PhongController extends Controller
     public function getThem()
     {
         $allBoMon = BoMon::all();
-        return view('admin.phong.them', ['allBoMon' => $allBoMon]);
+        $phanmem = PhanMem::all();
+        return view('admin.phong.them', ['allBoMon' => $allBoMon, 'phanmem'=>$phanmem]);
     }
 
     public function postThem(Request $request)
@@ -81,7 +83,8 @@ class PhongController extends Controller
 
         $phong->save();
 
-        return redirect('admin/phong/them')->with('thongbao','Thêm thành công');
+        $a = $phong->id;
+        return redirect('admin/phong/chitiet/'.$a)->with('thongbao','Thêm thành công');
     }
 
     public function getSua($id)
@@ -114,7 +117,7 @@ class PhongController extends Controller
         $phong->GPU = $request->GPU;
         $phong->save();
 
-        return redirect('admin/phong/sua/'.$id)->with('thongbao','Sửa thành công');
+        return redirect('admin/phong/chitiet/'.$id)->with('thongbao','Sửa thành công');
     }
 
     public function getXoa($id)
