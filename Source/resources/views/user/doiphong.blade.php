@@ -115,8 +115,18 @@ Danh sách các vấn đề
   									@endforeach
 								</label>
 							</div>
-							@endforeach							
-							<button type="submit" class="btn btn-success">Duyệt</button>
+							@endforeach			
+							
+							@if (count ($nullPhong) == 0)
+								<div class="alert alert-warning">
+  									Bộ môn không còn phòng trống!
+								</div>
+								<button disabled="disabled" type="submit" class="btn btn-info">Đổi phòng</button>
+								<a class="btn btn-default" href="user/chinhsualich">Trở lại</a>
+							@else
+								<button type="submit" class="btn btn-info xacnhan">Đổi phòng</button>
+								<a class="btn btn-default" href="user/chinhsualich">Trở lại</a>
+							@endif	
 						</form>
 						
 					</div>

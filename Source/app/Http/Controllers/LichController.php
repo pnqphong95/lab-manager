@@ -19,6 +19,261 @@ use App\Lich_ChoDuyet;
 
 class LichController extends Controller
 {
+
+    public function xoalichCN ($id)
+    {
+        $lich = Lich::find ($id);
+        if (is_null($lich))
+        {
+            return redirect('user/lichthuchanh')->with('thongbao', 'Có lỗi khi xóa, mong bạn kiểm tra lại!');
+        }
+        else
+        {
+            if ($lich->delete())
+            {
+                return redirect('user/lichthuchanh')->with('thongbao', 'Đã xóa thành công lịch!');
+            }
+            else
+            {
+                return redirect('user/lichthuchanh')->with('thongbao', 'Có lỗi khi xóa, mong bạn kiểm tra lại!');
+            }
+        }
+    }
+    
+    public function getTraVeBM ($idLichCD)
+    {
+        $idLichCD = Crypt::decrypt($idLichCD);
+        $lichCD = Lich_ChoDuyet::find ($idLichCD);
+        $lichCD->idBMDuyet = 0;
+        $lichCD->save();
+        $mh = MonHoc::find ($lichCD->idMonHoc);
+        $t = Tuan::find ($lichCD->idTuan);
+        $th = Thu::find ($lichCD->idThu);
+        $b = Buoi::find ($lichCD->idBuoi);
+        return redirect('user/cacyeucau')->with('thongbao','Đã trả yêu cầu: '.$mh->TenMH.' --- Tuần '.$t->TenTuan.', '.$th->TenThu.', Buổi '.$b->TenBuoi.' về BM quản lý');
+    }
+
+    public function getTuChoiLCD ($idLichCD)
+    {
+        $idLichCD = Crypt::decrypt($idLichCD);
+        $lichCD = Lich_ChoDuyet::find ($idLichCD);
+        $lichCD->TrangThai = 2;
+        $lichCD->save();
+        $mh = MonHoc::find ($lichCD->idMonHoc);
+        $t = Tuan::find ($lichCD->idTuan);
+        $th = Thu::find ($lichCD->idThu);
+        $b = Buoi::find ($lichCD->idBuoi);
+        return redirect('user/cacyeucau')->with('thongbao','Đã từ chối xếp phòng cho môn '.$mh->TenMH.' --- Tuần '.$t->TenTuan.', '.$th->TenThu.', Buổi '.$b->TenBuoi);
+    }
+
+    public function postXinTroGiup (Request $req)
+    {
+        $lichCD = Lich_ChoDuyet::find ($req->idLichCD);
+        $lichCD->idBMDuyet = $req->idBoMon;
+        $lichCD->save();  
+        $bomon = BoMon::find ($req->idBoMon);
+        return redirect('user/cacyeucau')->with('thongbao','Yêu cầu đã được chuyển tới bộ môn '.$bomon->TenBM);
+    }
+
+    public function getChoDuyet($id)
+    {
+        $mes = '';
+        $lich = Lich::find ($id);
+        $gv = GiaoVien::find ($lich->idGiaoVien);
+        $lichCD = new Lich_ChoDuyet();
+        $lichCD->idGiaoVien =$lich->idGiaoVien;
+        $lichCD->idMonHoc =$lich->idMonHoc;
+        $lichCD->Nhom = $lich->Nhom;
+        $lichCD->idThu = $lich->idThu;
+        $lichCD->idBuoi = $lich->idBuoi;
+        $lichCD->idTuan = $lich->idTuan;
+        $lichCD->idHocKyNienKhoa = $lich->idHocKyNienKhoa;
+        $lichCD->TrangThai = 0;
+        $lichCD->idBMDuyet = $gv->idBoMon;
+        $lichCD->save();
+        $phong = Phong::find ($lich->idPhong);
+        $buoi = Buoi::find ($lich->idBuoi);
+        $thu = Thu::find ($lich->idThu);
+        $tuan = Tuan::find ($lich->idTuan); 
+        $mon = MonHoc::find ($lich->idMonHoc);                  
+        $mes = $mes . 'Đã chuyển lịch: Môn '.$mon->TenMH.', Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- vào lịch chờ duyệt<br>'; 
+        $mes = $mes . 'Phòng: '.$phong->TenPhong.' -- Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' đã được làm trống<br>';
+        $lich->delete();
+        return redirect('user/chinhsualich')->with('thongbao', $mes);
+    }
+
+    public function getXacNhan($id)
+    {
+        //echo $id;
+        return view ('user.chinhsualich.xacnhan', ['id' => $id]);
+    }
+
+    public function getThuHoi ($id) 
+    {
+        $mes = '';
+        $lich = Lich::find ($id);
+        $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
+        $idLastHKNK = $lastHKNK->id;
+
+        $monHocPhanMem = DB::table('monhoc_phanmem')  ->where('idMonHoc', $lich->idMonHoc)
+                                                ->select('idPhanMem')
+                                                ->get();
+        $arrayPM = array();
+        foreach ($monHocPhanMem as $pm) 
+        {
+            array_push($arrayPM, $pm->idPhanMem);
+        }
+
+        //Lay tat ca phong trong bo mon
+        $allPhongBM = DB::table('phong')    ->where('idBoMon', Auth::user()->idBoMon)
+                                            ->get();
+        foreach ($allPhongBM as $p) 
+        {
+            //kiem tra phong con trong khong
+            $check = DB::table('lich')  ->where('idPhong', $p->id)
+                                        ->where('idTuan', $lich->idTuan)
+                                        ->where('idThu', $lich->idThu)
+                                        ->where('idBuoi', $lich->idBuoi)
+                                        ->count();
+            //echo 'check '.$check . ' Phong '.$p->id ."<br>";
+            if ($check === 0)  //Neu phong con trong
+            {
+                //echo 'check '.$check . ' Phong '.$p->id ."<br>";
+                //Lay cac phan mem co cai trong phong
+                $phongPhanMem = DB::table('phong_phanmem')  ->where('idPhong', $p->id)
+                                                            ->select('idPhanMem')
+                                                            ->get();
+                $arrayPMPhong = array();
+
+                //Cover array(object) to array(idPhanMem)
+                foreach ($phongPhanMem as $pm1) 
+                {
+                    array_push($arrayPMPhong, $pm1->idPhanMem);
+                }
+
+                //Kiem tra phong co pm yeu cau khongs
+                if(checkParentArray($arrayPM, $arrayPMPhong)) 
+                {
+                    $lichDB = new Lich();
+                    $lichDB->idGiaoVien =$lich->idGiaoVien;
+                    $lichDB->idPhong =$p->id;
+                    $lichDB->idMonHoc =$lich->idMonHoc;
+                    $lichDB->Nhom = $lich->Nhom;
+                    $lichDB->idThu = $lich->idThu;
+                    $lichDB->idBuoi = $lich->idBuoi;
+                    $lichDB->idTuan = $lich->idTuan;
+                    $lichDB->idHocKyNienKhoa = $lich->idHocKyNienKhoa;
+                    $lichDB->save();
+                    $phong = Phong::find ($lichDB->idPhong);
+                    $buoi = Buoi::find ($lichDB->idBuoi);
+                    $thu = Thu::find ($lichDB->idThu);
+                    $tuan = Tuan::find ($lichDB->idTuan); 
+                    $mon = MonHoc::find ($lichDB->idMonHoc);                  
+                    $mes = $mes . 'Đã chuyển lịch: Môn '.$mon->TenMH.', Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- tới phòng: '.$phong->TenPhong .'<br>';
+                    $phong = Phong::find ($lich->idPhong);
+                    $buoi = Buoi::find ($lich->idBuoi);
+                    $thu = Thu::find ($lich->idThu);
+                    $tuan = Tuan::find ($lich->idTuan); 
+                    $mon = MonHoc::find ($lich->idMonHoc); 
+                    $mes = $mes . 'Phong: '.$phong->TenPhong.' vào Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' đã được làm trống<br>';
+                    $lich->delete(); //Đã chuyễn đc phòng nên xóa
+                    $daChuyen = true;
+                    break;                     
+                }
+                else //Phong khong phu hop
+                {
+                    $daChuyen = false;
+                }
+            }
+            else                //Khong co phong trong
+            {
+                $daChuyen = false;
+            }
+        }
+
+        if ($daChuyen === false)
+        {
+            $allPhongBMK = DB::table('phong')   ->where('idBoMon', '!=', Auth::user()->idBoMon)
+                                                ->get();
+                                                // 
+            foreach ($allPhongBMK as $p) 
+            {
+                //kiem tra phong con trong khong
+                $check = DB::table('lich')  ->where('idPhong', $p->id)
+                                            ->where('idTuan', $lich->idTuan)
+                                            ->where('idThu', $lich->idThu)
+                                            ->where('idBuoi', $lich->idBuoi)
+                                            ->count();
+                //echo 'check '.$check . ' Phong '.$p->id ."<br>";
+                if ($check === 0)  //Neu phong con trong
+                {
+                    //echo 'check '.$check . ' Phong '.$p->id ."<br>";
+                    //Lay cac phan mem co cai trong phong
+                    $phongPhanMem = DB::table('phong_phanmem')  ->where('idPhong', $p->id)
+                                                                ->select('idPhanMem')
+                                                                ->get();
+                    $arrayPMPhong = array();
+
+                    //Cover array(object) to array(idPhanMem)
+                    foreach ($phongPhanMem as $pm1) 
+                    {
+                        array_push($arrayPMPhong, $pm1->idPhanMem);
+                    }
+
+                    //Kiem tra phong co pm yeu cau khongs
+                    if(checkParentArray($arrayPM, $arrayPMPhong)) 
+                    {
+                        $lichDB = new Lich();
+                        $lichDB->idGiaoVien =$lich->idGiaoVien;
+                        $lichDB->idPhong =$p->id;
+                        $lichDB->idMonHoc =$lich->idMonHoc;
+                        $lichDB->Nhom = $lich->Nhom;
+                        $lichDB->idThu = $lich->idThu;
+                        $lichDB->idBuoi = $lich->idBuoi;
+                        $lichDB->idTuan = $lich->idTuan;
+                        $lichDB->idHocKyNienKhoa = $lich->idHocKyNienKhoa;
+                        $lichDB->save();
+                        $phong = Phong::find ($lichDB->idPhong);
+                        $buoi = Buoi::find ($lichDB->idBuoi);
+                        $thu = Thu::find ($lichDB->idThu);
+                        $tuan = Tuan::find ($lichDB->idTuan); 
+                        $mon = MonHoc::find ($lichDB->idMonHoc);                  
+                        $mes = $mes . 'Đã chuyển lịch: Môn '.$mon->TenMH.', Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- tới phòng: '.$phong->TenPhong .'<br>';
+                        $phong = Phong::find ($lich->idPhong);
+                        $buoi = Buoi::find ($lich->idBuoi);
+                        $thu = Thu::find ($lich->idThu);
+                        $tuan = Tuan::find ($lich->idTuan); 
+                        $mon = MonHoc::find ($lich->idMonHoc); 
+                        $mes = $mes . 'Phong: '.$phong->TenPhong.' vào Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' đã được làm trống<br>';
+                        $lich->delete(); //Đã chuyễn đc phòng nên xóa
+                        $daChuyen = true;
+                        break;                     
+                    }
+                    else //Phong khong phu hop
+                    {
+                        $daChuyen = false;
+                    }
+                }
+                else                //Khong co phong trong
+                {
+                    $daChuyen = false;
+                }
+            }
+        }
+
+        if ($daChuyen === false)
+        {
+            return redirect('user/chinhsualich/xacnhan/'.$id);
+        }
+        else
+        {
+            return redirect('user/chinhsualich')->with('thongbao', $mes);
+        }
+
+        
+        
+    }
+
     public function getXoaLich ($id)
     {
         
@@ -170,7 +425,16 @@ class LichController extends Controller
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
 
-        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+        $lich = DB::table('lich')   ->join('phong', 'lich.idPhong', '=', 'phong.id')
+                                    ->join('monhoc', 'lich.idMonHoc', '=', 'monhoc.id')
+                                    ->where('idGiaoVien', Auth::user()->id)
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->orderBy('idThu')
+                                    ->orderBy('idBuoi')
+                                    ->get(); 
+
+        $lich1 = DB::table('lich') ->where('idGiaoVien', Auth::user()->id)
                                     ->where('idHocKyNienKhoa', $idLastHKNK)
                                     ->orderBy('idTuan')
                                     ->orderBy('idThu')
@@ -183,14 +447,15 @@ class LichController extends Controller
         $allTuan = Tuan::all();
 
         $allLichCD = DB::table('Lich_ChoDuyet')
+                        ->orderBy('id', 'desc')
                         ->where ('idGiaoVien', Auth::user()->id)
                         ->where ('idHocKyNienKhoa', $idLastHKNK)
-                        ->where ('TrangThai', 0)
                         ->get();
 
         return view('user.lichthuchanh', 
                     [
                         'lich' => $lich,
+                        'lich1' => $lich1,
                         'allMonHoc' => $allMonHoc,
                         'allBuoi' => $allBuoi,
                         'allPhong' => $allPhong,
@@ -216,14 +481,18 @@ class LichController extends Controller
         $allBuoi = Buoi::all();
         $allTuan = Tuan::all();
         $allGiaoVien = GiaoVien::all();
+        $allBoMon = BoMon::all ();
 
         $allLichCD = DB::table('Lich_ChoDuyet')
                         ->where ('idHocKyNienKhoa', $idLastHKNK)
                         ->where ('TrangThai', 0)
                         ->whereIn ('idGiaoVien', $idGVinBM)
                         ->get();
+        $allLCDYeuCau = Lich_ChoDuyet::where ('idBMDuyet', Auth::user()->idBoMon) 
+                                        ->where ('TrangThai', 0)
+                                        ->get();
                         //echo $allLichCD;
-
+        //echo $allLCDYeuCau;
         return view('user.lichchoduyet.danhsach', 
                     [
                         'allMonHoc' => $allMonHoc,
@@ -232,7 +501,9 @@ class LichController extends Controller
                         'allThu' => $allThu,
                         'allTuan' => $allTuan,
                         'allLichCD' => $allLichCD,
-                        'allGiaoVien' => $allGiaoVien
+                        'allGiaoVien' => $allGiaoVien,
+                        'allLCDYeuCau' => $allLCDYeuCau,
+                        'allBoMon' => $allBoMon
                     ]);
     }
 
@@ -269,6 +540,7 @@ class LichController extends Controller
             $allBuoi = Buoi::all();
             $allTuan = Tuan::all();
             $allGiaoVien = GiaoVien::all();
+            $allBM = BoMon::all();
 
 
 
@@ -281,7 +553,8 @@ class LichController extends Controller
                             'allTuan' => $allTuan,
                             'lichCD' => $lichCD,
                             'allGiaoVien' => $allGiaoVien,
-                            'allPhong' => $allPhong
+                            'allPhong' => $allPhong,
+                            'allBM' => $allBM
                         ]);
         } else
         {
@@ -292,24 +565,29 @@ class LichController extends Controller
     public function postXepPhong ($idLichCD, Request $req)
     {
         $lichCD = Lich_ChoDuyet::find($idLichCD);
+        if (!is_null ($lichCD))
+        {
+            $lichCD->TrangThai = 1;
+            $lichCD->idPhong = $req->idPhong;
+            $lichCD->save(); 
 
-        $lichCD->TrangThai = 1;
-        $lichCD->idPhong = $req->idPhong;
-        $lichCD->save(); 
+            $lich = new Lich();
+            $lich->idGiaoVien = $lichCD->idGiaoVien;
+            $lich->idPhong = $lichCD->idPhong;
+            $lich->idMonHoc = $lichCD->idMonHoc;
+            $lich->Nhom = $lichCD->Nhom;
+            $lich->idThu = $lichCD->idThu;
+            $lich->idBuoi = $lichCD->idBuoi;
+            $lich->idTuan = $lichCD->idTuan;
+            $lich->idHocKyNienKhoa = $lichCD->idHocKyNienKhoa;
+            $lich->save();
 
-        $lich = new Lich();
-        $lich->idGiaoVien = $lichCD->idGiaoVien;
-        $lich->idPhong = $lichCD->idPhong;
-        $lich->idMonHoc = $lichCD->idMonHoc;
-        $lich->Nhom = $lichCD->Nhom;
-        $lich->idThu = $lichCD->idThu;
-        $lich->idBuoi = $lichCD->idBuoi;
-        $lich->idTuan = $lichCD->idTuan;
-        $lich->idHocKyNienKhoa = $lichCD->idHocKyNienKhoa;
-        $lich->save();
-
-
-        return redirect('user/cacyeucau')->with('thongbao','Đã duyệt lịch thành công');
+            return redirect('user/cacyeucau')->with('thongbao','Đã duyệt lịch thành công');
+        }
+        else
+        {
+            return redirect('user/cacyeucau')->with('loi','Đã xảy ra lỗi vui lòng thử lại');
+        }
     }
 
     public function getDieuChinh ()

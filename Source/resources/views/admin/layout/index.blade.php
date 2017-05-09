@@ -29,6 +29,8 @@
     <!-- <script type="text/javascript" language="javascript" src="ckeditor/ckfinder.js" ></script>
    
     <script type="text/javascript" language="javascript" src="ckeditor/ckfinder.js" ></script> -->
+    <script src="vendor/Chart/Chart.bundle.js"></script>
+    <script src="vendor/Chart/utils.js"></script>
 </head>
 <body>
     <div id="wrapper">

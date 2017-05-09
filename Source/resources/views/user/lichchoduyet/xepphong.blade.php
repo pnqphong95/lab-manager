@@ -114,9 +114,13 @@ Danh sách các vấn đề
 								<div class="alert alert-warning">
   									Bộ môn không còn phòng trống!
 								</div>
-								<button type="submit" class="btn btn-success">Xin trợ giúp phòng</button>
+								<button disabled="disabled" type="submit" class="btn btn-info">Duyệt</button>
+								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Xin trợ giúp phòng</button>
+								<a class="btn btn-default" href="user/cacyeucau">Trở lại</a>
 							@else
-								<button type="submit" class="btn btn-success">Duyệt</button>
+								<button type="submit" class="btn btn-info xacnhan">Duyệt</button>
+								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Xin trợ giúp phòng</button>
+								<a class="btn btn-default" href="user/cacyeucau">Trở lại</a>
 							@endif						
 							
 						</form>
@@ -126,6 +130,37 @@ Danh sách các vấn đề
 			</div>
 		</div> <!-- <div class="white-well"> -->
 	</div> <!-- <div class="col-lg-12"> -->
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  	<div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    	<div class="modal-content">
+	    		<form action="user/xepphong/xintrogiup/gui" method="post">
+	    			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		      		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        		<h4 class="modal-title">Xin trợ giúp phòng</h4>
+		      		</div>
+		      		<div class="modal-body">
+		      			<label>Chọn bộ môn bạn muốn xin trợ giúp</label>
+		      			<input hidden type="text" name="idLichCD" value="{{ $lichCD->id }}">
+		        		<select class="form-control" name="idBoMon">
+		        			@foreach ($allBM as $bm)
+		        			<option value="{{$bm->id}}">{{$bm->TenBM}}</option>	
+		        			@endforeach
+		        		</select>
+		      		</div>
+		      		<div class="modal-footer">
+		      			<button class="btn btn-warning" type="submit">Gửi trợ giúp</button>
+		        		<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+		      		</div>
+	      		</form>
+	    	</div>
+
+	  	</div>
+	</div>
 
 </div> <!-- <div class="row"> -->
 @endsection
@@ -140,6 +175,13 @@ Danh sách các vấn đề
 	        alert('Vui lòng chọn phòng!');
 	        return false;
 	    }
+	});
+
+	$( document ).ready(function() {
+
+    	$(".xacnhan").click(function() {
+		  	return confirm('Bạn có chắc duyệt phòng?');
+		});
 	});
 </script>
 @endsection

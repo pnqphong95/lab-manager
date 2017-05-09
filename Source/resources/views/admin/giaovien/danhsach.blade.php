@@ -46,7 +46,10 @@ Giáo viên - Danh sách
 	                		@endif
 	                	@endforeach
 	                </td>
-	                <td><a href="admin/giaovien/chitiet/{{$gv->id}}">Chi tiết</a></td>
+	                <td>
+	                	<a href="admin/giaovien/chitiet/{{$gv->id}}">Chi tiết</a>
+	                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">Chi tiết</button>
+                	</td>
 	                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa giáo viên {{$gv->TenGV}} không?');"> Xóa</a></td>
 	                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/giaovien/sua/{{$gv->id}}">Sửa</a></td>
 	            </tr>

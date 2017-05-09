@@ -92,8 +92,8 @@ Chỉnh sửa lịch phòng
 								</td>
 								<td>
 									<a class="btn btn-info btn-xs" href="user/chinhsualich/{{$l->id}}">Đổi phòng</a>		
-									<a class="btn btn-warning btn-xs" href="user/chinhsualich/thuhoi/{{$l->id}}">Thu hồi</a>
-									<a class="btn btn-danger btn-xs" href="user/chinhsualich/xoa/{{$l->id}}">Xóa</a>
+									<a class="btn btn-warning btn-xs xnthuhoi" href="user/chinhsualich/thuhoi/{{$l->id}}">Thu hồi</a>
+									<a class="btn btn-danger btn-xs xnxoa" href="user/chinhsualich/xoa/{{$l->id}}">Xóa</a>
 								</td>
 							</tr>
 						@endforeach
@@ -134,6 +134,17 @@ Chỉnh sửa lịch phòng
 	    $(".nav-tabs a").click(function(){
 	        $(this).tab('show');
 	    });
+	});
+
+	$( document ).ready(function() {
+
+    	$(".xnxoa").click(function() {
+		  	return confirm('Bạn có xóa lịch của phòng vừa chọn?');
+		});
+
+		$(".xnthuhoi").click(function() {
+		  	return confirm('Bạn có muốn thu hồi lại phòng vừa chọn?');
+		});
 	});
 
 </script>

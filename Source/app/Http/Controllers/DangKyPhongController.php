@@ -181,7 +181,12 @@ class DangKyPhongController extends Controller
 	                        $lichDB->idHocKyNienKhoa = $idLastHKNK;
 	                        $lichDB->save();
 	                        $dk_suc = true;
+                            $phong = Phong::find ($lichDB->idPhong);
+                            $buoi = Buoi::find ($lichDB->idBuoi);
+                            $thu = Thu::find ($lichDB->idThu);
+                            $tuan = Tuan::find ($lichDB->idTuan);
 	                        $daDK = 1;
+                            $mes = $mes . 'Đã đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- tại phòng: '.$phong->TenPhong .'<br>';
 	                        break;                     
 	                    }
 	                    else
@@ -212,7 +217,7 @@ class DangKyPhongController extends Controller
                 $buoi = Buoi::find ($lichCD->idBuoi);
                 $thu = Thu::find ($lichCD->idThu);
                 $tuan = Tuan::find ($lichCD->idTuan);
-                $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.'<br>';
+                $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' sẽ đưa vào lịch chờ duyệt<br>';
            	}
         }        
         return redirect('user/dangkyphong')->with('thongbao', $mes);

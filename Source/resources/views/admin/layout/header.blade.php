@@ -19,7 +19,7 @@
                 <li><a href="#"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a></li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt</a></li>
                 <li class="divider"></li>
-                <li><a href="login"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
+                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
                 <li>
             </ul>
             <!-- /.dropdown-user -->
@@ -146,7 +146,13 @@
                             <a href="admin/thongke/danhsach">Danh sách</a>
                         </li>
                         <li>
-                            <a href="admin/thongke/them">Thêm</a>
+                            <a href="admin/thongke/solantheoBM">Số lần dùng phòng của các bộ môn</a>
+                        </li>
+                        <li>
+                            <a href="admin/thongke/sosanhphong">So sánh giữa các phòng</a>
+                        </li>
+                        <li>
+                            <a href="admin/thongke/solantheoPhong">Số lần được dùng của các phòng</a>
                         </li>
                     </ul>
                 </li>

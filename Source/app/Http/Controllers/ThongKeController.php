@@ -11,6 +11,60 @@ use DB;
 
 class ThongKeController extends Controller
 {
+    public function getLanTheoBM ()
+    {
+        //SELECT idBoMon, COUNT(*) as SoLan FROM `lich`,`giaovien` WHERE lich.idGiaoVien = giaovien.id GROUP BY idBoMon
+        $toanHK = DB::table('lich')     ->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
+                                        ->select('idBoMon', DB::raw('count(*) as SoLan'))
+                                        ->groupBy('idBoMon')
+                                        ->get();
+        //$a = DB::table('lich')->join()
+        $allBM = BoMon::all();
+        return view ('admin.thongke.soLanTheoBM', ['data' => $toanHK, 'allPhong' => $allBM]);
+    }
+
+    public function getLanSDHK ()
+    {
+        $toanHK = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as SoLan'))
+                                        ->groupBy('idPhong')
+                                        ->get();
+        $allPhong = Phong::all();
+        return view ('admin.thongke.solanHK', ['data' => $toanHK, 'allPhong' => $allPhong]);
+    }
+
+    public function postSoSanhPhong (Request $req)
+    {
+        $data = array();
+        $allPhong = Phong::all();
+
+        foreach ($req->idPhong as $id) {
+            $solan = DB::table('lich')  ->select('idPhong', DB::raw('count(*) as SoLan'))
+                                        ->groupBy('idPhong')
+                                        ->where ('idPhong', $id)
+                                        ->first();
+            if (!is_null ($solan))
+            {
+                array_push($data, $solan);
+            }
+            else
+            {
+                array_push($data, '{"idPhong":"'.$id.'", "SoLan": "0"}');
+            }
+            
+        }
+        //echo $data[0]->idPhong. 'so lan'. $data[0]->SoLan;
+        //echo $data[0];
+        return view ('admin.thongke.postSSP', ['data' => $data, 'allPhong' => $allPhong]);
+    }
+
+    public function getSoSanhPhong ()
+    {
+        $toanHK = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as SoLan'))
+                                        ->groupBy('idPhong')
+                                        ->get();
+        $allPhong = Phong::all();
+        return view ('admin.thongke.sosanhphong', ['data' => $toanHK, 'allPhong' => $allPhong]);
+    }
     //
     public function getChart()
     {
