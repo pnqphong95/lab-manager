@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class VanDeController extends Controller
 {
+    public function getDSVanDe ()
+    {
+        $allvande = DB::table('vande')  ->skip(0) //lay tu vi tri 0
+                                        ->take(20)  //lay 20 result
+                                        ->orderBy('id', 'desc') //sap xep giam theo id
+                                        ->get();
+        $allPhong = Phong::all();
+        return view('user.vande.dsvande', ['allvande' => $allvande, 'allPhong' => $allPhong]);
+    }
+
     public function getVanDe() {
         $allPhong = Phong::all();
         $allGiaoVien = GiaoVien::all();

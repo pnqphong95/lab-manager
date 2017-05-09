@@ -82,13 +82,7 @@
                     </li>
                     @endrole
                 </ul>
-                @if(Auth::user())
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="user/hopthu">THÔNG BÁO</a>
-                    </li>
-                </ul>
-                @endif
+
             </div>
             <!-- /.navbar-collapse -->
     </nav>

@@ -21,7 +21,28 @@ use App\LichSu_ChoDuyet;
 
 class LichController extends Controller
 {
-   public function getTraVeBM ($idLichCD)
+
+    public function xoalichCN ($id)
+    {
+        $lich = Lich::find ($id);
+        if (is_null($lich))
+        {
+            return redirect('user/lichthuchanh')->with('thongbao', 'Có lỗi khi xóa, mong bạn kiểm tra lại!');
+        }
+        else
+        {
+            if ($lich->delete())
+            {
+                return redirect('user/lichthuchanh')->with('thongbao', 'Đã xóa thành công lịch!');
+            }
+            else
+            {
+                return redirect('user/lichthuchanh')->with('thongbao', 'Có lỗi khi xóa, mong bạn kiểm tra lại!');
+            }
+        }
+    }
+    
+    public function getTraVeBM ($idLichCD)
     {
         $idLichCD = Crypt::decrypt($idLichCD);
         $lichCD = Lich_ChoDuyet::find ($idLichCD);
@@ -53,13 +74,6 @@ class LichController extends Controller
         $lichCD->idBMDuyet = $req->idBoMon;
         $lichCD->save();  
         $bomon = BoMon::find ($req->idBoMon);
-
-        $lichsu = new LichSu_ChoDuyet();
-        $lichsu->idChoDuyet = $req->idLichCD;
-        $lichsu->idBMNhan = $req->idBoMon;
-        $lichsu->ghiChu = "Yêu cầu trợ giúp";
-        $lichsu->trangThai = 0;
-        $lichsu->save();
         return redirect('user/cacyeucau')->with('thongbao','Yêu cầu đã được chuyển tới bộ môn '.$bomon->TenBM);
     }
 
@@ -387,24 +401,21 @@ class LichController extends Controller
     
     public function getThem()
     {
-        $lich = Lich::all();
-        return view('admin.lich.them', ['lich'=>$lich]);
+
     }
 
     public function postThem(Request $request)
     {
-        $lich = new Lich;
-        $lich->idGiaoVien =$request->idGiaoVien;
 
-        $lich->save();
 
-        return redirect('admin/lich/them')->with('thongbao','Thêm thành công');
+
+
+
     }
 
     public function getSua()
     {
-        // $theloai = TheLoai::all();
-        // return view('admin.theloai.sua', ['theloai'=>$theloai]);
+    	// return view('admin.theloai.sua', ['theloai'=>$theloai]);
     }
 
     public function getLichThucHanh() 
@@ -413,7 +424,17 @@ class LichController extends Controller
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
 
-        $lich = DB::table('lich')   ->where('idGiaoVien', Auth::user()->id)
+        
+        $lich = DB::table('lich')   ->join('phong', 'lich.idPhong', '=', 'phong.id')
+                                    ->join('monhoc', 'lich.idMonHoc', '=', 'monhoc.id')
+                                    ->where('idGiaoVien', Auth::user()->id)
+                                    ->where('idHocKyNienKhoa', $idLastHKNK)
+                                    ->orderBy('idTuan')
+                                    ->orderBy('idThu')
+                                    ->orderBy('idBuoi')
+                                    ->get(); 
+
+        $lich1 = DB::table('lich') ->where('idGiaoVien', Auth::user()->id)
                                     ->where('idHocKyNienKhoa', $idLastHKNK)
                                     ->orderBy('idTuan')
                                     ->orderBy('idThu')
@@ -426,14 +447,15 @@ class LichController extends Controller
         $allTuan = Tuan::all();
 
         $allLichCD = DB::table('Lich_ChoDuyet')
+                        ->orderBy('id', 'desc')
                         ->where ('idGiaoVien', Auth::user()->id)
                         ->where ('idHocKyNienKhoa', $idLastHKNK)
-                        ->where ('TrangThai', 0)
                         ->get();
 
         return view('user.lichthuchanh', 
                     [
                         'lich' => $lich,
+                        'lich1' => $lich1,
                         'allMonHoc' => $allMonHoc,
                         'allBuoi' => $allBuoi,
                         'allPhong' => $allPhong,
@@ -470,7 +492,7 @@ class LichController extends Controller
                                         ->where ('TrangThai', 0)
                                         ->get();
         $ls_choduyet = DB::table('LichSu_ChoDuyet') ->get(); 
-
+        //echo $allLCDYeuCau;
         return view('user.lichchoduyet.danhsach', 
                     [
                         'allMonHoc' => $allMonHoc,
@@ -479,6 +501,7 @@ class LichController extends Controller
                         'allThu' => $allThu,
                         'allTuan' => $allTuan,
                         'allLichCD' => $allLichCD,
+                  
                         'allGiaoVien' => $allGiaoVien,
                         'allLCDYeuCau' => $allLCDYeuCau,
                         'allBoMon' => $allBoMon,

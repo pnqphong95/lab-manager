@@ -116,9 +116,11 @@ Danh sách các vấn đề
 								</div>
 								<button disabled="disabled" type="submit" class="btn btn-info">Duyệt</button>
 								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Xin trợ giúp phòng</button>
+								<a class="btn btn-default" href="user/cacyeucau">Trở lại</a>
 							@else
-								<button type="submit" class="btn btn-info">Duyệt</button>
+								<button type="submit" class="btn btn-info xacnhan">Duyệt</button>
 								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Xin trợ giúp phòng</button>
+								<a class="btn btn-default" href="user/cacyeucau">Trở lại</a>
 							@endif						
 							
 						</form>
@@ -143,7 +145,7 @@ Danh sách các vấn đề
 		      		</div>
 		      		<div class="modal-body">
 		      			<label>Chọn bộ môn bạn muốn xin trợ giúp</label>
-		      			<input type="text" name="idLichCD" value="{{ $lichCD->id }}">
+		      			<input hidden type="text" name="idLichCD" value="{{ $lichCD->id }}">
 		        		<select class="form-control" name="idBoMon">
 		        			@foreach ($allBM as $bm)
 		        			<option value="{{$bm->id}}">{{$bm->TenBM}}</option>	
@@ -152,7 +154,7 @@ Danh sách các vấn đề
 		      		</div>
 		      		<div class="modal-footer">
 		      			<button class="btn btn-warning" type="submit">Gửi trợ giúp</button>
-		        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        		<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
 		      		</div>
 	      		</form>
 	    	</div>
@@ -173,6 +175,13 @@ Danh sách các vấn đề
 	        alert('Vui lòng chọn phòng!');
 	        return false;
 	    }
+	});
+
+	$( document ).ready(function() {
+
+    	$(".xacnhan").click(function() {
+		  	return confirm('Bạn có chắc duyệt phòng?');
+		});
 	});
 </script>
 @endsection

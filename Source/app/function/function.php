@@ -7,6 +7,34 @@
 // ]
 
 // Chạy cmd : composer  dumpautoload
+class Lich
+{
+	var $id;
+	var $idphong;
+    var $idthu;
+    var $idbuoi;
+	var $idtuan;
+    var $idmh;
+    var $idgv;
+		    
+	function Lich($id1,$id2,$id3,$id4,$id5,$id6,$id7){
+		
+		$this->id = $id1;
+		$this->idphong = $id2;
+        $this->idthu = $id3;
+        $this->idbuoi = $id4;
+		$this->idtuan = $id5;
+        $this->idmh = $id6;
+        $this->idgv = $id7;
+	}
+}
+
+function objectToArray ($object) {
+    if(!is_object($object) && !is_array($object))
+        return $object;
+
+    return array_map('objectToArray', (array) $object);
+}
 
 function coverData($str){
 	$posPhay = strpos($str, ','); // tim vi tri day phay

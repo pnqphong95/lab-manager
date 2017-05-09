@@ -25,6 +25,8 @@
     <script src="vendor/Chart/Chart.bundle.js"></script>
     <script src="vendor/Chart/utils.js"></script>
     @yield('header')
+    <script src="vendor/Chart/Chart.bundle.js"></script>
+    <script src="vendor/Chart/utils.js"></script>
 </head>
 <body>
     <div id="wrapper">

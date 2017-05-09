@@ -22,6 +22,16 @@ use App\Pages;
 use App\MonHoc_PhanMem;
 use App\ThongKe;
 
+Route::group (['prefix' => 'api'], function (){
+	Route::get ('login/{tk}/{mk}', 'apiController@getLogin');
+	Route::get ('dangky/{idGV}/{idTuan}/{idThu}/{idBuoi}/{idMH}/{nhom}', 'apiController@getDK');
+	Route::get ('xemchitiet/{idTuan}/{idGiaoVien}', 'apiController@getXemChiTietTheoTuan');
+	Route::get ('cacyeucau/{idQL}', 'apiController@getCacYC');
+	Route::get ('tuchoixeplich/{idLich}', 'apiController@getTuChoi');
+	Route::get ('layphongtrongBM/{idQL}/{idLich}', 'apiController@getPhongTrongBM');
+	Route::get ('xepphong/{idLCD}/{idP}', 'apiController@getXepPhong');
+	Route::get ('travebm/{idLCD}', 'apiController@getTraVeBM');
+});
 
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
@@ -207,6 +217,12 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get ('sosanhhocky', 'ThongKeController@getSoSanhHocKy');
 		Route::post ('sosanhhocky', 'ThongKeController@postSoSanhHocKy');
 
+
+		Route::get ('solantheoPhong', 'ThongKeController@getLanSDHK');
+
+		Route::get ('sosanhphong', 'ThongKeController@getSoSanhPhong');
+		Route::post ('sosanhphong', 'ThongKeController@postSoSanhPhong');
+		Route::get ('solantheoBM', 'ThongKeController@getLanTheoBM');
 	});
 
 	Route::group(['prefix'=>'duyetlich'], function(){
@@ -233,6 +249,7 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], 
 	Route::post('vande', 'VanDeController@postVanDe');
 
 	Route::get('lichthuchanh', 'LichController@getLichThucHanh');
+	Route::get('xoalichCN/{id}', 'LichController@xoalichCN');
 
 	Route::group (['prefix' => 'chinhsualich', 'middleware' => ['role:manager']], function (){
 		Route::get('', ['middleware' => ['role:manager'], 'uses' => 'LichController@getChinhSuaLich'])->name('chinhsualich');

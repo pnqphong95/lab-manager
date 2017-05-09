@@ -1,0 +1,12 @@
+<ion-view cache-view="false" view-title="Xếp phòng" name="login-view">
+    <ion-content class="padding">
+        <div class="alert alert-info">
+  			<strong>Warning!</strong> <span id="mes"></span>
+		</div>
+		<div class="radio" ng-repeat="phong in phongs">
+  			<label><input type="radio" name="idPhong" ng-model="data.idPhong" value="{{phong.id}}">{{phong.TenPhong}}</label>
+		</div>
+		
+        <button class="btn btn-info" id="btn-dangky" ng-click="dangky()">Duyệt lịch</button> 
+    </ion-content>
+</ion-view>
