@@ -1,0 +1,13 @@
+<ion-view cache-view="false" view-title="Đăng nhập" name="login-view">
+    <ion-content class="padding">
+        <div class="list list-inset">
+            <label class="item item-input">          		
+                <input type="text" placeholder="Tài khoản" ng-model="data.username">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Mật khẩu" ng-model="data.password">
+            </label>
+        </div>
+        <button class="button button-block button-calm" ng-click="login()">Đăng nhập</button>
+    </ion-content>
+</ion-view>

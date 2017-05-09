@@ -1,0 +1,15 @@
+<ion-view view-title="Quản lý">
+  	<ion-content padding="true" ng-controller="LoginCtrl">
+    	<ion-list>
+    		<ion-item>
+      			<button class="button button-block button-calm" ng-click="duyetlich()">Quản lý lịch chờ duyệt</button>
+      		</ion-item>
+       		<ion-item>
+      			<button class="button button-block button-calm" ng-click="dieuchinh()">Điều chỉnh lịch</button>
+      		</ion-item>
+      		<ion-item ng-repeat="role in mydata">
+      			{{role}}
+      		</ion-item>
+    	</ion-list>
+  	</ion-content>
+</ion-view>
