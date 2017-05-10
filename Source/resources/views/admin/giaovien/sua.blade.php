@@ -30,25 +30,32 @@ Giảng viên - Sửa
 
 		    <div class="col-md-8">
 		    	<form action="admin/giaovien/sua/{{$giaovien->id}}" method="POST">
+		    	<h4><label>Thông tin người dùng</label></h4>
+		    	<ul class="list-group">
+			  		<li class="list-group-item">
+		    	
 			        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 			        <div class="col-md-6">
 			        	<div class="form-group">
 				            <label>Mã giảng viên</label>
-				            <input class="form-control" name="MaGV" value="{{$giaovien->MaGV}}" placeholder="Nhập mã giảng viên" />
+				            <input class="form-control" id="MaGV" name="MaGV" value="{{$giaovien->MaGV}}" placeholder="Nhập mã giảng viên" />
 				        </div>
 				        <div class="form-group">
-				            <label>Họ</label>
+				            <label>Họ giảng viên</label>
 				            <input class="form-control" name="HoGV" value="{{$giaovien->HoGV}}" placeholder="Nhập học giảng viên" />
 				        </div>
 				        <div class="form-group">
-				            <label>Tên</label>
+				            <label>Tên giảng viên</label>
 				            <input class="form-control" name="TenGV" placeholder="Nhập tên giảng viên" value="{{$giaovien->TenGV}}"/>
 				        </div>
 				        <div class="form-group">
 				            <label>Ngày sinh</label>
 				            <input type="date" class="form-control" name="NgaySinh" value="{{$giaovien->NgaySinh}}"/>
 				        </div>
-				        <div class="form-group">
+				        
+			        </div>
+				    <div class="col-md-6">
+				    	<div class="form-group">
 				            <label>Giới tính</label>
 				            <select name="GioiTinh" class="form-control">
 				                @if($giaovien->GioiTinh == 0)
@@ -60,30 +67,25 @@ Giảng viên - Sửa
 				                @endif
 				            </select>
 				        </div>
-			        </div>
-				    <div class="col-md-6">
 				    	<div class="form-group">
 				            <label>Số điện thoại</label>
 				            <input type="number" class="form-control" name="SDT" placeholder="Nhập Số điện thoại" value="{{$giaovien->SDT}}"/>
 				        </div>
 				        <div class="form-group">
-				            <label>Email</label>
-				            <input type="text" class="form-control" name="Email" placeholder="Nhập email" value="{{$giaovien->Email}}"/>
+				            <label>Tình trạng tài khoản</label>
+				            
+				            <ul class="list-group">
+			  					<li class="list-group-item" style="padding-top: 10px;padding-bottom: 5px;">
+			  						@if ($giaovien->KichHoat)
+			  						Đã kích hoạt
+			  						@else
+			  						Chưa kích hoạt
+			  						@endif
+			  					</li>
+			  				</ul>
 				        </div>
-				        <div class="form-group">
-				            <label>Chức vụ</label>
-				            <select name="idChucVu" class="form-control">
-				                @foreach($chucvu as $cv)
-				                    <option
-				                    @if($cv->id == $giaovien->idChucVu)
-				                        {{"selected"}}
-				                    @endif
-				                     value="{{$cv->id}}">{{$cv->TenCV}}</option>
-				                @endforeach
-				            </select>
-				        </div>
-				        <div class="form-group">
-				            <label>Bộ môn</label>
+				        <div class="form-group" style="margin-top: 5px;">
+				            <label style="padding-top: 5px;">Bộ môn</label>
 				            <select class="form-control" name="idBoMon">
 				            	@foreach($bomon as $bm)
 				                    <option
@@ -94,22 +96,15 @@ Giảng viên - Sửa
 				                @endforeach
 				            </select>
 				        </div>
-				        <span id="ipMK"></span>
-				        <div class="form-group">
-	                        <input type="checkbox" id="changePass" name="changePass">
-	                        <label>Đổi mật khẩu</label>
-	                        <input type="password" class="form-control password" name="password" placeholder="Nhập mật khẩu mới" disabled="" />
-	                    </div>
-	                    <div class="form-group">
-	                        <label>Nhập lại mật khẩu</label>
-	                        <input type="password" class="form-control password" name="matkhau2" placeholder="Nhập lại mật khẩu" disabled="" />
-	                    </div>
+				        
 				    </div>
 			        <div class="text-center">
 		                <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn cập nhật thông tin giảng viên {{$giaovien->TenGV}} không?');"><span class="glyphicon glyphicon-edit"> </span> Sửa</button>
 		                <button type="reset" class="btn btn-default">Reset</button>      
 		            </div>
 			    </form>
+			    	</li>
+			    </ul>
 		    </div>
 		    <div class="col-md-4">
     			<h4><label>Quyền người dùng</label></h4>
@@ -148,6 +143,24 @@ Giảng viên - Sửa
 	                    </div>
 	                </li>
 	            </ul>
+
+	            <h4><label>Cấp lại mật khẩu</label></h4>
+	    		<ul class="list-group">
+	    			<form action="admin/giaovien/doiMK" method="POST">
+	    				<input type="hidden" name="_token" value="{{csrf_token()}}" />
+	    				<input type="hidden" name="id" value="{{$giaovien->id}}">
+				  		<li class="list-group-item">
+		                    <input class="form-control" type="password" name="password" placeholder="Nhập mật khẩu">
+		                </li>
+		                <li class="list-group-item">
+		                    <input class="form-control" type="password" name="re_password" placeholder="Nhập lại mật khẩu">
+		                </li>
+		                <li class="list-group-item">
+		                    <button class="btn btn-info" type="submit">Đổi mật khẩu</button>
+		                    <button type="reset" class="btn btn-default">Xóa dữ liệu</button>  
+		                </li>
+	                </form>
+	            </ul>
     		</div>
     	</div>
     </div>
@@ -155,21 +168,6 @@ Giảng viên - Sửa
 
 @endsection
 @section('script')
-    <script>
-        $(document).ready(function(){
-            $("#changePass").change(function(){
-                if($(this).is(":checked")) 
-                {
-                    $(".password").removeAttr('disabled');
-                }
-                else
-                {
-                    $(".password").attr('disabled','');
-                    $("#ipMK").html('<input class="form-control password" name="password" value="{{$giaovien->password}}" />');
-                }
-            });
-        });
-    </script>
 
 	<script type="text/javascript">
 		$(document).ready (function (){
@@ -177,8 +175,7 @@ Giảng viên - Sửa
 		    if (this.checked) 
 		    {
 		    	var roleName = this.id;
-		    	var magv = $('#MaGV').text();
-    	       	//alert(magv + roleId);
+		    	var magv = $('#MaGV').val();
     	       	$.ajax({
 		            type: "get",
 		            url: "ajax/addRole/" +magv+ "/" + roleName,
@@ -194,8 +191,7 @@ Giảng viên - Sửa
 		    else 
 	    	{
     			var roleName = this.id;
-		    	var magv = $('#MaGV').text();
-    	       	//alert(magv + roleId);
+		    	var magv = $('#MaGV').val();
     	       	$.ajax({
 		            type: "get",
 		            url: "ajax/removeRole/" +magv+ "/" + roleName,

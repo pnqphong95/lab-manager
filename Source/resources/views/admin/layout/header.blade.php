@@ -18,7 +18,7 @@
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="admin/giaovien/chitiet/{{Auth::user()->id}}"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a></li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
+                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
                 <li>
             </ul>
             <!-- /.dropdown-user -->

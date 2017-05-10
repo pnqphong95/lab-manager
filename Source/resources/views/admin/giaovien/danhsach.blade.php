@@ -42,7 +42,7 @@ Giảng viên - Danh sách
 	                	{{$gv->bomon->TenBM}}
 	                </td>
 	                <td><!-- <a href="admin/giaovien/chitiet/{{$gv->id}}">Chi tiết</a> -->
-		                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#yourModal{{$gv->id}}">
+		                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#yourModal{{$gv->id}}">
 		                	Chi tiết
 		                </button>
 	                </td>
@@ -51,7 +51,7 @@ Giảng viên - Danh sách
                 			<a class="btn btn-danger btn-sm" href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa Giảng viên {{$gv->TenGV}} không?');">Xóa</a>
                 		@endif -->
                 		@role('admin')
-                			<a class="btn btn-danger btn-sm" href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa Giảng viên {{$gv->TenGV}} không?');">Xóa</a>
+                			<a class="btn btn-danger btn-xs" href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa Giảng viên {{$gv->TenGV}} không?');">Xóa</a>
                 		@endrole
 	                </td>
 	                <td class="center">
@@ -66,10 +66,12 @@ Giảng viên - Danh sách
 	                    @endrole -->
 
 	                    @role('admin')                    
-		                	<a class="btn btn-warning btn-sm" href="admin/giaovien/sua/{{$gv->id}}"><i class="fa fa-pencil fa-fw"></i> Sửa</a>
+		                	<a class="btn btn-warning btn-xs" href="admin/giaovien/sua/{{$gv->id}}"><i class="fa fa-pencil fa-fw"></i> Sửa</a>
 	                    @endrole
 	                </td>
 	            </tr>
+
+
 	        @endforeach
 	    </tbody>
 	</table>
@@ -120,76 +122,9 @@ Giảng viên - Danh sách
 		    					</td>
 			    			</tr>
 		    		</table>
-		    <!-- <div class="panel panel-primary">
-			  	<div class="panel-heading text-center">
-			  		<label>Quyền người dùng</label>
-		  		</div>
-		  		<ul class="list-group">
-			  		<li class="list-group-item">
-	                    Người dùng bình thường
-	                    <div class="material-switch pull-right">
-	                    	@if ($normal == true)
-	                        <input checked id="normal" name="normal-user" type="checkbox"/>
-	                        @else
-	                        <input id="normal" name="normal-user" type="checkbox"/>
-	                        @endif
-	                        <label for="normal" class="label-success"></label>
-	                    </div>
-	                </li>
-	                <li class="list-group-item">
-	                    Người dùng quản lý
-	                    <div class="material-switch pull-right">
-	                    	@if ($manager == true)
-	                        <input checked id="manager" name="manager" type="checkbox"/>
-	                        @else
-	                        <input id="manager" name="manager" type="checkbox"/>
-	                        @endif
-	                        <label for="manager" class="label-success"></label>
-	                    </div>
-	                </li>
-	                <li class="list-group-item">
-	                    Administrator
-	                    <div class="material-switch pull-right">
-                   		 	@if ($admin == true)
-	                        <input checked id="admin" name="admin" type="checkbox"/>
-	                        @else
-	                        <input id="admin" name="admin" type="checkbox"/>
-	                        @endif
-	                        <label for="admin" class="label-success"></label>
-	                    </div>
-	                </li>
-	            </ul>
-			</div> -->
-			<div class="panel panel-primary">
-			  	<div class="panel-heading text-center">
-			  		<label>Quyền người dùng</label>
-		  		</div>
-		  		<ul class="list-group">
-		  		@foreach($role_user as $ru)
-		  			@if($ru->user_id == $gv->id and $ru->role_id == 1)
-			  		<li class="list-group-item">
-			  			<label>Admin</label><div class="material-switch pull-right">
-			  			<input checked id="admin" name="admin-user" type="checkbox"/>
-			  			</div>
-	                </li>
-	                @endif
-			  		@if($ru->user_id == $gv->id and $ru->role_id == 2)
-			  		<li class="list-group-item">
-			  			<label>Quản lý</label><div class="material-switch pull-right"><input checked id="manager" name="manager-user" type="checkbox"/></div>
-	                </li>
-	            	@endif
-	            	@if($ru->user_id == $gv->id and $ru->role_id == 3)
-			  		<li class="list-group-item">
-			  			<label>Giảng viên</label><div class="material-switch pull-right"><input checked id="normal" name="normal-user" type="checkbox"/></div>
-	                </li>
-	            	@endif
-		  		@endforeach
-			</div>
-	          	</div>
-	          	<div class="modal-footer">
-	            	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	          	</div>
-	        </div>
+					
+		      	</div>
+      		</div>
       	</div>
     </div>
 @endforeach

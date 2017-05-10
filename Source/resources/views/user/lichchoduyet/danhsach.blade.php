@@ -108,78 +108,6 @@ Danh sách các vấn đề
 						<th style="border-color: #4296CA" bgcolor="#4296CA" colspan="7">Các yêu cầu từ bộ môn khác</th>
 					</tr>
 					<tr>
-						<th width="9%">Giáo viên</th>
-						
-						<th>Môn học</th>
-						<th>Nhóm</th>
-						<th>Thứ</th>
-						<th>Buổi</th>
-						<th>Tuần</th>
-						<th>Bộ môn trợ giúp </th>
-						<th>Hành động</th>     								
-					</tr>
-				</thead>
-				<tbody>
-					@foreach ($allLichCD as $lichCD)
-			      	<tr>						        								        	
-						<td>
-							@foreach ($allGiaoVien as $gv)
-								@if ($gv->id == $lichCD->idGiaoVien)
-									{{$gv->TenGV}} ({{$gv->MaGV}})
-								@endif
-							@endforeach
-						</td>
-			        	<td>
-			        		@foreach ($allMonHoc as $mh)
-			        			@if ($mh->id == $lichCD->idMonHoc)
-			        				{{$mh->TenMH}}
-			        			@endif
-		        			@endforeach
-	        			</td>
-			        	<td>{{$lichCD->Nhom}}</td>
-			        	<td>
-			        		@foreach ($allThu as $th)
-			        			@if ($th->id == $lichCD->idThu)
-			        				{{$th->TenThu}}
-			        			@endif
-		        			@endforeach
-			        	</td>
-			        	<td>
-			        		@foreach ($allBuoi as $bu)
-			        			@if ($bu->id == $lichCD->idBuoi)
-			        				{{$bu->TenBuoi}}
-			        			@endif
-		        			@endforeach
-			        	</td>
-			        	<td>
-			        		@foreach ($allTuan as $tu)
-			        			@if ($tu->id == $lichCD->idTuan)
-			        				{{$tu->TenTuan}}
-			        			@endif
-		        			@endforeach
-			        	</td>
-			        	<td>
-			        		@foreach ($allBoMon as $bm)
-			        			@if ($bm->id == $lichCD->idBMDuyet)
-			        				{{$bm->TenBM}}
-			        			@endif
-		        			@endforeach
-			        	</td> 
-			        	<td>			        		
-		        			<a href="user/xepphong/{{Crypt::encrypt($lichCD->id)}}" class="btn btn-info btn-xs btn-xepphong">Xếp phòng</a>	
-		        			<a href="user/xepphongtuchoi/{{Crypt::encrypt($lichCD->id)}}" class="btn btn-danger btn-xs btn-tuchoi">Từ chối</a>
-	        			</td>
-	     	 		</tr>
-		     	 	@endforeach
-		     	 </tbody>
-		    </table>
-
-		    <table class="table table-bordered" style="text-align: center;">
-				<thead>
-					<tr>
-						<th style="border-color: #4296CA" bgcolor="#4296CA" colspan="7">Các yêu cầu từ bộ môn khác</th>
-					</tr>
-					<tr>
 						<th width="13%">Bộ môn yêu cầu</th>
 						
 						<th width="13%">Môn học</th>
@@ -259,20 +187,18 @@ Danh sách các vấn đề
 							<thead>	
 								<tr>
 									<th>STT</th>		
-									<th>Ghi chú</th>
 									<th>Bộ môn nhận</th>
 									<th>Thời gian nhận</th>
 									<th>Trạng thái</th>
 								</tr>	
 							</thead>
-							<tbody>
+							<tbody id="lschuyen">
 							<?php $i=0; ?>
 							@foreach($ls_choduyet as $ls)
 							@if($ls->idChoDuyet == $lichCD->id)
 								<?php $i++; ?>
 								<tr>
 									<td>{{$i}}</td>
-									<td>{{$ls->ghiChu}}</td>
 									<td>
 										@foreach($allBoMon as $bm)
 											@if($bm->id == $ls->idBMNhan)
@@ -282,13 +208,7 @@ Danh sách các vấn đề
 									</td>
 									<td>{{$ls->ngayNhan}}</td>
 									<td>
-										@if($lichCD->TrangThai == 0)
-											Chưa được xếp phòng
-										@elseif ($lichCD->TrangThai == 1)
-											Đã xếp phòng
-										@else
-											Bị hủy yêu cầu
-										@endif
+										Đã chuyển
 									</td>
 								</tr>
 							@endif
@@ -308,7 +228,7 @@ Danh sách các vấn đề
 	  	<div class="modal-dialog">
 	    <!-- Modal content-->
 	    	<div class="modal-content">
-	    		<form action="admin/duyetlich/xepphong/xintrogiup/gui" method="post">
+	    		<form action="user/xepphong/xintrogiup/gui" method="post">
 	    			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		      		<div class="modal-header">
 		        		<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -343,6 +263,8 @@ Danh sách các vấn đề
     	$(".btn-tuchoi").click(function() {
 		  	return confirm('Bạn có chắc muốn từ chối yêu cầu?');
 		});
+
+		$( "#lschuyen tr:last-child td:last-child").html("Đang xử lý");
 	});
 
 </script>

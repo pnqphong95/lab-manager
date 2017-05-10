@@ -36,13 +36,17 @@ class GiaoVienController extends Controller
             else if ($ru->role_id == 2) $manager = true;
             else $normal = true;
         }
-        return view('admin.giaovien.danhsach', compact('giaovien','bomon',
-                                                        'chucvu','role_user',
-                                                        'admin','normal','manager',
-                                                        'quyen_admin',
-                                                        'quyen_manager',
-                                                        'quyen_normal'
-                                                        ));
+        return view('admin.giaovien.danhsach', [    'giaovien'=>$giaovien,
+                                                    'bomon'=>$bomon,
+                                                    'chucvu'=>$chucvu,
+                                                    'role_user'=>$role_user,
+                                                    'admin'=>$admin,
+                                                    'normal'=>$normal,
+                                                    'manager'=>$manager,
+                                                        'quyen_admin'=>$quyen_admin,
+                                                        'quyen_manager'=>$quyen_manager,
+                                                        'quyen_normal'=>$quyen_normal
+                                                        ]);
     }
 
     public function getThem()
@@ -166,7 +170,6 @@ class GiaoVienController extends Controller
                 'MaGV'=>'required|min:4|max:4',
                 'HoGV'=>'required|max:255',
                 'TenGV'=>'required|max:255',
-                'Email'=>'required|max:255',
                 'SDT'=>'required|max:11|min:10',
 
             ],
@@ -180,7 +183,6 @@ class GiaoVienController extends Controller
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
                 'SDT.max'=>'Số điện thoại có nhiều nhất 11 chữ số',
                 'SDT.min'=>'Số điện thoại có ít nhất 10 chữ số',
-                'Email.required'=>'Bạn chưa nhập email'
             ]);
 
     if($request->changePass == "on")
@@ -205,9 +207,7 @@ class GiaoVienController extends Controller
         $giaovien->NgaySinh =$request->NgaySinh;
         $giaovien->GioiTinh =$request->GioiTinh;
         $giaovien->SDT =$request->SDT;
-        $giaovien->Email = $request->Email;
         $giaovien->idBoMon =$request->idBoMon;
-        $giaovien->idChucVu =$request->idChucVu;
         $giaovien->save();
 
         return redirect('admin/giaovien/sua/'.$id)->with('thongbao','Sửa thành công');
@@ -229,7 +229,7 @@ class GiaoVienController extends Controller
 
     public function postDoiMK(Request $request)
     {
-        $giaovien = $request->id;
+        
 
         $this->validate($request,
             [
@@ -244,9 +244,11 @@ class GiaoVienController extends Controller
                 'password.same'=>'Mật khẩu không khớp'
             ]
         );
-        $giaovien = $request->password;
+        $giaovien = GiaoVien::find($request->id);
+        $pw = password_hash($request->password, PASSWORD_DEFAULT);
+        $giaovien->password = $pw;
         $giaovien->save();
 
-        return redirect('admin/giaovien/doiMK/'.$id)->with('thongbao','Đổi mật khẩu thành công');
+        return redirect('admin/giaovien/sua/'.$request->id)->with('thongbao','Cấp mật khẩu thành công');
     }
 }

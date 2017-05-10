@@ -43,7 +43,7 @@ Phòng - Chi tiết
                 	</td>
 	                <td>
 	                	<!-- <a href="admin/phong/chitiet/{{$p->id}}" class="btn btn-info btn-xs"><i class="fa fa-list fa-fw"></i> Chi tiết</a> -->
-	                	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#yourModal{{$p->id}}">
+	                	<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#yourModal{{$p->id}}">
 		                	Chi tiết
 		                </button>
 	                </td>

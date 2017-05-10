@@ -85,10 +85,13 @@ Giảng viên - Chi tiết
 	    		</table>
 	    	</div>
     		<div class="col-md-4">
-    			<h4><label>Quyền người dùng</label></h4>
-	    		<ul class="list-group">
+    			<div class="panel panel-primary">
+			  	<div class="panel-heading text-center">
+			  		<label>Quyền người dùng</label>
+		  		</div>
+		  		<ul class="list-group">
 			  		<li class="list-group-item">
-	                    Giảng viên
+	                    Người dùng bình thường
 	                    <div class="material-switch pull-right">
 	                    	@if ($normal == true)
 	                        <input checked id="normal" name="normal-user" type="checkbox"/>
@@ -121,6 +124,7 @@ Giảng viên - Chi tiết
 	                    </div>
 	                </li>
 	            </ul>
+			</div>
     		</div>
     	</div>
     </div>

@@ -74,6 +74,13 @@ class LichController extends Controller
         $lichCD->idBMDuyet = $req->idBoMon;
         $lichCD->save();  
         $bomon = BoMon::find ($req->idBoMon);
+
+        $lichsu = new LichSu_ChoDuyet();
+        $lichsu->idChoDuyet = $req->idLichCD;
+        $lichsu->idBMNhan = $req->idBoMon;
+        $lichsu->ghiChu = "chuyen";
+        $lichsu->trangThai = 0;
+        $lichsu->save();
         return redirect('user/cacyeucau')->with('thongbao','Yêu cầu đã được chuyển tới bộ môn '.$bomon->TenBM);
     }
 

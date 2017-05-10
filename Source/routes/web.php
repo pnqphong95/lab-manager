@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 use App\TaiKhoan;
 use App\BoMon;
 use App\ChucVu;
@@ -51,7 +41,7 @@ Route::post('login', 'DangNhapController@postDangNhap')->name('postLogin');
 Route::get('logout', 'DangNhapController@getDangXuat')->name('logout');
 
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], function(){
 	Route::get('trangchu','TrangChuController@getTrangChuAdmin');
 	Route::group(['prefix'=>'lich'], function(){
 		//admin/theloai/danhsach
@@ -183,7 +173,7 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('danhsach', 'GiaoVienController@getDanhSach');
 		Route::get('chitiet/{id}', 'GiaoVienController@getChiTietById');
 		Route::get('doiMK/{id}', 'GiaoVienController@getDoiMK');
-		Route::get('doiMK/{id}', 'GiaoVienController@postDoiMK');
+		Route::post('doiMK', 'GiaoVienController@postDoiMK');
 
 		Route::get('sua/{id}', 'GiaoVienController@getSua');
 		Route::post('sua/{id}', 'GiaoVienController@postSua');

@@ -48,6 +48,8 @@ class VanDeController extends Controller
         $vande->idPhong = $request->idPhong;
         $vande->TomTatVD = $request->tomTatVD;
         $vande->ChiTietVD = $request->chiTietVD;
+        $vande->nguoiBaoCao = Auth::user()->id;
+        $vande->nguoiNhan = 0;
         $vande->TrangThai = 0;
         $vande->save();
         return redirect('user/vande')->with('thongbao', 'Vấn đề đã gửi!');

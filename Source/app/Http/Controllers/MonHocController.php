@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\MonHoc;
 use App\MonHoc_PhanMem;
 use DB;
+use App\PhanMem;
 
 class MonHocController extends Controller
 {
@@ -13,7 +14,9 @@ class MonHocController extends Controller
     public function getDanhSach()
     {
         $monhoc = MonHoc::all();
-        return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc]);
+        $ycpm = MonHoc_PhanMem::all();
+        $pm = PhanMem::all();
+        return view('admin.monhoc.danhsach', ['monhoc'=>$monhoc, 'ycpm' => $ycpm, 'pms' => $pm]);
     }
 
     public function getThem()

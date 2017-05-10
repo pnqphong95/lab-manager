@@ -213,14 +213,14 @@ class DangKyPhongController extends Controller
                 $lichCD->idBuoi = $lich['buoi'];
                 $lichCD->idTuan = $lich['tuan'];
                 $lichCD->idHocKyNienKhoa = $idLastHKNK;
-                $lichCD->idBMDuyet = Auth::user()->idBoMon;
+                $lichCD->idBMDuyet = 0;
                 $lichCD->TrangThai = 0;
                 $lichCD->save();
                 $buoi = Buoi::find ($lichCD->idBuoi);
                 $thu = Thu::find ($lichCD->idThu);
                 $tuan = Tuan::find ($lichCD->idTuan);
 
-                $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' sẽ đưa vào lịch chờ duyệt<br>';
+                $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' sẽ đưa vào lịch chờ duyệt<br>';
 
                 $idCD = Lich_ChoDuyet::orderBy('id','desc')->first();
                 $ls_ChoDuyet = new LichSu_ChoDuyet();

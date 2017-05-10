@@ -13,7 +13,6 @@ use App\Buoi;
 use App\Thu;
 use App\Lich;
 use App\VanDe;
-use App\BoMon;
 use App\Lich_ChoDuyet;
 use App\BoMon;
 use DB;
