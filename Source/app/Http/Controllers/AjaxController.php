@@ -10,13 +10,13 @@ use App\Role;
 
 class AjaxController extends Controller
 {
-    public function getLich ($buoi, $tuan) 
+    public function getLich ($idHKNK, $tuan) 
     {
     	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
 	    $lich = DB::table('lich')		->join('monhoc','monhoc.id', '=', 'idMonHoc')
 	    								->join('giaovien','giaovien.id', '=', 'idGiaoVien')
 	    								->where('idTuan', $tuan)
-	    								->where('idHocKyNienKhoa', $idHocKyNienKhoa->id)
+	    								->where ('idHocKyNienKhoa', $idHKNK)
 	    								->get();
 	    return json_encode($lich);
 	}

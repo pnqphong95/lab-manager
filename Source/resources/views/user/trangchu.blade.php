@@ -11,8 +11,15 @@ Trang chủ
 	<div class="row">	    		
     	<div class="col-md-12 sidebar">
     		<div class="white-well">
-
-				<h3>Lịch thực hành (<span>HK{{$HKNK->HocKy}} / {{$HKNK->NienKhoa}}</span>)</h3>
+	    		
+				<h3>Lịch thực hành
+					<select id="idHKNK">
+						@foreach ($allHKNK as $hknk1)
+							<option value="{{$hknk1->id}}">HK{{$hknk1->HocKy}} / {{$hknk1->NienKhoa}}</option>
+						@endforeach
+					</select>
+				</h3>
+						
 				<hr>
 			
 				<div style="margin-top: 10px;" class="btn-group" data-toggle="buttons">
@@ -191,6 +198,9 @@ Trang chủ
 
 	$(document).ready(function(){ 
 
+		// $('#idHKNK').change( function(){
+		// 	alert ("ádfghj");
+		// });
 		//hien thi ngay len lich
 		showNgayStart();
 
@@ -200,42 +210,54 @@ Trang chủ
  		@foreach ($lich as $lich) 			
  			$('#' + {{$lich->idPhong}} + {{$lich->idThu}} + 's').html("<span>{{$lich->MaMH}}<span><br><span>Thầy {{$lich->TenGV}}</span>");
  			$('#' + {{$lich->idPhong}} + {{$lich->idThu}} + 's').addClass('bg-xam');
+ 			@if ($lich->Loai == 1)
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}} + 's').removeClass('bg-xam');
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}} + 's').addClass('bg-xamk');
+ 			@endif
  		@endforeach
 
  		@foreach ($lichChieu as $lichC) 			
  			$('#' + {{$lichC->idPhong}} + {{$lichC->idThu}} + 'c').html("{{$lichC->MaMH}} - Thầy {{$lichC->TenGV}}");
  			$('#' + {{$lichC->idPhong}} + {{$lichC->idThu}} + 'c').addClass('bg-xam');
+ 			@if ($lich->Loai == 1)
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}} + 's').removeClass('bg-xam');
+ 			$('#' + {{$lich->idPhong}} + {{$lich->idThu}} + 's').addClass('bg-xamk');
+ 			@endif
  		@endforeach
 
 		//ajax theo buoi
-		// $("input[name=radioBuoi]").change(function () {
-		// 	var buoiLich = $("input[name=radioBuoi]:checked").val();
-		// 	var tuanLich = $("input[name=radioTuan]:checked").val();
-  //      		emptyLich();
+		$('#idHKNK').change(function () {
+			var idHKNK = $("#idHKNK").val();
+			//alert ("aa"+idHKNK);
+			var tuanLich = $("input[name=radioTuan]:checked").val();
+       		//emptyLich();
+       		emptyNgay();
+       		emptyLich1() 
 
-  //      		$.ajax({
-	 //            type: "get",
-	 //            url: "ajax/getLich/" + buoiLich + "/" + tuanLich,
-	 //            success: function (data) {
-	 //                //console.log(data);
-	 //            	showLich(data);	               
-	 //            },
-	 //            error: function (data) {
-	 //                console.log('Error:', data);
-	 //            }
-	 //        });
-  //   	});
+       		$.ajax({
+	            type: "get",
+	            url: "ajax/getLich/" + idHKNK + "/" + tuanLich,
+	            success: function (data) {
+	                //console.log(data);
+	            	showLich(data);	               
+	            },
+	            error: function (data) {
+	                console.log('Error:', data);
+	            }
+	        });
+    	});
 
     	//ajax theo tuan
 		$("input[name=radioTuan]").change(function () {
-			var buoiLich = $("input[name=radioBuoi]:checked").val();
+			var idHKNK = $("#idHKNK").val();
 			var tuanLich = $("input[name=radioTuan]:checked").val();
-       		emptyLich();
+       		//emptyLich();
+       		emptyLich1() 
        		emptyNgay();
 
        		$.ajax({
 	            type: "get",
-	            url: "ajax/getLich/" + buoiLich + "/" + tuanLich,
+	            url: "ajax/getLich/" + idHKNK + "/" + tuanLich,
 	            success: function (data) {
 	                //console.log(data);
 	                $("#tuan").html(tuanLich);
@@ -302,6 +324,83 @@ Trang chủ
 	    	t = $('#' + {{$ph->id}} + 8 + 'c');
 	    	t.html('');
 	    	t.addClass('bg-trang');
+    	@endforeach
+
+	}
+
+	function emptyLich1() 
+	{		
+		@foreach($phong as $ph)
+			var t = $('#' + {{$ph->id}} + 2 + 's');
+			t.html('');
+			t.removeClass('bg-xam');
+			t.removeClass('bg-xamk');
+
+	    	t = $('#' + {{$ph->id}} + 3 + 's');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 4 + 's');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 5 + 's');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 6 + 's');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 7 + 's');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 8 + 's');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	 
+	    	t = $('#' + {{$ph->id}} + 2 + 'c');
+			t.html('');
+			t.removeClass('bg-xam');
+			t.removeClass('bg-xamk');
+
+	    	t = $('#' + {{$ph->id}} + 3 + 'c');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 4 + 'c');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 5 + 'c');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 6 + 'c');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 7 + 'c');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
+	    	t = $('#' + {{$ph->id}} + 8 + 'c');
+	    	t.html('');
+	    	t.removeClass('bg-xam');
+	    	t.removeClass('bg-xamk');
+	  
     	@endforeach
 
 	}
@@ -424,6 +523,11 @@ Trang chủ
 				cell.html(noidung);		
 				cell.removeClass('bg-trang');
 				cell.addClass('bg-xam');	
+				if ( obj.lich[i].Loai == 1)
+				{
+					cell.removeClass('bg-xam');
+					cell.addClass('bg-xamk');
+				}
 			} else if (obj.lich[i].idBuoi == 2)
 			{
 				var cell = $('#' + obj.lich[i].idPhong + obj.lich[i].idThu + 'c');
@@ -431,6 +535,11 @@ Trang chủ
 				cell.html(noidung);		
 				cell.removeClass('bg-trang');
 				cell.addClass('bg-xam');
+				if ( obj.lich[i].Loai == 1)
+				{
+					cell.removeClass('bg-xam');
+					cell.addClass('bg-xamk');
+				}
 			}
 		}
 	}

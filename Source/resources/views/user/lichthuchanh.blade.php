@@ -154,12 +154,12 @@ Lịch thực hành
 					<table style="margin-top: 5px;" class="table table-bordered" style="text-align: center;">
 						<thead>
 							<tr>								
-								<th width="13%">Môn học</th>
-								<th width="13%">Nhóm</th>
-								<th width="13%">Thứ</th>
-								<th width="13%">Buổi</th>
-								<th width="13%">Tuần</th>  	
-								<th width="13%">Trạng thái</th>							
+								<th width="">Môn học</th>
+								<th width="">Nhóm</th>
+								<th width="">Thứ</th>
+								<th width="">Buổi</th>
+								<th width="">Tuần</th>  	
+								<th width="23%">Trạng thái</th>							
 							</tr>
 						</thead>
 						<tbody>
@@ -202,6 +202,15 @@ Lịch thực hành
 									@else
 									<span>Đã bị từ chối</span>
 									@endif
+									@foreach ($arrDangXuLy as $xl)
+									@if ($lichCD->id == $xl->idChoDuyet)
+									@foreach ($allBM as $abm1)
+									@if ($abm1->id == $xl->idBoMon)
+									<span id="idLCD{{$lichCD->id}}">({{$abm1->TenVietTat}})</span>
+									@endif
+									@endforeach
+									@endif
+									@endforeach
 								</td>
 				     	 	</tr>
 				     	 	@endforeach
@@ -220,9 +229,9 @@ Lịch thực hành
 
 		@foreach ($lich as $l2)
 			@if ($l2->idBuoi == 1)
-		$('#' + {{$l2->idTuan}} + {{$l2->idThu}} + 's').append("<span>{{$l2->MaMH}} - {{$l2->TenPhong}}</span><br>");
+		$('#' + {{$l2->idTuan}} + {{$l2->idThu}} + 's').append("<span>{{$l2->MaMH}}/{{$l2->Nhom}} - {{$l2->TenPhong}}</span><br>");
 			@else
-		$('#' + {{$l2->idTuan}} + {{$l2->idThu}} + 'c').append("<span>{{$l2->MaMH}} - {{$l2->TenPhong}}</span><br>");
+		$('#' + {{$l2->idTuan}} + {{$l2->idThu}} + 'c').append("<span>{{$l2->MaMH}}/{{$l2->Nhom}} - {{$l2->TenPhong}}</span><br>");
 			@endif
 		@endforeach
 
@@ -266,6 +275,8 @@ Lịch thực hành
 		$(".xnthuhoi").click(function() {
 		  	return confirm('Bạn có muốn thu hồi lại phòng vừa chọn?');
 		});
+
+
 	});
 
 </script>

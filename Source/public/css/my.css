@@ -215,6 +215,18 @@ tr {
   background-color: #fff;
 }
 
+.bg-sang{
+  background-color: #e6f3ff;
+}
+
+.bg-chieu{
+  background-color: #ffffe6;
+}
+
+.bg-xamk{
+  background-color: #78A9F9;
+}
+
 /*dinh nghia class ẩn*/
 .my-hidden {
   display: none;

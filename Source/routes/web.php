@@ -27,7 +27,7 @@ Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
 Route::group(['prefix'=>'ajax'], function(){
 
-	Route::get('getLich/{buoi?}/{tuan}','AjaxController@getLich');
+	Route::get('getLich/{idHKNK}/{tuan}','AjaxController@getLich');
 
 	Route::get('suaLoi/{id?}', 'AjaxController@suaLoi');
 
@@ -267,17 +267,5 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], 
 	Route::get ('hopthu', 'HopThuController@getThuIndex');
 	Route::get ('hopthu/soanthu', 'HopThuController@getSoanThu');
 
-	// Route::group(['prefix'=>'duyetlich'], function(){
-	// 	Route::get ('danhsach', ['middleware' => ['role:manager'], 'uses' => 'LichSu_ChoDuyetController@getLichChoDuyet']);
-	// 	Route::get ('xepphongtuchoi/{idLichCD}', ['middleware' => ['role:manager'], 'uses' => 'LichSu_ChoDuyetController@getTuChoiLCD']);
-	// 	Route::get ('travebm/{idLichCD}', ['middleware' => ['role:manager'], 'uses' => 'LichSu_ChoDuyetController@getTraVeBM']);
-
-	// 	Route::get('xepphong/{idLichCD}', ['middleware' => ['role:manager'], 'uses' => 'LichSu_ChoDuyetController@getXepPhong']);
-	// 	Route::post('xepphong/{idLichCD}', ['middleware' => ['role:manager'], 'uses' => 'LichSu_ChoDuyetController@postXepPhong']);
-		
-	// 	Route::post ('xepphong/xintrogiup/gui', ['middleware' => ['role:manager'], 'uses' => 'LichSu_ChoDuyetController@postXinTroGiup']);
-	// 	Route::get('chitiet/{id}', 'LichSu_ChoDuyetController@getChiTiet');
-	// 	Route::post('chitiet/{id}', 'LichSu_ChoDuyetController@postXinTroGiup');
-	// });
 
 });

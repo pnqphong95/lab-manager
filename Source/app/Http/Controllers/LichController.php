@@ -459,6 +459,23 @@ class LichController extends Controller
                         ->where ('idHocKyNienKhoa', $idLastHKNK)
                         ->get();
 
+        $lichChuaDuyet = DB::table('Lich_ChoDuyet')
+                        ->orderBy('id', 'desc')
+                        ->where ('idGiaoVien', Auth::user()->id)
+                        ->where ('idHocKyNienKhoa', $idLastHKNK)
+                        ->where ('TrangThai', 0)
+                        ->get();
+
+                        //echo $lichChuaDuyet;
+        $arrDangXuLy = array();
+        foreach ($lichChuaDuyet as $lcd) 
+        {
+            $dangXuLy = LichSu_ChoDuyet::where ('idChoDuyet', $lcd->id)->get()->last()->idBMNhan;
+            $obj = json_decode('{"idChoDuyet":'.$lcd->id.', "idBoMon":'.$dangXuLy.'}');
+            array_push($arrDangXuLy, $obj);   
+        }
+        $allBM = BoMon::all();
+        //echo $arrDangXuLy[0]->idChoDuyet;
         return view('user.lichthuchanh', 
                     [
                         'lich' => $lich,
@@ -468,7 +485,9 @@ class LichController extends Controller
                         'allPhong' => $allPhong,
                         'allThu' => $allThu,
                         'allTuan' => $allTuan,
-                        'allLichCD' => $allLichCD
+                        'allLichCD' => $allLichCD,
+                        'arrDangXuLy' =>$arrDangXuLy,
+                        'allBM' => $allBM
                     ]);
     }
 
@@ -589,6 +608,7 @@ class LichController extends Controller
             $lich->idBuoi = $lichCD->idBuoi;
             $lich->idTuan = $lichCD->idTuan;
             $lich->idHocKyNienKhoa = $lichCD->idHocKyNienKhoa;
+            $lich->Loai = 1;
             $lich->save();
 
             $lichsu = new LichSu_ChoDuyet();
