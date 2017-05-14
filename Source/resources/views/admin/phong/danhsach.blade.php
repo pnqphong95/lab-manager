@@ -1,15 +1,27 @@
 @extends('admin.layout.index')
 @section('title')
-Phòng - Chi tiết
+Phòng
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center">
-	<h2 style="color: blue">DANH SÁCH PHÒNG THỰC HÀNH</h2>
+<div class="col-md-12" style="padding-top: 10px">
+	<table width="100%">
+		<tr>
+			<td style="text-align: left;">
+				<h3>DANH SÁCH PHÒNG THỰC HÀNH</h3>
+			</td>
+			<td>
+				<div class="pull-right">
+					<a class="btn btn-success" href="admin/phong/them">
+						<span class="glyphicon glyphicon-plus"></span>  THÊM PHÒNG
+					</a>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>
-<div class="col-md-12 text-center" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-success" href="admin/phong/them"><span class="glyphicon glyphicon-plus"></span>  THÊM PHÒNG</a>
-</div>
+<hr>
+<br>
 <div class="col-md-12">
 	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	    <thead>
@@ -118,4 +130,14 @@ Phòng - Chi tiết
     </div>
 @endforeach
 
+@endsection
+
+@section ('script')
+<script type="text/javascript">
+	$(document).ready (function (){
+		var a = $('#dataTables-example_paginate').parent();
+		a.removeClass('col-sm-6').addClass('col-md-9');
+		$('#dataTables-example_info').addClass('hidden');
+	});
+</script>
 @endsection

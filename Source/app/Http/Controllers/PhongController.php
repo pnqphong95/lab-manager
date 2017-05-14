@@ -40,7 +40,7 @@ class PhongController extends Controller
         $phong_phanmem->idPhanMem =$request->idPhanMem;
         $phong_phanmem->save();
 
-        return redirect('admin/phong/chitiet/'.$id)->with('thongbao','Thêm thành công');        
+        return redirect('admin/phong/sua/'.$id)->with('thongbao','Thêm phần mềm thành công!');        
     }
 
     public function getThem()

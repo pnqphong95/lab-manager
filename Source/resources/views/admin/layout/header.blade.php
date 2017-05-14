@@ -1,33 +1,5 @@
 <!-- <img width="100%" src="img/banner.png" class="img-responsive"> -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-    
-    <ul class="nav navbar-top-links pull-right">
-        <li>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </li>
-        <!-- /.dropdown -->
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> {{Auth::user()->HoGV}} {{Auth::user()->TenGV}} <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a href="admin/giaovien/chitiet/{{Auth::user()->id}}"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a></li>
-                <li class="divider"></li>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
-                <li>
-            </ul>
-            <!-- /.dropdown-user -->
-        </li>
-        <!-- /.dropdown -->
-    </ul>  
-    <!-- /.navbar-top-links -->
-
-    <div class="navbar-default sidebar" role="navigation">
+    <div class="navbar-default sidebar" role="navigation" style="margin-top: 0px;">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
@@ -52,6 +24,17 @@
                         </li>
                         <li>
                             <a href="admin/giaovien/them">Thêm</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><!--lớp học phần-->
+                    <a href="admin/giaovien/danhsach"><i class="fa fa-cube fa-fw"></i> LỚP HỌC PHẦN<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="admin/lophocphan/danhsach">Danh sách</a>
+                        </li>
+                        <li>
+                            <a href="admin/lophocphan/them">Nhập từ excel</a>
                         </li>
                     </ul>
                 </li>
@@ -128,16 +111,16 @@
                     <a href="admin/phong/danhsach"><i class="fa fa-cube fa-fw"></i> HỌC KỲ-NIÊN KHÓA<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="admin/phong/danhsach">Danh sách</a>
+                            <a href="#">Danh sách</a>
                         </li>
                         <li>
-                            <a href="admin/phong/them">Thêm</a>
+                            <a href="#">Thêm</a>
                         </li>
                         <li>
-                            <a href="admin/thongke/sosanhphong">So sánh giữa các phòng</a>
+                            <a href="#">So sánh giữa các phòng</a>
                         </li>
                         <li>
-                            <a href="admin/thongke/solantheoPhong">Số lần được dùng của các phòng</a>
+                            <a href="#">Số lần được dùng của các phòng</a>
                         </li>
                     </ul>
                 </li>
@@ -147,4 +130,3 @@
         <!-- /.sidebar-collapse -->
     </div>
     <!-- /.navbar-static-side -->
-</nav>

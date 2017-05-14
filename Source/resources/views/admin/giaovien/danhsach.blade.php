@@ -4,10 +4,23 @@ Giảng viên - Danh sách
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH NGƯỜI DÙNG</h2></div>
-<div class="col-md-12 text-center" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+<div class="col-md-12" style="padding-top: 10px">
+<table width="100%">
+	<tr>
+		<td style="text-align: left;">
+			<h3 class="page-header">DANH SÁCH NGƯỜI DÙNG</h3>
+		</td>
+		<td>
+			<div class="pull-right">
+				<a class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+			</div>
+		</td>
+	</tr>
+</table>
 </div>
+<hr>
+<br>
+
 <div class="col-md-12">
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	    <thead>
@@ -15,7 +28,6 @@ Giảng viên - Danh sách
 	        	<th>STT</th>
 	            <th>Mã người dùng</th>
 	            <th>Họ tên</th>
-	            <th>Chức vụ</th>
 	            <th>Bộ môn</th>
 	            <th>Chi tiết</th>
 	            <th>Xóa</th>
@@ -36,9 +48,6 @@ Giảng viên - Danh sách
 	                <td>{{$gv->MaGV}}</td>
 	                <td>{{$gv->HoGV}} {{$gv->TenGV}}</td>
 	                <td>
-	                	{{$gv->chucvu->TenCV}}
-	                </td>
-	                <td>
 	                	{{$gv->bomon->TenBM}}
 	                </td>
 	                <td><!-- <a href="admin/giaovien/chitiet/{{$gv->id}}">Chi tiết</a> -->
@@ -47,23 +56,11 @@ Giảng viên - Danh sách
 		                </button>
 	                </td>
 	                <td class="center">
-	                	<!-- @if($gv->idBoMon == Auth::user()->idBoMon)
-                			<a class="btn btn-danger btn-sm" href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa Giảng viên {{$gv->TenGV}} không?');">Xóa</a>
-                		@endif -->
                 		@role('admin')
-                			<a class="btn btn-danger btn-xs" href="admin/phong/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa Giảng viên {{$gv->TenGV}} không?');">Xóa</a>
+                			<a class="btn btn-danger btn-xs" href="admin/giaovien/xoa/{{$gv->id}}" onclick="return confirm('Bạn có muốn xóa Giảng viên {{$gv->TenGV}} không?');">Xóa</a>
                 		@endrole
 	                </td>
 	                <td class="center">
-	                	<!-- @if($gv->idBoMon == Auth::user()->idBoMon)
-	                	<a class="btn btn-warning btn-sm" href="admin/giaovien/sua/{{$gv->id}}"><i class="fa fa-pencil fa-fw"></i> Sửa</a>
-	                	@endif
-	                	 -->
-	                	<!-- @role('manager')                    
-		                    @if($gv->idBoMon == Auth::user()->idBoMon)
-		                	<a class="btn btn-warning btn-sm" href="admin/giaovien/sua/{{$gv->id}}"><i class="fa fa-pencil fa-fw"></i> Sửa</a>
-		                	@endif
-	                    @endrole -->
 
 	                    @role('admin')                    
 		                	<a class="btn btn-warning btn-xs" href="admin/giaovien/sua/{{$gv->id}}"><i class="fa fa-pencil fa-fw"></i> Sửa</a>

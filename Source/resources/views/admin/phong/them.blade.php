@@ -4,9 +4,23 @@ Phòng - Thêm
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="padding-top: 10px">
-    <a style="width: 20%" class="btn btn-primary" href="admin/phong/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+<div class="col-md-12" style="padding-top: 10px">
+    <table width="100%">
+        <tr>
+            <td style="text-align: left;">
+                <h3>THÊM MỚI PHÒNG</h3>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="admin/phong/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
+<hr>
+<br>
+
 <div class="col-md-12" style="padding-top: 10px">
     @if(count($errors)>0)
         <div class="alert alert-danger">
@@ -21,50 +35,51 @@ Phòng - Thêm
             {{session('thongbao')}}
         </div>
     @endif
-    <div class="panel panel-primary">
-        <div class="panel-heading"><strong>THÊM MỚI PHÒNG</strong></div>
-        <div class="panel-body">
-            <form action="admin/phong/them" method="POST">
-                <input type="hidden" name="_token" value="{{csrf_token()}}" />
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Tên phòng</label>
-                        <input class="form-control" name="TenPhong" placeholder="Nhập tên phòng" />
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <form action="admin/phong/them" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tên phòng</label>
+                            <input class="form-control" name="TenPhong" placeholder="Nhập tên phòng" />
+                        </div>
+                        <div class="form-group">
+                            <label>Bộ môn</label>
+                            <select name="idBoMon" class="form-control">
+                                @foreach($allBoMon as $bomon)
+                                <option value="{{$bomon->id}}">{{$bomon->TenBM}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Dung lượng ram</label>
+                            <input type="number" class="form-control" name="DLRam" placeholder="Nhập dung lượng ram" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Bộ môn</label>
-                        <select name="idBoMon" class="form-control">
-                            @foreach($allBoMon as $bomon)
-                            <option value="{{$bomon->id}}">{{$bomon->TenBM}}</option>
-                            @endforeach
-                        </select>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Dung lượng ổ cứng</label>
+                            <input type="number" class="form-control" name="DLOCung" placeholder="Nhập dung lượng ổ cứng" />
+                        </div>
+                        <div class="form-group">
+                            <label>CPU</label>
+                            <input class="form-control" name="CPU" placeholder="Nhập thông tin CPU" />
+                        </div>
+                        <div class="form-group">
+                            <label>GPU</label>
+                            <input class="form-control" name="GPU" placeholder="Nhập thông tin GPU" />
+                        </div>
+                    </div>        
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <a href="admin/phong/danhsach" class="btn btn-default">Hủy</a>
                     </div>
-                    <div class="form-group">
-                        <label>Dung lượng ram</label>
-                        <input type="number" class="form-control" name="DLRam" placeholder="Nhập dung lượng ram" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Dung lượng ổ cứng</label>
-                        <input type="number" class="form-control" name="DLOCung" placeholder="Nhập dung lượng ổ cứng" />
-                    </div>
-                    <div class="form-group">
-                        <label>CPU</label>
-                        <input class="form-control" name="CPU" placeholder="Nhập thông tin CPU" />
-                    </div>
-                    <div class="form-group">
-                        <label>GPU</label>
-                        <input class="form-control" name="GPU" placeholder="Nhập thông tin GPU" />
-                    </div>
-                </div>        
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Thêm</button>
-                    <button type="reset" class="btn btn-default">Làm mới</button>
-                </div>
-            </form>
-        </div>
-    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
 </div>
 
 @endsection

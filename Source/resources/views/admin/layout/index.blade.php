@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/my.css" rel="stylesheet">
+
 
     <!-- MetisMenu CSS -->
     <link href="css/metisMenu.min.css" rel="stylesheet">
@@ -21,6 +21,7 @@
     <link href="css/dataTables.responsive.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link href="css/my.css" rel="stylesheet">
 
     <!-- <link href="css/my.css" rel="stylesheet">       -->
     <script src="js/my.js"></script>
@@ -31,15 +32,20 @@
     <script src="vendor/Chart/utils.js"></script>
 </head>
 <body>
-    <div id="wrapper">
-        @include('admin.layout.header')
-        
-        <div id="page-wrapper">
-            @yield('content')
+    <div class="container">
+        <div class="well well-sm" style="height: auto;">
+            @include('layout.header')
+            <div class="row">
+                <div class="col-md-3">
+                @include('admin.layout.header')
+                </div>
+                <div class="col-md-9" id="">
+                    @yield('content')
+                </div>
+            </div>
         </div>
-        @include('admin.layout.footer')
+
     </div>
-    
     <script src="js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->

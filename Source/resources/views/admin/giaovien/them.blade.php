@@ -4,9 +4,23 @@ Giáo viên - Thêm
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+<div class="col-md-12" style="padding-top: 10px">
+<table width="100%">
+	<tr>
+		<td style="text-align: left;">
+			<h3>THÊM MỚI NGƯỜI DÙNG</h3>
+		</td>
+		<td>
+			<div class="pull-right">
+				<a class="btn btn-primary" href="admin/giaovien/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+			</div>
+		</td>
+	</tr>
+</table>
 </div>
+<hr>
+<br>
+
 <div class="col-md-12" style="padding-top: 10px">
 	
 	    @if(count($errors)>0)
@@ -22,13 +36,11 @@ Giáo viên - Thêm
 	            {{session('thongbao')}}
 	        </div>
 	    @endif
-	<div class="panel panel-primary">
-		<div class="panel-heading text-center"><h4>THÊM MỚI NGƯỜI DÙNG</h4></div>
-		<div class="panel-body"> 
-			<div class="col-md-10 col-md-offset-1 ">
+
+        <div class="row">
 			<form action="admin/giaovien/them" method="POST">
 		        <input type="hidden" name="_token" value="{{csrf_token()}}" />
-		        <table class="table">
+		        <table class="table" style="border-top-color: white;">
 		        <tr> 
 		        	<td width="20%">
 			            <label>Mã giáo viên</label>
@@ -37,27 +49,19 @@ Giáo viên - Thêm
 			            <input class="form-control pull-right" name="MaGV" placeholder="Nhập mã giáo viên" />
 		            </td>
 			        <td width="20%">
-			            <label>Họ</label>
-		            </td>
-		            <td width="30%">
-			            <input class="form-control pull-right" name="HoGV" placeholder="Nhập học giáo viên" />
+			            <label>Ngày sinh</label>
+			        </td>
+			        <td  width="30%">
+			            <input type="date" class="form-control pull-right" name="NgaySinh"/>
 			        </td>
 			    </tr>
 			    <tr>
-			    	<td>
-			            <label>Tên</label>
-			        </td>
+			        <td >
+			            <label>Họ</label>
+		            </td>
 		            <td>
-			            <input class="form-control pull-right" name="TenGV" placeholder="Nhập tên giáo viên" />
+			            <input class="form-control pull-right" name="HoGV" placeholder="Nhập học giáo viên" />
 			        </td>
-			        <td>
-			            <label>Ngày sinh</label>
-			        </td>
-			        <td>
-			            <input type="date" class="form-control pull-right" name="NgaySinh"/>
-			        </td>
-		        </tr>
-			    <tr>
 			    	<td>
 			            <label>Giới tính</label>
 			        </td>
@@ -66,6 +70,15 @@ Giáo viên - Thêm
 			            	<option value="1">Nam</option>
 			            	<option value="0">Nữ</option>
 			            </select>
+			        </td>
+			    	
+		        </tr>
+			    <tr>
+			    	<td>
+			            <label>Tên</label>
+			        </td>
+		            <td>
+			            <input class="form-control pull-right" name="TenGV" placeholder="Nhập tên giáo viên" />
 			        </td>
 
 			    	<td>
@@ -117,15 +130,14 @@ Giáo viên - Thêm
 			    	<td colspan="4">
 			    <div class="text-center">
                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"> </span> Thêm</button>
-                    <button type="reset" class="btn btn-default">Reset</button>      
+                    <a href="admin/giaovien/danhsach" class="btn btn-default">Hủy</a>      
                 </div>
                 	</td>
                 </tr>
                 </table>
 		    </form>
-		    </div>
-		</div>
-	</div>	
-</div>
+	    </div>
+
+		
 
 @endsection

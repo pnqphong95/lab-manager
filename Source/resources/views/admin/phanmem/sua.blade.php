@@ -4,16 +4,25 @@ Phần mềm - Sửa
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="color: blue"><h2>SỬA PHẦN MỀM</h2></div>
-<div class="col-md-12 text-center" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-primary" href="admin/phanmem/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-	<a style="width: 20%" class="btn btn-success" href="admin/phanmem/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
-</div>
 <div class="col-md-12" style="padding-top: 10px">
-    <div class="panel panel-primary">
-    	<div class="panel-heading text-center">
-    		SỬA PHẦN MỀM - {{$phanmem->TenPM}}
-    	</div>
+<table width="100%">
+	<tr>
+		<td style="text-align: left;">
+			<h3 class="page-header">SỬA THÔNG TIN PHẦN MỀM - {{$phanmem->TenPM}}</h3>
+		</td>
+		<td>
+			<div class="pull-right">
+				<a class="btn btn-primary" href="admin/phanmem/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+<hr>
+<br>
+
+<div class="col-md-12" style="padding-top: 10px">
+    <div class="panel panel-default ">
     	<div class="panel-body">
 		    @if(count($errors)>0)
 		        <div class="alert alert-danger">
@@ -28,7 +37,7 @@ Phần mềm - Sửa
 		            {{session('thongbao')}}
 		        </div>
 		    @endif
-		    <form action="admin/phanmem/sua/{{$phanmem->id}}" method="POST">
+		    <form  action="admin/phanmem/sua/{{$phanmem->id}}" method="POST">
 		        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 		        <div class="form-group">
 		            <label>Tên phần mềm</label>
@@ -41,7 +50,7 @@ Phần mềm - Sửa
 		        
 			    <div class="text-center">
 	                <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn cập nhật {{$phanmem->TenPM}}  không?');"><span class="glyphicon glyphicon-edit"> </span> Sửa</button>
-	                <button type="reset" class="btn btn-default">Reset</button>      
+	                <a href="admin/phanmem/danhsach" class="btn btn-default">Trở lại</a>      
 	            </div>
 		    </form>
 		</div>

@@ -4,18 +4,34 @@ Phòng- Sửa
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="color: blue"><h2>SỬA PHÒNG</h2></div>
-<div class="col-md-12 text-center" style="padding-top: 10px">
-    <a style="width: 20%" class="btn btn-primary" href="admin/phong/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-</div>
 <div class="col-md-12" style="padding-top: 10px">
-    <div class="panel panel-primary">
-        <div class="panel-heading text-center">
-            SỬA PHÒNG - {{$phong->TenPhong}}
-        </div>
-        <div class="panel-body">
+    <table width="100%">
+        <tr>
+            <td style="text-align: left;">
+                <h3>ĐIỀU CHỈNH PHÒNG - {{$phong->TenPhong}}</h3>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="admin/phong/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<hr>
+<br>
+@if(session('thongbao'))
+    <div class="alert alert-success">
+        {{session('thongbao')}}
+    </div>
+@endif
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="row">   
+
             <div class="col-md-8">
-                <center><label>Các phần mềm</label></center>
+                
+                <label>Các phần mềm</label>
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <tr>
                         <th>STT</th>
@@ -52,15 +68,12 @@ Phòng- Sửa
                     </div>
                 </form>
             </div>
-            <div class="col-md-8" style="padding-top: 10px">
+            <div class="col-md-12" style="padding-top: 10px">
+                <label>Thông tin của phòng</label>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <form action="admin/phong/sua/{{$phong->id}}" method="POST">
-                            @if(session('thongbao'))
-                                <div class="alert alert-success">
-                                    {{session('thongbao')}}
-                                </div>
-                            @endif
+                            
                             <input type="hidden" name="_token" value="{{csrf_token()}}" />
                             <div class="col-md-6">
                                 <div class="form-group form-inline">
@@ -100,40 +113,13 @@ Phòng- Sửa
                             </div>
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn cập nhật {{$phong->TenPhong}}  không?');"><span class="glyphicon glyphicon-edit"> </span> Cập nhật</button>
-                                <button type="reset" class="btn btn-default">Reset</button>
+                                <a href="admin/phong/danhsach" class="btn btn-default">Hủy</a>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-            
-</div>
-    <!-- <div class="col-md-4" style="padding-top: 10px">
-        <div class="panel panel-primary">
-            <div class="panel-heading text-center">
-                Danh sách phần mềm
-            </div>
-            <div class="panel-body">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên phần mềm</th>
-                        <th>Phiên bản</th>
-                        <th>Xóa</th>
-                    </tr>
-                    <?php $i=0; ?>
-                    @foreach($phong_phanmem as $pm)
-                    <?php $i++; ?>
-                    <tr>
-                        <td>{{$i}}</td>
-                        <td>{{$pm->TenPM}}</td>
-                        <td>{{$pm->PhienBan}}</td>
-                        <td><a href="admin/phong/chitiet/xoaPM/{{$pm->id}}/{{$pm->idPhong}}">Xóa</a></td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
-        </div>        
-    </div> -->
+    </li>
+</ul>
 @endsection

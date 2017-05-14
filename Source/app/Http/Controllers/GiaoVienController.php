@@ -127,11 +127,15 @@ class GiaoVienController extends Controller
         $pw = password_hash($request->password, PASSWORD_DEFAULT);
         $giaovien->password = $pw;
         $giaovien->idChucVu = $request->idChucVu;
+        $giaovien->KichHoat = 1;
         $giaovien->remember_token = '';
         $giaovien->save();
 
+        $user = User::where ('MaGV', $request->MaGV)->first();
+        $role = Role::where('name', 'normal')->first();
+        $user->attachRole($role);
         //$a = $phong->id;
-        return redirect('admin/giaovien/chitiet/'.$giaovien->id)->with('thongbao','Thêm người dùng thành công <br>hihi');
+        return redirect('admin/giaovien/danhsach')->with('thongbao','Thêm người dùng thành công!');
     }
 
     public function getSua($id)

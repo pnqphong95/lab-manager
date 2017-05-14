@@ -25,6 +25,7 @@ Route::group (['prefix' => 'api'], function (){
 
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
+
 Route::group(['prefix'=>'ajax'], function(){
 
 	Route::get('getLich/{idHKNK}/{tuan}','AjaxController@getLich');
@@ -138,6 +139,22 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], functi
 		Route::post('them', 'PhanMemController@postThem');
 
 		Route::get('xoa/{id}', 'PhanMemController@getXoa');
+	});
+
+	Route::group(['prefix'=>'lophocphan'], function(){
+		//admin/lophocphan/danhsach
+		Route::get('danhsach', 'LopHocPhanController@getDanhSach');
+
+		Route::get('sua/{id}', 'LopHocPhanController@getSua');
+		Route::post('sua/{id}', 'LopHocPhanController@postSua');
+
+		Route::get('themexcel', 'LopHocPhanController@getThemExcel');
+		Route::post('themexcel', 'LopHocPhanController@importExcel')->name('importExcel');
+		
+		Route::get('them', 'LopHocPhanController@getThem');
+		Route::post('them', 'LopHocPhanController@postThem');
+
+		Route::get('xoa/{id}', 'LopHocPhanController@getXoa');
 	});
 
 	Route::group(['prefix'=>'vaitro'], function(){
