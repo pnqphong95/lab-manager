@@ -15,6 +15,7 @@ use App\Lich;
 use App\VanDe;
 use App\Lich_ChoDuyet;
 use App\BoMon;
+use App\HocKy_NienKhoa;
 use DB;
 
 class TrangChuController extends Controller
@@ -23,6 +24,7 @@ class TrangChuController extends Controller
     	$allTuan = Tuan::all();
         $allBM = BoMon::all();
         $phong = Phong::all();
+        $allHKNK = HocKy_NienKhoa::orderBy('id', 'desc')->get();
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
         $dateBD = date_create($lastHKNK->NgayBD);
@@ -47,6 +49,7 @@ class TrangChuController extends Controller
                                             'lich' => $lich, 
                                             'allTuan' => $allTuan,
                                             'lichChieu' => $lichChieu,
+                                            'allHKNK' => $allHKNK,
                                             'allBM' => $allBM,
                                             'HKNK' => $lastHKNK,
                                             'dateBD' => $dateBD,
@@ -61,6 +64,7 @@ class TrangChuController extends Controller
         $phong = Phong::all();
         $lastHKNK = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();
         $idLastHKNK = $lastHKNK->id;
+        $allHKNK = HocKy_NienKhoa::orderBy('id', 'desc')->get();
         $dateBD = date_create($lastHKNK->NgayBD);
         $dateForDisp = date_create($lastHKNK->NgayBD);
     	$lich = DB::table('lich')	->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
@@ -82,7 +86,7 @@ class TrangChuController extends Controller
                                             'phong' => $phong, 
                                             'lich' => $lich, 
                                             'allTuan' => $allTuan,
-                                 
+                                            'allHKNK' => $allHKNK,
                                             'lichChieu' => $lichChieu,
                                             'allBM' => $allBM,
                                             'HKNK' => $lastHKNK,

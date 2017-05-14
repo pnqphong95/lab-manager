@@ -27,7 +27,7 @@ Route::get('/', 'TrangChuController@getTrangChu')->name('root');
 
 Route::group(['prefix'=>'ajax'], function(){
 
-	Route::get('getLich/{buoi?}/{tuan}','AjaxController@getLich');
+	Route::get('getLich/{idHKNK}/{tuan}','AjaxController@getLich');
 
 	Route::get('suaLoi/{id?}', 'AjaxController@suaLoi');
 
