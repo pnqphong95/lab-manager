@@ -93,13 +93,13 @@
                             <a href="admin/thongke/tuan">Số lần dùng phòng qua các tuần</a>
                         </li> -->
                         <li>
-                            <a href="admin/thongke/sosanhphong">So sánh theo phòng</a>
+                            <a href="admin/thongke/sosanhphong">Thống kê theo phòng</a>
                         </li>
                         <li>
-                            <a href="admin/thongke/sosanhbomon">So sánh theo bộ môn</a>
+                            <a href="admin/thongke/sosanhbomon">Thống kê theo bộ môn</a>
                         </li>
                         <li>
-                            <a href="admin/thongke/sosanhhocky">So sánh theo học kỳ</a>
+                            <a href="admin/thongke/sosanhhocky">Thống kê theo học kỳ</a>
                         </li>
                         <!-- <li>
                             <a href="admin/thongke/bieudotron/sosanh">So sánh</a>
@@ -108,19 +108,13 @@
                 </li>
                 @role('admin')
                 <li> <!--phòng-->
-                    <a href="admin/phong/danhsach"><i class="fa fa-cube fa-fw"></i> HỌC KỲ-NIÊN KHÓA<span class="fa arrow"></span></a>
+                    <a href="admin/hocky/danhsach"><i class="fa fa-cube fa-fw"></i> HỌC KỲ-NIÊN KHÓA<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Danh sách</a>
+                            <a href="admin/hocky/danhsach">Danh sách</a>
                         </li>
                         <li>
-                            <a href="#">Thêm</a>
-                        </li>
-                        <li>
-                            <a href="#">So sánh giữa các phòng</a>
-                        </li>
-                        <li>
-                            <a href="#">Số lần được dùng của các phòng</a>
+                            <a href="admin/hocky/them">Thêm</a>
                         </li>
                     </ul>
                 </li>

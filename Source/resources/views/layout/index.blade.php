@@ -11,6 +11,7 @@
     <base href="{{asset('/')}}">
 
     <title>@yield('title')</title>
+    @yield('header')
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +19,7 @@
 
     <link href="css/my.css" rel="stylesheet">  
     <link rel="stylesheet" type="text/css" href="css/mystyle.css">
-
+    <link rel="stylesheet" type="text/css" href="Classes/PHPExcel/IOFactory.php">
     
     <script src="js/my.js"></script>
 

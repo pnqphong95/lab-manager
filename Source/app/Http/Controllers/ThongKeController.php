@@ -12,161 +12,201 @@ use App\HocKy_NienKhoa;
 
 class ThongKeController extends Controller
 {
-    public function getXemBieuDo ()
-    {
-        $allBoMon = BoMon::all();
-        $allPhong = Phong::all();
-        $allHKNK = HocKy_NienKhoa::all();
-        $allTuan = Tuan::all();
-        $bomon = DB::table('lich')     ->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
-                                        ->select('idBoMon', DB::raw('count(*) as SoLan'))
-                                        ->groupBy('idBoMon')
-                                        ->get();
+    // public function getXemBieuDo ()
+    // {
+    //     $allBoMon = BoMon::all();
+    //     $allPhong = Phong::all();
+    //     $allHKNK = HocKy_NienKhoa::all();
+    //     $allTuan = Tuan::all();
+    //     $bomon = DB::table('lich')     ->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
+    //                                     ->select('idBoMon', DB::raw('count(*) as SoLan'))
+    //                                     ->groupBy('idBoMon')
+    //                                     ->get();
 
-        $phong = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as SoLan'))
-                                        ->groupBy('idPhong')
-                                        ->get();
+    //     $phong = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as SoLan'))
+    //                                     ->groupBy('idPhong')
+    //                                     ->get();
 
-        $hocky = DB::table('lich')     ->join('hocky_nienkhoa', 'idHocKyNienKhoa', '=', 'hocky_nienkhoa.id')
-                                        ->select('HocKy', DB::raw('count(HocKy) as SoLan'))
-                                        ->groupBy('HocKy')
-                                        ->get();
-
-
-        return view ('admin.thongke.xembieudo',['bomon' => $bomon,
-                                                'allBoMon' => $allBoMon, 
-                                                'phong'=>$phong, 
-                                                'allPhong'=>$allPhong, 
-                                                'allHKNK'=>$allHKNK,
-                                                'hocky'=>$hocky,
-                                                'allTuan'=>$allTuan
-                                                ]);
-        // print_r($toanHK);
-    }
-
-    public function getXemBieuDoCot ()
-    {
-        $allBoMon = BoMon::all();
-        $allPhong = Phong::all();
-        $allHKNK = HocKy_NienKhoa::all();
-        $allTuan = Tuan::all();
-        $bomon = DB::table('lich')     ->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
-                                        ->select('idBoMon', DB::raw('count(*) as SoLan'))
-                                        ->groupBy('idBoMon')
-                                        ->get();
-
-        $phong = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as SoLan'))
-                                        ->groupBy('idPhong')
-                                        ->get();
-
-        $hocky = DB::table('lich')     ->join('hocky_nienkhoa', 'idHocKyNienKhoa', '=', 'hocky_nienkhoa.id')
-                                        ->select('HocKy', DB::raw('count(HocKy) as SoLan'))
-                                        ->groupBy('HocKy')
-                                        ->get();
+    //     $hocky = DB::table('lich')     ->join('hocky_nienkhoa', 'idHocKyNienKhoa', '=', 'hocky_nienkhoa.id')
+    //                                     ->select('HocKy', DB::raw('count(HocKy) as SoLan'))
+    //                                     ->groupBy('HocKy')
+    //                                     ->get();
 
 
-        return view ('admin.thongke.xembieudocot',['bomon' => $bomon,
-                                                'allBoMon' => $allBoMon, 
-                                                'phong'=>$phong, 
-                                                'allPhong'=>$allPhong, 
-                                                'allHKNK'=>$allHKNK,
-                                                'hocky'=>$hocky,
-                                                'allTuan'=>$allTuan
-                                                ]);
-    }
+    //     return view ('admin.thongke.xembieudo',['bomon' => $bomon,
+    //                                             'allBoMon' => $allBoMon, 
+    //                                             'phong'=>$phong, 
+    //                                             'allPhong'=>$allPhong, 
+    //                                             'allHKNK'=>$allHKNK,
+    //                                             'hocky'=>$hocky,
+    //                                             'allTuan'=>$allTuan
+    //                                             ]);
+    //     // print_r($toanHK);
+    // }
 
-    public function getSoSanh ()
-    {
-        $c = Phong::select('TenPhong')->first();
-        $d = Phong::select('TenPhong')->orderBy('id','desc')->first();
+    // public function getXemBieuDoCot ()
+    // {
+    //     $allBoMon = BoMon::all();
+    //     $allPhong = Phong::all();
+    //     $allHKNK = HocKy_NienKhoa::all();
+    //     $allTuan = Tuan::all();
+    //     $bomon = DB::table('lich')     ->join('giaovien', 'idGiaoVien', '=', 'giaovien.id')
+    //                                     ->select('idBoMon', DB::raw('count(*) as SoLan'))
+    //                                     ->groupBy('idBoMon')
+    //                                     ->get();
 
-        $a = Tuan::select('id')->first();
-        $b = Tuan::select('id')->orderBy('id','desc')->first();
-        $last = HocKy_NienKhoa::select('id')->orderBy('id','desc')->first();
+    //     $phong = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as SoLan'))
+    //                                     ->groupBy('idPhong')
+    //                                     ->get();
 
-        $sosanhPhong = DB::table('lich') ->select('idPhong', DB::raw('count(*) as SoLan'))
-                                        ->where('idHocKyNienKhoa',$last->id)
-                                        ->groupBy('idPhong')
-                                        ->get();
-        $sosanhTuan = DB::table('lich')   ->select('idTuan', DB::raw('count(*) as SoLan'))
-                                        ->where('idHocKyNienKhoa',$last->id)
-                                        ->groupBy('idTuan')
-                                        ->get();
-        $sosanhBoMon = DB::table('lich')->join('phong', 'idBoMon', '=', 'phong.idBoMon')
-                                        ->select('idBoMon','idPhong', DB::raw('count(*) as SoLan'))
-                                        ->where('idHocKyNienKhoa',$last->id)
-                                        ->groupBy('idBoMon','idPhong')
-                                        ->get();
-        $allPhong = Phong::all();
-        $allTuan = Tuan::all();
-        $allBoMon = BoMon::all();
-        return view ('admin.thongke.bieudotron.sosanh', ['sosanhPhong' => $sosanhPhong,
-                                                        'sosanhTuan' => $sosanhTuan,
-                                                        'sosanhBoMon'=>$sosanhBoMon,
-                                                        'allPhong'=>$allPhong,
-                                                        'allTuan'=>$allTuan,
-                                                        'allBoMon'=>$allBoMon,
-                                                        'c'=>$c,
-                                                        'd'=>$d,
-                                                        'a'=>$a,
-                                                        'b'=>$b
-                                                        ]);
-    }
+    //     $hocky = DB::table('lich')     ->join('hocky_nienkhoa', 'idHocKyNienKhoa', '=', 'hocky_nienkhoa.id')
+    //                                     ->select('HocKy', DB::raw('count(HocKy) as SoLan'))
+    //                                     ->groupBy('HocKy')
+    //                                     ->get();
+
+
+    //     return view ('admin.thongke.xembieudocot',['bomon' => $bomon,
+    //                                             'allBoMon' => $allBoMon, 
+    //                                             'phong'=>$phong, 
+    //                                             'allPhong'=>$allPhong, 
+    //                                             'allHKNK'=>$allHKNK,
+    //                                             'hocky'=>$hocky,
+    //                                             'allTuan'=>$allTuan
+    //                                             ]);
+    // }
+
+    // public function getSoSanh ()
+    // {
+    //     $c = Phong::select('TenPhong')->first();
+    //     $d = Phong::select('TenPhong')->orderBy('id','desc')->first();
+
+    //     $a = Tuan::select('id')->first();
+    //     $b = Tuan::select('id')->orderBy('id','desc')->first();
+    //     $last = HocKy_NienKhoa::select('id')->orderBy('id','desc')->first();
+
+    //     $sosanhPhong = DB::table('lich') ->select('idPhong', DB::raw('count(*) as SoLan'))
+    //                                     ->where('idHocKyNienKhoa',$last->id)
+    //                                     ->groupBy('idPhong')
+    //                                     ->get();
+    //     $sosanhTuan = DB::table('lich')   ->select('idTuan', DB::raw('count(*) as SoLan'))
+    //                                     ->where('idHocKyNienKhoa',$last->id)
+    //                                     ->groupBy('idTuan')
+    //                                     ->get();
+    //     $sosanhBoMon = DB::table('lich')->join('phong', 'idBoMon', '=', 'phong.idBoMon')
+    //                                     ->select('idBoMon','idPhong', DB::raw('count(*) as SoLan'))
+    //                                     ->where('idHocKyNienKhoa',$last->id)
+    //                                     ->groupBy('idBoMon','idPhong')
+    //                                     ->get();
+    //     $allPhong = Phong::all();
+    //     $allTuan = Tuan::all();
+    //     $allBoMon = BoMon::all();
+    //     return view ('admin.thongke.bieudotron.sosanh', ['sosanhPhong' => $sosanhPhong,
+    //                                                     'sosanhTuan' => $sosanhTuan,
+    //                                                     'sosanhBoMon'=>$sosanhBoMon,
+    //                                                     'allPhong'=>$allPhong,
+    //                                                     'allTuan'=>$allTuan,
+    //                                                     'allBoMon'=>$allBoMon,
+    //                                                     'c'=>$c,
+    //                                                     'd'=>$d,
+    //                                                     'a'=>$a,
+    //                                                     'b'=>$b
+    //                                                     ]);
+    // }
     
-    public function postSoSanh (Request $request)
-    {
-        $allPhong = Phong::all();
-        $allTuan = Tuan::all();
-        $allBoMon = BoMon::all();
-        $phongBD = $request->phongBD;
-        $phongKT = $request->phongKT;
-        $tuanBD = $request->tuanBD;
-        $tuanKT = $request->tuanKT;
-        $BoMon = $request->BoMon;
+    // public function postSoSanh (Request $request)
+    // {
+    //     $allPhong = Phong::all();
+    //     $allTuan = Tuan::all();
+    //     $allBoMon = BoMon::all();
+    //     $phongBD = $request->phongBD;
+    //     $phongKT = $request->phongKT;
+    //     $tuanBD = $request->tuanBD;
+    //     $tuanKT = $request->tuanKT;
+    //     $BoMon = $request->BoMon;
 
-        $c = $request->phongBD;
-        $d = $request->phongKT;
-        $a = $request->tuanBD;
-        $b = $request->tuanKT;
-        $last = HocKy_NienKhoa::select('id')->orderBy('id','desc')->first();
+    //     $c = $request->phongBD;
+    //     $d = $request->phongKT;
+    //     $a = $request->tuanBD;
+    //     $b = $request->tuanKT;
+    //     $last = HocKy_NienKhoa::select('id')->orderBy('id','desc')->first();
 
-        $sosanhPhong = DB::table('lich')->select('idPhong', DB::raw('count(*) as SoLan'))
-                                        ->where('idPhong', '<=', $phongKT)
-                                        ->where('idPhong', '>=', $phongBD)
-                                        ->where('idTuan', '<=', $tuanKT)
-                                        ->where('idTuan', '>=', $tuanBD)
-                                        ->where('idHocKyNienKhoa',$last->id)
-                                        ->groupBy('idPhong')
-                                        ->get();
+    //     $sosanhPhong = DB::table('lich')->select('idPhong', DB::raw('count(*) as SoLan'))
+    //                                     ->where('idPhong', '<=', $phongKT)
+    //                                     ->where('idPhong', '>=', $phongBD)
+    //                                     ->where('idTuan', '<=', $tuanKT)
+    //                                     ->where('idTuan', '>=', $tuanBD)
+    //                                     ->where('idHocKyNienKhoa',$last->id)
+    //                                     ->groupBy('idPhong')
+    //                                     ->get();
 
-        $sosanhTuan = DB::table('lich')    ->select('idTuan',DB::raw('count(*) as SoLan'))
-                                        ->where('idPhong', '<=', $phongKT)
-                                        ->where('idPhong', '>=', $phongBD)
-                                        ->where('idTuan', '<=', $tuanKT)
-                                        ->where('idTuan', '>=', $tuanBD)
-                                        ->where('idHocKyNienKhoa',$last->id)
-                                        ->groupBy('idTuan')
-                                        ->get();
-        $sosanhBoMon = DB::table('lich')->join('phong', 'idPhong', '=', 'phong.id')
-                                        ->select('idPhong','idBoMon',DB::raw('count(*) as SoLan'))
-                                        ->where('idTuan', '<=', $tuanKT)
-                                        ->where('idTuan', '>=', $tuanBD)
-                                        ->where('idBoMon',$BoMon)
-                                        ->where('idHocKyNienKhoa',$last->id)
-                                        ->groupBy('idPhong','idBoMon')
-                                        ->get();
+    //     $sosanhTuan = DB::table('lich')    ->select('idTuan',DB::raw('count(*) as SoLan'))
+    //                                     ->where('idPhong', '<=', $phongKT)
+    //                                     ->where('idPhong', '>=', $phongBD)
+    //                                     ->where('idTuan', '<=', $tuanKT)
+    //                                     ->where('idTuan', '>=', $tuanBD)
+    //                                     ->where('idHocKyNienKhoa',$last->id)
+    //                                     ->groupBy('idTuan')
+    //                                     ->get();
+    //     $sosanhBoMon = DB::table('lich')->join('phong', 'idPhong', '=', 'phong.id')
+    //                                     ->select('idPhong','idBoMon',DB::raw('count(*) as SoLan'))
+    //                                     ->where('idTuan', '<=', $tuanKT)
+    //                                     ->where('idTuan', '>=', $tuanBD)
+    //                                     ->where('idBoMon',$BoMon)
+    //                                     ->where('idHocKyNienKhoa',$last->id)
+    //                                     ->groupBy('idPhong','idBoMon')
+    //                                     ->get();
 
-        return view('admin.thongke.bieudotron.sosanh', ['sosanhPhong'=>$sosanhPhong,
-                                                        'sosanhTuan'=>$sosanhTuan,
-                                                        'sosanhBoMon'=>$sosanhBoMon, 
-                                                        'allTuan'=>$allTuan, 
-                                                        'allPhong'=>$allPhong,
-                                                        'allBoMon'=>$allBoMon,
-                                                        'a'=>$tuanBD,'b'=>$tuanKT,
-                                                        'c'=>$phongBD,'d'=>$phongKT
-                                                        ]);
+    //     return view('admin.thongke.bieudotron.sosanh', ['sosanhPhong'=>$sosanhPhong,
+    //                                                     'sosanhTuan'=>$sosanhTuan,
+    //                                                     'sosanhBoMon'=>$sosanhBoMon, 
+    //                                                     'allTuan'=>$allTuan, 
+    //                                                     'allPhong'=>$allPhong,
+    //                                                     'allBoMon'=>$allBoMon,
+    //                                                     'a'=>$tuanBD,'b'=>$tuanKT,
+    //                                                     'c'=>$phongBD,'d'=>$phongKT
+    //                                                     ]);
          
-    }
+    // }
+
+
+    // public function getChart()
+    // {
+    //     $allPhong = Phong::all();
+    //     $allTuan = Tuan::all();
+    //     $toanHK = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as total'))
+    //                                     ->groupBy('idPhong')
+    //                                     ->get();
+
+    //     return view('admin.thongke.danhsach', ['toanHK'=>$toanHK,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
+    // }
+
+    // public function getTuan()
+    // {
+    //     $allPhong = Phong::all();
+    //     $allTuan = Tuan::all();
+
+    //     $tuan = DB::table('lich')       ->select('idTuan', DB::raw('count(*) as total'))
+    //                                     ->groupBy('idTuan')
+    //                                     ->get();
+
+    //     return view('admin.thongke.tuan', ['allTuan'=>$allTuan,'tuan'=>$tuan,'allPhong'=>$allPhong]);
+    // }
+    
+    // public function postXemThongKe (Request $request)
+    // {
+    //     $allPhong = Phong::all();
+    //     $allTuan = Tuan::all();
+    //     $tuanBD = $request->tuanBD;
+    //     $tuanKT = $request->tuanKT;
+    //     $xemThongKe = DB::table('lich')    ->select('idTuan','idPhong', DB::raw('count(*) as total'))
+    //                                         ->where('idTuan', '<=', $tuanKT)
+    //                                         ->where('idTuan', '>=', $tuanBD)
+    //                                         ->groupBy('idTuan','idPhong')
+    //                                         ->get();
+    //     return view('admin.thongke.xemthongke', ['xemThongKe'=>$xemThongKe, 
+    //                                             'allTuan'=>$allTuan, 'allPhong'=>$allPhong,
+    //                                             'a'=>$tuanBD,'b'=>$tuanKT]);     
+    // }
 
     public function getSoSanhPhong ()
     {
@@ -180,6 +220,7 @@ class ThongKeController extends Controller
         $phongKT = $phongKT->id;
         $tuanBD = $tuanBD->id;
         $tuanKT = $tuanKT->id;
+        $tong = DB::table('lich')->where('idHocKyNienKhoa',$last->id)->count('id');
 
         $sosanhPhong = DB::table('lich')    ->select('idPhong', DB::raw('count(*) as SoLan'))
                                             ->where('idHocKyNienKhoa',$last->id)
@@ -187,14 +228,16 @@ class ThongKeController extends Controller
                                             ->get();
         $allPhong = Phong::all();
         $allTuan = Tuan::all();
-        return view ('admin.thongke.sosanhphong', ['sosanhPhong' => $sosanhPhong,
+
+        return view ('user.thongke.sosanhphong', ['sosanhPhong' => $sosanhPhong,
                                                     'allPhong'=>$allPhong,
                                                     'allTuan'=>$allTuan,
                                                     'phongBD'=>$phongBD,
                                                     'phongKT'=>$phongKT,
                                                     'tuanBD'=>$tuanBD,
                                                     'tuanKT'=>$tuanKT,
-                                                    'last'=>$last
+                                                    'last'=>$last,
+                                                    'tong'=>$tong
                                                     ]);  
     }
 
@@ -206,7 +249,12 @@ class ThongKeController extends Controller
 
         $tuanBD = $request->tuanBD;
         $tuanKT = $request->tuanKT;
+
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
+        $tong = DB::table('lich')   ->where('idHocKyNienKhoa',$last->id)
+                                    ->where('idTuan', '<=', $tuanKT)
+                                    ->where('idTuan', '>=', $tuanBD)
+                                    ->count('id');
 
         foreach ($request->idPhong as $id) {
             $solan = DB::table('lich') 
@@ -227,11 +275,12 @@ class ThongKeController extends Controller
             } 
         }
 
-        return view('admin.thongke.sosanhphong', ['sosanhPhong'=>$sosanhPhong, 
+        return view('user.thongke.sosanhphong', ['sosanhPhong'=>$sosanhPhong, 
                                                     'allTuan'=>$allTuan, 
                                                     'allPhong'=>$allPhong,
                                                     'tuanBD'=>$tuanBD,'tuanKT'=>$tuanKT,
-                                                    'last'=>$last
+                                                    'last'=>$last,
+                                                    'tong'=>$tong
                                                     ]);
     }
 
@@ -245,18 +294,20 @@ class ThongKeController extends Controller
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
         $tuanBD = 1;
         $tuanKT = 20;
+        $tong = DB::table('lich')->where('idHocKyNienKhoa',$last->id)->count('id');
         $sosanhBoMon = DB::table('lich')->join('phong', 'idPhong', '=', 'phong.id')
                                         ->select('idBoMon', DB::raw('count(*) as SoLan'))
                                         ->where('idHocKyNienKhoa',$last->id)
                                         ->groupBy('idBoMon')
                                         ->get();
 
-        return view ('admin.thongke.sosanhbomon', ['sosanhBoMon' => $sosanhBoMon, 
+        return view ('user.thongke.sosanhbomon', ['sosanhBoMon' => $sosanhBoMon, 
                                                     'allBoMon' => $allBoMon,
                                                     'allTuan'=>$allTuan,
                                                     'tuanBD'=>$tuanBD,
                                                     'tuanKT'=>$tuanKT,
-                                                    'last'=>$last
+                                                    'last'=>$last,
+                                                    'tong'=>$tong
                                                     ]);
     }
 
@@ -268,6 +319,10 @@ class ThongKeController extends Controller
         $tuanBD = $request->tuanBD;
         $tuanKT = $request->tuanKT;
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
+        $tong = DB::table('lich')   ->where('idHocKyNienKhoa',$last->id)
+                                    ->where('idTuan', '<=', $tuanKT)
+                                    ->where('idTuan', '>=', $tuanBD)
+                                    ->count('id');
 
         foreach ($request->idBoMon as $id) {
             $solan = DB::table('lich')  ->join('phong', 'idPhong', '=', 'phong.id')
@@ -288,25 +343,28 @@ class ThongKeController extends Controller
             }   
         }
 
-        return view ('admin.thongke.sosanhbomon', ['sosanhBoMon' => $sosanhBoMon, 
+        return view ('user.thongke.sosanhbomon', ['sosanhBoMon' => $sosanhBoMon, 
                                                     'allBoMon' => $allBoMon,
                                                     'allTuan' => $allTuan,
                                                     'tuanBD' => $tuanBD,
                                                     'tuanKT' =>$tuanKT,
-                                                    'last'=>$last
+                                                    'last'=>$last,
+                                                    'tong'=>$tong
                                                     ]);
     }
 
     public function getSoSanhHocKy ()
     {
         $allHocKy = HocKy_NienKhoa::all();
-        
+        $tong = DB::table('lich')->count('id');
         $sosanhHocKy = DB::table('lich')
                                         ->select('idHocKyNienKhoa', DB::raw('count(*) as SoLan'))
                                         ->groupBy('idHocKyNienKhoa')
                                         ->get();
 
-        return view ('admin.thongke.sosanhhocky', ['sosanhHocKy' => $sosanhHocKy, 'allHocKy'=>$allHocKy]);
+        return view ('user.thongke.sosanhhocky',   ['sosanhHocKy' => $sosanhHocKy,
+                                                    'allHocKy'=>$allHocKy,
+                                                    'tong'=>$tong]);
 
     }
 
@@ -328,51 +386,11 @@ class ThongKeController extends Controller
                 array_push($sosanhHocKy, '{"idHocKyNienKhoa":"'.$id.'", "SoLan": "0"}');
             }   
         }
+        $tong = DB::table('lich')->count('id');
 
-        return view ('admin.thongke.sosanhhocky', ['sosanhHocKy' => $sosanhHocKy,
-                                                    'last'=>$last ,
-                                                    'allHocKy' => $allHocKy
+        return view ('user.thongke.sosanhhocky', ['sosanhHocKy' => $sosanhHocKy,
+                                                    'allHocKy' => $allHocKy,
+                                                    'tong'=>$tong
                                                     ]);
     }
-
-    public function getChart()
-    {
-        $allPhong = Phong::all();
-        $allTuan = Tuan::all();
-        $toanHK = DB::table('lich')     ->select('idPhong', DB::raw('count(*) as total'))
-                                        ->groupBy('idPhong')
-                                        ->get();
-
-        return view('admin.thongke.danhsach', ['toanHK'=>$toanHK,'allPhong'=>$allPhong,'allTuan'=>$allTuan]);
-    }
-
-    public function getTuan()
-    {
-        $allPhong = Phong::all();
-        $allTuan = Tuan::all();
-
-        $tuan = DB::table('lich')       ->select('idTuan', DB::raw('count(*) as total'))
-                                        ->groupBy('idTuan')
-                                        ->get();
-
-        return view('admin.thongke.tuan', ['allTuan'=>$allTuan,'tuan'=>$tuan,'allPhong'=>$allPhong]);
-    }
-    
-    public function postXemThongKe (Request $request)
-    {
-        $allPhong = Phong::all();
-        $allTuan = Tuan::all();
-        $tuanBD = $request->tuanBD;
-        $tuanKT = $request->tuanKT;
-        $xemThongKe = DB::table('lich')    ->select('idTuan','idPhong', DB::raw('count(*) as total'))
-                                            ->where('idTuan', '<=', $tuanKT)
-                                            ->where('idTuan', '>=', $tuanBD)
-                                            ->groupBy('idTuan','idPhong')
-                                            ->get();
-        return view('admin.thongke.xemthongke', ['xemThongKe'=>$xemThongKe, 
-                                                'allTuan'=>$allTuan, 'allPhong'=>$allPhong,
-                                                'a'=>$tuanBD,'b'=>$tuanKT]);     
-    }
-
-
 }

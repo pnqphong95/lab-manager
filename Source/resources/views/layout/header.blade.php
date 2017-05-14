@@ -50,7 +50,7 @@
                                 <a href="user/dangkyphong">ĐĂNG KÝ PHÒNG</a>
                             </li>
                             <li>
-                                <a href="user/vande">PHẢN HỒI PHÒNG</a>
+                                <a href="user/vande/them">GỬI VẤN ĐỀ</a>
                             </li>                    
                             <li>
                                 <a href="user/lichthuchanh">LỊCH DẠY & LỊCH CHỜ DUYỆT</a>
@@ -70,7 +70,10 @@
                                 <a href="user/chinhsualich">ĐIỀU CHỈNH LỊCH</a>
                             </li>
                             <li>
-                                <a href="user/duyetlich/danhsach">ĐIỀU CHỈNH LỊCH</a>
+                                <a href="user/vande/danhsach">VẤN ĐỀ</a>
+                            </li>
+                            <li>
+                                <a href="user/thongke/sosanhphong">THỐNG KÊ</a>
                             </li>
                         </ul>
                     </li>
