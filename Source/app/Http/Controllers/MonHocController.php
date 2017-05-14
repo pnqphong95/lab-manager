@@ -50,13 +50,20 @@ class MonHocController extends Controller
         $monhoc->SoTinChi =$request->SoTinChi;
         $monhoc->save();
 
-        return redirect('admin/monhoc/them')->with('thongbao','Thêm thành công');        
+        $last= MonHoc::orderBy('id','desc')->first();
+
+        return redirect('admin/monhoc/chitiet/'.$last->id)->with('thongbao','Thêm thành công');        
     }
 
     public function getSua($id)
     {
         $monhoc = MonHoc::find($id);
-        return view('admin.monhoc.sua', ['monhoc'=>$monhoc]);
+        $a = DB::table('monhoc_phanmem')->select('idPhanMem')->where('idMonHoc',$id);
+        $phanmem = DB::table('phanmem')->whereNotIn('id',$a)->get();
+
+        return view('admin.monhoc.sua', ['monhoc'=>$monhoc,
+                                        'phanmem'=>$phanmem
+                                        ]);
     }
 
     public function postSua(Request $request, $id)
@@ -100,4 +107,44 @@ class MonHocController extends Controller
         return redirect('admin/monhoc/danhsach')->with('thongbao','Xóa thành công');
     }
 
+    public function getChiTiet($id)
+    {
+        $monhoc = MonHoc::find($id);
+        $allPhanMem = PhanMem::all();
+        $a = DB::table('monhoc_phanmem')->select('idPhanMem')->where('idMonHoc',$id);
+        $phanmem = DB::table('phanmem')->whereNotIn('id',$a)->get();
+
+        return view('admin.monhoc.chitiet', ['monhoc'=>$monhoc,
+                                            'phanmem'=>$phanmem,
+                                            'allPhanMem'=>$allPhanMem
+                                            ]);
+    }
+
+    public function postThemPM(Request $request,$id)
+    {
+        $monhoc_phanmem = new MonHoc_PhanMem();
+        $monhoc_phanmem->idMonHoc =$request->idMonHoc;
+        $monhoc_phanmem->idPhanMem =$request->idPhanMem;
+        $monhoc_phanmem->save();
+
+        return redirect('admin/monhoc/chitiet/'.$id)->with('thongbao','Thêm thành công');        
+    }
+
+    public function postSuaPM(Request $request,$id)
+    {
+        $monhoc_phanmem = new MonHoc_PhanMem();
+        $monhoc_phanmem->idMonHoc =$request->idMonHoc;
+        $monhoc_phanmem->idPhanMem =$request->idPhanMem;
+        $monhoc_phanmem->save();
+
+        return redirect('admin/monhoc/sua/'.$id)->with('thongbao','Thêm thành công');        
+    }
+
+    public function getXoaPM($idPM, $idPhong)
+    {
+        $monhoc_phanmem = MonHoc_PhanMem::where('idMonHoc',$idMonHoc)->where('idPhanMem',$idPM)->first();
+        $monhoc_phanmem->delete();
+        
+        return redirect('admin/monhoc/sua/'.$idMonHoc)->with('thongbao','Xóa thành công');
+    }
 }

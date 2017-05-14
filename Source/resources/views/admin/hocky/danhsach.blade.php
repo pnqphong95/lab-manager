@@ -4,19 +4,21 @@ Bộ môn - Danh sách
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH BỘ MÔN</h2></div>
+<div class="col-md-12 text-center" style="color: blue"><h2>DANH SÁCH HỌC</h2></div>
 <div class="col-md-12 text-center" style="padding-top: 10px">
 	<!-- <a style="width: 20%" class="btn btn-primary" href="admin/bomon/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a> -->
-	<a style="width: 20%" class="btn btn-success btn-responsive" href="admin/bomon/them"><span class="glyphicon glyphicon-plus"></span>  THÊM MỚI</a>
+	<a style="width: 20%" class="btn btn-success btn-responsive" href="admin/hocky/them"><span class="glyphicon glyphicon-plus"></span>  THÊM MỚI</a>
 </div>
 <div class="col-md-12">
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 		<thead>
-            <tr>
+            <tr class="text-center">
                 <th><center>STT</center></th>
-                <th><center>Tên bộ môn</center></th>
-                <th><center>Xóa</center></th>
+                <th><center>Học kỳ</center></th>
+                <th><center>Niên khóa</center></th>
+                <th><center>Ngày bắt đầu</center></th>
                 <th><center>Sửa</center></th>
+                <th><center>Xóa</center></th>
             </tr>
         </thead>
         <tbody>
@@ -25,12 +27,19 @@ Bộ môn - Danh sách
 	    			{{session('thongbao')}}
 	    		</div>
 	    	@endif	
-	        @foreach($bomon as $bm)
-	            <tr class="odd gradeX">
-	                <td>{{$bm->id}}</td>
-	                <td>{{$bm->TenBM}}</td>
-	                <td><i class="fa fa-trash-o  fa-fw"></i><a href="admin/bomon/xoa/{{Crypt::encrypt($bm->id)}}" onclick="return confirm('Bạn có muốn xóa bộ môn {{$bm->TenBM}} không?');"> Xóa</a></td>
-	                <td><i class="fa fa-pencil fa-fw"></i> <a href="admin/bomon/sua/{{Crypt::encrypt($bm->id)}}">Sửa</a></td>
+	        @foreach($hocky as $hk)
+	            <tr class="text-center">
+	                <td>{{$hk->id}}</td>
+	                <td>{{$hk->HocKy}}</td>
+	                <td>{{$hk->NienKhoa}}</td>
+	                <td>{{$hk->NgayBD}}
+	                </td>
+	                <td>
+	                	<a class="btn btn-warning btn-xs" href="admin/hocky/sua/{{Crypt::encrypt($hk->id)}}"><i class="fa fa-pencil fa-fw"></i> Sửa</a>
+	                </td>
+	                <td>
+	                	<a class="btn btn-danger btn-xs" href="admin/hocky/xoa/{{Crypt::encrypt($hk->id)}}" onclick="return confirm('Bạn có muốn xóa bộ môn {{$hk->HocKy}}/{{$hk->NienKhoa}} này không?');"><i class="fa fa-trash-o  fa-fw"></i> Xóa</a>
+	                </td>
 	            </tr>
 	        @endforeach
 	    </tbody>

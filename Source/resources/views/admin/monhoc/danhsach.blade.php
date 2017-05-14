@@ -37,7 +37,6 @@ Môn học - Danh sách
 	                <td>{{$mh->TenMH}}</td>
 	                <td>{{$mh->SoTinChi}}</td>
 	                <td>
-	                	<a href="admin/monhoc/monhoc_phanmem/{{$mh->id}}" class="btn btn-primary btn-xs">Chi tiết</a>
 	                	<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#yourModal{{$mh->id}}">
 		                	Chi tiết
 	                </button>
@@ -46,7 +45,9 @@ Môn học - Danh sách
 	                <td class="center">
 	                	<a href="admin/monhoc/xoa/{{$mh->id}}" onclick="return confirm('Bạn có muốn xóa môn học và các dữ liệu liên quan tới môn {{$mh->TenMH}} không?');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o  fa-fw"></i> Xóa</a>
 	                </td>
-	                <td class="center"><a href="admin/monhoc/sua/{{$mh->id}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil fa-fw"></i> Sửa</a></td>
+	                <td class="center">
+	                	<a href="admin/monhoc/sua/{{$mh->id}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil fa-fw"></i> Sửa</a>
+	                </td>
 	            </tr>
 	        @endforeach
 	    </tbody>

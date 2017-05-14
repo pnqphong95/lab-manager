@@ -43,6 +43,16 @@ class PhongController extends Controller
         return redirect('admin/phong/chitiet/'.$id)->with('thongbao','Thêm thành công');        
     }
 
+    public function postSuaPM(Request $request,$id)
+    {
+        $phong_phanmem = new Phong_PhanMem();
+        $phong_phanmem->idPhong =$request->idPhong;
+        $phong_phanmem->idPhanMem =$request->idPhanMem;
+        $phong_phanmem->save();
+
+        return redirect('admin/phong/sua/'.$id)->with('thongbao','Thêm thành công');        
+    }
+
     public function getThem()
     {
         $allBoMon = BoMon::all();
@@ -117,7 +127,7 @@ class PhongController extends Controller
         $phong->GPU = $request->GPU;
         $phong->save();
 
-        return redirect('admin/phong/chitiet/'.$id)->with('thongbao','Sửa thành công');
+        return redirect('admin/phong/sua/'.$id)->with('thongbao','Sửa thành công');
     }
 
     public function getXoa($id)

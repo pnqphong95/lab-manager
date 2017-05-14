@@ -28,10 +28,10 @@
                 @foreach ($sosanhPhong as $d)
                     @foreach($allPhong as $p)
                          @if($d->idPhong == $p->id)
-                            ['{{$p->TenPhong}}',{{$d->SoLan}}],
+                            ['{{$p->TenPhong}} - {{$d->SoLan}} lần',{{$d->SoLan}}],
                          @endif
                     @endforeach
-                @endforeach
+                @endforeach 
             ]);
                 var piechart_options = {title:'SO SÁNH TỈ LỆ SỬ DỤNG GIỮA CÁC PHÒNG (từ tuần {{$tuanBD}} đến tuần {{$tuanKT}})',
                            width:900,
@@ -57,9 +57,9 @@
 <div class="text-center">
     <div class="col-md-4 col-md-offset-2">
         <select id="link" class="form-control">
-            <option selected value="admin/thongke/sosanhphong">So sánh theo phòng</option>
-            <option value="admin/thongke/sosanhbomon">So sánh theo bộ môn</option>
-            <option value="admin/thongke/sosanhhocky">So sánh theo học kỳ</option>
+            <option selected value="admin/thongke/sosanhphong">Thống kê theo phòng</option>
+            <option value="admin/thongke/sosanhbomon">Thống kê theo bộ môn</option>
+            <option value="admin/thongke/sosanhhocky">Thống kê theo học kỳ</option>
         </select>
     </div>
     <div class="col-md-4">
@@ -82,7 +82,6 @@
 						<label>Từ</label>
 						
 						<select class="form-control" name="tuanBD">
-							<option value="0"></option>
 							@foreach($allTuan as $tuan)
 								<option value="{{$tuan->id}}">{{$tuan->id}}</option>
 							@endforeach
@@ -91,7 +90,11 @@
 						<select class="form-control" name="tuanKT">
 							<option value="0"></option>
 							@foreach($allTuan as $tuan)
-								<option value="{{$tuan->id}}">{{$tuan->id}}</option>
+								<option 
+                                    @if($tuan->id == 20)
+                                        selected
+                                    @endif
+                                value="{{$tuan->id}}">{{$tuan->id}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -102,15 +105,14 @@
                             <?php $i=1; $i++; ?>
                                 @if($i<=7)
                                 <div class="checkbox col-md-4">
-                                    <input class="form-inline" type="checkbox" value="{{$p->id}}" name="idPhong[]"> {{$p->TenPhong}}
+                                    <input class="form-inline idphong" type="checkbox" value="{{$p->id}}" name="idPhong[]"> {{$p->TenPhong}}
                                 </div>
                                 @endif
                                 
                         @endforeach
                     </div>
 					<div class="text-center">
-                        <button name="phong" type="submit" class="btn btn-primary">Xem thống kê</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>          
+                        <button id="btXTK" name="phong" type="submit" class="btn btn-primary">Xem thống kê</button>    
                     </div>
 				</form>
 		    </div>
@@ -134,6 +136,17 @@
     $("#link").change(function()
     {
         document.location.href = $(this).val();
+    });
+    $(document).ready(function (){
+        $('#btXTK').click(function(event){
+            
+            if(!$('.idphong').is(':checked'))
+            {
+                alert ("Vui lòng chọn phòng muốn xem!");
+                return false;
+            }
+            else return true;
+        })
     });
 </script>
 
