@@ -4,7 +4,7 @@ Lớp học phần
 @endsection
 @section('content')
 <!-- Page Content -->
-
+<div class="row">
 <div class="col-md-12" style="padding-top: 10px">
 	<table width="100%">
 		<tr>
@@ -16,14 +16,14 @@ Lớp học phần
 					<a class="btn btn-success pull-right" href="admin/lophocphan/themexcel">
 						<span class="glyphicon glyphicon-plus"></span>  THÊM TỪ EXCEL
 					</a>
-
-					<a class="btn btn-info pull-right" href="admin/phanmem/them" style="margin-right: 10px;">
+					<a class="btn btn-info pull-right" href="admin/lophocphan/them" style="margin-right: 10px;">
 						<span class="glyphicon glyphicon-plus"></span>  THÊM
 					</a>
 				</div>
 			</td>
 		</tr>
 	</table>
+</div>
 </div>
 <hr>
 @if(session('thongbao'))

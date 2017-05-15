@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-			      	<button type="submit" class="btn btn-default">Đăng ký</button>
+			      	<button type="submit" class="btn btn-success">Đăng ký</button>
 			      	<button type="reset" class="btn btn-default">Đặt lại dữ liệu</button>
 			  </div>
 			</form>

@@ -58,11 +58,15 @@ class MonHocController extends Controller
     public function getSua($id)
     {
         $monhoc = MonHoc::find($id);
+        $monhoc_phanmem = DB::table('monhoc_phanmem')
+                            ->join('phanmem','monhoc_phanmem.idPhanMem','phanmem.id')
+                            ->where('idMonHoc',$id)->get();
         $a = DB::table('monhoc_phanmem')->select('idPhanMem')->where('idMonHoc',$id);
         $phanmem = DB::table('phanmem')->whereNotIn('id',$a)->get();
 
         return view('admin.monhoc.sua', ['monhoc'=>$monhoc,
-                                        'phanmem'=>$phanmem
+                                        'phanmem'=>$phanmem,
+                                        'monhoc_phanmem'=>$monhoc_phanmem
                                         ]);
     }
 
@@ -140,7 +144,7 @@ class MonHocController extends Controller
         return redirect('admin/monhoc/sua/'.$id)->with('thongbao','Thêm thành công');        
     }
 
-    public function getXoaPM($idPM, $idPhong)
+    public function getXoaPM($idPM, $idMonHoc)
     {
         $monhoc_phanmem = MonHoc_PhanMem::where('idMonHoc',$idMonHoc)->where('idPhanMem',$idPM)->first();
         $monhoc_phanmem->delete();

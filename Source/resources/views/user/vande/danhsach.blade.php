@@ -5,13 +5,8 @@ Danh sách các vấn đề
 
 @section('main')
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-md-12" style="padding-top: 10px">
 		<div class="white-well">
-			<div class="text-center">
-				<h3>DANH SÁCH VẤN ĐỀ</h3>
-				<a style="width: 20%" class="btn btn-success btn-responsive" href="user/vande/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
-			</div>
-			<hr>
 			@if(session('thongbao'))
 		        <div class="alert alert-success">		      
 	                {!!session('thongbao')!!}
@@ -23,6 +18,14 @@ Danh sách các vấn đề
 	                {!!session('loi')!!}
 		        </div>
 		    @endif
+			<table width="100%">
+				<tr>
+					<td style="text-align: left;">
+						<h3 class="page-header">DANH SÁCH VẤN ĐỀ</h3>
+					</td>
+				</tr>
+			</table>
+
 			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<tr>
@@ -32,7 +35,9 @@ Danh sách các vấn đề
 						<th>Người gửi</th>
 						<th>Người xử lý</th>
 						<th>Trạng thái</th>
+						@role('manager')
 						<th>Hành động</th>
+						@endrole
 						<th>Chi tiết</th>     								
 					</tr>
 				</thead>
@@ -69,18 +74,18 @@ Danh sách các vấn đề
 			      				Đã xử lý
 			      			@endif
 			      		</td>
-			      		<td>			        		
-		        			<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#xuly{{$vd->id}}"
+			      		@role('manager')
+			      		<td>	
+			      		@if($vd->trangThai == 0)		        		
+		        			<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#xuly{{$vd->id}}">Xử lý</button>
+	        			@endif
+		        			<!-- <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#chuyen{{$vd->id}}"
 		        			@if($vd->trangThai == 1)
 	        				disabled
 	        				@endif
-		        			>Xử lý</button>
-		        			<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#chuyen{{$vd->id}}"
-		        			@if($vd->trangThai == 1)
-	        				disabled
-	        				@endif
-		        			>Chuyển yêu cầu</button>
+		        			>Chuyển yêu cầu</button> -->
 	        			</td>
+	        			@endrole
 			      		<td>
 			      			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal{{$vd->id}}">Xem</button>
 			      		</td>			      		
@@ -88,9 +93,8 @@ Danh sách các vấn đề
 		     	 	@endforeach
 		     	 </tbody>
 		    </table>
-		</div> <!-- <div class="white-well"> -->
-	</div> <!-- <div class="col-lg-12"> -->
-
+		</div>
+	</div> 
 </div>
 
 @foreach ($allVanDe as $vd)
@@ -188,7 +192,7 @@ Danh sách các vấn đề
 		         					<option value="{{$bm->id}}">{{$bm->TenBM}}</option>
 		         				@endforeach
 	         				@else
-	         					<option value="{{Auth::user()->idBoMon}}">{{Auth::user()->TenGV}}</option>
+	         					<option value="1">Admin</option>
 	         				@endif
 	         			</select>
 	         		</div>

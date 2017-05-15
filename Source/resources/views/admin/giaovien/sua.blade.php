@@ -86,13 +86,15 @@ Giảng viên - Sửa
 				            <label>Tình trạng tài khoản</label>
 				            
 				            <ul class="list-group">
-			  					<li class="list-group-item" style="padding-top: 10px;padding-bottom: 5px;">
-			  						@if ($giaovien->KichHoat)
-			  						Đã kích hoạt
-			  						@else
-			  						Chưa kích hoạt
-			  						@endif
-			  					</li>
+			  					<select name="KichHoat" class="form-control">
+			  						@if($giaovien->KichHoat == 0)
+					                	<option selected value="0">Không</option>
+					                	<option value="1">Có</option>
+					                @elseif($giaovien->KichHoat == 1)
+					                	<option selected value="1">Có</option>
+					                	<option value="0">Không</option>
+					                @endif
+					            </select>
 			  				</ul>
 				        </div>
 				        <div class="form-group" style="margin-top: 5px;">

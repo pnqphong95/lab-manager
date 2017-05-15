@@ -9,6 +9,9 @@ use App\BoMon;
 use App\Tuan;
 use DB;
 use App\HocKy_NienKhoa;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Input;
+
 
 class ThongKeController extends Controller
 {
@@ -393,4 +396,29 @@ class ThongKeController extends Controller
                                                     'tong'=>$tong
                                                     ]);
     }
+
+    public function exportBoMon ()
+    {
+        $allBoMon = BoMon::all();
+        $allTuan = Tuan::all();
+        $tuanBD = DB::table('tuan')->select('id')->first();
+        $tuanKT = Tuan::select('id')->orderBy('id','desc')->first();
+
+        $last = HocKy_NienKhoa::orderBy('id','desc')->first();
+        $tuanBD = 1;
+        $tuanKT = 20;
+        $tong = DB::table('lich')->where('idHocKyNienKhoa',$last->id)->count('id');
+        $sosanhBoMon = DB::table('lich')->join('phong', 'idPhong', '=', 'phong.id')
+                                        ->select('idBoMon', DB::raw('count(*) as SoLan'))
+                                        ->where('idHocKyNienKhoa',$last->id)
+                                        ->groupBy('idBoMon')
+                                        ->get();
+
+        Excel::create('thongkeBoMon', function($excel){
+            $excel->sheet('thongkeBoMon',function($sheet){
+                $sheet->loadView('user.thongke.exportBoMon');
+            });
+        })->export('xlsx');
+    }
+
 }

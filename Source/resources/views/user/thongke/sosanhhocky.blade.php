@@ -55,26 +55,30 @@ Thống kê theo học kỳ
 
 <div class="white-well">    
 <div class="row">
-    <div class="col-lg-6">
-        <h3>THỐNG KÊ - HK </h3>
+    <div class="col-md-6">
+        <h3>THỐNG KÊ - Theo học kỳ</h3>
     </div>
-    <div class="col-lg-6">
+    <div class="col-md-6">
         <table class="pull-right">
             <tr>
                 <td>
                     <select id="link" class="form-control">
                         <option value="user/thongke/sosanhphong">Thống kê theo phòng</option>
-                        <option selected value="user/thongke/sosanhbomon">Thống kê theo bộ môn</option>
-                        <option value="user/thongke/sosanhhocky">Thống kê theo học kỳ</option>
+                        <option value="user/thongke/sosanhbomon">Thống kê theo bộ môn</option>
+                        <option selected value="user/thongke/sosanhhocky">Thống kê theo học kỳ</option>
                     </select>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">TÙY CHỌN XEM THỐNG KÊ</button>
+                <td  style="padding-left:  10px">
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">TÙY CHỌN XEM THỐNG KÊ</button>
                 </td>
             </tr>
         </table>
     </div>
-    <div class="col-lg-6">       
+
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-6">       
         <table>
             <td>
                 <tr><div id="SSBoMon1" class="targetDiv" style="border: 1px solid #ccc"></div></tr>

@@ -28,7 +28,6 @@ Phòng- Sửa
 <ul class="list-group">
     <li class="list-group-item">
         <div class="row">   
-
             <div class="col-md-8">
                 
                 <label>Các phần mềm</label>
@@ -119,43 +118,6 @@ Phòng- Sửa
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <form action="admin/phong/suapm/{{$phong->id}}" method="POST">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}" />
-                    <input hidden name="idPhong" value="{{$phong->id}}" />
-                    <div class="form-group">
-                        <label>Tên phần mềm</label>
-                        <select name="idPhanMem" class="form-control">
-                            @foreach($phanmem as $p_pm)
-                                <option value="{{$p_pm->id}}">{{$p_pm->TenPM}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Thêm phần mềm</button>
-                    </div>
-                    <br><br>
-                </form>
-                <!-- <center><label>Các phần mềm</label></center> -->
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên phần mềm</th>
-                        <th>Phiên bản</th>
-                        <th>Xóa</th>
-                    </tr>
-                    <?php $i=0; ?>
-                    @foreach($phong_phanmem as $pm)
-                    <?php $i++; ?>
-                    <tr>
-                        <td>{{$i}}</td>
-                        <td>{{$pm->TenPM}}</td>
-                        <td>{{$pm->PhienBan}}</td>
-                        <td><a href="admin/phong/chitiet/xoaPM/{{$pm->id}}/{{$pm->idPhong}}">Xóa</a></td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div> 
         </div>
     </li>
 </ul>

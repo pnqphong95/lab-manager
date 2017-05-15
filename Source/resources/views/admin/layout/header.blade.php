@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="user/trangchu"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
+                    <a href="admin/trangchu"><i class="fa fa-dashboard fa-fw"></i>ADMIN</a>
                 </li>
                 <li> <!--phòng-->
                     <a href="admin/phong/danhsach"><i class="fa fa-cube fa-fw"></i> PHÒNG<span class="fa arrow"></span></a>
@@ -34,7 +34,10 @@
                             <a href="admin/lophocphan/danhsach">Danh sách</a>
                         </li>
                         <li>
-                            <a href="admin/lophocphan/them">Nhập từ excel</a>
+                            <a href="admin/lophocphan/them">Thêm</a>
+                        </li>
+                        <li>
+                            <a href="admin/lophocphan/themexcel">Nhập từ excel</a>
                         </li>
                     </ul>
                 </li>
@@ -63,7 +66,7 @@
                     </ul>
                 </li>
                 <!--vấn đề-->
-                <li> 
+                <!-- <li> 
                     <a href="admin/taovande/danhsach"><i class="fa fa-cube fa-fw"></i> VẤN ĐỀ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -81,17 +84,11 @@
                             <a href="admin/duyetlich/danhsach">Danh sách</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <!--thống kê-->
-                <li> 
+                <!-- <li> 
                     <a href="admin/thongke/danhsach"><i class="fa fa-cube fa-fw"></i> THỐNG KÊ<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <!-- <li>
-                            <a href="admin/thongke/danhsach">Toàn học kỳ</a>
-                        </li>
-                        <li>
-                            <a href="admin/thongke/tuan">Số lần dùng phòng qua các tuần</a>
-                        </li> -->
                         <li>
                             <a href="admin/thongke/sosanhphong">Thống kê theo phòng</a>
                         </li>
@@ -101,11 +98,8 @@
                         <li>
                             <a href="admin/thongke/sosanhhocky">Thống kê theo học kỳ</a>
                         </li>
-                        <!-- <li>
-                            <a href="admin/thongke/bieudotron/sosanh">So sánh</a>
-                        </li> -->
                     </ul>
-                </li>
+                </li> -->
                 @role('admin')
                 <li> <!--phòng-->
                     <a href="admin/hocky/danhsach"><i class="fa fa-cube fa-fw"></i> HỌC KỲ-NIÊN KHÓA<span class="fa arrow"></span></a>
@@ -115,6 +109,19 @@
                         </li>
                         <li>
                             <a href="admin/hocky/them">Thêm</a>
+                        </li>
+                    </ul>
+                </li>
+                @endrole
+                @role('admin')
+                <li> <!--phòng-->
+                    <a href="admin/bomon/danhsach"><i class="fa fa-cube fa-fw"></i> BỘ MÔN<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="admin/bomon/danhsach">Danh sách</a>
+                        </li>
+                        <li>
+                            <a href="admin/bomon/them">Thêm</a>
                         </li>
                     </ul>
                 </li>
