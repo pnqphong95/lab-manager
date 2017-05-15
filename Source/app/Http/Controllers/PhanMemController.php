@@ -40,7 +40,7 @@ class PhanMemController extends Controller
         $phanmem->PhienBan =$request->PhienBan;
         $phanmem->save();
 
-        return redirect('admin/phanmem/them')->with('thongbao','Thêm thành công');
+        return redirect('admin/phanmem/danhsach')->with('thongbao','Thêm thành công');
     }
 
     public function getSua($id)

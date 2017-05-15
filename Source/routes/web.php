@@ -107,7 +107,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], functi
 
 		Route::post('themPM/{id}', 'MonHocController@postThemPM');
 
-		Route::get('chitiet/xoaPM/{idPM}/{idPhong}', 'MonHocController@getXoaPM');
+		Route::get('sua/xoaPM/{idPM}/{idMonHoc}', 'MonHocController@getXoaPM');
 	});
 
 	Route::group(['prefix'=>'phanmem'], function(){
@@ -194,6 +194,9 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], functi
 		Route::post('them', 'GiaoVienController@postThem');
 
 		Route::get('xoa/{id}', 'GiaoVienController@getXoa');
+
+		Route::get('themexcel', 'GiaoVienController@getThemExcel');
+		Route::post('themexcel', 'GiaoVienController@importExcel')->name('importExcel');
 	});
 
 	Route::group(['prefix'=>'duyetlich'], function(){
@@ -251,12 +254,13 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], 
 	Route::group(['prefix'=>'vande'], function(){
 		Route::get('danhsach', 'VanDeController@getDanhSach');
 		Route::post('danhsach', 'VanDeController@postDanhSach');
+		Route::get('danhsachnguoidung', 'VanDeController@getDanhSachNguoiDung');
 
 		Route::post('xuly', 'VanDeController@postXuLy');
 		Route::post('chuyen', 'VanDeController@postChuyen');
 
-		Route::get('them', 'VanDeController@getThem');
-		Route::post('them', 'VanDeController@postThem');
+		Route::get('them', ['middleware' => ['role:normal'],'uses' => 'VanDeController@getThem']);
+		Route::post('them', ['middleware' => ['role:normal'],'uses' => 'VanDeController@postThem']);
 	});
 
 	Route::group(['prefix'=>'thongke'], function(){
@@ -266,6 +270,8 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], 
 
 		Route::get ('sosanhbomon', 'ThongKeController@getSoSanhBoMon');
 		Route::post ('sosanhbomon', 'ThongKeController@postSoSanhBoMon');
+		Route::get ('exportBoMon', 'ThongKeController@exportBoMon');
+
 
 		Route::get ('sosanhhocky', 'ThongKeController@getSoSanhHocKy');
 		Route::post ('sosanhhocky', 'ThongKeController@postSoSanhHocKy');

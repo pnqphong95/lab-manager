@@ -13,6 +13,4 @@ return array(
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
-    // Include PHPEXCEL Library with Laravel 5 
-	'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
 );

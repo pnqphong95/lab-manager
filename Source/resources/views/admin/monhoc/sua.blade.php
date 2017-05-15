@@ -4,15 +4,29 @@ Môn học- Sửa
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="color: blue"><h2>SỬA MÔN HỌC</h2></div>
-<div class="col-md-12 text-center" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-primary" href="admin/monhoc/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-</div>
 <div class="col-md-12" style="padding-top: 10px">
-    <div class="panel panel-primary">
-    	<div class="panel-heading text-center">
-    		SỬA MÔN HỌC - {{$monhoc->TenMH}}
-    	</div>
+    <table width="100%">
+        <tr>
+            <td style="text-align: left;">
+                <h3>ĐIỀU CHỈNH MÔN HỌC - {{$monhoc->TenMH}}</h3>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="admin/monhoc/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<hr>
+<br>
+@if(session('thongbao'))
+    <div class="alert alert-success">
+        {{session('thongbao')}}
+    </div>
+@endif
+<div class="col-md-12" style="padding-top: 10px">
+    <div class="panel panel-default">
     	<div class="panel-body">
 		    <div class="col-md-6">
 		    	@if(count($errors)>0)
@@ -58,31 +72,18 @@ Môn học- Sửa
                         <th>Xóa</th>
                     </tr>
                     <?php $i=0; ?>
-                    @foreach($phanmem as $pm)
+                    @foreach($monhoc_phanmem as $pm)
                     <?php $i++; ?>
                     <tr>
                         <td>{{$i}}</td>
                         <td>{{$pm->TenPM}}</td>
                         <td>{{$pm->PhienBan}}</td>
-                        <td><a href="admin/monhoc/sua/xoaPM/{{$monhoc->id}}/{{$pm->id}}">Xóa</a></td>
+                        <td><a href="admin/monhoc/sua/xoaPM/{{$pm->id}}/{{$pm->idMonHoc}}">Xóa</a></td>
                     </tr>
                     @endforeach
                 	</table>
 				</div>
 				<div>
-					@if(count($errors)>0)
-				        <div class="alert alert-danger">
-				            @foreach($errors->all() as $err)
-				                {{$err}}<br>
-				            @endforeach
-				        </div>
-				    @endif
-
-				    @if(session('thongbao'))
-				        <div class="alert alert-success">
-				            {{session('thongbao')}}
-				        </div>
-				    @endif
 				    <form action="admin/monhoc/suapm/{{$monhoc->id}}" method="POST" class="text-center">
 				        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 				        

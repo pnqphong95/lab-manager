@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\GiaoVien;
+use Illuminate\Support\Facades\Input;
 use DB;
+use PHPExcel; 
+use PHPExcel_IOFactory;
 use App\BoMon;
 use App\ChucVu;
 use App\Role_User;
@@ -171,7 +174,7 @@ class GiaoVienController extends Controller
         $chucvu = ChucVu::all();
         $this->validate($request,
             [
-                'MaGV'=>'required|min:4|max:4',
+                'MaGV'=>'required|min:4|max:6',
                 'HoGV'=>'required|max:255',
                 'TenGV'=>'required|max:255',
                 'SDT'=>'required|max:11|min:10',
@@ -181,7 +184,7 @@ class GiaoVienController extends Controller
                 'TenGV.required'=>'Bạn chưa nhập tên người dùng',
                 'TenGV.max'=>'Tên người dùng có nhiều nhất 255 ký tự',
                 'MaGV.required'=>'Bạn chưa nhập mã người dùng',
-                'MaGV.max'=>'Mã người dùng có 4 ký tự',
+                'MaGV.max'=>'Mã người dùng có ít nhất 4 ký tự và nhiều nhất 6 ký tự',
                 'HoGV.required'=>'Bạn chưa nhập họ người dùng',
                 'HoGV.max'=>'Họ người dùng có nhiều nhất 255 ký tự',
                 'SDT.required'=>'Bạn chưa nhập số điện thoại',
@@ -212,6 +215,7 @@ class GiaoVienController extends Controller
         $giaovien->GioiTinh =$request->GioiTinh;
         $giaovien->SDT =$request->SDT;
         $giaovien->idBoMon =$request->idBoMon;
+        $giaovien->KichHoat =$request->KichHoat;
         $giaovien->save();
 
         return redirect('admin/giaovien/sua/'.$id)->with('thongbao','Sửa thành công');
@@ -254,5 +258,56 @@ class GiaoVienController extends Controller
         $giaovien->save();
 
         return redirect('admin/giaovien/sua/'.$request->id)->with('thongbao','Cấp mật khẩu thành công');
+    }
+
+    public function getThemExcel ()
+    {
+        return view('admin.giaovien.themexcel');
+    }
+
+    public function importExcel()
+    {
+        $i = 0;
+        if(Input::hasFile('import_file'))
+        {
+            $path = Input::file('import_file')->getRealPath();
+            $inputFileType = 'Excel5';
+            $inputFileName = $path;
+            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcelReader = $objReader->load($inputFileName);
+
+            $loadedSheetNames = $objPHPExcelReader->getSheetNames();
+
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcelReader, 'CSV');
+
+            foreach($loadedSheetNames as $sheetIndex => $loadedSheetName) 
+            {
+                $objWriter->setSheetIndex($sheetIndex);
+                $objWriter->save($loadedSheetName.'.csv');
+            }
+
+            $i=1;
+            $filename=$loadedSheetName.'.csv';
+            $file = fopen($filename, "r");
+
+            while(($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+            {
+                if ($emapData[1] == "" || $emapData[1] == "Mã CB")
+                {}
+                else
+                {
+                    $listGV = DB::table('GiaoVien')->get();
+                    
+                    $giaovien = new GiaoVien();
+                    $giaovien->MaGV = substr($emapData[1], 1);
+                    $giaovien->TenGV = $emapData[2];
+                    $giaovien->idBoMon = $emapData[4];
+                    $giaovien->save();  
+                }
+            }
+            fclose($file);
+            unlink ($filename);
+        }
+        return back()->with('thongbao', 'Đã nhập thành công!');
     }
 }

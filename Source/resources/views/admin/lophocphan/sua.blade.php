@@ -1,14 +1,27 @@
 @extends('admin.layout.index')
 @section('title')
-Phần mềm - Sửa
+Lớp học phần - sửa
 @endsection
 @section('content')
 <!-- Page Content -->
-<div class="col-md-12 text-center" style="color: blue"><h2>SỬA PHẦN MỀM</h2></div>
-<div class="col-md-12 text-center" style="padding-top: 10px">
-	<a style="width: 20%" class="btn btn-primary" href="admin/phanmem/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
-	<a style="width: 20%" class="btn btn-success" href="admin/phanmem/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
+
+<div class="col-md-12" style="padding-top: 10px">
+	<table width="100%">
+		<tr>
+			<td style="text-align: left;">
+				<h3>SỬA LỚP HỌC PHẦN</h3>
+			</td>
+			<td>
+				<div class="pull-right">
+					<a class="btn btn-primary pull-right" href="admin/lophocphan/danhsach">
+						<span class="glyphicon glyphicon-list"></span>  DANH SÁCH
+					</a>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>
+<hr>
 <div class="col-md-12" style="padding-top: 10px">
     <div class="panel panel-primary">
     	<div class="panel-heading text-center">

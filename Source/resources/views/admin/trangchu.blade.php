@@ -33,7 +33,7 @@
 					  	</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3">
+						<!-- <div class="col-md-3">
 					    	<a href="admin/lichsu_choduyet/danhsach" class="thumbnail">
 					      		<img src="img/choduyet.png">
 					      		<center>DUYỆT LỊCH</center>
@@ -44,11 +44,11 @@
 					      		<img src="img/issue.png">
 					      		<center>VẤN ĐỀ</center>
 					    	</a>
-					  	</div>
+					  	</div> -->
 					  	<div class="col-md-3">
-					    	<a href="admin/thongke/danhsach" class="thumbnail">
-					      		<img src="img/thongke.png">
-					      		<center>THỐNG KÊ</center>
+					    	<a href="admin/bomon/danhsach" class="thumbnail">
+					      		<img src="img/choduyet.png">
+					      		<center>BỘ MÔN</center>
 					    	</a>
 					  	</div>
 					  	<div class="col-md-3">

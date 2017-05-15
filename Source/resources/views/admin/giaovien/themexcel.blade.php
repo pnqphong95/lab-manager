@@ -1,17 +1,17 @@
 @extends('admin.layout.index')
 @section('title')
-Thêm học phần - Nhập từ file
+Thêm giảng viên - Nhập từ file
 @endsection
 @section('content')
 <div class="col-md-12" style="padding-top: 10px">
 <table width="100%">
 	<tr>
 		<td style="text-align: left;">
-			<h3 class="page-header">Thêm danh sách lớp học phần từ tập tin excel</h3>
+			<h3 class="page-header">Thêm danh sách giảng viên từ tập tin excel</h3>
 		</td>
 		<td>
 			<div class="pull-right">
-				<a class="btn btn-primary pull-right" href="admin/lophocphan/danhsach" style="margin-right: 10px;">
+				<a class="btn btn-primary pull-right" href="admin/giaovien/danhsach" style="margin-right: 10px;">
 					<span class="glyphicon glyphicon-list"></span>  DANH SÁCH
 				</a>
 			</div>
@@ -32,7 +32,7 @@ Thêm học phần - Nhập từ file
 		<input type="file" name="import_file" />
 		<br>
 		<button class="btn btn-primary">Xác nhận</button>
-		<a class="btn btn-default " href="admin/lophocphan/danhsach">Quay lại</a>
+		<a class="btn btn-default " href="admin/giaovien/danhsach">Quay lại</a>
 	</form>
 </div>
 

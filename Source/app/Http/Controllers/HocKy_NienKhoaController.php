@@ -39,7 +39,7 @@ class HocKy_NienKhoaController extends Controller
         $hocky->NgayBD =$request->NgayBD;
         $hocky->save();
 
-        return redirect('admin/hocky/danhsach')->with('thongbao','Thêm học kỳ {{$hocky->HocKy}}/{{$hocky->NienKhoa}} thành công');
+        return redirect('admin/hocky/danhsach')->with('thongbao','Thêm học kỳ mới thành công');
     }
 
     public function getSua($id)

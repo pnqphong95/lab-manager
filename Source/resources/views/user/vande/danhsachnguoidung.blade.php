@@ -23,6 +23,11 @@ Danh sách các vấn đề
 					<td style="text-align: left;">
 						<h3 class="page-header">DANH SÁCH VẤN ĐỀ</h3>
 					</td>
+					<td>
+						<div class="pull-right">
+							<a class="btn btn-default" href="user/vande/them">Quay lại</a>
+						</div>
+					</td>
 				</tr>
 			</table>
 
@@ -35,9 +40,6 @@ Danh sách các vấn đề
 						<th>Người gửi</th>
 						<th>Người xử lý</th>
 						<th>Trạng thái</th>
-						@role('manager')
-						<th>Hành động</th>
-						@endrole
 						<th>Chi tiết</th>     								
 					</tr>
 				</thead>
@@ -74,18 +76,6 @@ Danh sách các vấn đề
 			      				Đã xử lý
 			      			@endif
 			      		</td>
-			      		@role('manager')
-			      		<td>	
-			      		@if($vd->trangThai == 0)		        		
-		        			<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#xuly{{$vd->id}}">Xử lý</button>
-	        			@endif
-		        			<!-- <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#chuyen{{$vd->id}}"
-		        			@if($vd->trangThai == 1)
-	        				disabled
-	        				@endif
-		        			>Chuyển yêu cầu</button> -->
-	        			</td>
-	        			@endrole
 			      		<td>
 			      			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal{{$vd->id}}">Xem</button>
 			      		</td>			      		

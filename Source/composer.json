@@ -9,8 +9,8 @@
         "khill/lavacharts": "3.0.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "zizaco/entrust": "5.2.x-dev",
-        "phpexcel/phpexcel": "dev-master"
+        "phpexcel/phpexcel": "dev-master",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

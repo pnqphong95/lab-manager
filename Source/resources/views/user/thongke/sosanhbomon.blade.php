@@ -27,7 +27,7 @@ Thống kê theo bộ môn
                             ['{{$bm->TenVietTat}}',{{$d->SoLan}}],
                         @endif
                     @endforeach
-                @endforeach
+                @endforeach                
             ]);
                 var piechart_options = {title:'SO SÁNH TỈ LỆ SỬ DỤNG GIỮA CÁC BỘ MÔN (từ tuần {{$tuanBD}} đến tuần {{$tuanKT}})',
                            width:500,
@@ -67,7 +67,7 @@ Thống kê theo bộ môn
                     <option value="user/thongke/sosanhhocky">Thống kê theo học kỳ</option>
                 </select>
             </td>
-            <td>
+            <td style="padding-left:  10px">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">TÙY CHỌN XEM THỐNG KÊ</button>
             </td>
         </tr>
@@ -134,7 +134,8 @@ Thống kê theo bộ môn
     </div>
     <div class="col-md-6">
         <h3 class="text-center">BẢNG SỐ LIỆU THỐNG KÊ
-        </h3>     
+        </h3>
+        <p class="text-center">(Từ tuần {{$tuanBD}} đến tuần {{$tuanKT}})</p>
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <tr>
                 <th>Tên bộ môn</th>

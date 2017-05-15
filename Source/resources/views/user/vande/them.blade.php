@@ -9,12 +9,20 @@ Vấn đề
 <div class="row">
 	<div class="col-lg-12">
 		<div class="white-well">
-			<div class="text-center">
-				<h3>THÊM VẤN ĐỀ</h3>
-				@role('admin')
-					<a style="width: 20%" class="btn btn-success btn-responsive" href="user/vande/danhsach"><span class="glyphicon glyphicon-list"></span>  DANH SÁCH</a>
-				@endrole
-			</div>
+			<table width="100%">
+				<tr>
+					<td style="text-align: left;">
+						<h3 class="page-header">THÊM VẤN ĐỀ</h3>
+					</td>
+					<td>
+						<div class="pull-right">
+							@role('normal')
+							<a class="btn btn-primary btn-responsive" href="user/vande/danhsachnguoidung"><span class="glyphicon glyphicon-list"></span>  DANH SÁCH</a>
+							@endrole
+						</div>
+					</td>
+				</tr>
+			</table>
 			<hr>
 			@if(count($errors)>0)
 		        <div class="alert alert-danger">
@@ -56,7 +64,9 @@ Vấn đề
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-info">Gửi vấn đề</button>
+				<div class="text-center">
+					<button type="submit" class="btn btn-info">Gửi vấn đề</button>
+				</div>
 			</form>
 		</div>
 	</div>

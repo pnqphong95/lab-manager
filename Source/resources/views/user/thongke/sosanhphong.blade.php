@@ -55,24 +55,28 @@ Thống kê theo phòng
 <!-- Page Content -->
 <div class="white-well">    
 <div class="row">
-    <div class="col-md-12">
-        <h3 class="text-center" style="color: blue">THỐNG KÊ - HỌC KỲ {{$last->HocKy}}/{{$last->NienKhoa}}
-        <br>(Theo phòng)
-        </h3>
+    <div class="col-md-6">
+        <h3>THỐNG KÊ - HK {{$last->HocKy}}/{{$last->NienKhoa}} (Theo phòng)</h3>
     </div>
-    <div class="text-center">
-        <div class="col-md-4 col-md-offset-2">
-            <select id="link" class="form-control">
-                <option selected value="user/thongke/sosanhphong">Thống kê theo phòng</option>
-                <option value="user/thongke/sosanhbomon">Thống kê theo bộ môn</option>
-                <option value="user/thongke/sosanhhocky">Thống kê theo học kỳ</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">TÙY CHỌN XEM THỐNG KÊ</button>
-        </div>
+    <div class="col-md-6">
+        <table class="pull-right">
+            <tr>
+                <td>
+                    <select id="link" class="form-control">
+                        <option  selected value="user/thongke/sosanhphong">Thống kê theo phòng</option>
+                        <option value="user/thongke/sosanhbomon">Thống kê theo bộ môn</option>
+                        <option value="user/thongke/sosanhhocky">Thống kê theo học kỳ</option>
+                    </select>
+                </td>
+                <td  style="padding-left:  10px">
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">TÙY CHỌN XEM THỐNG KÊ</button>
+                </td>
+            </tr>
+        </table>
     </div>
-
+</div>
+<hr>
+<div class="row">
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
     	<div class="modal-dialog" role="document">
     	    <div class="modal-content">
@@ -126,16 +130,16 @@ Thống kê theo phòng
     	</div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div class="col-lg-12 text-center">       
-        <div class="col-md-6">
-            <div id="SSPhong1" class="targetDiv" style="border: 1px solid #ccc"></div>
-        </div>
-        <div class="col-md-6">
-            <div id="SSPhong2" class="targetDiv" style="border: 1px solid #ccc"></div>
-        </div>
+    <div class="col-lg-6">
+        <table>
+            <td>
+                <tr><div id="SSPhong1" class="targetDiv" style="border: 1px solid #ccc"></div></tr>
+                <tr><div id="SSPhong2" class="targetDiv" style="border: 1px solid #ccc"></div></tr>
+            </td>
+        </table>       
     </div>
-    <div class="col-md-6 col-md-offset-3">  
-        <h3 class="text-center" style="color: blue">BẢNG SỐ LIỆU THỐNG KÊ
+    <div class="col-lg-6">  
+        <h3 class="text-center">BẢNG SỐ LIỆU THỐNG KÊ
         </h3>     
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <tr>

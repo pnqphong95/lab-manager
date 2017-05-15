@@ -8,8 +8,8 @@ use App\VanDe;
 use App\LichSu_VanDe;
 use App\GiaoVien;
 use App\BoMon;
-use DB;
 use Illuminate\Support\Facades\Auth;
+use DB,Mail;
 
 class VanDeController extends Controller
 {
@@ -18,12 +18,40 @@ class VanDeController extends Controller
         $allPhong = Phong::all();
         $allGiaoVien = GiaoVien::all();
         $allBoMon = BoMon::all();
+        $PhongBM = Phong::where('idBoMon',Auth::user()->idBoMon)->get();
+        $a = [];
+        foreach ($PhongBM as $ph) 
+        {
+            array_push($a, $ph->id);
+        }
         $allVanDe = DB::table('VanDe')  ->skip(0) //lay tu vi tri 0
                                         ->take(20)  //lay 20 result
                                         ->orderBy('id', 'desc') //sap xep giam theo id
+                                        ->whereIn('idPhong', $a)
                                         ->get();
         $ls_vande = DB::table('LichSu_VanDe')->get();
+
         return view('user.vande.danhsach', ['allVanDe' => $allVanDe, 
+                                            'allPhong' => $allPhong,
+                                            'allGiaoVien' => $allGiaoVien,
+                                            'ls_vande' => $ls_vande,
+                                            'allBoMon' => $allBoMon
+                                            ]);
+    }
+
+    public function getDanhSachNguoiDung ()
+    {
+        $allPhong = Phong::all();
+        $allGiaoVien = GiaoVien::all();
+        $allBoMon = BoMon::all();
+        $allVanDe = DB::table('VanDe')  ->skip(0) //lay tu vi tri 0
+                                        ->take(20)  //lay 20 result
+                                        ->orderBy('id', 'desc') //sap xep giam theo id
+                                        ->where('nguoiBaoCao',Auth::user()->id)
+                                        ->get();
+        $ls_vande = DB::table('LichSu_VanDe')->get();
+
+        return view('user.vande.danhsachnguoidung', ['allVanDe' => $allVanDe, 
                                             'allPhong' => $allPhong,
                                             'allGiaoVien' => $allGiaoVien,
                                             'ls_vande' => $ls_vande,
@@ -158,6 +186,30 @@ class VanDeController extends Controller
         $ls->ghiChu = "Gửi yêu cầu xử lý";
         $ls->trangThai = 0;
         $ls->save();
-        return redirect('user/vande/danhsach')->with('thongbao', 'Vấn đề đã gửi!');
+
+        // // gửi email thông báo
+        // $data = [   'Email'=> Auth::user()->Email,
+        //             'MaGV'=> Auth::user()->MaGV,
+        //             'HoGV'=> Auth::user()->HoGV,
+        //             'TenGV'=> Auth::user()->TenGV,
+        //             'subject'=> $last->tomTatVD,
+        //             'noidung'=> "Gửi yêu cầu xử lý", 
+        //             'from' => 'anmapmap2017@gmail.com', 
+        //             'from_name' => 'Admin'
+        //         ];
+        
+        // Mail::send( 'user.vande.blanks', $data, function( $message ) use ($data)
+        // {
+        //     $message    ->to( $data['Email'], $data['HoGV'] )
+        //                 ->from( $data['from'], $data['from_name'] )
+        //                 ->subject( $data['subject'] );
+        // });
+        // echo 
+        // //return redirect('admin/giaovien/sua/'.$data['idGV']);
+        // "<script>
+        //     alert('Bạn đã gửi mail thành công');
+        // </script>";
+
+        return redirect('user/vande/them')->with('thongbao', 'Vấn đề đã gửi!');
     }
 }
