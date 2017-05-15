@@ -20,35 +20,36 @@ Bộ môn - thêm
 </div>
 <hr>
 <br>
-<div class="col-md-12" style="padding-top: 10px">
-    @if(count($errors)>0)
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $err)
-                {{$err}}<br>
-            @endforeach
-        </div>
-    @endif
+<br>
+<div class="col-md-12">
+    <div class="col-md-9" style="padding-bottom:120px">
+        @if(count($errors)>0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $err)
+                    {{$err}}<br>
+                @endforeach
+            </div>
+        @endif
 
-    @if(session('thongbao'))
-        <div class="alert alert-success">
-            {{session('thongbao')}}
+        @if(session('thongbao'))
+            <div class="alert alert-success">
+                {{session('thongbao')}}
+            </div>
+        @endif
+        <div class="panel panel-default ">
+        <div class="panel-body">
+        <form action="admin/bomon/them" method="POST">
+            <input type="hidden" name="_token" value="{{csrf_token()}}" />
+            <div class="form-group">
+                <label>Tên bộ môn</label>
+                <input class="form-control" name="TenBM" placeholder="Nhập tên bộ môn" />
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm</button>
+            <a href="admin/bomon/danhsach" class="btn btn-default">Hủy</a>
+        <form>
         </div>
-    @endif
-    <div class="panel panel-default">
-    	<div class="panel-body">
-    		<form action="admin/bomon/them" method="POST">
-		        <input type="hidden" name="_token" value="{{csrf_token()}}" />
-		        <div class="form-horizontal" style="padding-bottom: 10px">
-		            <div class="col-md-4"><label>Tên bộ môn</label></div>
-		            <div class="col-md-8" style="padding-bottom: 10px"><input class="form-control" name="TenBM" placeholder="Nhập tên bộ môn" /></div>
-		        </div>
-		        <div class="text-center">
-                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"> </span> Thêm</button>
-                    <a href="admin/bomon/danhsach" class="btn btn-default">Trở về</a>     
-                </div>
-		    <form>
-    	</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 @endsection

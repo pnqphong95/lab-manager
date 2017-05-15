@@ -100,7 +100,6 @@ Giáo viên - Thêm
 			        </td>
 			        <td>
 			            <select class="form-control pull-right" name="idChucVu">
-			            	<option selected value="-1"></option>
 			            	@foreach($chucvu as $cv)
 			            		<option value="{{$cv->id}}">{{$cv->TenCV}}</option>
 			            	@endforeach
@@ -123,7 +122,7 @@ Giáo viên - Thêm
 			            <label>Mật khẩu</label>
 			        </td>
 			        <td>
-			            <input type="text" class="form-control pull-right" name="password" placeholder="Nhập mật khẩu" />
+			            <input type="password" class="form-control pull-right" name="password" placeholder="Nhập mật khẩu" />
 			        </td>
 			    </tr>
 			    <tr>

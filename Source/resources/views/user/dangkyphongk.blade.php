@@ -46,8 +46,8 @@
 					</div>
 					<div class="col-lg-5">
 						<div class="form-group">
-							<label>Bạn muốn đăng ký phòng cho môn học khác</label>
-							<a class="btn btn-info " href="user/dangkyphongk">Đăng ký môn học khác</a>
+							<label>Quay lại trang trước</label><br>
+							<a class="btn btn-default " href="user/dangkyphong">Quay lại</a>
 						</div>
 						
 					</div>
