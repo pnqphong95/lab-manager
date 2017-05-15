@@ -12,6 +12,7 @@ Giảng viên - Danh sách
 		</td>
 		<td>
 			<div class="pull-right">
+				<a class="btn btn-info" href="admin/giaovien/themexcel"><span class="glyphicon glyphicon-plus"></span>  THÊM TỪ FILE</a>
 				<a class="btn btn-success" href="admin/giaovien/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 			</div>
 		</td>

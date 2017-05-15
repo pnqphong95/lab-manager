@@ -54,7 +54,8 @@ class DangKyPhongController extends Controller
                 'allMonHoc' => $allMonHoc, 
                 'allTuan' => $allTuan,
                 'allThu' => $allThu,
-                'allBuoi' => $allBuoi
+                'allBuoi' => $allBuoi,
+                'lophocphan' => $lophocphan
             ]
         );
     }

@@ -12,6 +12,7 @@ Môn học - Danh sách
 		</td>
 		<td>
 			<div class="pull-right">
+				<a class="btn btn-info" href="admin/monhoc/themexcel"><span class="glyphicon glyphicon-plus"></span>  THÊM TỪ FILE</a>
 				<a class="btn btn-success" href="admin/monhoc/them"><span class="glyphicon glyphicon-plus"></span>  THÊM</a>
 			</div>
 		</td>
