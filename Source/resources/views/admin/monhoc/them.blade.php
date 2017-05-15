@@ -12,7 +12,7 @@ Môn học - Thêm
             </td>
             <td>
                 <div class="pull-right">
-                    <a class="btn btn-info" href="admin/monhoc/themexcel"><span class="glyphicon glyphicon-plus"></span>   THÊM TỪ FILE</a>
+                    <a class="btn btn-info hidden" href="admin/monhoc/themexcel"><span class="glyphicon glyphicon-plus"></span>   THÊM TỪ FILE</a>
                 </div>
                 <div class="pull-right" style="padding-right: 10px">
                     <a class="btn btn-primary" href="admin/monhoc/danhsach"><span class="glyphicon glyphicon-list-alt"></span>   DANH SÁCH</a>
@@ -24,7 +24,7 @@ Môn học - Thêm
 <hr>
 <br>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         @if(count($errors)>0)
                 <div class="alert alert-danger">
                     @foreach($errors->all() as $err)
@@ -38,7 +38,9 @@ Môn học - Thêm
                     {{session('thongbao')}}
                 </div>
             @endif
-            <form action="admin/monhoc/them" method="POST">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="admin/monhoc/them" method="POST">
                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
                 <div class="form-group">
                     <label>Mã môn học</label>
@@ -57,6 +59,8 @@ Môn học - Thêm
                     <a href="admin/monhoc/danhsach" class="btn btn-default">Trở về</a>
                 </div>
             <form>
+                </div>
+            </div>
     </div>
 </div>
 

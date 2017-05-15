@@ -90,7 +90,7 @@ class GiaoVienController extends Controller
 
         $this->validate($request,
             [
-                'MaGV'=>'required|min:4|max:4|unique:giaovien',
+                'MaGV'=>'required|min:4|max:6|unique:giaovien',
                 'HoGV'=>'required|max:255',
                 'TenGV'=>'required|max:255',
                 'NgaySinh'=>'required',
@@ -137,8 +137,8 @@ class GiaoVienController extends Controller
         $user = User::where ('MaGV', $request->MaGV)->first();
         $role = Role::where('name', 'normal')->first();
         $user->attachRole($role);
-        //$a = $phong->id;
-        return redirect('admin/giaovien/danhsach')->with('thongbao','Thêm người dùng thành công!');
+        $last= GiaoVien::orderBy('id','desc')->first();
+        return redirect('admin/giaovien/sua/'.$last->id)->with('thongbao','Thêm người dùng thành công!');
     }
 
     public function getSua($id)

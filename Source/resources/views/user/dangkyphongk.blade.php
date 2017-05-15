@@ -28,7 +28,7 @@
 			<form action="user/dangkyphong" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row">
-					<div class="col-lg-6">		
+					<div class="col-lg-4">		
 						<div class="form-group">
 							<label>Môn học</label>
 							<select class="form-control" name="idMonHoc">
@@ -43,6 +43,13 @@
 							<label>Nhóm</label>
 							<input type="text" name="nhomHoc" class="form-control" required>
 						</div>
+					</div>
+					<div class="col-lg-5">
+						<div class="form-group">
+							<label>Quay lại trang trước</label><br>
+							<a class="btn btn-default " href="user/dangkyphong">Quay lại</a>
+						</div>
+						
 					</div>
 				</div>
 
@@ -78,8 +85,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-			      	<button type="submit" class="btn btn-default">Đăng ký</button>
-			      	<button type="reset" class="btn btn-default">Đặt lại dữ liệu</button>
+			      	<center><button type="submit" class="btn btn-success">Đăng ký</button></center>
 			  </div>
 			</form>
 			<!-- End dang ky -->

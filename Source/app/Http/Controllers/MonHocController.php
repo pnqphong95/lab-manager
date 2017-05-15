@@ -52,7 +52,7 @@ class MonHocController extends Controller
 
         $last= MonHoc::orderBy('id','desc')->first();
 
-        return redirect('admin/monhoc/chitiet/'.$last->id)->with('thongbao','Thêm thành công');        
+        return redirect('admin/monhoc/sua/'.$last->id)->with('thongbao','Thêm thành công');        
     }
 
     public function getSua($id)

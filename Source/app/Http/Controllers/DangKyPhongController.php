@@ -32,15 +32,14 @@ class DangKyPhongController extends Controller
             array_push($a, $lhp->MaHP);
         }
         $allMonHoc = MonHoc::whereIn ('MaMH', $a)->get();
-        echo $allMonHoc;
-        // return view('user.dangkyphong', 
-        //     [   
-        //         'allMonHoc' => $allMonHoc, 
-        //         'allTuan' => $allTuan,
-        //         'allThu' => $allThu,
-        //         'allBuoi' => $allBuoi
-        //     ]
-        // );
+        return view('user.dangkyphong', 
+            [   
+                'allMonHoc' => $allMonHoc, 
+                'allTuan' => $allTuan,
+                'allThu' => $allThu,
+                'allBuoi' => $allBuoi
+            ]
+        );
     }
 
     public function getDangKyPhongK() {
