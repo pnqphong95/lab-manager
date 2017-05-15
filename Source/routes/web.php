@@ -216,6 +216,8 @@ Route::group(['prefix'=>'user', 'middleware' => ['role:normal|manager|admin']], 
 	Route::get('dangkyphong', 'DangKyPhongController@getDangKyPhong');
 	Route::post('dangkyphong', 'DangKyPhongController@postDangKyPhong');
 
+	Route::get('dangkyphongk', 'DangKyPhongController@getDangKyPhongK');
+
 	Route::get('lichthuchanh', 'LichController@getLichThucHanh');
 	Route::get('xoalichCN/{id}', 'LichController@xoalichCN');
 

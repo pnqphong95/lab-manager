@@ -15,17 +15,42 @@ use App\Lich;
 use App\VanDe;
 use App\Lich_ChoDuyet;
 use App\LichSu_ChoDuyet;
+use App\LopHocPhan;
 
 class DangKyPhongController extends Controller
 {
     
     public function getDangKyPhong() {
         
+        
+        $allTuan = Tuan::all();
+        $allBuoi = Buoi::all();
+        $allThu = Thu::all();
+        $lophocphan = LopHocPhan::where ('MaCB', "000509")->select("MaHP")->get();
+        $a = [];
+        foreach ($lophocphan as $lhp) {
+            array_push($a, $lhp->MaHP);
+        }
+        $allMonHoc = MonHoc::whereIn ('MaMH', $a)->get();
+        echo $allMonHoc;
+        // return view('user.dangkyphong', 
+        //     [   
+        //         'allMonHoc' => $allMonHoc, 
+        //         'allTuan' => $allTuan,
+        //         'allThu' => $allThu,
+        //         'allBuoi' => $allBuoi
+        //     ]
+        // );
+    }
+
+    public function getDangKyPhongK() {
+        
         $allMonHoc = MonHoc::all();
         $allTuan = Tuan::all();
         $allBuoi = Buoi::all();
         $allThu = Thu::all();
-        return view('user.dangkyphong', 
+        $lophocphan = LopHocPhan::where ('MaCB', "000509")->get();
+        return view('user.dangkyphongk', 
             [   
                 'allMonHoc' => $allMonHoc, 
                 'allTuan' => $allTuan,
@@ -241,6 +266,7 @@ class DangKyPhongController extends Controller
         $allTuan = Tuan::all();
         $allBuoi = Buoi::all();
         $allThu = Thu::all();
+        
         return view('admin.lich.dangkyphong', 
             [   
                 'allMonHoc' => $allMonHoc, 
