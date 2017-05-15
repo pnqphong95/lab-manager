@@ -8,6 +8,7 @@ use DB;
 use PHPExcel; 
 use PHPExcel_IOFactory;
 use App\LopHocPhan;
+use App\HocKy_NienKhoa;
 
 class LopHocPhanController extends Controller
 {
@@ -31,63 +32,78 @@ class LopHocPhanController extends Controller
     {
         $this->validate($request,
             [
-                'TenPM'=>'required|min:3|max:255',
-                'PhienBan'=>'required|min:3|max:255'
+                'MaCB'=>'required|min:4|max:6',
+                'MaHP'=>'required|min:5|max:10',
+                'Nhom'=>'required',
+                'SoSV'=>'required'
             ],
             [
-                'TenPM.required'=>'Bạn chưa nhập tên môn học',
-                'TenPM.min'=>'Tên môn học có ít nhất 3 ký tự',
-                'TenPM.max'=>'Tên môn học có nhiều nhất 255 ký tự',
-                'PhienBan.required'=>'Bạn chưa nhập phiên bản',
-                'PhienBan.min'=>'Thông tin phiên bản có ít nhất 3 ký tự',
-                'PhienBan.max'=>'Thông tin phiên bản có nhiều nhất 255 ký tự'
-
+                'MaCB.required'=>'Bạn chưa nhập mã cán bộ',
+                'MaCB.min'=>'Mã cán bộ có ít nhất 4 ký tự',
+                'MaCB.max'=>'Mã cán bộ có nhiều nhất 6 ký tự',
+                'MaHP.required'=>'Bạn chưa nhập mã học phần',
+                'MaHP.min'=>'Mã cán bộ có ít nhất 4 ký tự',
+                'MaHP.max'=>'Mã cán bộ có nhiều nhất 10 ký tự',
+                'Nhom.required'=>'Bạn chưa nhập nhóm',
+                'SoSV.required'=>'Bạn chưa nhập số sinh viênlophocphan'
             ]);
-       
-        $phanmem = new PhanMem;
-        $phanmem->TenPM =$request->TenPM;
-        $phanmem->PhienBan =$request->PhienBan;
-        $phanmem->save();
+        $lastHKNK = HocKy_NienKhoa::orderBy('id','desc')->first();
 
-        return redirect('admin/phanmem/them')->with('thongbao','Thêm thành công');
+        $lophocphan = new LopHocPhan;
+        $lophocphan->MaCB =$request->MaCB;
+        $lophocphan->MaHP =$request->MaHP;
+        $lophocphan->Nhom =$request->Nhom;
+        $lophocphan->SoSV =$request->SoSV;
+        $lophocphan->idHocKyNienKhoa = $lastHKNK->id;
+        $lophocphan->save();
+
+        return redirect('admin/lophocphan/danhsach')->with('thongbao','Thêm lớp học phần thành công');
     }
 
     public function getSua($id)
     {
-        $phanmem = PhanMem::find($id);
-        return view('admin.phanmem.sua', ['phanmem'=>$phanmem]);
+        $lophocphan = LopHocPhan::find($id);
+        return view('admin.lophocphan.sua', ['lophocphan'=>$lophocphan]);
     }
 
     public function postSua(Request $request, $id)
     {
-        $phanmem = PhanMem::find($id);
+        $lophocphan = LopHocPhan::find($id);
         $this->validate($request,
             [
-                'TenPM'=>'required|min:3|max:255',
-                'PhienBan'=>'required|min:3|max:255'
+                'MaCB'=>'required|min:4|max:6',
+                'MaHP'=>'required|min:5|max:10',
+                'Nhom'=>'required',
+                'SoSV'=>'required'
             ],
             [
-                'TenPM.required'=>'Bạn chưa nhập tên môn học',
-                'TenPM.min'=>'Tên môn học có ít nhất 3 ký tự',
-                'TenPM.max'=>'Tên môn học có nhiều nhất 255 ký tự',
-                'PhienBan.required'=>'Bạn chưa nhập phiên bản',
-                'PhienBan.min'=>'Thông tin phiên bản có ít nhất 3 ký tự',
-                'PhienBan.max'=>'Thông tin phiên bản có nhiều nhất 255 ký tự'
+                'MaCB.required'=>'Bạn chưa nhập mã cán bộ',
+                'MaCB.min'=>'Mã cán bộ có ít nhất 4 ký tự',
+                'MaCB.max'=>'Mã cán bộ có nhiều nhất 6 ký tự',
+                'MaHP.required'=>'Bạn chưa nhập mã học phần',
+                'MaHP.min'=>'Mã cán bộ có ít nhất 4 ký tự',
+                'MaHP.max'=>'Mã cán bộ có nhiều nhất 10 ký tự',
+                'Nhom.required'=>'Bạn chưa nhập nhóm',
+                'SoSV.required'=>'Bạn chưa nhập số sinh viênlophocphan'
             ]);
+        $lastHKNK = HocKy_NienKhoa::orderBy('id','desc')->first();
 
-        $phanmem->TenPM = $request->TenPM;
-        $phanmem->PhienBan = $request->PhienBan;
-        $phanmem->save();        
+        $lophocphan->MaCB =$request->MaCB;
+        $lophocphan->MaHP =$request->MaHP;
+        $lophocphan->Nhom =$request->Nhom;
+        $lophocphan->SoSV =$request->SoSV;
+        $lophocphan->idHocKyNienKhoa = $lastHKNK->id;
+        $lophocphan->save();        
 
-        return redirect('admin/phanmem/sua/'.$id)->with('thongbao','Sửa thành công');
+        return redirect('admin/lophocphan/sua/'.$id)->with('thongbao','Sửa học phần thành công');
     }
 
     public function getXoa($id)
     {
-        $phanmem = PhanMem::find($id);
-        $phanmem->delete();
+        $lophocphan = LopHocPhan::find($id);
+        $lophocphan->delete();
         
-        return redirect('admin/phanmem/danhsach')->with('thongbao','Xóa thành công');
+        return redirect('admin/lophocphan/danhsach')->with('thongbao','Xóa lớp học phần thành công');
     }
 
 	public function getIPLopHocPham ()

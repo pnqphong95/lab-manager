@@ -1,10 +1,10 @@
 @extends('admin.layout.index')
 @section('title')
-Lớp học phần - sửa
+Lớp học phần - Sửa
 @endsection
 @section('content')
 <!-- Page Content -->
-
+<div class="row">
 <div class="col-md-12" style="padding-top: 10px">
 	<table width="100%">
 		<tr>
@@ -13,7 +13,7 @@ Lớp học phần - sửa
 			</td>
 			<td>
 				<div class="pull-right">
-					<a class="btn btn-primary pull-right" href="admin/lophocphan/danhsach">
+					<a class="btn btn-primary pull-right" href="admin/lophocphan/danhsach" style="margin-right: 10px;">
 						<span class="glyphicon glyphicon-list"></span>  DANH SÁCH
 					</a>
 				</div>
@@ -21,44 +21,49 @@ Lớp học phần - sửa
 		</tr>
 	</table>
 </div>
+</div>
 <hr>
-<div class="col-md-12" style="padding-top: 10px">
-    <div class="panel panel-primary">
-    	<div class="panel-heading text-center">
-    		SỬA PHẦN MỀM - {{$phanmem->TenPM}}
-    	</div>
-    	<div class="panel-body">
-		    @if(count($errors)>0)
-		        <div class="alert alert-danger">
-		            @foreach($errors->all() as $err)
-		                {{$err}}<br>
-		            @endforeach
-		        </div>
-		    @endif
 
-		    @if(session('thongbao'))
-		        <div class="alert alert-success">
-		            {{session('thongbao')}}
-		        </div>
-		    @endif
-		    <form action="admin/phanmem/sua/{{$phanmem->id}}" method="POST">
-		        <input type="hidden" name="_token" value="{{csrf_token()}}" />
-		        <div class="form-group">
-		            <label>Tên phần mềm</label>
-		            <input class="form-control" name="TenPM" placeholder="Nhập tên phần mềm" value="{{$phanmem->TenPM}}" />
-		        </div>
-		        <div class="form-group">
-		            <label>Phiên bản</label>
-		            <input class="form-control" name="PhienBan" placeholder="Nhập phiên bản" value="{{$phanmem->PhienBan}}" />
-		        </div>
-		        
-			    <div class="text-center">
-	                <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có muốn cập nhật {{$phanmem->TenPM}}  không?');"><span class="glyphicon glyphicon-edit"> </span> Sửa</button>
-	                <button type="reset" class="btn btn-default">Reset</button>      
-	            </div>
-		    </form>
-		</div>
+<div class="row">
+<div class="col-md-12">
+	<div class="col-md-9" style="padding-bottom:120px">
+	    @if(count($errors)>0)
+	        <div class="alert alert-danger">
+	            @foreach($errors->all() as $err)
+	                {{$err}}<br>
+	            @endforeach
+	        </div>
+	    @endif
+
+	    @if(session('thongbao'))
+	        <div class="alert alert-success">
+	            {{session('thongbao')}}
+	        </div>
+	    @endif
+	    <form action="admin/lophocphan/sua/{{$lophocphan->id}}" method="POST">
+	        <input type="hidden" name="_token" value="{{csrf_token()}}" />
+	        <div class="form-group">
+	            <label>Mã cán bộ</label>
+	            <input class="form-control" name="MaCB" placeholder="Nhập mã cán bộ"  value="{{$lophocphan->MaCB}}" />
+	        </div>
+	        <div class="form-group">
+	            <label>Mã học phần</label>
+	            <input class="form-control" name="MaHP" placeholder="Nhập mã học phần" value="{{$lophocphan->MaHP}}"/>
+	        </div>
+	        <div class="form-group">
+	            <label>Nhóm</label>
+	            <input class="form-control" name="Nhom" placeholder="Nhập mã nhóm" value="{{$lophocphan->Nhom}}"/>
+	        </div>
+	        <div class="form-group">
+	            <label>Số sinh viên</label>
+	            <input class="form-control" name="SoSV" placeholder="Nhập số sinh viên" value="{{$lophocphan->SoSV}}"/>
+	        </div>
+	        <div class="text-center">
+	        	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-edit "></span> Cập nhật</button>
+	        	<a href="admin/lophocphan/danhsach" class="btn btn-default">Hủy</a>
+	        </div>
+	    <form>
 	</div>
 </div>
-
+</div>
 @endsection
