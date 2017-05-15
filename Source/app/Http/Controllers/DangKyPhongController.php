@@ -212,7 +212,7 @@ class DangKyPhongController extends Controller
                             $thu = Thu::find ($lichDB->idThu);
                             $tuan = Tuan::find ($lichDB->idTuan);
 	                        $daDK = 1;
-                            $mes = $mes . 'Đã đăng ký: Tuần '.$tuan->TenTuan.', Thứ '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- tại phòng: '.$phong->TenPhong .'<br>';
+                            $mes = $mes . 'Đã đăng ký: Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' -- tại phòng: '.$phong->TenPhong .'<br>';
 	                        break;                     
 	                    }
 	                    else
@@ -245,7 +245,7 @@ class DangKyPhongController extends Controller
                 $thu = Thu::find ($lichCD->idThu);
                 $tuan = Tuan::find ($lichCD->idTuan);
 
-                $mes = $mes . 'Chưa được đăng ký: Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' sẽ đưa vào lịch chờ duyệt<br>';
+                $mes = $mes . '<p style="color: red;">Chưa được đăng ký: Tuần '.$tuan->TenTuan.', '.$thu->TenThu. ', Buổi '.$buoi->TenBuoi.' sẽ đưa vào lịch chờ duyệt</p><br>';
 
                 $idCD = Lich_ChoDuyet::orderBy('id','desc')->first();
                 $ls_ChoDuyet = new LichSu_ChoDuyet();
