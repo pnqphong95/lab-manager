@@ -61,18 +61,47 @@ angular.module('starter.controllers', [])
 
         $scope.dangkylich = function ()
         {
-          var user = $scope.user;
-          console.log("id "+ $scope.userService.id);
-          console.log($scope.data.idTuan + $scope.data.idThu + $scope.data.idBuoi + $scope.data.idMH + $scope.data.nhom);
-          var link = $scope.userService.id+"/"+$scope.data.idTuan +"/"+ $scope.data.idThu +"/"+ $scope.data.idBuoi +"/"+ $scope.data.idMH +"/"+ $scope.data.nhom;
-         console.log(link);
-          $http.get ("http://qlpth.dev/api/dangky/"+ link, {
+            var user = $scope.user;
+            var mes = [];
 
-          }).success( function(data){
-            alert(data);
-          }).error(function(){
-            alert("Error");
-          })
+            for (var key in $scope.data.idTuan)
+            {
+                if ($scope.data.idTuan[key] == true)
+                {
+                    for (var key2 in $scope.data.idThu)
+                    {
+                        if ($scope.data.idThu[key2] == true)
+                        {
+                            for (var key3 in $scope.data.idBuoi)
+                            {
+                                if ($scope.data.idBuoi[key3] == true)
+                                {
+                                    var link = $scope.userService.id+"/"+key +"/"+ key2 +"/"+ key3 +"/"+ $scope.data.idMH +"/"+ $scope.data.nhom;
+                                    //console.log(link);
+                                    $http.get ("http://qlpth.dev/api/dangky/"+ link, {
+
+                                    }).success( function(data){
+                                        alert (data);
+                                    }).error(function(){
+                                        alert("Error");
+                                    })
+                                }
+                            }
+                        }
+                    }                    
+                }
+            }
+            // console.log("id "+ $scope.userService.id);
+            // console.log($scope.data.idTuan + $scope.data.idThu + $scope.data.idBuoi + $scope.data.idMH + $scope.data.nhom);
+            //var link = $scope.userService.id+"/"+$scope.data.idTuan +"/"+ $scope.data.idThu +"/"+ $scope.data.idBuoi +"/"+ $scope.data.idMH +"/"+ $scope.data.nhom;
+            //console.log(link);
+            // $http.get ("http://qlpth.dev/api/dangky/"+ link, {
+
+            // }).success( function(data){
+            //     alert(data);
+            // }).error(function(){
+            //     alert("Error");
+            // })
         }
     }]) //controller('LoginCtrl')
 
@@ -94,7 +123,7 @@ angular.module('starter.controllers', [])
             $('.manager').removeClass('hidden');
         }
     }
-    console.log (arrRole);
+    //console.log (arrRole);
 
     $scope.xuly = function ()
     {
@@ -168,6 +197,22 @@ angular.module('starter.controllers', [])
             $state.go ('xepphong', {idLCD: idLichCD, idGV: 1});
         }
 
+        $scope.chuyen = function ()
+        {
+            console.log($stateParams.idLCD+ '-' +$scope.data.idBoMon);
+            $http.get("http://qlpth.dev/api/chuyenyc/"+$stateParams.idLCD+"/"+$scope.data.idBoMon, { //tao thich tao de day
+                
+            })
+            .success(function(data, status, headers, config){  
+                alert(data);
+                $state.go('duyetlich');    
+                
+            })
+            .error(function(){
+                alert("Error");
+            })
+        }
+
         $scope.trave = function (idLichCD)
         {
             $http.get("http://qlpth.dev/api/travebm/"+idLichCD, { //tao thich tao de day
@@ -219,15 +264,20 @@ angular.module('starter.controllers', [])
             console.log ('idPhong '+$scope.data.idPhong);
             $http.get("http://qlpth.dev/api/xepphong/"+$stateParams.idLCD+"/"+$scope.data.idPhong, { //tao thich tao de day
                 
-                })
-                .success(function(data, status, headers, config){  
-                    alert("Đã xếp phòng cho yêu cầu thành công");
-                    $state.go('duyetlich');    
-                    
-                })
-                .error(function(){
-                    alert("Error");
-                })
+            })
+            .success(function(data, status, headers, config){  
+                alert("Đã xếp phòng cho yêu cầu thành công");
+                $state.go('duyetlich');    
+                
+            })
+            .error(function(){
+                alert("Error");
+            })
+        }
+
+        $scope.chuyen = function ()
+        {
+            $state.go('chuyenyc', {idLCD: $stateParams.idLCD});
         }
     }])
 

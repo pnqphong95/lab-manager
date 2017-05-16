@@ -7,9 +7,13 @@ use App\VanDe;
 use DB;
 use App\User;
 use App\Role;
+use App\BoMon;
 
 class AjaxController extends Controller
 {
+
+	
+
     public function getLich ($idHKNK, $tuan) 
     {
     	$idHocKyNienKhoa = DB::table('hocky_nienkhoa')->orderBy('id', 'desc')->first();

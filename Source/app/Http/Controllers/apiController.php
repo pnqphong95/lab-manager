@@ -18,9 +18,27 @@ use App\Lich;
 use App\GiaoVien;
 use App\VanDe;
 use App\Lich_ChoDuyet;
+use App\LichSu_ChoDuyet;
 
 class apiController extends Controller
 {
+    public function getChuyenYC ($idLCD, $idBM)
+    {
+
+        $lichCD = Lich_ChoDuyet::find ($idLCD);
+        $lichCD->idBMDuyet = $idBM;
+        $lichCD->save();  
+        $bomon = BoMon::find ($idBM);
+
+        $lichsu = new LichSu_ChoDuyet();
+        $lichsu->idChoDuyet = $idLCD;
+        $lichsu->idBMNhan = $idBM;
+        $lichsu->ghiChu = "chuyen";
+        $lichsu->trangThai = 0;
+        $lichsu->save();
+
+        return "Yêu cầu đã được chuyển tới bộ môn ".$bomon->TenBM;
+    }
 
 	public function getTraVeBM ($idLCD)
 	{
