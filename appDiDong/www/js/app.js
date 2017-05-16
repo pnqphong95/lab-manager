@@ -98,6 +98,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     controller: 'DuyetLichCtrl'
   })
 
+  .state('chuyenyc', {
+    url: '/chuyenyc/:idLCD',
+    templateUrl: 'templates/chuyenyc.html',
+    controller: 'DuyetLichCtrl'
+  })
+
   .state('xepphong', {
     url: '/xepphong/:idLCD/:idGV',
     templateUrl: 'templates/xepphong.html',

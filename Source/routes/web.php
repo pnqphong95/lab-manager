@@ -21,6 +21,7 @@ Route::group (['prefix' => 'api'], function (){
 	Route::get ('layphongtrongBM/{idQL}/{idLich}', 'apiController@getPhongTrongBM');
 	Route::get ('xepphong/{idLCD}/{idP}', 'apiController@getXepPhong');
 	Route::get ('travebm/{idLCD}', 'apiController@getTraVeBM');
+	Route::get ('chuyenyc/{idLCD}/{idBM}', 'apiController@getChuyenYC');
 });
 
 Route::get('/', 'TrangChuController@getTrangChu')->name('root');

@@ -1,0 +1,25 @@
+<ion-view view-title="Chuyển yêu cầu"> <!-- XemLichCtrl -->
+  	<ion-content >
+  		<table class="table">
+  			<tr>
+    			<td>
+    				<label>Chọn bộ môn cần chuyển</label>
+
+	              	<select class="form-control" ng-model="data.idBoMon">
+	              		<option value="">--Chọn bộ môn--</option>
+	              		<option value="1">Công nghệ thông tin</option>
+	              		<option value="2">Hệ thống thông tin</option>
+	              		<option value="3">Khoa học máy tính</option>
+	                    <option value="4">Kỹ thuật phần mềm</option>
+	                    <option value="5">Truyền thông & mạng máy tính</option>
+	                    <option value="6">Tin học ứng dụng</option>
+	              	</select>
+              	</td>
+          	</tr>
+		</table>
+		<ion-item>
+  			<button class="button button-block button-calm" ng-click="chuyen()">Chuyển yêu cầu</button>
+  		</ion-item>
+  	</ion-content>
+</ion-view>
+
