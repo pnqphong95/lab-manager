@@ -55,8 +55,12 @@ Danh sách các vấn đề
 			      		<td>{{$vd->tomTatVD}}</td>
 			      		<td>
 			      		@foreach($allGiaoVien as $gv)
-			      			@if($gv->id == $vd->nguoiBaoCao)
-			      				{{$gv->TenGV}}
+			      			
+			      			@if($gv->id == $vd->nguoiBaoCao && $gv->GioiTinh==0)
+			      				Thầy {{$gv->TenGV}}
+			      			@endif
+			      			@if($gv->id == $vd->nguoiBaoCao && $gv->GioiTinh==1)
+			      				Cô {{$gv->TenGV}}
 			      			@endif
 			      		@endforeach
 			      		</td>

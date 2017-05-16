@@ -135,7 +135,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], functi
 		Route::post('sua/{id}', 'LopHocPhanController@postSua');
 
 		Route::get('themexcel', 'LopHocPhanController@getThemExcel');
-		Route::post('themexcel', 'LopHocPhanController@importExcel')->name('importExcel');
+		Route::post('themexcel', 'LopHocPhanController@importExcel');
 		
 		Route::get('them', 'LopHocPhanController@getThem');
 		Route::post('them', 'LopHocPhanController@postThem');

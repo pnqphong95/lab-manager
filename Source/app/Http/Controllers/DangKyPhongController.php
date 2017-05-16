@@ -26,7 +26,7 @@ class DangKyPhongController extends Controller
         $allTuan = Tuan::all();
         $allBuoi = Buoi::all();
         $allThu = Thu::all();
-        $lophocphan = LopHocPhan::where ('MaCB', "000509")->select("MaHP")->get();
+        $lophocphan = LopHocPhan::where ('MaCB', Auth::user()->MaGV)->select("MaHP")->get();
         $a = [];
         foreach ($lophocphan as $lhp) {
             array_push($a, $lhp->MaHP);
@@ -48,7 +48,7 @@ class DangKyPhongController extends Controller
         $allTuan = Tuan::all();
         $allBuoi = Buoi::all();
         $allThu = Thu::all();
-        $lophocphan = LopHocPhan::where ('MaCB', "000509")->get();
+        $lophocphan = LopHocPhan::where ('MaCB', Auth::user()->MaGV)->get();
         return view('user.dangkyphongk', 
             [   
                 'allMonHoc' => $allMonHoc, 
