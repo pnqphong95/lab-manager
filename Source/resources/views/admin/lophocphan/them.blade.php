@@ -40,17 +40,24 @@ Lớp học phần - Thêm
 	            {{session('thongbao')}}
 	        </div>
 	    @endif
-	    <form action="admin/phanmem/them" method="POST">
+	    <form action="admin/lophocphan/them" method="POST">
 	        <input type="hidden" name="_token" value="{{csrf_token()}}" />
 	        <div class="form-group">
-	            <label>Tên phần mềm</label>
-	            <input class="form-control" name="TenPM" placeholder="Nhập tên phần mềm" />
+	            <label>Mã cán bộ</label>
+	            <input class="form-control" name="MaCB" placeholder="Nhập mã cán bộ" />
 	        </div>
 	        <div class="form-group">
-	            <label>Phiên bản</label>
-	            <input class="form-control" name="PhienBan" placeholder="Nhập phiên bản" />
+	            <label>Mã học phần</label>
+	            <input class="form-control" name="MaHP" placeholder="Nhập mã học phần" />
 	        </div>
-	        
+	        <div class="form-group">
+	            <label>Nhóm</label>
+	            <input class="form-control" name="Nhom" placeholder="Nhập mã nhóm" />
+	        </div>
+	        <div class="form-group">
+	            <label>Số sinh viên</label>
+	            <input class="form-control" name="SoSV" placeholder="Nhập số sinh viên" />
+	        </div>
 	        <div class="text-center">
 	        	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus "></span> Thêm</button>
 	        	<a href="admin/lophocphan/danhsach" class="btn btn-default">Hủy</a>

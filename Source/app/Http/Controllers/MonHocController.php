@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MonHoc;
 use App\MonHoc_PhanMem;
+use Illuminate\Support\Facades\Input;
 use DB;
+use PHPExcel; 
+use PHPExcel_IOFactory;
 use App\PhanMem;
 
 class MonHocController extends Controller
@@ -150,5 +153,54 @@ class MonHocController extends Controller
         $monhoc_phanmem->delete();
         
         return redirect('admin/monhoc/sua/'.$idMonHoc)->with('thongbao','Xóa thành công');
+    }
+
+    public function getThemExcel ()
+    {
+        return view('admin.monhoc.themexcel');
+    }
+
+    public function importExcel()
+    {
+        $i = 0;
+        if(Input::hasFile('import_file'))
+        {
+            $path = Input::file('import_file')->getRealPath();
+            $inputFileType = 'Excel5';
+            $inputFileName = $path;
+            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcelReader = $objReader->load($inputFileName);
+
+            $loadedSheetNames = $objPHPExcelReader->getSheetNames();
+
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcelReader, 'CSV');
+
+            foreach($loadedSheetNames as $sheetIndex => $loadedSheetName) 
+            {
+                $objWriter->setSheetIndex($sheetIndex);
+                $objWriter->save($loadedSheetName.'.csv');
+            }
+
+            $i=1;
+            $filename=$loadedSheetName.'.csv';
+            $file = fopen($filename, "r");
+
+            while(($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+            {
+                if ($emapData[0] == "" || $emapData[0] == "Mã học phần")
+                {}
+                else
+                {
+                    $monhoc = new MonHoc();
+                    $monhoc->MaMH = $emapData[0];
+                    $monhoc->SoTinChi = $emapData[1];
+                    $monhoc->TenMH = $emapData[2];
+                    $monhoc->save();  
+                }
+            }
+            fclose($file);
+            unlink ($filename);
+        }
+        return back()->with('thongbao', 'Đã thêm danh sách môn học từ file thành công!');
     }
 }

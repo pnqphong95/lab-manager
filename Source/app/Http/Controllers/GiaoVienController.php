@@ -292,17 +292,27 @@ class GiaoVienController extends Controller
 
             while(($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
             {
-                if ($emapData[1] == "" || $emapData[1] == "Mã CB")
+                if ($emapData[0] == "" || $emapData[0] == "macb")
                 {}
                 else
                 {
-                    $listGV = DB::table('GiaoVien')->get();
+                    $emapData[1] = trim($emapData[1]);
+                    $last_name = (strpos($emapData[1], ' ') === false) ? '' : preg_replace('#.*\s([\w-]*)$#', '$1', $emapData[1]);
+                    $first_name = trim( preg_replace('#'.$last_name.'#', '', $emapData[1] ) );
                     
                     $giaovien = new GiaoVien();
-                    $giaovien->MaGV = substr($emapData[1], 1);
-                    $giaovien->TenGV = $emapData[2];
-                    $giaovien->idBoMon = $emapData[4];
-                    $giaovien->save();  
+                    $giaovien->MaGV = substr($emapData[0], 1);                    
+                    $giaovien->HoGV = $first_name;
+                    $giaovien->TenGV = $last_name;
+                    $giaovien->idBoMon = 1;
+                    $giaovien->NgaySinh = '1980-01-01';
+                    $giaovien->GioiTinh = 0;
+                    $pw = password_hash('000000', PASSWORD_DEFAULT);
+                    $giaovien->password = $pw;
+                    $giaovien->idChucVu = 1;
+                    $giaovien->KichHoat = 1;
+                    $giaovien->remember_token = '';
+                    $giaovien->save();
                 }
             }
             fclose($file);

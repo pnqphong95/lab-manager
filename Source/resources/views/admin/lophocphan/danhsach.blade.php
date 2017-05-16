@@ -58,12 +58,12 @@ Lớp học phần
 	                <td>{{$lhp->MaCB}}</td>
 	                <td>{{$lhp->Nhom}}</td>
 	                <td class="center">
-	                	<a href="admin/phanmem/xoa/{{$lhp->id}}" onclick="return confirm('Bạn có muốn xóa phần mềm {{$lhp->MaMH}} không?');" class="btn btn-danger btn-xs">
+	                	<a href="admin/lophocphan/xoa/{{$lhp->id}}" onclick="return confirm('Bạn có muốn xóa học phần {{$lhp->MaHP}} không?');" class="btn btn-danger btn-xs">
 	                		<i class="fa fa-trash-o  fa-fw"></i> Xóa
 	                	</a>
 	                </td>
 	                <td class="center">
-	                	<a href="admin/phanmem/sua/{{$lhp->id}}" class="btn btn-warning btn-xs">
+	                	<a href="admin/lophocphan/sua/{{$lhp->id}}" class="btn btn-warning btn-xs">
 	                		<i class="fa fa-pencil fa-fw"></i> Sửa
                 		</a>
             		</td>

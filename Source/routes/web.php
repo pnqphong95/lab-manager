@@ -109,6 +109,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], functi
 		Route::post('themPM/{id}', 'MonHocController@postThemPM');
 
 		Route::get('sua/xoaPM/{idPM}/{idMonHoc}', 'MonHocController@getXoaPM');
+		Route::get('xoa/{id}', 'MonHocController@getXoa');
+
+		Route::get('themexcel', 'MonHocController@getThemExcel');
+		Route::post('themexcel', 'MonHocController@importExcel');
 	});
 
 	Route::group(['prefix'=>'phanmem'], function(){
