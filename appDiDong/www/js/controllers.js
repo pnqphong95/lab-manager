@@ -156,13 +156,14 @@ angular.module('starter.controllers', [])
         }
     }])
 
-    .controller('DuyetLichCtrl', ['$scope', 'lichCDBM', '$state', '$stateParams', '$http',function ($scope, lichCDBM, $state, $stateParams, $http) {
+    .controller('DuyetLichCtrl', ['$scope', 'userService', 'lichCDBM', '$state', '$stateParams', '$http',function ($scope, userService, lichCDBM, $state, $stateParams, $http) {
         $scope.data = {};  
         $scope.lichCDBM = lichCDBM;
         $scope.lichs = [];
         $scope.lichBMKs = [];
+        $scope.userService = userService;
 
-        $http.get("http://qlpth.dev/api/cacyeucau/1", { //tao thich tao de day
+        $http.get("http://qlpth.dev/api/cacyeucau/"+$scope.userService.id, { //tao thich tao de day
                 
                 })
                 .success(function(data, status, headers, config){  
@@ -234,7 +235,7 @@ angular.module('starter.controllers', [])
         $scope.data = {};  
         $scope.phongs = [];
 
-        $http.get("http://qlpth.dev/api/layphongtrongBM/1/"+$stateParams.idLCD, { //tao thich tao de day
+        $http.get("http://qlpth.dev/api/layphongtrongBM/"+$scope.userService.id+"/"+$stateParams.idLCD, { //tao thich tao de day
                 
             })
             .success(function(data, status, headers, config){  
@@ -260,8 +261,8 @@ angular.module('starter.controllers', [])
 
         $scope.dangky = function ()
         {
-            console.log('idLCD '+$stateParams.idLCD);
-            console.log ('idPhong '+$scope.data.idPhong);
+            // console.log('idLCD '+$stateParams.idLCD);
+            // console.log ('idPhong '+$scope.data.idPhong);
             $http.get("http://qlpth.dev/api/xepphong/"+$stateParams.idLCD+"/"+$scope.data.idPhong, { //tao thich tao de day
                 
             })

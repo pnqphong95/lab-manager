@@ -217,20 +217,38 @@ class ThongKeController extends Controller
         $phongKT = Phong::select('id','TenPhong')->orderBy('id','desc')->first();
         $tuanBD = DB::table('tuan')->select('id')->first();
         $tuanKT = Tuan::select('id')->orderBy('id','desc')->first();
-
+        $sosanhPhong = [];
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
         $phongBD = $phongBD->id;
         $phongKT = $phongKT->id;
         $tuanBD = $tuanBD->id;
         $tuanKT = $tuanKT->id;
-        $tong = DB::table('lich')->where('idHocKyNienKhoa',$last->id)->count('id');
-
-        $sosanhPhong = DB::table('lich')    ->select('idPhong', DB::raw('count(*) as SoLan'))
-                                            ->where('idHocKyNienKhoa',$last->id)
-                                            ->groupBy('idPhong')
-                                            ->get();
         $allPhong = Phong::all();
         $allTuan = Tuan::all();
+        $tong = DB::table('lich')->where('idHocKyNienKhoa',$last->id)->count('id');
+
+        foreach ($allPhong as $p) {
+            $solan = DB::table('lich') 
+                                        ->select('idPhong', DB::raw('count(*) as SoLan'))
+                                        ->where('idHocKyNienKhoa',$last->id)
+                                        ->where('idTuan', '<=', $tuanKT)
+                                        ->where('idTuan', '>=', $tuanBD)
+                                        ->where('idPhong',$p->id)
+                                        ->groupBy('idPhong')
+                                        ->first();
+            if (!is_null ($solan))
+            {
+                array_push($sosanhPhong, $solan);
+                //$tong  = $solan->SoLan + $tong;
+            }
+            else
+            {
+                $obj = (object) array('idPhong' => $p->id, 'SoLan' => 0);
+                array_push($sosanhPhong, $obj);
+            } 
+            
+        }
+        
 
         return view ('user.thongke.sosanhphong', ['sosanhPhong' => $sosanhPhong,
                                                     'allPhong'=>$allPhong,
@@ -254,11 +272,7 @@ class ThongKeController extends Controller
         $tuanKT = $request->tuanKT;
 
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
-        $tong = DB::table('lich')   ->where('idHocKyNienKhoa',$last->id)
-                                    ->where('idTuan', '<=', $tuanKT)
-                                    ->where('idTuan', '>=', $tuanBD)
-                                    ->count('id');
-
+        $tong=0;
         foreach ($request->idPhong as $id) {
             $solan = DB::table('lich') 
                                         ->select('idPhong', DB::raw('count(*) as SoLan'))
@@ -271,11 +285,14 @@ class ThongKeController extends Controller
             if (!is_null ($solan))
             {
                 array_push($sosanhPhong, $solan);
+                $tong  = $solan->SoLan + $tong;
             }
             else
             {
-                array_push($sosanhPhong, '{"idPhong":"'.$id.'", "SoLan": "0"}');
+                $obj = (object) array('idPhong' => $id, 'SoLan' => 0);
+                array_push($sosanhPhong, $obj);
             } 
+            
         }
 
         return view('user.thongke.sosanhphong', ['sosanhPhong'=>$sosanhPhong, 
@@ -290,23 +307,43 @@ class ThongKeController extends Controller
     public function getSoSanhBoMon ()
     {
         $allBoMon = BoMon::all();
+        $sosanhBoMon = [];
         $allTuan = Tuan::all();
         $tuanBD = DB::table('tuan')->select('id')->first();
         $tuanKT = Tuan::select('id')->orderBy('id','desc')->first();
-
+        $allHocKy = HocKy_NienKhoa::all();
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
         $tuanBD = 1;
         $tuanKT = 20;
         $tong = DB::table('lich')->where('idHocKyNienKhoa',$last->id)->count('id');
-        $sosanhBoMon = DB::table('lich')->join('phong', 'idPhong', '=', 'phong.id')
+        foreach ($allBoMon as $bm) 
+        {
+            $solan = DB::table('lich')  ->join('phong', 'idPhong', '=', 'phong.id')
                                         ->select('idBoMon', DB::raw('count(*) as SoLan'))
                                         ->where('idHocKyNienKhoa',$last->id)
+                                        ->where('idTuan', '<=', $tuanKT)
+                                        ->where('idTuan', '>=', $tuanBD)
+                                        ->where('idBoMon',$bm->id)
                                         ->groupBy('idBoMon')
-                                        ->get();
+                                        ->first();
+            if (!is_null ($solan))
+            {
+                array_push($sosanhBoMon, $solan);
+        
+            }
+            else
+            {
+                $obj = (object) array('idBoMon' => $bm->id, 'SoLan' => 0);
+                array_push($sosanhBoMon, $obj);
+            }   
+            
+            //print_r($solan);
+        }
 
         return view ('user.thongke.sosanhbomon', ['sosanhBoMon' => $sosanhBoMon, 
                                                     'allBoMon' => $allBoMon,
                                                     'allTuan'=>$allTuan,
+                                                    'allHocKy'=>$allHocKy,
                                                     'tuanBD'=>$tuanBD,
                                                     'tuanKT'=>$tuanKT,
                                                     'last'=>$last,
@@ -319,15 +356,13 @@ class ThongKeController extends Controller
         $sosanhBoMon = array();
         $allBoMon = BoMon::all();
         $allTuan = Tuan::all();
+        $allHocKy = HocKy_NienKhoa::all();
         $tuanBD = $request->tuanBD;
         $tuanKT = $request->tuanKT;
         $last = HocKy_NienKhoa::orderBy('id','desc')->first();
-        $tong = DB::table('lich')   ->where('idHocKyNienKhoa',$last->id)
-                                    ->where('idTuan', '<=', $tuanKT)
-                                    ->where('idTuan', '>=', $tuanBD)
-                                    ->count('id');
-
-        foreach ($request->idBoMon as $id) {
+        $tong=0;
+        foreach ($request->idBoMon as $id) 
+        {
             $solan = DB::table('lich')  ->join('phong', 'idPhong', '=', 'phong.id')
                                         ->select('idBoMon', DB::raw('count(*) as SoLan'))
                                         ->where('idHocKyNienKhoa',$last->id)
@@ -339,16 +374,21 @@ class ThongKeController extends Controller
             if (!is_null ($solan))
             {
                 array_push($sosanhBoMon, $solan);
+                $tong  = $solan->SoLan + $tong;
             }
             else
             {
-                array_push($sosanhBoMon, '{"idBoMon":"'.$id.'", "SoLan": "0"}');
+                $obj = (object) array('idBoMon' => $id, 'SoLan' => 0);
+                array_push($sosanhBoMon, $obj);
             }   
+            
+            //print_r($solan);
         }
-
+        //print_r($sosanhBoMon);
         return view ('user.thongke.sosanhbomon', ['sosanhBoMon' => $sosanhBoMon, 
                                                     'allBoMon' => $allBoMon,
                                                     'allTuan' => $allTuan,
+                                                    'allHocKy'=>$allHocKy,
                                                     'tuanBD' => $tuanBD,
                                                     'tuanKT' =>$tuanKT,
                                                     'last'=>$last,
@@ -359,11 +399,24 @@ class ThongKeController extends Controller
     public function getSoSanhHocKy ()
     {
         $allHocKy = HocKy_NienKhoa::all();
+        $sosanhHocKy = [];
         $tong = DB::table('lich')->count('id');
-        $sosanhHocKy = DB::table('lich')
-                                        ->select('idHocKyNienKhoa', DB::raw('count(*) as SoLan'))
+        foreach ($allHocKy as $hk) {
+            $solan = DB::table('lich')  ->select('idHocKyNienKhoa', DB::raw('count(*) as SoLan'))
+                                        ->where('idHocKyNienKhoa',$hk->id)
                                         ->groupBy('idHocKyNienKhoa')
-                                        ->get();
+                                        ->first();
+            if (!is_null ($solan))
+            {
+                array_push($sosanhHocKy, $solan);
+                //$tong  = $solan->SoLan + $tong;
+            }
+            else
+            {
+                $obj = (object) array('idHocKyNienKhoa' => $hk->id, 'SoLan' => 0);
+                array_push($sosanhHocKy, $obj);
+            } 
+        }
 
         return view ('user.thongke.sosanhhocky',   ['sosanhHocKy' => $sosanhHocKy,
                                                     'allHocKy'=>$allHocKy,
@@ -373,6 +426,7 @@ class ThongKeController extends Controller
 
     public function postSoSanhHocKy (Request $request)
     {
+        $tong=0;
         $sosanhHocKy = array();
         $allHocKy = HocKy_NienKhoa::all();
         foreach ($request->idHocKy as $id) {
@@ -383,13 +437,14 @@ class ThongKeController extends Controller
             if (!is_null ($solan))
             {
                 array_push($sosanhHocKy, $solan);
+                $tong  = $solan->SoLan + $tong;
             }
             else
             {
-                array_push($sosanhHocKy, '{"idHocKyNienKhoa":"'.$id.'", "SoLan": "0"}');
-            }   
+                $obj = (object) array('idHocKyNienKhoa' => $id, 'SoLan' => 0);
+                array_push($sosanhHocKy, $obj);
+            } 
         }
-        $tong = DB::table('lich')->count('id');
 
         return view ('user.thongke.sosanhhocky', ['sosanhHocKy' => $sosanhHocKy,
                                                     'allHocKy' => $allHocKy,

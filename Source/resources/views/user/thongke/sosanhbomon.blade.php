@@ -5,7 +5,7 @@ Thống kê theo bộ môn
 @section('header')
     <script type="text/javascript" src="js/loader.js"></script>
     <script type="text/javascript">
-
+    
       // Load Charts and the corechart and barchart packages.
         google.charts.load('current', {'packages':['corechart']});
 
@@ -86,6 +86,14 @@ Thống kê theo bộ môn
     		    <div class="modal-body">
     		        <form action="user/thongke/sosanhbomon" method="post">
     			    	<input type="hidden" name="_token" value="{{csrf_token()}}" />
+                        <div class="form-group form-inline">
+                            <div class="text-center"><label>Học kỳ</label></div>
+                            @foreach ($allHocKy as $hk)
+                                <div class="checkbox col-md-6 col-md-offset-3">
+                                    <label><input class="form-inline idBM" type="checkbox" value="{{$hk->id}}" name="idHocKyNienKhoa[]"> {{$hk->HocKy}}/{{$hk->NienKhoa}}</label>
+                                </div><br>
+                            @endforeach
+                        </div>
     			    	<div class="form-group form-inline text-center">
     			    		<label>Tuần</label>
     						<label>Từ</label>
@@ -109,8 +117,6 @@ Thống kê theo bộ môn
                         <div class="form-group form-inline">
                             <div class="text-center"><label>Bộ môn</label></div>
                             @foreach ($allBoMon as $bm)
-
-                                
                                 <div class="checkbox col-md-6 col-md-offset-3">
                                     <label><input class="form-inline idBM" type="checkbox" value="{{$bm->id}}" name="idBoMon[]"> {{$bm->TenBM}}</label>
                                 </div><br>
