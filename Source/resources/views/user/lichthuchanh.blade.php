@@ -25,7 +25,7 @@ Lịch thực hành
 					<div class="checkbox">						
 						@foreach($allTuan as $tu1)
 					  	<label class="radio-inline">
-						  	<input type="radio" name="selectTuan" class="selectTuan" value="{{$tu1->id}}"> {{$tu1->TenTuan}}
+						  	<input type="checkbox" name="checkboxTuan" class="checkboxTuan" value="{{$tu1->id}}"> {{$tu1->TenTuan}}
 						</label>				
 						@endforeach
 					</div>
@@ -253,9 +253,24 @@ Lịch thực hành
             
 		});
 
+		$('.checkboxTuan').on("click", function () {
+
+				var idTuan = $(this).val();
+				if($(this).prop("checked") == true){
+	                $('#idTuan'+ idTuan).removeClass('my-hidden');
+	                //$('.tuan'+ idTuan).removeClass('my-hidden');
+	            }
+	        	if($(this).prop("checked") == false){
+	     			//$(".trLich").removeClass('my-hidden');
+	     			$('#idTuan'+ idTuan).addClass('my-hidden');
+	            } 
+   
+            
+		});
+
 		@foreach ($allTuan as $tu)
 
-			$('#idTuan'+{{$tu->id}}).addClass('my-hidden');
+		$('#idTuan'+{{$tu->id}}).addClass('my-hidden');
 		@endforeach
 		$('#idTuan1').removeClass('my-hidden');
 	});

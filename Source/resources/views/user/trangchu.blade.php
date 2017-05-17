@@ -18,8 +18,14 @@ Trang chủ
 							<option value="{{$hknk1->id}}">HK{{$hknk1->HocKy}} / {{$hknk1->NienKhoa}}</option>
 						@endforeach
 					</select>
+					<select id="idBoMonLoc">	
+							<option value="0">Tất cả bộ môn</option>
+						@foreach ($allBM as $bm)
+							<option value="{{$bm->id}}">{{$bm->TenBM}}</option>
+						@endforeach
+					</select>
+
 				</h3>
-						
 				<hr>
 			
 				<div style="margin-top: 10px;" class="btn-group" data-toggle="buttons">
@@ -34,19 +40,7 @@ Trang chủ
 					
 				</div>
 				<br>
-				<br>
-				<!-- <div style="margin-top: 10px; margin-bottom: 10px;" class="btn-group" data-toggle="buttons">
-					<label class="btn btn-default">
-						Buổi
-					</label>
-	    			<label class="btn btn-default active">
-						<input type="radio" name="radioBuoi" value="1" checked/>Sáng
-					</label>
-					<label class="btn btn-default">
-						<input type="radio" name="radioBuoi" value="2"/>Chiều
-					</label>
-				</div> -->
-				
+				<br>				
 
 				<table style="background-color: #e6f3ff;" class="table table-bordered" style="text-align: center;">
 					<thead>
@@ -93,7 +87,7 @@ Trang chủ
 					</thead>
 					<tbody>
 					@foreach($phong as $p)
-				      	<tr>						        								        	
+				      	<tr class="bm{{$p->idBoMon}} phongkhoa">						        								        	
 							
 							<td>
 								<span>{{$p->TenPhong}}</span><br>
@@ -161,7 +155,7 @@ Trang chủ
 					</thead>
 					<tbody>
 					@foreach($phong as $p)
-				      	<tr>						        								        	
+				      	<tr class="bm{{$p->idBoMon}} phongkhoa">						        								        	
 							<td>
 								<span>{{$p->TenPhong}}</span><br>
 								<span> 
@@ -198,9 +192,18 @@ Trang chủ
 
 	$(document).ready(function(){ 
 
-		// $('#idHKNK').change( function(){
-		// 	alert ("ádfghj");
-		// });
+		$('#idBoMonLoc').change( function(){
+			var idBM = $('#idBoMonLoc').val();
+			if (idBM != 0)
+			{
+				$('.phongkhoa').addClass('hidden');
+				$('.bm'+idBM).removeClass('hidden');
+			}
+			else
+			{
+				$('.phongkhoa').removeClass('hidden');
+			}
+		});
 		//hien thi ngay len lich
 		showNgayStart();
 
