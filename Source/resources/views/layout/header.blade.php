@@ -70,7 +70,7 @@
                                 <a href="user/chinhsualich">ĐIỀU CHỈNH LỊCH</a>
                             </li>
                             <li>
-                                <a href="user/vande/danhsach">VẤN ĐỀ</a>
+                                <a href="user/vande/danhsach">XỬ LÝ VẤN ĐỀ</a>
                             </li>
                             <li>
                                 <a href="user/thongke/sosanhphong">THỐNG KÊ</a>
