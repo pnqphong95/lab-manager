@@ -40,7 +40,7 @@ Danh sách các vấn đề
 						<th>Buổi</th>
 						<th>Tuần</th>
 						<th>Bộ môn trợ giúp </th>
-						<th>Lịch sử</th>
+						<th>Tiến trình xử lý</th>
 						<th>Hành động</th>     								
 					</tr>
 				</thead>
@@ -91,7 +91,7 @@ Danh sách các vấn đề
 		        			@endforeach
 			        	</td>
 			        	<td>
-		        			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal{{$lichCD->id}}">Xem lịch sử</button>
+		        			<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal{{$lichCD->id}}">Xem</button>
 			        	</td>
 			        	<td>			        		
 		        			<a href="user/xepphong/{{Crypt::encrypt($lichCD->id)}}" class="btn btn-primary btn-xs btn-xepphong">Xếp phòng</a>	

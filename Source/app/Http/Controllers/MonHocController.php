@@ -32,7 +32,7 @@ class MonHocController extends Controller
         $this->validate($request,
             [
                 'TenMH'=>'required|min:3|max:255',
-                'MaMH'=>'required|min:5|max:5',
+                'MaMH'=>'required|min:5|max:5|unique:monhoc',
                 //'MaMH'=>'unique: monhoc, MaMH',
                 'SoTinChi'=>'required'
             ],
@@ -43,7 +43,7 @@ class MonHocController extends Controller
                 'MaMH.required'=>'Bạn chưa nhập mã môn học',
                 'MaMH.min'=>'Mã môn học có độ dài 5 ký tự',
                 'MaMH.max'=>'Mã môn học có độ dài 5 ký tự',
-                //'MaMH.unique'=>'Mã môn học không được trùng',
+                'MaMH.unique'=>'Mã môn học không được trùng',
                 'SoTinChi.required'=>'Bạn chưa nhập số tín chỉ'
             ]);
 

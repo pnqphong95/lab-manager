@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 14, 2017 lúc 01:36 CH
--- Phiên bản máy phục vụ: 10.1.21-MariaDB
--- Phiên bản PHP: 7.1.1
+-- Host: 127.0.0.1
+-- Generation Time: May 23, 2017 at 04:48 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `qlpth`
+-- Database: `qlpth`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bomon`
+-- Table structure for table `bomon`
 --
 
 CREATE TABLE `bomon` (
@@ -33,7 +33,7 @@ CREATE TABLE `bomon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `bomon`
+-- Dumping data for table `bomon`
 --
 
 INSERT INTO `bomon` (`id`, `TenBM`, `TenVietTat`) VALUES
@@ -42,13 +42,12 @@ INSERT INTO `bomon` (`id`, `TenBM`, `TenVietTat`) VALUES
 (3, 'Khoa học máy tính', 'KHMT'),
 (4, 'Kỹ thuật phần mềm', 'KTPM'),
 (5, 'Truyền thông và mạng máy tính', 'TTMMT'),
-(6, 'Tin học ứng dụng', 'THUD'),
-(7, 'Tin học ứng dụng 123', '');
+(6, 'Tin học ứng dụng', 'THUD');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `buoi`
+-- Table structure for table `buoi`
 --
 
 CREATE TABLE `buoi` (
@@ -58,7 +57,7 @@ CREATE TABLE `buoi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `buoi`
+-- Dumping data for table `buoi`
 --
 
 INSERT INTO `buoi` (`id`, `TenBuoi`, `TenVietTat`) VALUES
@@ -68,7 +67,7 @@ INSERT INTO `buoi` (`id`, `TenBuoi`, `TenVietTat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cauhinh`
+-- Table structure for table `cauhinh`
 --
 
 CREATE TABLE `cauhinh` (
@@ -80,7 +79,7 @@ CREATE TABLE `cauhinh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `cauhinh`
+-- Dumping data for table `cauhinh`
 --
 
 INSERT INTO `cauhinh` (`id`, `DLRam`, `DLOCung`, `CPU`, `GPU`) VALUES
@@ -92,7 +91,7 @@ INSERT INTO `cauhinh` (`id`, `DLRam`, `DLOCung`, `CPU`, `GPU`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chucvu`
+-- Table structure for table `chucvu`
 --
 
 CREATE TABLE `chucvu` (
@@ -101,7 +100,7 @@ CREATE TABLE `chucvu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chucvu`
+-- Dumping data for table `chucvu`
 --
 
 INSERT INTO `chucvu` (`id`, `TenCV`) VALUES
@@ -112,40 +111,102 @@ INSERT INTO `chucvu` (`id`, `TenCV`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `giaovien`
+-- Table structure for table `giaovien`
 --
 
 CREATE TABLE `giaovien` (
   `id` int(10) UNSIGNED NOT NULL,
   `MaGV` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `HoGV` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `HoGV` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `TenGV` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NgaySinh` date NOT NULL,
-  `GioiTinh` tinyint(1) NOT NULL,
-  `SDT` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idBoMon` int(10) UNSIGNED NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `KichHoat` tinyint(1) NOT NULL,
-  `idChucVu` int(10) UNSIGNED NOT NULL,
+  `NgaySinh` date DEFAULT NULL,
+  `GioiTinh` tinyint(1) DEFAULT NULL,
+  `SDT` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `idBoMon` int(10) UNSIGNED DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `KichHoat` tinyint(1) DEFAULT NULL,
+  `idChucVu` int(10) UNSIGNED DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `giaovien`
+-- Dumping data for table `giaovien`
 --
 
 INSERT INTO `giaovien` (`id`, `MaGV`, `HoGV`, `TenGV`, `NgaySinh`, `GioiTinh`, `SDT`, `idBoMon`, `password`, `KichHoat`, `idChucVu`, `remember_token`, `Email`) VALUES
-(1, '0000', 'Account', 'Admin', '2017-04-07', 1, '0970000000', 1, '$2y$10$uXx91FdsuFeJA7pTSv/3bubcSME1xevGVIuw8.NSXLCXB75igrzKS', 1, 1, 'Py5O0xrdSzEVQssFNJqA3XMqC61eIlX86q7MDtJefdbuvKRi7NakMtFYBNav', NULL),
-(2, '0001', 'Phạm Duy', 'Hậu', '2017-04-15', 0, '0971111111', 1, '$2y$10$4dUE9W4hRnK9q4LTyMf8bOBugz43UkrEYsEsbJ8SmzxXM07riHGk6', 1, 2, '86wWkWDJYaLitBnSiCouWUOwcMMeogP9wlcmKO7OQGNssBHPZs2U8KjKaynl', NULL),
-(3, '0010', 'Quản lý bộ môn', 'HTTT', '2017-05-05', 1, '0971234567', 2, '$2y$10$CIpxbCXp8fgApKST7U5Kj.48gq4D3xgQNgBxF6u.7r./DyuviavMK', 1, 2, 'DZ7uFdbqECtUtW3NCiGqxWet1wtYo5ZbluDW8Y2vHbVtMQbJXJrUOWyMxMCq', NULL),
-(4, '0002', 'Quản lý', 'Bộ môn', '2017-03-31', 0, '09874563214', 1, '$2y$10$KIo2xhJX7ddhYf9fepaWe.Ddkce5whRi78qreTbDQT3NZ5pN3h5Se', 1, 2, '', NULL),
-(5, '0015', 'Phạm Duy', 'Hậu', '1995-10-03', 1, '0987456321', 1, '$2y$10$7bRYGbpU8Y8IbG5rC8l6cOParE9Fygu.8UsMZlfeAIxvg7SzqzlLG', 1, 1, '', 'wertyuio@sdfghjk.com');
+(1, '0000', 'Account', 'Admin', '1980-04-07', 1, '0970000000', 1, '$2y$10$uXx91FdsuFeJA7pTSv/3bubcSME1xevGVIuw8.NSXLCXB75igrzKS', 1, 1, 'ngTHW00JhYudc5reS1OSufYwZdzLGuvZDe9SzNmurzQsiF6IIXyAygN3s3x2', 'anmapmap2017@gmail.com'),
+(2, '0001', 'Quản lý bộ môn', 'CNTT', '1990-04-15', 0, '0971111111', 1, '$2y$10$5EGLCcTl7H2rMGathFeS0.JOYB2lT1EbYRfBJpMZ0AVVI00O3HB8O', 1, 2, 'GeLDyknj3KDaye0Az59jvImwCtpyn7lmW34AaVQjKofkFAIEI1wT8ilFS9LI', 'oriduyhau@gmail.com'),
+(3, '0010', 'Quản lý bộ môn', 'HTTT', '2017-05-05', 1, '0971234567', 2, '$2y$10$CIpxbCXp8fgApKST7U5Kj.48gq4D3xgQNgBxF6u.7r./DyuviavMK', 1, 2, 'CPML9zxDMrAhihGZuAp3Qa3gWEpVt03hV02yzpvzS7ULLdZeKqVQvC7CCQxW', 'ntatfff@gmail.com'),
+(4, '0020', 'Quản lý bộ môn', 'KHMT', '1990-03-31', 0, '0987456321', 3, '$2y$10$KIo2xhJX7ddhYf9fepaWe.Ddkce5whRi78qreTbDQT3NZ5pN3h5Se', 1, 2, 'lEMzZoLnCgQVRziErrtVSCHR6YRXiWJDkjMK6rqnRokCytoC2Ozo14rK1j0u', 'yeoyeo1711@gmail.com'),
+(5, '0030', 'Quản lý bộ môn', 'TT&MMT', '1995-10-03', 1, '0987456321', 5, '$2y$10$7bRYGbpU8Y8IbG5rC8l6cOParE9Fygu.8UsMZlfeAIxvg7SzqzlLG', 1, 1, '', 'wertyuio@sdfghjk.com'),
+(6, '0040', 'Quản lý bộ môn', 'THUD', '1960-01-01', 1, '01234123123', 6, '$2y$10$7bRYGbpU8Y8IbG5rC8l6cOParE9Fygu.8UsMZlfeAIxvg7SzqzlLG', 1, 2, 'pOnYzDR8PQMuJTwnstzSWyop1FKrLnRkl4WZMMBqK43hXqV63M0CD3OuQJK2', NULL),
+(13, '0050', 'Quản lý bộ môn', 'KTPM', '1970-01-01', 1, '0989898989', 4, '$2y$10$7bRYGbpU8Y8IbG5rC8l6cOParE9Fygu.8UsMZlfeAIxvg7SzqzlLG', 1, 2, 'VxibbXYlPr7dn1z5se3XbztEDxAYHOjXnfvTG51rLwuAokbYZoQnXvSXeYJl', NULL),
+(208, '001000', 'Nguyễn Thị Anh', 'Thư', '1996-01-24', 1, '0963363636', 1, '$2y$10$Dz2wj3f/WGCf/a5xlqMpbeM/mPAPoeHiAMMCs5fp6lwvuiXvmpEwW', 1, 2, 'TGHOvqgoaYi5snWHIq1MHQsefGDdF25WczkkqjPiAVrlbDLYzbb2HF7VHr8L', NULL),
+(393, '000509', 'Lê Quyết ', 'Thắng ', '1980-01-01', 0, '0912345678', 2, '$2y$10$T4AOjFr8A54.SlGU8EzIhORZkCyTQpuhXbKPrPnXjk3REyHXCuHzS', 1, 1, 'VdQv8t0FKhEVRyAQttPfy42d3wBP25dqeZj07tdrOH7Z2bfxRCNXimkBPvFD', NULL),
+(394, '000510', 'Nguyễn Văn', 'Thầy Linh ', '1950-01-01', 0, '0909123123', 3, '$2y$10$ldHLKc9ta4JA6BU4YesTN.9nKWX.geI0BqGx5bQOWnXK2mYuuFkcG', 1, 1, 'T97ju6EC9fcZd2bSDy2kOJqCYss4bWh2Cvb88Kh5OHtxZG4dDc4oeF4MONNR', NULL),
+(395, '000515', 'Lê Đức', 'Thắng ', '1960-01-01', 0, '01234123124', 4, '$2y$10$jHcz2ycY5CipZT8uTQodCui1dmMXyNCx3LAENEZRkwkF0qzpY6II2', 1, 1, '44IutgoIY8G4gxY30j3GPY3F4IG7HstFiwE8XdQWHUO66FeUGIUGIB2xIzgn', NULL),
+(396, '000516', 'Nguyễn Hoàng', 'Việt ', '1980-01-01', 0, '0909123456', 5, '$2y$10$4wiFHmP42LPum5chSjWMs.EYr3sGeWTsBgxkL0tWwalbOcMPw2MVq', 1, 1, 'hfWOway3eksEpI3SA9Xo0pSskHV34JSE4Bo2bZeVQmrBt8t3OkHoYEgnQRY8', NULL),
+(397, '000517', 'Trần Cao', 'Đệ ', '1980-01-01', 0, '0909888999', 1, '$2y$10$peNxwL7vXQAagHw/DmJMQOVT8ZuiI6vEG1POSqmJ2WblgFio9UYVi', 1, 1, 'XA7VYVcrnMZjfxDJWhuXhIHefaZbQsgDAK2zLheA28xUqGvckeHKmsg4cK5s', NULL),
+(398, '000520', 'Trương Minh', 'Thái ', '1980-01-01', 0, '0939888999', 6, '$2y$10$6YoA0obgK3qdjfsNKaoJDOXgA8pTc9xj8m0EutpO13HR7P9Zr3g.q', 1, 1, 'oWPHzrISUuRq4WJf6wYp0CB8jOWnvH7jXdHKMiiBfexEztUvIloKwMDUCIXU', NULL),
+(399, '000527', 'Đoàn Hòa', 'Minh ', '1950-01-01', 0, '01234123321', 1, '$2y$10$rOOc9mawXOt.W5b3iBkpy.2feGtEu/MirLgSR9SUbGCC/rKvf7uJC', 1, 1, 'JsFuZtq05xR9dg1S78ljZ2JwLDuxZOEx68gcqbmgKlAu8IPuYj0I2ADoFG4R', NULL),
+(400, '001042', '', 'Vũ Duy Linh ', '1980-01-01', 0, NULL, 1, '$2y$10$xJjG4gy6UJM69Ajfck.pPuznfDzvYsuJMccAQY5A784wRcxXcs6je', 1, 1, '', NULL),
+(401, '001043', '', 'Nguyễn Minh Trung ', '1980-01-01', 0, NULL, 1, '$2y$10$x2FBU/.JatWYR1CEBFkDYeoNHU7TxbPd7k.nn4JUTa3xUjBapV/l6', 1, 1, '', NULL),
+(402, '001044', '', 'Nguyễn Nhị Gia Vinh ', '1980-01-01', 0, NULL, 1, '$2y$10$AiOZIlMk5P6bJM2rbWVMvecEWswJOjYl.cOXgeNeg2cM9fuSv50Da', 1, 1, '', NULL),
+(403, '001067', '', 'Huỳnh Xuân Hiệp ', '1980-01-01', 0, NULL, 1, '$2y$10$tTM/kqdkL7SN7wwBd4k3duIyMtPs/y.suyrRthIBuqWJ4DVG.lBAG', 1, 1, '', NULL),
+(404, '001068', '', 'Trương Thị Thanh Tuyền ', '1980-01-01', 0, NULL, 1, '$2y$10$foqMmq5Tlzn13fVX1lJxC.Pz0Jj13JkS8AafWGV4FKhJkHAkWRUcK', 1, 1, '', NULL),
+(405, '001069', '', 'Võ Huỳnh Trâm ', '1980-01-01', 0, NULL, 1, '$2y$10$LXMrhWi4HBbYXfStpC4lfe0fuX4LznSS7RwCLosRXSey4LHe8IelC', 1, 1, '', NULL),
+(406, '001070', '', 'Phan Tấn Tài ', '1980-01-01', 0, NULL, 1, '$2y$10$wGcBmcqFoTNsDHKOZQBlQ.XHYkclTcGm3I1NiIPMjwkauWI6iCVr.', 1, 1, '', NULL),
+(407, '001072', '', 'Đỗ Thanh Nghị ', '1980-01-01', 0, NULL, 1, '$2y$10$a06ZiE24HDwb3D8t1JSMi.Pb.dwMFyj8gQDnh3R0bmHxHQf5DTRH6', 1, 1, '', NULL),
+(408, '001112', '', 'Nguyễn Đức Khoa ', '1980-01-01', 0, NULL, 1, '$2y$10$8h1jmxFC7Gl/PSxpv3zvfOvQL9KsM9PYttrFRqlsqi4wLD4asGlHG', 1, 1, '', NULL),
+(409, '001124', '', 'Ngô Bá Hùng ', '1980-01-01', 0, NULL, 1, '$2y$10$LGdIMMfp9FrXWtR5sfhkTeS0RlegToYvE3nxl5sZQVUG54ysK5jfO', 1, 1, '', NULL),
+(410, '001128', '', 'Phạm Hữu Tài ', '1980-01-01', 0, NULL, 1, '$2y$10$EW9Hmm8c/0ZL.y3yN/CYtOalxRbXi0A2UaFQoS9K43uqYgyzyY62y', 1, 1, '', NULL),
+(411, '001168', '', 'Nguyễn Công Huy ', '1980-01-01', 0, NULL, 1, '$2y$10$aNPpjioWDG2f4Ms2RaZikOdhKPPW5k10AUi7/ks0DrQSaZybavX9u', 1, 1, '', NULL),
+(412, '001169', '', 'Hoàng Minh Trí ', '1980-01-01', 0, NULL, 1, '$2y$10$TuTLRgTLOAPs90JuCWcpeOjGubDye8UqtHT2C/qNOxzw/bG2ubSyy', 1, 1, '', NULL),
+(413, '001170', '', 'Nguyễn Thị Thùy Linh ', '1980-01-01', 0, NULL, 1, '$2y$10$4Xd9/WvQlJE69UZO0.H1jeEaZLrs0NSSbwxrKAZ2SEjalH2XCyM6S', 1, 1, '', NULL),
+(414, '001229', '', 'Phạm Thế Phi ', '1980-01-01', 0, NULL, 1, '$2y$10$Uyat2RoWGqy6iKqh.VJGIecQNTE.uPaTX.hCnV6DErwELGHvW0/w2', 1, 1, '', NULL),
+(415, '001230', '', 'Phan Thượng Cang ', '1980-01-01', 0, NULL, 1, '$2y$10$l3XhE7bSG.Aqw2yeQqP3tONOBwaeDfDG1ucZ2hUoKehNvSL.NOjVm', 1, 1, '', NULL),
+(416, '001232', '', 'Phan Phương Lan ', '1980-01-01', 0, NULL, 1, '$2y$10$UzrECC5EWO80bG2IsqD/rOVQT4whKoby6Z/WFljQFKHKERYkwrAti', 1, 1, '', NULL),
+(417, '001322', '', 'Lê Thị Diễm ', '1980-01-01', 0, NULL, 1, '$2y$10$o1bsw874AWXxOv.h83ohm.4zNqlNhthUsD751frO.YW2geX53qedq', 1, 1, '', NULL),
+(418, '001323', '', 'Trần Thanh Điền ', '1980-01-01', 0, NULL, 1, '$2y$10$7O/COAlOt7P5hzQL7ejk.O4RQv0CECVscsVCyUceU5NzZHGBMAFPu', 1, 1, '', NULL),
+(419, '001348', '', 'Phạm Nguyên Khang ', '1980-01-01', 0, NULL, 1, '$2y$10$fXRbPhpNMDQFkCfDEZabKe9CyNBa.ttpHvzwcRnfArfMYNvOMReYS', 1, 1, '', NULL),
+(420, '001349', '', 'Lê Văn Lâm ', '1980-01-01', 0, NULL, 1, '$2y$10$nHQ/jcvI5Vs9C0B1LkSYi.CzJ/XvcIWIXJko/jXgc8xnTi7kgUVMi', 1, 1, '', NULL),
+(421, '001352', '', 'Nguyễn Thái Nghe ', '1980-01-01', 0, NULL, 1, '$2y$10$efCOmcTfFKlFMFKGbHmOJ.qXJke.AII/Eex8l1eV4t21rkJOkqXZi', 1, 1, '', NULL),
+(422, '001353', '', 'Phạm Thị Ngọc Diễm ', '1980-01-01', 0, NULL, 1, '$2y$10$KRqK6j7uxY3/1iD2n5BNAeH7sw3ramNjsWdLMwq549Csue5FG/k4K', 1, 1, '', NULL),
+(423, '001521', '', 'Nguyễn Thư Hương ', '1980-01-01', 0, NULL, 1, '$2y$10$obaL0HpCg/aqiv8YIdJ8ZuaImSTI45dzd0j9G4DMb3JbAXzqBXw8y', 1, 1, '', NULL),
+(424, '001531', '', 'Trương Quốc Định ', '1980-01-01', 0, NULL, 1, '$2y$10$cXXB6/96r7csw.3IRoXcuOZ2ZeDnNIVaG1JEac4G1rvm0EnttoX7a', 1, 1, '', NULL),
+(425, '001533', 'Trần Công', 'Án ', '1970-01-01', 0, '0939123456', 1, '$2y$10$7UKlrfkGfhn.r6x9e3WkTuZntui1utzfJxDcPRt6Fzb0Ofl1WZxuW', 1, 1, '', NULL),
+(426, '001586', '', 'Phan Huy Cường ', '1980-01-01', 0, NULL, 1, '$2y$10$Z.yC7nX32GGBb9CWHRx.Dubc.hPQ.LEbiD16bIzT8oxC2pRVLfRmC', 1, 1, '', NULL),
+(427, '001602', '', 'Huỳnh Phụng Toàn ', '1980-01-01', 0, NULL, 1, '$2y$10$SAGQz4WLEN.ZlihsQQnvReAooONaBvlV.mPYeV/eTLDRL6YpKoDtq', 1, 1, '', NULL),
+(428, '001603', '', 'Hồ Văn Tú ', '1980-01-01', 0, NULL, 1, '$2y$10$0MIATuqlbF1pOoBOJM2dsuXV5WEDNH/PICiU.fk1D8OpKhOwM7VIG', 1, 1, '', NULL),
+(429, '001707', '', 'Phạm Xuân Hiền ', '1980-01-01', 0, NULL, 1, '$2y$10$Fq2AWSEy47QSxAolkAdQCuxKvn8PURq633cGe0cBqubBHlmKLmI9S', 1, 1, '', NULL),
+(430, '001708', '', 'Lâm Chí Nguyện ', '1980-01-01', 0, NULL, 1, '$2y$10$OiRH5fpy41PaENAYF0jT2O2x.T9Af0MNAWoWvuPGdCgKKQDKIe1d6', 1, 1, '', NULL),
+(431, '001806', '', 'Sử Kim Anh ', '1980-01-01', 0, NULL, 1, '$2y$10$SpNibm34ha29vRkh2lbdOu04KlQmT4iS/25cvwTb8OiRFXXZ8L.Ca', 1, 1, '', NULL),
+(432, '001943', '', 'Lâm Nhựt Khang ', '1980-01-01', 0, NULL, 1, '$2y$10$7Hh5xZPhy5HPaG1xKNDK2OkpnQnoN09l9VxkGGFRcXay/TnbGIq92', 1, 1, '', NULL),
+(433, '002172', '', 'Trần Phước Lộc ', '1980-01-01', 0, NULL, 1, '$2y$10$14qmc4gp.W6KG6ZOUbLKYO9lO0K1UOfqBzLppFCOtzz4KPUsMJVIq', 1, 1, '', NULL),
+(434, '002207', '', 'Phạm Thị Trúc Phương ', '1980-01-01', 0, NULL, 1, '$2y$10$Va1DnPZPQaiFOgWnRTc1JOYPJFLR/ARlUlwYZdtWp4PeTRYxMllhC', 1, 1, '', NULL),
+(435, '002226', '', 'Trần Nguyễn Minh Thái ', '1980-01-01', 0, NULL, 1, '$2y$10$t3/2FjjhYO/ips/iZ4ey5uuTV9i85BDvlw5RTLJeLh3jF9MzzvHVu', 1, 1, '', NULL),
+(436, '002266', '', 'Nguyễn Thị Thu An ', '1980-01-01', 0, NULL, 1, '$2y$10$R9slzMDbaBucZInhxloIhujgDnG8fig8xS0jTu.wqLCexBYZ1BgCG', 1, 1, '', NULL),
+(437, '002366', '', 'Hà Duy An ', '1980-01-01', 0, NULL, 1, '$2y$10$.GC73axSegRXicGb5osnb.GNLQrFvTizhWNoNtyF/MRjwOJjvmCbO', 1, 1, '', NULL),
+(438, '002367', '', 'Nguyễn Hữu Vân Long ', '1980-01-01', 0, NULL, 1, '$2y$10$dgrcg/fV1zQ2n/VVTZ50x.MHJIro7TF5fB61AG5aTZesMERzCIzwu', 1, 1, '', NULL),
+(439, '002395', '', 'Đặng Mỹ Hạnh ', '1980-01-01', 0, NULL, 1, '$2y$10$kHOj31eZYEqx0/olZXqJSuRWVwGNBU4RQQwBXsMaj8NRKihKuGxB.', 1, 1, '', NULL),
+(440, '002455', '', 'Lê Văn Quan ', '1980-01-01', 0, NULL, 1, '$2y$10$6V16saFvpOQ6UacNumjHjuACL8I7SStTMVXmZlfLCFy7Y28wZvE.G', 1, 1, '', NULL),
+(441, '002480', '', 'Trần Thị Tố Quyên ', '1980-01-01', 0, NULL, 1, '$2y$10$XbeBLVR0AXNGKrtxpncpcO7H9AAzHe2fRTlExdC5OOZCx5gjM6TaG', 1, 1, '', NULL),
+(442, '002481', '', 'Triệu Thanh Ngoan ', '1980-01-01', 0, NULL, 1, '$2y$10$Kh7z5rlsfercuIzToIz8neHZPA/HAGd3nOte9GCisK0MpinLC.AqK', 1, 1, '', NULL),
+(443, '002482', '', 'Trần Văn Hoàng ', '1980-01-01', 0, NULL, 1, '$2y$10$KxcNgS7v7rfUP2/s5rBlaOE/mtohSoG6HbCJ0diD0JSJqQl.Zim2u', 1, 1, '', NULL),
+(444, '002626', '', 'Bùi Võ Quốc Bảo ', '1980-01-01', 0, NULL, 1, '$2y$10$5TIPYEArlXalOlfG4cWDVOofT.A8nZhwY4Ap5y5T6vor8COppCcdq', 1, 1, '', NULL),
+(445, '002628', '', 'Huỳnh Quang Nghi ', '1980-01-01', 0, NULL, 1, '$2y$10$Ywe7OlaKQVB9ToUs1TB/g.H53sJW9f9.pazh056DKfWTrC6UoydVC', 1, 1, '', NULL),
+(446, '002635', '', 'Trần Nguyễn Minh Thư ', '1980-01-01', 0, NULL, 1, '$2y$10$aSbTpsxHwBtarJRQEbpLBOTggJ3TocFhGn1p.cqlFbdf2eOpv1XMe', 1, 1, '', NULL),
+(447, '002685', '', 'Phạm Thị Xuân Diễm ', '1980-01-01', 0, NULL, 1, '$2y$10$XmChcuHeqBBwlUJcBO4Dhuvscb8WZjWEhhgkQ76BelRhhzZXFjSKG', 1, 1, '', NULL),
+(448, '002692', '', 'Trần Việt Châu ', '1980-01-01', 0, NULL, 1, '$2y$10$EVNPdhcbQM3fsyHBNLjl0.9/w4VM9RFUPGbDhpfbVwdk4SAcu4qFS', 1, 1, '', NULL),
+(449, '002742', '', 'Nguyễn Ngọc Mỹ ', '1980-01-01', 0, NULL, 1, '$2y$10$Y2vhYMmG1vGJTkRd6DgrH.d55OdDfy9DejxRhuJ4b3RZULpnRP...', 1, 1, '', NULL),
+(450, '010006', '', 'Công nghệ thôngtin M.Giảng ', '1980-01-01', 0, NULL, 1, '$2y$10$Vb47yUylqKz27exUQFDamOTcLf4LrdnlfWd3MHMul9Y0cjdNGzLzS', 1, 1, '', NULL),
+(451, '700508', '', 'Nguyễn Hồng Vân ', '1980-01-01', 0, NULL, 1, '$2y$10$ibivMUcIqdBZ/PfJ9c0A4u/KYByjNMwiNqr7tCX6h.wcbS6mD.ZQe', 1, 1, '', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `hocky_nienkhoa`
+-- Table structure for table `hocky_nienkhoa`
 --
 
 CREATE TABLE `hocky_nienkhoa` (
@@ -156,7 +217,7 @@ CREATE TABLE `hocky_nienkhoa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `hocky_nienkhoa`
+-- Dumping data for table `hocky_nienkhoa`
 --
 
 INSERT INTO `hocky_nienkhoa` (`id`, `HocKy`, `NienKhoa`, `NgayBD`) VALUES
@@ -166,7 +227,7 @@ INSERT INTO `hocky_nienkhoa` (`id`, `HocKy`, `NienKhoa`, `NgayBD`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `hopthu`
+-- Table structure for table `hopthu`
 --
 
 CREATE TABLE `hopthu` (
@@ -180,7 +241,7 @@ CREATE TABLE `hopthu` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lich`
+-- Table structure for table `lich`
 --
 
 CREATE TABLE `lich` (
@@ -197,39 +258,134 @@ CREATE TABLE `lich` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `lich`
+-- Dumping data for table `lich`
 --
 
 INSERT INTO `lich` (`id`, `idGiaoVien`, `idPhong`, `idMonHoc`, `Nhom`, `idThu`, `idBuoi`, `idTuan`, `idHocKyNienKhoa`, `Loai`) VALUES
-(4, 1, 1, 1, '1', 2, 1, 4, 2, 0),
-(6, 1, 1, 1, '1', 7, 1, 4, 2, 0),
-(7, 1, 1, 1, '1', 2, 1, 7, 2, 0),
-(8, 1, 1, 1, '1', 4, 1, 7, 2, 0),
-(9, 1, 1, 1, '1', 7, 1, 7, 2, 0),
-(10, 1, 1, 1, '1', 2, 1, 10, 2, 0),
-(11, 1, 1, 1, '1', 4, 1, 10, 2, 0),
-(12, 1, 1, 1, '1', 7, 1, 10, 2, 0),
-(13, 1, 2, 1, '4', 2, 1, 1, 2, 0),
-(14, 1, 3, 1, '5', 2, 1, 1, 2, 0),
-(15, 1, 3, 1, '1', 4, 1, 1, 2, 0),
-(16, 1, 1, 1, '321', 3, 2, 1, 2, 0),
-(17, 1, 1, 1, '321', 5, 1, 1, 2, 0),
-(18, 1, 1, 1, '321', 2, 1, 3, 2, 0),
-(19, 1, 1, 1, '321', 3, 2, 3, 2, 0),
-(20, 1, 1, 1, '321', 5, 1, 3, 2, 0),
-(21, 1, 1, 1, '321', 2, 1, 5, 2, 0),
-(22, 1, 1, 1, '321', 3, 2, 5, 2, 0),
-(23, 1, 1, 1, '321', 5, 1, 5, 2, 0),
-(24, 1, 4, 1, '369', 2, 1, 1, 2, 0),
-(26, 1, 8, 1, '789', 2, 1, 1, 2, 0),
-(27, 1, 1, 1, '321', 2, 1, 1, 2, 0),
-(28, 1, 1, 1, '11', 3, 1, 2, 2, 0),
-(29, 1, 7, 1, '101', 2, 1, 1, 2, 1);
+(1, 393, 2, 9, '01-02-03', 2, 1, 1, 2, 0),
+(2, 393, 2, 9, '01-02-03', 2, 2, 1, 2, 0),
+(3, 393, 12, 9, '01-02-03', 3, 1, 1, 2, 0),
+(4, 393, 19, 9, '01-02-03', 3, 2, 1, 2, 0),
+(5, 393, 12, 9, '01-02-03', 4, 1, 1, 2, 0),
+(6, 393, 2, 9, '01-02-03', 4, 2, 1, 2, 0),
+(7, 393, 2, 9, '01-02-03', 5, 1, 1, 2, 0),
+(8, 393, 12, 9, '01-02-03', 5, 2, 1, 2, 0),
+(9, 393, 12, 9, '01-02-03', 6, 1, 1, 2, 0),
+(10, 393, 2, 9, '01-02-03', 6, 2, 1, 2, 0),
+(11, 393, 2, 9, '01-02-03', 2, 1, 2, 2, 0),
+(12, 393, 2, 9, '01-02-03', 2, 2, 2, 2, 0),
+(13, 393, 2, 9, '01-02-03', 3, 1, 2, 2, 0),
+(14, 393, 2, 9, '01-02-03', 3, 2, 2, 2, 0),
+(15, 393, 2, 9, '01-02-03', 4, 1, 2, 2, 0),
+(16, 393, 19, 9, '01-02-03', 4, 2, 2, 2, 0),
+(17, 393, 2, 9, '01-02-03', 5, 1, 2, 2, 0),
+(18, 393, 2, 9, '01-02-03', 5, 2, 2, 2, 0),
+(19, 393, 2, 9, '01-02-03', 6, 1, 2, 2, 0),
+(20, 393, 2, 9, '01-02-03', 6, 2, 2, 2, 0),
+(21, 393, 2, 9, '01-02-03', 2, 1, 3, 2, 0),
+(22, 393, 2, 9, '01-02-03', 2, 2, 3, 2, 0),
+(23, 393, 2, 9, '01-02-03', 3, 1, 3, 2, 0),
+(24, 393, 2, 9, '01-02-03', 3, 2, 3, 2, 0),
+(25, 393, 2, 9, '01-02-03', 4, 1, 3, 2, 0),
+(26, 393, 2, 9, '01-02-03', 4, 2, 3, 2, 0),
+(27, 393, 2, 9, '01-02-03', 5, 1, 3, 2, 0),
+(28, 393, 2, 9, '01-02-03', 5, 2, 3, 2, 0),
+(29, 393, 2, 9, '01-02-03', 6, 1, 3, 2, 0),
+(30, 393, 2, 9, '01-02-03', 6, 2, 3, 2, 0),
+(31, 393, 2, 9, '01-02-03', 2, 1, 4, 2, 0),
+(32, 393, 2, 9, '01-02-03', 2, 2, 4, 2, 0),
+(33, 393, 2, 9, '01-02-03', 3, 1, 4, 2, 0),
+(34, 393, 2, 9, '01-02-03', 3, 2, 4, 2, 0),
+(35, 393, 2, 9, '01-02-03', 4, 1, 4, 2, 0),
+(36, 393, 2, 9, '01-02-03', 4, 2, 4, 2, 0),
+(37, 393, 2, 9, '01-02-03', 5, 1, 4, 2, 0),
+(38, 393, 2, 9, '01-02-03', 5, 2, 4, 2, 0),
+(39, 393, 2, 9, '01-02-03', 6, 1, 4, 2, 0),
+(40, 393, 2, 9, '01-02-03', 6, 2, 4, 2, 0),
+(41, 393, 2, 9, '01-02-03', 2, 1, 5, 2, 0),
+(42, 393, 2, 9, '01-02-03', 2, 2, 5, 2, 0),
+(43, 393, 2, 9, '01-02-03', 3, 1, 5, 2, 0),
+(44, 393, 2, 9, '01-02-03', 3, 2, 5, 2, 0),
+(45, 393, 2, 9, '01-02-03', 4, 1, 5, 2, 0),
+(46, 393, 2, 9, '01-02-03', 4, 2, 5, 2, 0),
+(47, 393, 2, 9, '01-02-03', 5, 1, 5, 2, 0),
+(48, 393, 2, 9, '01-02-03', 5, 2, 5, 2, 0),
+(49, 393, 2, 9, '01-02-03', 6, 1, 5, 2, 0),
+(50, 393, 12, 9, '01-02-03', 6, 2, 5, 2, 0),
+(51, 393, 5, 10, '01', 2, 1, 4, 2, 0),
+(52, 393, 5, 10, '01', 3, 1, 4, 2, 0),
+(53, 393, 5, 10, '01', 4, 1, 4, 2, 0),
+(54, 393, 2, 10, '01', 2, 1, 7, 2, 0),
+(55, 393, 2, 10, '01', 3, 1, 7, 2, 0),
+(56, 393, 2, 10, '01', 4, 1, 7, 2, 0),
+(57, 393, 2, 10, '01', 2, 1, 10, 2, 0),
+(58, 393, 2, 10, '01', 3, 1, 10, 2, 0),
+(59, 393, 2, 10, '01', 4, 1, 10, 2, 0),
+(60, 393, 2, 10, '01', 2, 1, 13, 2, 0),
+(61, 393, 2, 10, '01', 3, 1, 13, 2, 0),
+(62, 393, 2, 10, '01', 4, 1, 13, 2, 0),
+(63, 393, 2, 10, '01', 2, 1, 17, 2, 0),
+(64, 393, 2, 10, '01', 3, 1, 17, 2, 0),
+(65, 393, 2, 10, '01', 4, 1, 17, 2, 0),
+(66, 393, 2, 10, '01', 2, 1, 20, 2, 0),
+(67, 393, 2, 10, '01', 3, 1, 20, 2, 0),
+(68, 393, 2, 10, '01', 4, 1, 20, 2, 0),
+(69, 398, 14, 1, '01', 3, 1, 1, 2, 0),
+(70, 398, 14, 1, '01', 2, 1, 1, 2, 0),
+(71, 398, 14, 1, '01', 2, 1, 2, 2, 0),
+(72, 398, 14, 1, '01', 3, 1, 2, 2, 0),
+(73, 398, 14, 1, '01', 2, 1, 3, 2, 0),
+(74, 398, 14, 1, '01', 3, 1, 3, 2, 0),
+(75, 398, 14, 1, '01', 2, 1, 4, 2, 0),
+(76, 398, 14, 1, '01', 3, 1, 4, 2, 0),
+(77, 398, 14, 1, '01', 2, 1, 5, 2, 0),
+(78, 398, 14, 1, '01', 3, 1, 5, 2, 0),
+(79, 398, 14, 1, '01', 2, 1, 6, 2, 0),
+(80, 398, 14, 1, '01', 3, 1, 6, 2, 0),
+(81, 399, 7, 30, '01', 2, 1, 1, 2, 0),
+(82, 399, 1, 30, '01', 2, 1, 2, 2, 0),
+(83, 399, 4, 19, '123', 2, 1, 1, 2, 0),
+(84, 399, 4, 19, '123', 2, 1, 2, 2, 0),
+(85, 399, 1, 19, '123', 2, 1, 3, 2, 0),
+(86, 399, 1, 19, '123', 2, 1, 4, 2, 0),
+(88, 399, 11, 19, '3', 2, 1, 1, 2, 0),
+(89, 399, 5, 19, '5', 2, 1, 1, 2, 0),
+(90, 393, 13, 9, '01', 2, 1, 1, 2, 0),
+(91, 393, 5, 9, '01', 2, 2, 1, 2, 0),
+(92, 393, 5, 9, '01', 2, 1, 2, 2, 0),
+(93, 393, 5, 9, '01', 2, 2, 2, 2, 0),
+(94, 393, 5, 9, '01', 2, 1, 3, 2, 0),
+(95, 393, 5, 9, '01', 2, 2, 3, 2, 0),
+(96, 393, 13, 9, '01', 2, 1, 4, 2, 0),
+(97, 393, 5, 9, '01', 2, 2, 4, 2, 0),
+(98, 393, 12, 14, '01', 2, 1, 1, 2, 0),
+(99, 393, 12, 14, '01', 2, 2, 1, 2, 0),
+(100, 393, 12, 14, '01', 2, 1, 2, 2, 0),
+(101, 393, 12, 14, '01', 2, 2, 2, 2, 0),
+(102, 393, 12, 14, '01', 2, 1, 3, 2, 0),
+(103, 393, 12, 14, '01', 2, 2, 3, 2, 0),
+(104, 393, 12, 14, '01', 2, 1, 4, 2, 0),
+(105, 393, 12, 14, '01', 2, 2, 4, 2, 0),
+(106, 399, 19, 19, '07', 2, 1, 1, 2, 1),
+(107, 399, 3, 30, '12', 2, 1, 1, 2, 0),
+(108, 399, 7, 30, '12', 2, 1, 3, 2, 0),
+(109, 399, 1, 30, '12', 2, 1, 5, 2, 0),
+(110, 399, 1, 19, '08', 2, 1, 1, 2, 1),
+(111, 399, 1, 22, '1', 3, 1, 9, 2, 0),
+(112, 399, 1, 22, '1', 4, 1, 1, 2, 0),
+(113, 399, 1, 22, '1', 3, 1, 5, 2, 0),
+(114, 399, 1, 22, '1', 3, 1, 1, 2, 0),
+(115, 399, 1, 22, '1', 4, 1, 9, 2, 0),
+(116, 399, 1, 22, '1', 3, 1, 13, 2, 0),
+(117, 399, 1, 22, '1', 4, 1, 13, 2, 0),
+(118, 399, 1, 22, '1', 4, 1, 5, 2, 0),
+(119, 399, 1, 22, '1', 3, 1, 17, 2, 0),
+(120, 399, 1, 22, '1', 4, 1, 17, 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lichsu_choduyet`
+-- Table structure for table `lichsu_choduyet`
 --
 
 CREATE TABLE `lichsu_choduyet` (
@@ -242,40 +398,48 @@ CREATE TABLE `lichsu_choduyet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `lichsu_choduyet`
+-- Dumping data for table `lichsu_choduyet`
 --
 
 INSERT INTO `lichsu_choduyet` (`id`, `idChoDuyet`, `idBMNhan`, `ngayNhan`, `ghiChu`, `trangThai`) VALUES
-(1, 12, 1, '2017-05-09 18:17:37', 'Yêu cầu xếp phòng', 0),
-(2, 13, 1, '2017-05-09 18:17:49', 'Yêu cầu xếp phòng', 0),
-(3, 1, 1, '2017-05-09 18:19:19', 'Yêu cầu xếp phòng', 0),
-(4, 2, 1, '2017-05-09 18:19:26', 'Yêu cầu xếp phòng', 0),
-(5, 2, 3, '2017-05-09 18:22:09', 'chuyen', 0),
-(6, 3, 1, '2017-05-09 18:22:52', 'Yêu cầu xếp phòng', 0),
-(7, 4, 1, '2017-05-10 02:51:43', 'Yêu cầu xếp phòng', 0),
-(8, 2, 1, '2017-05-10 02:55:02', 'Đã xếp phòng', 1),
-(9, 1, 2, '2017-05-10 02:55:23', 'chuyen', 0),
-(10, 1, 2, '2017-05-10 02:56:14', 'Đã xếp phòng', 1),
-(11, 3, 2, '2017-05-10 02:57:42', 'chuyen', 0),
-(12, 3, 2, '2017-05-10 02:58:21', 'Đã xếp phòng', 1),
-(13, 5, 2, '2017-05-10 03:00:36', 'Yêu cầu xếp phòng', 0),
-(14, 5, 1, '2017-05-10 03:00:58', 'chuyen', 0),
-(15, 5, 3, '2017-05-10 03:01:43', 'chuyen', 0),
-(16, 6, 2, '2017-05-12 08:14:37', 'chuyen', 0),
-(17, 6, 2, '2017-05-12 08:14:53', 'chuyen', 0),
-(18, 6, 4, '2017-05-12 08:15:06', 'chuyen', 0),
-(19, 7, 1, '2017-05-13 07:28:44', 'Yêu cầu xếp phòng', 0),
-(20, 8, 1, '2017-05-13 07:28:52', 'Yêu cầu xếp phòng', 0),
-(21, 9, 1, '2017-05-13 07:29:01', 'Yêu cầu xếp phòng', 0),
-(22, 7, 2, '2017-05-13 07:29:53', 'chuyen', 0),
-(23, 8, 2, '2017-05-13 07:30:06', 'chuyen', 0),
-(24, 9, 2, '2017-05-13 07:30:14', 'chuyen', 0),
-(25, 7, 2, '2017-05-13 07:40:44', 'Đã xếp phòng', 1);
+(1, 1, 1, '2017-05-17 13:30:56', 'Yêu cầu xếp phòng', 0),
+(2, 1, 1, '2017-05-17 13:36:31', 'chuyen', 0),
+(3, 1, 1, '2017-05-17 13:36:58', 'chuyen', 0),
+(4, 1, 2, '2017-05-17 13:37:30', 'chuyen', 0),
+(5, 1, 2, '2017-05-17 13:39:09', 'chuyen', 0),
+(6, 1, 2, '2017-05-17 13:40:07', 'chuyen', 0),
+(7, 6, 3, '2017-05-17 17:59:02', 'Yêu cầu xếp phòng', 0),
+(8, 7, 3, '2017-05-17 17:59:02', 'Yêu cầu xếp phòng', 0),
+(9, 8, 3, '2017-05-17 17:59:02', 'Yêu cầu xếp phòng', 0),
+(10, 9, 3, '2017-05-17 17:59:02', 'Yêu cầu xếp phòng', 0),
+(11, 10, 3, '2017-05-17 17:59:02', 'Yêu cầu xếp phòng', 0),
+(12, 11, 3, '2017-05-17 17:59:03', 'Yêu cầu xếp phòng', 0),
+(13, 12, 3, '2017-05-17 17:59:03', 'Yêu cầu xếp phòng', 0),
+(14, 13, 3, '2017-05-17 17:59:03', 'Yêu cầu xếp phòng', 0),
+(15, 6, 3, '2017-05-17 18:00:03', 'chuyen', 0),
+(16, 7, 3, '2017-05-17 18:00:16', 'chuyen', 0),
+(17, 8, 5, '2017-05-17 18:00:26', 'chuyen', 0),
+(18, 9, 5, '2017-05-17 18:00:41', 'chuyen', 0),
+(19, 6, 6, '2017-05-17 18:01:38', 'chuyen', 0),
+(20, 7, 4, '2017-05-17 18:02:10', 'chuyen', 0),
+(21, 3, 2, '2017-05-17 18:15:35', 'chuyen', 0),
+(22, 4, 2, '2017-05-17 18:15:50', 'chuyen', 0),
+(23, 5, 2, '2017-05-17 18:15:58', 'chuyen', 0),
+(24, 3, 2, '2017-05-17 18:16:37', 'Đã xếp phòng', 1),
+(25, 5, 3, '2017-05-17 18:16:50', 'chuyen', 0),
+(26, 10, 2, '2017-05-17 18:18:18', 'chuyen', 0),
+(27, 11, 6, '2017-05-17 18:18:26', 'chuyen', 0),
+(28, 12, 4, '2017-05-17 18:19:29', 'chuyen', 0),
+(29, 6, 4, '2017-05-17 18:19:48', 'chuyen', 0),
+(30, 14, 1, '2017-05-18 00:48:30', 'Yêu cầu xếp phòng', 0),
+(31, 15, 1, '2017-05-18 00:48:30', 'Yêu cầu xếp phòng', 0),
+(32, 4, 3, '2017-05-18 00:51:28', 'chuyen', 0),
+(33, 4, 1, '2017-05-18 00:54:07', 'Đã xếp phòng', 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lichsu_vande`
+-- Table structure for table `lichsu_vande`
 --
 
 CREATE TABLE `lichsu_vande` (
@@ -287,10 +451,55 @@ CREATE TABLE `lichsu_vande` (
   `trangThai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `lichsu_vande`
+--
+
+INSERT INTO `lichsu_vande` (`id`, `idVanDe`, `ghiChu`, `nguoiNhan`, `ngayNhan`, `trangThai`) VALUES
+(1, 8, 'Gửi yêu cầu xử lý', 2, '2017-05-14 18:13:23', 0),
+(2, 8, 'đã xử lý', 2, '2017-05-14 18:14:04', 1),
+(3, 9, 'Gửi yêu cầu xử lý', 2, '2017-05-14 18:15:19', 0),
+(4, 9, 'Chưa xử lý được', 1, '2017-05-14 18:19:56', 0),
+(5, 9, 'ok', 1, '2017-05-14 18:20:31', 1),
+(6, 10, 'Gửi yêu cầu xử lý', 1, '2017-05-14 19:47:27', 0),
+(7, 10, 'thành công', 1, '2017-05-14 19:47:34', 1),
+(8, 10, 'thành công', 1, '2017-05-14 19:48:16', 1),
+(9, 10, 'thành công', 1, '2017-05-14 19:48:48', 1),
+(10, 10, 'thành công', 1, '2017-05-14 19:49:41', 1),
+(11, 11, 'Gửi yêu cầu xử lý', 1, '2017-05-14 19:53:14', 0),
+(12, 11, 'OKKKKKK', 1, '2017-05-14 19:53:22', 1),
+(13, 12, 'Gửi yêu cầu xử lý', 1, '2017-05-14 19:54:37', 0),
+(14, 12, 'OKKKKKK', 1, '2017-05-14 19:54:43', 1),
+(15, 13, 'Gửi yêu cầu xử lý', 1, '2017-05-14 19:55:15', 0),
+(16, 13, 'ok', 1, '2017-05-14 19:55:21', 1),
+(17, 14, 'Gửi yêu cầu xử lý', 1, '2017-05-14 19:59:51', 0),
+(18, 15, 'Gửi yêu cầu xử lý', 1, '2017-05-14 20:00:29', 0),
+(19, 16, 'Gửi yêu cầu xử lý', 1, '2017-05-14 20:01:10', 0),
+(20, 17, 'Gửi yêu cầu xử lý', 1, '2017-05-14 20:01:50', 0),
+(21, 18, 'Gửi yêu cầu xử lý', 1, '2017-05-14 20:04:53', 0),
+(22, 19, 'Gửi yêu cầu xử lý', 1, '2017-05-14 20:09:33', 0),
+(23, 20, 'Gửi yêu cầu xử lý', 1, '2017-05-14 20:10:26', 0),
+(24, 21, 'Gửi yêu cầu xử lý', 1, '2017-05-15 11:04:38', 0),
+(25, 22, 'Gửi yêu cầu xử lý', 1, '2017-05-15 11:06:05', 0),
+(26, 22, 'OKKKKKK', 1, '2017-05-15 11:07:38', 1),
+(27, 23, 'Gửi yêu cầu xử lý', 1, '2017-05-16 15:16:07', 0),
+(28, 24, 'Gửi yêu cầu xử lý', 2, '2017-05-16 15:16:47', 0),
+(29, 25, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:06:07', 0),
+(30, 26, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:06:28', 0),
+(31, 27, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:08:08', 0),
+(32, 28, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:10:39', 0),
+(33, 29, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:10:54', 0),
+(34, 30, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:11:21', 0),
+(35, 31, 'Gửi yêu cầu xử lý', 1, '2017-05-17 08:11:31', 0),
+(36, 23, 'Đã xử lý', 1, '2017-05-17 08:12:48', 1),
+(37, 32, 'Gửi yêu cầu xử lý', 2, '2017-05-17 17:20:19', 0),
+(38, 33, 'Gửi yêu cầu xử lý', 1, '2017-05-18 00:55:34', 0),
+(39, 33, 'đã xử lý', 1, '2017-05-18 00:56:47', 1);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lich_choduyet`
+-- Table structure for table `lich_choduyet`
 --
 
 CREATE TABLE `lich_choduyet` (
@@ -309,24 +518,30 @@ CREATE TABLE `lich_choduyet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `lich_choduyet`
+-- Dumping data for table `lich_choduyet`
 --
 
 INSERT INTO `lich_choduyet` (`id`, `idGiaoVien`, `idPhong`, `idMonHoc`, `Nhom`, `idThu`, `idBuoi`, `idTuan`, `idHocKyNienKhoa`, `TrangThai`, `idBMDuyet`, `ngayGui`) VALUES
-(1, 1, 5, 1, '3', 2, 1, 1, 2, 1, 2, '2017-05-09 18:19:19'),
-(2, 1, 4, 1, '369', 2, 1, 1, 2, 1, 3, '2017-05-09 18:19:26'),
-(3, 1, 8, 1, '789', 2, 1, 1, 2, 1, 2, '2017-05-09 18:22:52'),
-(4, 1, 1, 1, '321', 2, 1, 1, 2, 1, 0, '2017-05-10 02:51:43'),
-(5, 3, NULL, 1, '35', 2, 1, 1, 2, 0, 3, '2017-05-10 03:00:36'),
-(6, 1, NULL, 1, '3', 2, 1, 1, 2, 0, 4, '2017-05-10 03:03:45'),
-(7, 1, 7, 1, '101', 2, 1, 1, 2, 1, 2, '2017-05-13 07:28:44'),
-(8, 1, NULL, 1, '102', 2, 1, 1, 2, 0, 2, '2017-05-13 07:28:52'),
-(9, 1, NULL, 1, '103', 2, 1, 1, 2, 0, 2, '2017-05-13 07:29:01');
+(1, 399, 5, 19, '5', 2, 1, 1, 2, 1, 2, '2017-05-17 13:30:56'),
+(2, 399, NULL, 19, '10', 2, 1, 1, 2, 2, NULL, '2017-05-17 13:44:28'),
+(3, 399, 19, 19, '07', 2, 1, 1, 2, 1, 2, '2017-05-17 13:45:49'),
+(4, 399, 1, 19, '08', 2, 1, 1, 2, 1, 3, '2017-05-17 13:45:54'),
+(5, 399, NULL, 19, '09', 2, 1, 1, 2, 0, 3, '2017-05-17 13:45:59'),
+(6, 394, NULL, 11, '02', 2, 1, 1, 2, 0, 4, '2017-05-17 17:59:02'),
+(7, 394, NULL, 11, '02', 2, 2, 1, 2, 0, 4, '2017-05-17 17:59:02'),
+(8, 394, NULL, 11, '02', 2, 1, 2, 2, 0, 5, '2017-05-17 17:59:02'),
+(9, 394, NULL, 11, '02', 2, 2, 2, 2, 0, 5, '2017-05-17 17:59:02'),
+(10, 394, NULL, 11, '02', 2, 1, 3, 2, 0, 2, '2017-05-17 17:59:02'),
+(11, 394, NULL, 11, '02', 2, 2, 3, 2, 0, 6, '2017-05-17 17:59:02'),
+(12, 394, NULL, 11, '02', 2, 1, 4, 2, 0, 4, '2017-05-17 17:59:03'),
+(13, 394, NULL, 11, '02', 2, 2, 4, 2, 0, 0, '2017-05-17 17:59:03'),
+(14, 399, NULL, 19, '12', 2, 1, 1, 2, 0, 0, '2017-05-18 00:48:30'),
+(15, 399, NULL, 19, '12', 2, 1, 5, 2, 2, 0, '2017-05-18 00:48:30');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lophocphan`
+-- Table structure for table `lophocphan`
 --
 
 CREATE TABLE `lophocphan` (
@@ -339,7 +554,7 @@ CREATE TABLE `lophocphan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `lophocphan`
+-- Dumping data for table `lophocphan`
 --
 
 INSERT INTO `lophocphan` (`id`, `MaCB`, `MaHP`, `Nhom`, `SoSV`, `idHocKyNienKhoa`) VALUES
@@ -723,7 +938,7 @@ INSERT INTO `lophocphan` (`id`, `MaCB`, `MaHP`, `Nhom`, `SoSV`, `idHocKyNienKhoa
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -732,7 +947,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -757,7 +972,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `monhoc`
+-- Table structure for table `monhoc`
 --
 
 CREATE TABLE `monhoc` (
@@ -768,22 +983,148 @@ CREATE TABLE `monhoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `monhoc`
+-- Dumping data for table `monhoc`
 --
 
 INSERT INTO `monhoc` (`id`, `MaMH`, `TenMH`, `SoTinChi`) VALUES
-(1, 'CT106', 'Hệ cơ sở dữ liệu', 4),
-(2, 'CT110', 'Hệ quản trị cơ sở dữ liệu', 2),
-(3, 'CT107', 'Hệ điều hành', 3),
-(4, 'CT428', 'Lập trình Web', 3),
-(5, 'CT128', 'Kỹ thuật đồ hoạ - CNTT', 2),
-(6, 'CT332', 'Trí tuệ nhân tạo', 3),
-(7, 'CT120', 'Phân tích và thiết kế thuật toán', 2);
+(7, 'CT120', 'Phân tích và thiết kế thuật toán', 2),
+(9, 'CT123', 'Quy hoạch tuyến tính - CNTT', 2),
+(10, 'CT126', 'Lý thuyết xếp hàng', 2),
+(11, 'CT174', 'Phân tích và thiết kế thuật toán', 3),
+(12, 'CT123', 'Quy hoạch tuyến tính - CNTT', 2),
+(13, 'CT126', 'Lý thuyết xếp hàng', 2),
+(14, 'CT204', 'An toàn và bảo mật thông tin', 3),
+(15, 'CT311', 'Phương pháp NCKH', 2),
+(16, 'CT313', 'An toàn và bảo mật thông tin', 2),
+(17, 'CT103', 'Cấu trúc dữ liệu', 4),
+(18, 'CT174', 'Phân tích và thiết kế thuật toán', 3),
+(19, 'CT106', 'Hệ cơ sở dữ liệu', 4),
+(20, 'CT127', 'Lý thuyết thông tin', 2),
+(21, 'CT180', 'Cơ sở dữ liệu', 3),
+(22, 'CT252', 'Niên luận cơ sở ngành hệ thống thông tin', 3),
+(23, 'CT431', 'Hệ quản trị CSDL đa phương tiện', 2),
+(24, 'CT178', 'Nguyên lý hệ điều hành', 3),
+(25, 'CT326', 'Kiểm thử phần mềm', 2),
+(26, 'CT327', 'Đảm bảo chất lượng phần mềm', 2),
+(27, 'CT466', 'Niên luận - CNTT', 3),
+(28, 'CT171', 'Nhập môn công nghệ phần mềm', 3),
+(29, 'CT240', 'Nguyên lý xây dựng phần mềm', 3),
+(30, 'CT173', 'Kiến trúc máy tính', 3),
+(31, 'CT274', 'Lập trình cho thiết bị di động', 3),
+(32, 'CT329', 'Lập trình cho các thiết bị di động', 2),
+(33, 'TN033', 'Tin học căn bản', 1),
+(34, 'TN196', 'Lập trình hướng đối tượng Java', 3),
+(35, 'TN208', 'Lập trình Java nâng cao', 3),
+(36, 'TN407', 'Kỹ thuật dự báo', 3),
+(37, 'TN403', 'Kho dữ liệu và OLAP', 3),
+(38, 'TN211', 'Nhập môn hệ thống thông tin địa lý', 2),
+(39, 'CT242', 'Kiến trúc và Thiết kế phần mềm', 3),
+(40, 'CT309', 'Quản lý dự Án tin học', 2),
+(41, 'CT239', 'Niên luận cơ sở ngành KTPM', 3),
+(42, 'CT120', 'Phân tích và thiết kế thuật toán', 2),
+(43, 'CT121', 'Tin học lý thuyết', 3),
+(44, 'CT438', 'Niên luận Kỹ thuật phần mềm', 3),
+(45, 'CT464', 'Tiểu luận tốt nghiệp - KTPM', 4),
+(46, 'CT594', 'Luận văn tốt nghiệp - KTPM', 10),
+(47, 'CT109', 'Phân tích và thiết kế hệ thống TT', 3),
+(48, 'CT182', 'Ngôn ngữ mô hình hóa', 3),
+(49, 'CT236', 'Quản trị cơ sở dữ liệu trên Windows', 2),
+(50, 'CT237', 'Nguyên lý hệ quản trị cơ sở dữ liệu', 3),
+(51, 'CT430', 'Phân tích hệ thống hướng đối tượng', 3),
+(52, 'CT437', 'Niên luận Hệ thống thông tin', 3),
+(53, 'CT461', 'Tiểu luận tốt nghiệp - HTTT', 4),
+(54, 'CT111', 'Niên luận 2 - Tin học', 1),
+(55, 'CT225', 'Lập trình Python', 2),
+(56, 'CT226', 'Niên luận cơ sở mạng máy tính và truyền thông', 3),
+(57, 'CT306', 'Niên luận 3 - Tin học', 1),
+(58, 'CT358', 'Luận văn tốt nghiệp - Tin học', 10),
+(59, 'CT428', 'Lập trình Web', 3),
+(60, 'CT439', 'Niên luận Mạng máy tính và truyền thông', 3),
+(61, 'CT270', 'Niên luận cơ sở - THƯD', 3),
+(62, 'TN210', 'Ngôn ngữ mô hình hóa thống nhất', 2),
+(63, 'TN213', 'Xây dựng hệ thống thông tin địa lý', 3),
+(64, 'TN405', 'Thực tập thực tế - THƯD', 1),
+(65, 'TN408', 'Niên luận - THƯD', 3),
+(66, 'TN418', 'Luận văn tốt nghiệp - THƯD', 10),
+(67, 'CT112', 'Mạng máy tính', 3),
+(68, 'CT224', 'Công nghệ J2EE', 2),
+(69, 'CT233', 'Điện toán đám mây', 3),
+(70, 'CT334', 'Quản trị mạng trên Linux', 2),
+(71, 'CT335', 'Thiết kế và cài đặt mạng', 3),
+(72, 'CT344', 'Giải quyết sự cố mạng', 2),
+(73, 'CT434', 'An toàn hệ thống và an ninh mạng', 3),
+(74, 'CT176', 'Lập trình hướng đối tượng', 3),
+(75, 'CT221', 'Lập trình mạng', 3),
+(76, 'CT319', 'Lập trình mạng', 2),
+(77, 'TN404', 'Quản trị hệ thống mạng', 3),
+(78, 'TN212', 'Công nghệ web 3D', 3),
+(79, 'TN229', 'Bảo mật hệ thống và an ninh mạng', 3),
+(80, 'CT179', 'Quản trị hệ thống', 3),
+(81, 'CT412', 'Xử lý ngôn ngữ tự nhiên', 2),
+(82, 'CT447', 'Quản trị và bảo trì hệ thống', 3),
+(83, 'CT341', 'Xây dựng dịch vụ mạng', 2),
+(84, 'CT328', 'Bảo trì phần mềm', 2),
+(85, 'TN185', 'Cấu trúc dữ liệu - Toán TK', 3),
+(86, 'CT338', 'Mạng không dây và di động', 2),
+(87, 'CT101', 'Lập trình căn bản A', 4),
+(88, 'CT175', 'Lý thuyết đồ thị', 3),
+(89, 'CT202', 'Nguyên lý máy học', 3),
+(90, 'CT211', 'An ninh mạng', 3),
+(91, 'CT181', 'Hệ thống thông tin doanh nghiệp', 3),
+(92, 'CT183', 'Anh văn chuyên môn CNTT 1', 3),
+(93, 'CT205', 'Quản trị cơ sở dữ liệu', 3),
+(94, 'CT269', 'Hệ quản trị cơ sở dữ liệu Oracle', 2),
+(95, 'CT051H', 'Vi - Tích phân', 4),
+(96, 'CT253', 'Quản trị yêu cầu người dùng', 3),
+(97, 'CT307', 'Niên luận 4 - Tin học', 1),
+(98, 'CT591', 'Luận văn tốt nghiệp - HTTT', 10),
+(99, 'CT187', 'Nền tảng công nghệ thông tin', 3),
+(100, 'CT468', 'Tiểu luận tốt nghiệp - CNTT', 4),
+(101, 'TN034', 'TT. Tin học căn bản', 2),
+(102, 'CT158', 'Nguyên lý ngôn ngữ lập trình', 3),
+(103, 'TN277', 'Quản trị dự Án tin học', 2),
+(104, 'TN207', 'Lập trình .NET', 3),
+(105, 'TN216', 'Phát triển ứng dụng trên thiết bị di động', 3),
+(106, 'CT124', 'Phương pháp tính - CNTT', 2),
+(107, 'CT128', 'Kỹ thuật đồ hoạ - CNTT', 2),
+(108, 'CT172', 'Toán rời rạc', 4),
+(109, 'CT203', 'Đồ họa máy tính', 3),
+(110, 'CT465', 'Tiểu luận tốt nghiệp - KHMT', 4),
+(111, 'CT114', 'Lập trình hướng đối tượng C++', 3),
+(112, 'CT333', 'Quản trị mạng', 2),
+(113, 'CT118', 'Anh văn chuyên môn tin học', 2),
+(114, 'CT184', 'Anh văn chuyên môn CNTT 2', 3),
+(115, 'TN222', 'Thống kê tin học Ứng dụng', 3),
+(116, 'CT110', 'Hệ quản trị cơ sở dữ liệu', 2),
+(117, 'CT304', 'Giao diện người - máy', 2),
+(118, 'CT104', 'Kiến trúc máy tính', 2),
+(119, 'CT462', 'Tiểu luận tốt nghiệp - TT&MMT', 4),
+(120, 'CT592', 'Luận văn tốt nghiệp - TT&MMT', 10),
+(121, 'TN201', 'Kỹ thuật xử lý Ảnh', 2),
+(122, 'TN411', 'Xây dựng ứng dụng Web với PHP và MySQL', 3),
+(123, 'CT337', 'Đánh giá hiệu năng mạng', 2),
+(124, 'CT241', 'Phân tích yêu cầu phần mềm', 3),
+(125, 'CT251', 'Phát triển Ứng dụng trên Windows', 3),
+(126, 'CT170', 'Chuyên đề ngôn ngữ lập trình KHMT', 2),
+(127, 'CT448', 'Công nghệ Web', 2),
+(128, 'CT115', 'Chuyên đề ngôn ngữ lập trình 1', 2),
+(129, 'CT276', 'Java', 3),
+(130, 'CT201', 'Niên luận cơ sở ngành Khoa học máy tính', 3),
+(131, 'CT312', 'Khai khoáng dữ liệu', 3),
+(132, 'CT316', 'Xử lý Ảnh', 3),
+(133, 'CT332', 'Trí tuệ nhân tạo', 3),
+(134, 'CT440', 'Niên luận Khoa học máy tính', 3),
+(135, 'CT595', 'Luận văn tốt nghiệp - KHMT', 10),
+(136, 'CT271', 'Niên luận cơ sở - CNTT', 3),
+(137, 'CT593', 'Luận văn tốt nghiệp - CNTT', 10),
+(138, 'CT057H', 'Kỹ năng làm việc nhóm', 1),
+(139, 'CT336', 'Truyền thông đa phương tiện', 2),
+(140, 'CT123', 'Quy hoạch tuyến tính - CNTT', 2);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `monhoc_phanmem`
+-- Table structure for table `monhoc_phanmem`
 --
 
 CREATE TABLE `monhoc_phanmem` (
@@ -793,7 +1134,7 @@ CREATE TABLE `monhoc_phanmem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `monhoc_phanmem`
+-- Dumping data for table `monhoc_phanmem`
 --
 
 INSERT INTO `monhoc_phanmem` (`id`, `idMonHoc`, `idPhanMem`) VALUES
@@ -802,12 +1143,25 @@ INSERT INTO `monhoc_phanmem` (`id`, `idMonHoc`, `idPhanMem`) VALUES
 (3, 2, 3),
 (4, 2, 4),
 (5, 1, 3),
-(6, 7, 1);
+(6, 7, 1),
+(7, 7, 2),
+(9, 7, 3),
+(10, 8, 2),
+(11, 10, 2),
+(12, 9, 2),
+(13, 9, 1),
+(14, 11, 1),
+(15, 11, 2),
+(16, 11, 6),
+(17, 13, 2),
+(18, 19, 1),
+(19, 19, 2),
+(20, 19, 3);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `permissions`
+-- Table structure for table `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -822,7 +1176,7 @@ CREATE TABLE `permissions` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `permission_role`
+-- Table structure for table `permission_role`
 --
 
 CREATE TABLE `permission_role` (
@@ -833,7 +1187,7 @@ CREATE TABLE `permission_role` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phanmem`
+-- Table structure for table `phanmem`
 --
 
 CREATE TABLE `phanmem` (
@@ -843,7 +1197,7 @@ CREATE TABLE `phanmem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `phanmem`
+-- Dumping data for table `phanmem`
 --
 
 INSERT INTO `phanmem` (`id`, `TenPM`, `PhienBan`) VALUES
@@ -852,12 +1206,13 @@ INSERT INTO `phanmem` (`id`, `TenPM`, `PhienBan`) VALUES
 (3, 'Xampp', '5.7'),
 (4, 'DevC', '3.5'),
 (5, 'NetBean', '8.1'),
-(6, 'Eclipse', '10');
+(6, 'Eclipse', '10'),
+(7, 'Packet Trancer', '6.2');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phong`
+-- Table structure for table `phong`
 --
 
 CREATE TABLE `phong` (
@@ -871,27 +1226,33 @@ CREATE TABLE `phong` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `phong`
+-- Dumping data for table `phong`
 --
 
 INSERT INTO `phong` (`id`, `TenPhong`, `idBoMon`, `DLRam`, `DLOCung`, `CPU`, `GPU`) VALUES
 (1, 'P01', 1, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(2, 'P02', 1, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(3, 'P03', 1, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(4, 'P04', 1, 2, 100, 'Intel Core i3-6100', 'Không'),
-(5, 'P05', 2, 2, 100, 'Intel Core i5-6100', ''),
-(7, 'P07', 2, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(8, 'P08', 2, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(9, 'P09', 3, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(11, 'P11', 3, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(12, 'P12', 3, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
-(13, 'P15', 5, 3, 120, 'Core i3', 'Không'),
-(14, 'P10', 4, 3, 200, 'Core i5', 'Có');
+(2, 'P02', 2, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(3, 'P03', 4, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(4, 'P04', 3, 2, 100, 'Intel Core i3-6100', 'Không'),
+(5, 'P05', 3, 2, 100, 'Intel Core i5-6100', 'Không'),
+(7, 'P06', 1, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(8, 'P07', 5, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(9, 'P08', 4, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(11, 'P09', 1, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(12, 'P10', 2, 2, 100, 'Intel Core i3-6100', 'GeForce GT 730'),
+(13, 'P11', 4, 3, 120, 'Core i3', 'Không'),
+(14, 'P12', 6, 3, 200, 'Core i5', 'Có'),
+(15, 'P13', 6, 2, 500, 'Core i5', 'Có'),
+(16, 'P14', 6, 2, 200, 'Core i3', 'Không'),
+(17, 'P15', 6, 3, 250, 'Core i3', 'Không'),
+(18, 'P16', 6, 3, 200, 'Core i5', 'Không'),
+(19, 'P17', 2, 3, 200, 'Core i3', 'Không'),
+(20, 'P18 (TTDĐ3)', 5, 3, 200, 'Core i7', 'Có');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phong_phanmem`
+-- Table structure for table `phong_phanmem`
 --
 
 CREATE TABLE `phong_phanmem` (
@@ -901,7 +1262,7 @@ CREATE TABLE `phong_phanmem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `phong_phanmem`
+-- Dumping data for table `phong_phanmem`
 --
 
 INSERT INTO `phong_phanmem` (`id`, `idPhong`, `idPhanMem`) VALUES
@@ -909,7 +1270,6 @@ INSERT INTO `phong_phanmem` (`id`, `idPhong`, `idPhanMem`) VALUES
 (2, 1, 2),
 (3, 2, 1),
 (4, 2, 2),
-(5, 2, 3),
 (6, 3, 2),
 (7, 3, 5),
 (8, 3, 6),
@@ -918,20 +1278,50 @@ INSERT INTO `phong_phanmem` (`id`, `idPhong`, `idPhanMem`) VALUES
 (11, 4, 6),
 (12, 5, 2),
 (13, 6, 3),
-(14, 7, 2),
 (15, 8, 5),
-(16, 9, 6),
 (17, 10, 4),
-(18, 11, 5),
 (19, 12, 6),
-(20, 3, 1),
 (23, 1, 3),
-(26, 1, 5);
+(27, 14, 2),
+(30, 15, 2),
+(32, 15, 3),
+(33, 15, 4),
+(34, 16, 5),
+(35, 16, 6),
+(36, 16, 7),
+(37, 17, 4),
+(38, 17, 6),
+(39, 17, 1),
+(41, 7, 1),
+(42, 7, 4),
+(43, 7, 7),
+(44, 8, 1),
+(46, 8, 3),
+(47, 9, 1),
+(49, 5, 1),
+(50, 11, 1),
+(51, 11, 3),
+(52, 13, 2),
+(53, 13, 1),
+(56, 14, 3),
+(57, 18, 1),
+(59, 18, 4),
+(60, 18, 5),
+(61, 19, 1),
+(62, 19, 3),
+(64, 19, 7),
+(65, 19, 4),
+(66, 20, 1),
+(68, 20, 7),
+(69, 20, 6),
+(70, 20, 5),
+(71, 20, 4),
+(72, 2, 5);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -944,7 +1334,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
@@ -955,7 +1345,7 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role_user`
+-- Table structure for table `role_user`
 --
 
 CREATE TABLE `role_user` (
@@ -964,23 +1354,33 @@ CREATE TABLE `role_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `role_user`
+-- Dumping data for table `role_user`
 --
 
 INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(2, 3),
-(3, 1),
+(2, 2),
 (3, 2),
-(3, 3),
-(4, 2);
+(4, 2),
+(5, 2),
+(6, 2),
+(13, 2),
+(208, 3),
+(393, 3),
+(394, 3),
+(395, 3),
+(396, 3),
+(397, 3),
+(398, 3),
+(399, 3),
+(425, 3);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thu`
+-- Table structure for table `thu`
 --
 
 CREATE TABLE `thu` (
@@ -990,7 +1390,7 @@ CREATE TABLE `thu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `thu`
+-- Dumping data for table `thu`
 --
 
 INSERT INTO `thu` (`id`, `TenThu`, `TenVietTat`) VALUES
@@ -1005,7 +1405,7 @@ INSERT INTO `thu` (`id`, `TenThu`, `TenVietTat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tuan`
+-- Table structure for table `tuan`
 --
 
 CREATE TABLE `tuan` (
@@ -1015,7 +1415,7 @@ CREATE TABLE `tuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `tuan`
+-- Dumping data for table `tuan`
 --
 
 INSERT INTO `tuan` (`id`, `TenTuan`, `TenVietTat`) VALUES
@@ -1043,7 +1443,7 @@ INSERT INTO `tuan` (`id`, `TenTuan`, `TenVietTat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `vande`
+-- Table structure for table `vande`
 --
 
 CREATE TABLE `vande` (
@@ -1059,285 +1459,300 @@ CREATE TABLE `vande` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `vande`
+-- Dumping data for table `vande`
 --
 
 INSERT INTO `vande` (`id`, `idPhong`, `tomTatVD`, `chiTietVD`, `trangThai`, `nguoiBaoCao`, `ngayBaoCao`, `nguoiNhan`, `ngayNhan`) VALUES
-(1, 1, 'Bị hỏng chuột', 'Bị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuộtBị hỏng chuột', 0, 0, '2017-05-09 13:18:25', 0, '2017-05-09 13:18:25'),
-(2, 2, 'Bị hỏng màn hình', 'Bị hỏng màn hình', 1, 0, '2017-05-09 13:18:25', 0, '2017-05-09 13:18:25'),
-(3, 9, 'Bị hỏng chuột', 'Bị hỏng chuột mays 40 40 40 404 070 40 0', 1, 0, '2017-05-09 13:18:25', 0, '2017-05-09 13:18:25'),
-(4, 14, 'Bi hu chuot', 'qưertyuio', 0, 0, '2017-05-09 13:18:25', 0, '2017-05-09 13:18:25'),
-(5, 1, 'Bi hỏng chuột', 'Tất cả chuột ở các máy đều biij hỏngs', 0, 1, '2017-05-09 20:43:51', 0, '2017-05-09 20:43:51'),
-(6, 2, 'Chuột máy 2 hư', 'Chuột máy 2 hư', 0, 1, '2017-05-10 02:53:15', 0, '2017-05-10 02:53:15');
+(24, 3, 'Hư màn hình', 'Máy 11', 0, 393, '2017-05-16 15:16:47', 3, '2017-05-16 15:16:47'),
+(25, 1, 'Hư RAM', 'Máy 12', 0, 208, '2017-05-17 08:06:07', 1, '2017-05-17 08:06:07'),
+(26, 1, 'Hư màn hình', 'máy 10', 0, 208, '2017-05-17 08:06:28', 1, '2017-05-17 08:06:28'),
+(27, 1, 'Hư quạt', 'cây quạt số 1', 0, 208, '2017-05-17 08:08:08', 1, '2017-05-17 08:08:08'),
+(28, 4, 'Hư RAM', 'máy 01', 0, 208, '2017-05-17 08:10:39', 4, '2017-05-17 08:10:39'),
+(29, 4, 'Hư màn hình', 'máy 1', 0, 208, '2017-05-17 08:10:54', 4, '2017-05-17 08:10:54'),
+(30, 11, 'Hư RAM', 'máy 02', 0, 208, '2017-05-17 08:11:21', 1, '2017-05-17 08:11:21'),
+(31, 11, 'Hư màn hình', 'máy 01', 0, 208, '2017-05-17 08:11:31', 1, '2017-05-17 08:11:31'),
+(32, 1, 'Hư RAM', 'máy 10', 0, 393, '2017-05-17 17:20:19', 1, '2017-05-17 17:20:19'),
+(33, 1, 'Hư RAM', 'máy 12', 1, 208, '2017-05-18 00:55:34', 1, '2017-05-18 00:56:47');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `bomon`
+-- Indexes for table `bomon`
 --
 ALTER TABLE `bomon`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `buoi`
+-- Indexes for table `buoi`
 --
 ALTER TABLE `buoi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `cauhinh`
+-- Indexes for table `cauhinh`
 --
 ALTER TABLE `cauhinh`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `chucvu`
+-- Indexes for table `chucvu`
 --
 ALTER TABLE `chucvu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `giaovien`
+-- Indexes for table `giaovien`
 --
 ALTER TABLE `giaovien`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `hocky_nienkhoa`
+-- Indexes for table `hocky_nienkhoa`
 --
 ALTER TABLE `hocky_nienkhoa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `hopthu`
+-- Indexes for table `hopthu`
 --
 ALTER TABLE `hopthu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `lich`
+-- Indexes for table `lich`
 --
 ALTER TABLE `lich`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `lichsu_choduyet`
+-- Indexes for table `lichsu_choduyet`
 --
 ALTER TABLE `lichsu_choduyet`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `lich_choduyet`
+-- Indexes for table `lichsu_vande`
+--
+ALTER TABLE `lichsu_vande`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lich_choduyet`
 --
 ALTER TABLE `lich_choduyet`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `lophocphan`
+-- Indexes for table `lophocphan`
 --
 ALTER TABLE `lophocphan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `monhoc`
+-- Indexes for table `monhoc`
 --
 ALTER TABLE `monhoc`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `monhoc_phanmem`
+-- Indexes for table `monhoc_phanmem`
 --
 ALTER TABLE `monhoc_phanmem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `permissions`
+-- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `permissions_name_unique` (`name`);
 
 --
--- Chỉ mục cho bảng `permission_role`
+-- Indexes for table `permission_role`
 --
 ALTER TABLE `permission_role`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
   ADD KEY `permission_role_role_id_foreign` (`role_id`);
 
 --
--- Chỉ mục cho bảng `phanmem`
+-- Indexes for table `phanmem`
 --
 ALTER TABLE `phanmem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `phong`
+-- Indexes for table `phong`
 --
 ALTER TABLE `phong`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `phong_phanmem`
+-- Indexes for table `phong_phanmem`
 --
 ALTER TABLE `phong_phanmem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_name_unique` (`name`);
 
 --
--- Chỉ mục cho bảng `role_user`
+-- Indexes for table `role_user`
 --
 ALTER TABLE `role_user`
   ADD PRIMARY KEY (`user_id`,`role_id`),
   ADD KEY `role_user_role_id_foreign` (`role_id`);
 
 --
--- Chỉ mục cho bảng `thu`
+-- Indexes for table `thu`
 --
 ALTER TABLE `thu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tuan`
+-- Indexes for table `tuan`
 --
 ALTER TABLE `tuan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `vande`
+-- Indexes for table `vande`
 --
 ALTER TABLE `vande`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `bomon`
+-- AUTO_INCREMENT for table `bomon`
 --
 ALTER TABLE `bomon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT cho bảng `buoi`
+-- AUTO_INCREMENT for table `buoi`
 --
 ALTER TABLE `buoi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT cho bảng `cauhinh`
+-- AUTO_INCREMENT for table `cauhinh`
 --
 ALTER TABLE `cauhinh`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT cho bảng `chucvu`
+-- AUTO_INCREMENT for table `chucvu`
 --
 ALTER TABLE `chucvu`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT cho bảng `giaovien`
+-- AUTO_INCREMENT for table `giaovien`
 --
 ALTER TABLE `giaovien`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=452;
 --
--- AUTO_INCREMENT cho bảng `hocky_nienkhoa`
+-- AUTO_INCREMENT for table `hocky_nienkhoa`
 --
 ALTER TABLE `hocky_nienkhoa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT cho bảng `hopthu`
+-- AUTO_INCREMENT for table `hopthu`
 --
 ALTER TABLE `hopthu`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `lich`
+-- AUTO_INCREMENT for table `lich`
 --
 ALTER TABLE `lich`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 --
--- AUTO_INCREMENT cho bảng `lichsu_choduyet`
+-- AUTO_INCREMENT for table `lichsu_choduyet`
 --
 ALTER TABLE `lichsu_choduyet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
--- AUTO_INCREMENT cho bảng `lich_choduyet`
+-- AUTO_INCREMENT for table `lichsu_vande`
+--
+ALTER TABLE `lichsu_vande`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT for table `lich_choduyet`
 --
 ALTER TABLE `lich_choduyet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT cho bảng `lophocphan`
+-- AUTO_INCREMENT for table `lophocphan`
 --
 ALTER TABLE `lophocphan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
 --
--- AUTO_INCREMENT cho bảng `monhoc`
+-- AUTO_INCREMENT for table `monhoc`
 --
 ALTER TABLE `monhoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 --
--- AUTO_INCREMENT cho bảng `monhoc_phanmem`
+-- AUTO_INCREMENT for table `monhoc_phanmem`
 --
 ALTER TABLE `monhoc_phanmem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT cho bảng `permissions`
+-- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `phanmem`
+-- AUTO_INCREMENT for table `phanmem`
 --
 ALTER TABLE `phanmem`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT cho bảng `phong`
+-- AUTO_INCREMENT for table `phong`
 --
 ALTER TABLE `phong`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT cho bảng `phong_phanmem`
+-- AUTO_INCREMENT for table `phong_phanmem`
 --
 ALTER TABLE `phong_phanmem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
--- AUTO_INCREMENT cho bảng `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT cho bảng `thu`
+-- AUTO_INCREMENT for table `thu`
 --
 ALTER TABLE `thu`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT cho bảng `tuan`
+-- AUTO_INCREMENT for table `tuan`
 --
 ALTER TABLE `tuan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT cho bảng `vande`
+-- AUTO_INCREMENT for table `vande`
 --
 ALTER TABLE `vande`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `permission_role`
+-- Constraints for table `permission_role`
 --
 ALTER TABLE `permission_role`
   ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `role_user`
+-- Constraints for table `role_user`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

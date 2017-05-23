@@ -159,27 +159,6 @@ class LichSu_ChoDuyetController extends Controller
         $lichCD->save();
         $bomon = BoMon::find ($req->idBoMon);
 
-        // if($req->check == 1){
-             
-
-        //     $lichsu = new LichSu_ChoDuyet();
-        //     $lichsu->idChoDuyet = $req->idChoDuyet;
-        //     $lichsu->idBMNhan = $req->idBMNhan;
-        //     $lichsu->ghiChu = $req->ghiChu;
-        //     $lichsu->trangThai = 0;
-        //     $lichsu->save();
-        // }
-        // else{
-        //     $lichCD->idBMDuyet = Auth::user()->idBoMon;
-        //     $lichCD->save(); 
-
-        //     $lichsu = new LichSu_ChoDuyet();
-        //     $lichsu->idChoDuyet = $req->idChoDuyet;
-        //     $lichsu->idBMNhan = Auth::user()->idBoMon;
-        //     $lichsu->ghiChu = $req->ghiChu;
-        //     $lichsu->trangThai = 1;
-        //     $lichsu->save();
-        // }
         return redirect('user/duyetlich/danhsach')->with('thongbao','Yêu cầu đã được chuyển tới bộ môn '.$bomon->TenBM);
     }
 
@@ -218,8 +197,7 @@ class LichSu_ChoDuyetController extends Controller
 
         $ls_choduyet = DB::table('LichSu_ChoDuyet') ->where('idChoDuyet',$id)
                                                     ->get();    
-        //if (is_null ($lichCD)) return redirect('user/lichsu_choduyet/danhsach');
-        
+      
         if ($lichCD->TrangThai == 0)
         {
             $i = 0;
@@ -265,8 +243,5 @@ class LichSu_ChoDuyetController extends Controller
             return redirect('user/duyetlich/danhsach')->with('thongbao','Phòng đã có người duyệt!');
         }
         
-        //return view('user/lichsu_choduyet/chitiet',compact('allBoMon','lichCD','ls_choduyet'));
     }
-
-
 }

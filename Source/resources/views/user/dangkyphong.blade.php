@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-lg-4">		
 						<div class="form-group">
-							<label>Môn học</label>
+							<label>Môn học (trong thời khóa biểu)</label>
 							<select class="form-control" name="idMonHoc">
 							@foreach($allMonHoc as $mh)
 								<option value="{{$mh->id}}">{{$mh->TenMH}}</option>
@@ -46,7 +46,7 @@
 					</div>
 					<div class="col-lg-5">
 						<div class="form-group">
-							<label>Bạn muốn đăng ký phòng cho môn học khác</label>
+							<label>Đăng ký phòng cho môn học ngoài TKB</label>
 							<a class="btn btn-info " href="user/dangkyphongk">Đăng ký môn học khác</a>
 						</div>
 						

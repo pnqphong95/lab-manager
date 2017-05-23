@@ -231,9 +231,10 @@ angular.module('starter.controllers', [])
         }
     }])
 
-    .controller('XepPhongCtrl', ['$scope', 'lichCDBM', '$state', '$stateParams', '$http',function ($scope, lichCDBM, $state, $stateParams, $http) {
+    .controller('XepPhongCtrl', ['$scope', 'userService', 'lichCDBM', '$state', '$stateParams', '$http',function ($scope, userService, lichCDBM, $state, $stateParams, $http) {
         $scope.data = {};  
         $scope.phongs = [];
+        $scope.userService = userService;
 
         $http.get("http://qlpth.dev/api/layphongtrongBM/"+$scope.userService.id+"/"+$stateParams.idLCD, { //tao thich tao de day
                 

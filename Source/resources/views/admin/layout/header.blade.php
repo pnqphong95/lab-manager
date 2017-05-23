@@ -126,6 +126,19 @@
                     </ul>
                 </li>
                 @endrole
+                @role('admin')
+                <li> <!--phòng-->
+                    <a href="admin/tuan/danhsach"><i class="fa fa-cube fa-fw"></i> TUẦN<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="admin/tuan/danhsach">Danh sách</a>
+                        </li>
+                        <li>
+                            <a href="admin/tuan/them">Thêm</a>
+                        </li>
+                    </ul>
+                </li>
+                @endrole
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

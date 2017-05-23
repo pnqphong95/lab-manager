@@ -405,25 +405,6 @@ class LichController extends Controller
         $bomon = BoMon::all();
         return view('admin.chinhsualich', ['lich'=>$lich, 'phong'=>$phong, 'monhoc'=>$monhoc, 'bomon'=>$bomon]);
     }
-    
-    public function getThem()
-    {
-
-    }
-
-    public function postThem(Request $request)
-    {
-
-
-
-
-
-    }
-
-    public function getSua()
-    {
-    	// return view('admin.theloai.sua', ['theloai'=>$theloai]);
-    }
 
     public function getLichThucHanh() 
     {

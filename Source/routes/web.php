@@ -185,6 +185,19 @@ Route::group(['prefix'=>'admin', 'middleware' => ['role:manager|admin']], functi
 		Route::get('xoa/{id}', 'HocKy_NienKhoaController@getXoa');
 	});
 
+	Route::group(['prefix'=>'tuan'], function(){
+		//admin/theloai/danhsach
+		Route::get('danhsach', 'TuanController@getDanhSach');
+
+		Route::get('sua/{id}', 'TuanController@getSua');
+		Route::post('sua/{id}', 'TuanController@postSua');
+
+		Route::get('them', 'TuanController@getThem');
+		Route::post('them', 'TuanController@postThem');
+
+		Route::get('xoa/{id}', 'TuanController@getXoa');
+	});
+
 	Route::group(['prefix'=>'giaovien'], function(){
 		//admin/theloai/danhsach
 		Route::get('danhsach', 'GiaoVienController@getDanhSach');

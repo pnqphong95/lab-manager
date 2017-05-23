@@ -36,12 +36,6 @@ Môn học- Sửa
 		    			@endforeach
 		    		</div>
 		    	@endif
-
-		    	@if(session('thongbao'))
-		    		<div class="alert alert-success">
-		    			{{session('thongbao')}}
-		    		</div>
-		    	@endif
 			    <form action="admin/monhoc/sua/{{$monhoc->id}}" method="POST">
 			    	<input type="hidden" name="_token" value="{{csrf_token()}}" />
 			        <div class="form-group">

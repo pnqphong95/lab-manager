@@ -187,29 +187,6 @@ class VanDeController extends Controller
         $ls->trangThai = 0;
         $ls->save();
 
-        // // gửi email thông báo
-        // $data = [   'Email'=> Auth::user()->Email,
-        //             'MaGV'=> Auth::user()->MaGV,
-        //             'HoGV'=> Auth::user()->HoGV,
-        //             'TenGV'=> Auth::user()->TenGV,
-        //             'subject'=> $last->tomTatVD,
-        //             'noidung'=> "Gửi yêu cầu xử lý", 
-        //             'from' => 'anmapmap2017@gmail.com', 
-        //             'from_name' => 'Admin'
-        //         ];
-        
-        // Mail::send( 'user.vande.blanks', $data, function( $message ) use ($data)
-        // {
-        //     $message    ->to( $data['Email'], $data['HoGV'] )
-        //                 ->from( $data['from'], $data['from_name'] )
-        //                 ->subject( $data['subject'] );
-        // });
-        // echo 
-        // //return redirect('admin/giaovien/sua/'.$data['idGV']);
-        // "<script>
-        //     alert('Bạn đã gửi mail thành công');
-        // </script>";
-
         return redirect('user/vande/them')->with('thongbao', 'Vấn đề đã gửi!');
     }
 }

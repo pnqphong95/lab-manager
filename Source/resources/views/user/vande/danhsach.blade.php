@@ -33,7 +33,7 @@ Danh sách các vấn đề
 						<th>Tên Phòng</th>
 						<th>Tên vấn đề</th>
 						<th>Người gửi</th>
-						<th>Người xử lý</th>
+						<th>Bộ môn xử lý</th>
 						<th>Trạng thái</th>
 						@role('manager')
 						<th>Hành động</th>
@@ -65,9 +65,9 @@ Danh sách các vấn đề
 			      		@endforeach
 			      		</td>
 			      		<td>
-			      		@foreach($allGiaoVien as $gv1)
-			      			@if($gv1->id == $vd->nguoiNhan)
-			      				{{$gv1->TenGV}}
+			      		@foreach($allBoMon as $bm)
+			      			@if($bm->id == $vd->nguoiNhan)
+			      				{{$bm->TenBM}}
 			      			@endif
 			      		@endforeach
 			      		</td>
