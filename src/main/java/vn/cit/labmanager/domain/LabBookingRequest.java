@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -16,6 +15,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
@@ -28,8 +28,9 @@ public class LabBookingRequest {
 	@ManyToOne
 	private Lab bookLab;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
 	@JsonBackReference
+	@EqualsAndHashCode.Exclude
 	private Set<LabBookingTime> bookTimes = new HashSet<>();
 
 	private String bookCourse;
