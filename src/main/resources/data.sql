@@ -57,16 +57,3 @@ insert into lab_booking_time values(9, '2018-08-13', 1, 2, 5);
 insert into lab_booking_time values(10, '2018-08-15', 1, 2, 5);
 insert into lab_booking_time values(11, '2018-08-20', 1, 2, 6);
 insert into lab_booking_time values(12, '2018-08-22', 1, 2, 6);
-
-insert into lab_booking_request_book_times values(1, 1);
-insert into lab_booking_request_book_times values(1, 2);
-insert into lab_booking_request_book_times values(1, 3);
-insert into lab_booking_request_book_times values(1, 4);
-insert into lab_booking_request_book_times values(1, 5);
-insert into lab_booking_request_book_times values(1, 6);
-insert into lab_booking_request_book_times values(1, 7);
-insert into lab_booking_request_book_times values(1, 8);
-insert into lab_booking_request_book_times values(1, 9);
-insert into lab_booking_request_book_times values(1, 10);
-insert into lab_booking_request_book_times values(1, 11);
-insert into lab_booking_request_book_times values(1, 12);
