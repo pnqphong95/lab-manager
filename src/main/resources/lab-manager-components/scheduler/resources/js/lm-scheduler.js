@@ -11,7 +11,7 @@ $(function () {
                 slotDuration: { days: 1 }
             }
         },
-        slotLabelFormat: ['dddd\nDD/MM/YYYY'],
+        slotLabelFormat: ['dddd, DD/MM'],
         loading: function (isLoading, view) {
             $('#lm-scheduler').css('filter', 'blur(100px)');
             $('#loading-indicator').css('display', 'block');

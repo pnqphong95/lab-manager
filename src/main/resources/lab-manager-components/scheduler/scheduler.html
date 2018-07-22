@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Scheduler</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css" rel="stylesheet" type="text/css" media="print" />
     <link href="https://fullcalendar.io/releases/fullcalendar-scheduler/1.9.4/scheduler.min.css" rel="stylesheet" type="text/css"/>
@@ -11,10 +13,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <img id='loading-indicator' src="resources/img/spinner.gif">
-
-    <div id='lm-scheduler'></div>
-
+    <div id='lm-header-container'>
+        <nav class="navbar fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">LỊCH THỰC HÀNH</a>
+        </nav>
+    </div>
+    <div id='lm-site-container'>
+        <div id='lm-body-container'>
+            <div id='lm-scheduler'></div>
+        </div>
+        <div id='lm-footer-container'></div>
+        <img id='loading-indicator' src="resources/img/spinner.gif">
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js"></script>
     <script src="https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js"></script>
     <script src="https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js"></script>
