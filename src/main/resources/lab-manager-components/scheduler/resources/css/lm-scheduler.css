@@ -5,6 +5,23 @@ html, body {
   font-size: 14px;
 }
 
-#calendar {
+#loading-indicator {
+  background:none;
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:10000;
+}
+
+#lm-scheduler {
   margin: 40px auto;
+}
+
+#lm-scheduler .fc-timeline-event .fc-content {
+  white-space: pre-wrap;
+}
+
+#lm-scheduler .fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+  border-color: rgb(245, 245, 245);
 }
