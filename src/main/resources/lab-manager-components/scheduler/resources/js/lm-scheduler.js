@@ -1,7 +1,6 @@
 $(function () {
     $('#lm-scheduler').fullCalendar({
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-        locale: 'vi',
         height: 'auto',
         header: false,
         defaultView: 'timelineWeekCustom',
@@ -11,6 +10,7 @@ $(function () {
                 slotDuration: { days: 1 }
             }
         },
+        firstDay: 1,
         slotLabelFormat: ['dddd, DD/MM'],
         loading: function (isLoading, view) {
             $('#lm-scheduler').css('filter', 'blur(100px)');
@@ -21,7 +21,7 @@ $(function () {
             $('#loading-indicator').css('display', 'none');
         },
         resourceGroupField: 'shift',
-        resourceAreaWidth: '75px',
+        resourceAreaWidth: '80px',
         resourceColumns: [{
                 labelText: ' ',
                 field: 'labname'
