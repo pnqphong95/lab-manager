@@ -36,10 +36,10 @@ $(function () {
             element.css("background-color", "#00abd2");
             element.css("line-height", "1.5");
         },
-        resources: 'http://pnqphong-scheduler.getsandbox.com/api/shift_labs',
+        resources: 'https://pnqphong-scheduler.getsandbox.com/api/shift_labs',
         events: function (start, end, timezone, callback) {
             $.ajax({
-                url: 'http://pnqphong-scheduler.getsandbox.com/api/lab_events',
+                url: 'https://pnqphong-scheduler.getsandbox.com/api/lab_events',
                 dataType: 'json',
                 data: {
                     from: start.format('YYYY-MM-DD'),
