@@ -51,4 +51,14 @@ $(function () {
             });
         }
     });
+
+    $('#lm-scheduler-control-prev').click(function () {
+        $('#lm-scheduler').fullCalendar('prev');
+        return false;
+    });
+
+    $('#lm-scheduler-control-next').click(function () {
+        $('#lm-scheduler').fullCalendar('next');
+        return false;
+    });
 });
