@@ -20,6 +20,19 @@ $(function () {
             $('#lm-scheduler').css('filter', 'blur(0px)');
             $('#loading-indicator').css('display', 'none');
         },
+        viewRender: function (view) {
+            $.ajax({
+                url: 'https://pnqphong-scheduler.getsandbox.com/api/week_of_periods',
+                dataType: 'json',
+                data: {
+                    from: view.start.format('YYYY-MM-DD'),
+                    to: view.end.format('YYYY-MM-DD')
+                },
+                success: function (week) {
+                    $('#lm-scheduler-control-select-week').text('Week No.' + week.numOrder);
+                }
+            });
+        },
         resourceGroupField: 'shift',
         resourceAreaWidth: '80px',
         resourceColumns: [{
