@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Scheduler</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link th:href="@{/css/fullcalendar.min.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/fullcalendar.print.min.css}" rel="stylesheet" type="text/css" media="print" />
-    <link th:href="@{/css/scheduler.min.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/css/lm-scheduler.css}" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <div id='lm-header-container'>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <a href="#" class="btn btn-warning" role="button">
-                <i class="fa fa-calendar fa-lg" aria-hidden="true"> LAB Schedule</i>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Scheduler</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link th:href="@{/css/fullcalendar.min.css}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/fullcalendar.print.min.css}" rel="stylesheet" type="text/css" media="print" />
+        <link th:href="@{/css/scheduler.min.css}" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/css/lm-scheduler.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div id='lm-header-container'>
+            <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+                <a href="#" class="btn btn-warning" role="button">
+                    <i class="fa fa-calendar fa-lg" aria-hidden="true"> LAB Schedule</i>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav mr-auto">
-                </div>
-                <form class="form-inline my-2 my-lg-0">
-                    <div class="btn-group" role="group">
-                        <button id="lm-scheduler-control-prev" class="btn my-2 my-sm-0" data-prev><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-                        <button id="lm-scheduler-control-select-week" class="btn my-2 my-sm-0">
-                            
-                        </button>
-                        <button id="lm-scheduler-control-next" class="btn my-2 my-sm-0" data-next><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="navbar-nav mr-auto">
                     </div>
-                </form>
-            </div>
-        </nav>
-    </div>
-    <div id='lm-site-container'>
-        <div id='lm-body-container'>
-            <div id='lm-scheduler'></div>
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="btn-group" role="group">
+                            <button id="lm-scheduler-control-prev" class="btn my-2 my-sm-0" data-prev><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+                            <button id="lm-scheduler-control-select-week" class="btn my-2 my-sm-0"></button>
+                            <button id="lm-scheduler-control-next" class="btn my-2 my-sm-0" data-next><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </nav>
         </div>
-        <div id='lm-footer-container'></div>
-        <img id='loading-indicator' th:src="@{/images/spinner.gif}"/>
-    </div>
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script th:src="@{/js/moment.min.js}"></script>
-    <script th:src="@{/js/fullcalendar.min.js}"></script>
-    <script th:src="@{/js/scheduler.min.js}"></script>
-    <script th:src="@{/js/locale-all.js}"></script>
-    <script th:src="@{/js/lm-scheduler.js}"></script>
-</body>
+        <div id='lm-site-container'>
+            <div id='lm-body-container'>
+                <div id='lm-scheduler'></div>
+            </div>
+            <div id='lm-footer-container'></div>
+            <img id='loading-indicator' th:src="@{/images/spinner.gif}"/>
+        </div>
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script th:src="@{/js/moment.min.js}"></script>
+        <script th:src="@{/js/fullcalendar.min.js}"></script>
+        <script th:src="@{/js/scheduler.min.js}"></script>
+        <script th:src="@{/js/locale-all.js}"></script>
+        <script th:src="@{/js/lm-scheduler.js}"></script>
+        <script th:src="@{/js/lm-scheduler-key-mapping.js}"></script>
+    </body>
 </html>

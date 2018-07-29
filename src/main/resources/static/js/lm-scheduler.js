@@ -1,4 +1,18 @@
 $(function () {
+    $.ajax({
+        url: 'https://pnqphong-scheduler.getsandbox.com/api/periods',
+        dataType: 'json',
+        data: {
+            now: moment().format('YYYY-MM-DD')
+        },
+        success: function (period) {
+            $('#lm-scheduler').fullCalendar('option', 'validRange', {
+                start: period.startDate,
+                end: period.endDate
+            });
+        }
+    });
+
     $('#lm-scheduler').fullCalendar({
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         height: 'auto',
