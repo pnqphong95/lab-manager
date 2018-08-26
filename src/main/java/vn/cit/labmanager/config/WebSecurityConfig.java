@@ -6,6 +6,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import vn.cit.labmanager.config.security.LabManagerAuthenticationFailureHandler;
+import vn.cit.labmanager.config.security.LabManagerAuthenticationSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 			.and().formLogin()
 				.loginPage("/login").permitAll()
-				.successHandler(new LoggedUserSuccessHandler())
+				.successHandler(new LabManagerAuthenticationSuccessHandler())
+				.failureHandler(new LabManagerAuthenticationFailureHandler())
 				.and().logout().permitAll();
 	}
 
