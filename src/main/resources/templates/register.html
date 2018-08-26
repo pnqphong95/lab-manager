@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Yêu cầu cấp quyền truy cập</title>
+
+    <!-- Bootstrap core CSS-->
+    <link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.min.css}" rel="stylesheet" type="text/css">
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header">
+          <a class="btn btn-link" th:href="@{/login}">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </a>
+          Yêu cầu cấp quyền truy cập
+        </div>
+        <div class="card-body">
+          <p class="card-text text-justify small">Để hoàn tất yêu cầu cấp quyền sử dụng hệ thống quản lý phòng thực hành, bạn cần cung cấp tài khoản có hiệu lực được sử dụng tại <mark>hệ thống quản lý của nhà trường.</mark></p>
+          <form>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="text" id="input-user" class="form-control" placeholder="Tên đăng nhập" required="required">
+                <label for="input-user">Tên đăng nhập</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="password" id="input-password" class="form-control" placeholder="Mật khẩu" required="required">
+                <label for="input-password">Mật khẩu</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <textarea type="textarea" id="input-note" class="form-control" placeholder="Ghi chú"></textarea>
+                <label for="input-note">Ghi chú</label>
+              </div>
+            </div>
+            <a class="btn btn-primary btn-block" href="#">Gửi yêu cầu</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+  </body>
+
+</html>

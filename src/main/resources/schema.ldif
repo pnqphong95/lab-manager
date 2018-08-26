@@ -1,0 +1,63 @@
+dn: dc=pnqphong,dc=com
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: pnqphong
+
+# Organizational Units
+dn: ou=groups,dc=pnqphong,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=pnqphong,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+# Create People
+dn: uid=toha,ou=people,dc=pnqphong,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Ha Nguyen Thi To
+sn: Ha
+uid: toha
+userPassword: 1234
+
+dn: uid=toxa,ou=people,dc=pnqphong,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Xa Nguyen Thi To
+sn: Xa
+uid: toxa
+userPassword: 1234
+
+dn: uid=phong,ou=people,dc=pnqphong,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Phong Pham Nguyen Quang
+sn: Phong
+uid: phong
+userPassword: 1234
+
+# Create Groups
+dn: cn=users,ou=groups,dc=pnqphong,dc=com
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: users
+ou: user
+uniqueMember: uid=toha,ou=people,dc=pnqphong,dc=com
+uniqueMember: uid=toxa,ou=people,dc=pnqphong,dc=com
+
+dn: cn=admins,ou=groups,dc=pnqphong,dc=com
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: admins
+ou: admin
+uniqueMember: uid=phong,ou=people,dc=pnqphong,dc=com

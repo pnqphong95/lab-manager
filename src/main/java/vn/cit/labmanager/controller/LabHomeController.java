@@ -10,4 +10,9 @@ public class LabHomeController {
     public String index() {
         return "index";
     }
+	
+	@RequestMapping(path = "/admin")
+    public String processAdminView() {
+        return "index";
+    }
 }
