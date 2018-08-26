@@ -46,6 +46,16 @@ sn: Phong
 uid: phong
 userPassword: 1234
 
+dn: uid=admin,ou=people,dc=pnqphong,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Phong Pham Nguyen Quang
+sn: Phong
+uid: admin
+userPassword: admin
+
 # Create Groups
 dn: cn=users,ou=groups,dc=pnqphong,dc=com
 objectclass: top
@@ -61,3 +71,4 @@ objectclass: groupOfUniqueNames
 cn: admins
 ou: admin
 uniqueMember: uid=phong,ou=people,dc=pnqphong,dc=com
+uniqueMember: uid=admin,ou=people,dc=pnqphong,dc=com

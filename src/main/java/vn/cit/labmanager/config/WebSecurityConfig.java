@@ -15,12 +15,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/public/**", "/resources/**", "/resources/public/**").permitAll()
 				.antMatchers("/css/**", "/js/**", "/images/**", "/vendor/**/*", "**/favicon.ico").permitAll()
-				.antMatchers("/register").permitAll()
-				.antMatchers("/").anonymous()
+				.antMatchers("/registration").permitAll()
 				.anyRequest().authenticated()
 			.and().formLogin()
 				.loginPage("/login").permitAll()
-				.defaultSuccessUrl("/admin")
+				.successHandler(new LoggedUserSuccessHandler())
 				.and().logout().permitAll();
 	}
 
