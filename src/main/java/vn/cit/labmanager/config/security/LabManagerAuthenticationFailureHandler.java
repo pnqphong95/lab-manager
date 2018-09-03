@@ -13,7 +13,8 @@ public class LabManagerAuthenticationFailureHandler extends SimpleUrlAuthenticat
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-		super.onAuthenticationFailure(request, response, exception);
+		response.getWriter().print(AuthenticationResponseObjectBuilder.builder().success(false).build());
+		response.getWriter().flush();
 	}
 
 }

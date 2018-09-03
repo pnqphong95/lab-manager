@@ -17,11 +17,12 @@ public class LabManagerAuthenticationSuccessHandler extends SimpleUrlAuthenticat
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 	    SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+	    String forwardUrl = request.getContextPath();
 	    if(savedRequest != null) {
-	    	response.sendRedirect(savedRequest.getRedirectUrl());
-	    } else {
-	    	response.sendRedirect(request.getContextPath());
+	    	forwardUrl = savedRequest.getRedirectUrl();
 	    }
+	    response.getWriter().print(AuthenticationResponseObjectBuilder.builder().success(true).forwardUrl(forwardUrl).build());
+		response.getWriter().flush();
 	}
 
 }

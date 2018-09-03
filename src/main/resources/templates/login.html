@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,10 +41,8 @@
               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+            <div id="form-login-errors" style='margin-top:10px;color:#e00202;font-size:0.9em;display:block;text-align:center;'></div>
           </form>
-          <div class="text-center">
-            <a class="d-block small mt-3" th:href="@{/registration}">Yêu cầu cấp quyền truy cập</a>
-          </div>
         </div>
       </div>
     </div>
@@ -55,7 +53,22 @@
 
     <!-- Core plugin JavaScript-->
     <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-
+	<script>
+		$(document).ready(function() {			
+			$("#login-form").submit(function(event) {
+				event.preventDefault();
+				$.post($(this).attr("action"), $(this).serialize())
+				.done(function(data) {
+					var authResult = jQuery.parseJSON(data);
+					if (authResult.success) {
+						window.location.href = authResult.forwardUrl;
+					} else {
+						$("#form-login-errors").text('Sai tên đăng nhập và mật khẩu');
+					}
+				});
+			});
+		});
+	</script>
   </body>
 
 </html>
