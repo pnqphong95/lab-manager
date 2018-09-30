@@ -1,0 +1,7 @@
+.dataTables_filter label {
+	margin-bottom: 0;
+}
+
+.dataTables_paginate ul.pagination {
+	margin: 0;
+}
