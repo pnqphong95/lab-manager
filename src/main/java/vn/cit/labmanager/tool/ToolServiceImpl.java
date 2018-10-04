@@ -1,4 +1,4 @@
-package vn.cit.labmanager.service.impl;
+package vn.cit.labmanager.tool;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,10 +6,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import vn.cit.labmanager.domain.Tool;
-import vn.cit.labmanager.repository.ToolRepository;
-import vn.cit.labmanager.service.ToolService;
 
 @Service
 public class ToolServiceImpl implements ToolService {
@@ -46,6 +42,11 @@ public class ToolServiceImpl implements ToolService {
 	@Override
 	public Tool save(Tool tool) {
 		return repo.save(tool);
+	}
+
+	@Override
+	public Optional<Tool> findTopByOrderByModifiedDesc() {
+		return Optional.ofNullable(repo.findTopByOrderByModifiedDesc());
 	}
 	
 }

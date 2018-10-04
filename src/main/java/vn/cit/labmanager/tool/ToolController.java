@@ -1,16 +1,15 @@
-package vn.cit.labmanager.controller;
+package vn.cit.labmanager.tool;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import vn.cit.labmanager.domain.Tool;
-import vn.cit.labmanager.service.ToolService;
 
 @Controller
 public class ToolController {
@@ -20,7 +19,13 @@ public class ToolController {
 	
 	@RequestMapping(path = "/admin/category/tools")
     public String index(Model model) {
+		Optional<Tool> lastModifiedTool = service.findTopByOrderByModifiedDesc();
+		String lastModification = lastModifiedTool.map(Tool::getModified)
+				.map(modified -> modified.format(DateTimeFormatter.ofPattern("HH'h'mm 'ngày' dd/MM/yyyy")))
+				.orElse(StringUtils.EMPTY);
+		
 		model.addAttribute("tools", service.findAll());
+		model.addAttribute("lastModification", lastModification);
         return "admin/category/tool/index";
     }
 	

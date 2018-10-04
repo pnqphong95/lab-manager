@@ -1,8 +1,3 @@
-insert into tool values(1, 'Visual Studio Code');
-insert into tool values(2, 'XamPP');
-insert into tool values(3, 'Eclipse');
-insert into tool values(4, 'Netbeans');
-
 insert into shift values(1, 'Sáng');
 insert into shift values(2, 'Chiều');
 
