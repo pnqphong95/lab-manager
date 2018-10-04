@@ -6,6 +6,48 @@
     <title>Quản lý phòng thực hành</title>
 	<link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/customize.css}" rel="stylesheet" />
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+    
+    <script>
+ 	// Call the dataTables jQuery plugin
+    $(document).ready(function() {    	
+      var table = $('#tool-list-table').removeAttr('width').DataTable({
+    	  responsive: true,
+    	  info: false,
+    	  lengthChange: false,
+    	  language: {
+    	        search: "_INPUT_",
+    	        searchPlaceholder: "Nhập từ khóa...",
+    	        zeroRecords: "Không tìm thấy kết quả",
+    	        paginate: {
+    	            first: "Đầu",
+    	            last: "Cuối",
+    	            next: "<i class='fas fa-chevron-right'></i>",
+    	            previous: "<i class='fas fa-chevron-left'></i>"
+    	        },
+    	  },
+    	  columnDefs: [
+    		    { "orderable": false, "width": "5%", "targets": 2 }
+    	  ]
+      });
+      
+      $('#search-box').prepend($("#tool-list-table_filter"));
+      $('#paging-box').append($("#tool-list-table_paginate"));
+      
+      $('#confirmModal').on('show.bs.modal', function(e) {
+    	    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+      });
+      
+    });
+    </script>
   </head>
 
   <body id="page-top">
@@ -125,45 +167,10 @@
         </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-    
-    <!-- Core plugin JavaScript-->
-    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
-    
-    <script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
-    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
     
     <!-- Custom scripts for all pages-->
     <script th:src="@{/js/sb-admin.min.js}"></script>
-    <script>
- // Call the dataTables jQuery plugin
-    $(document).ready(function() {    	
-      var table = $('#tool-list-table').DataTable({
-    	  responsive: true,
-    	  info: false,
-    	  lengthChange: false,
-    	  language: {
-    	        search: "_INPUT_",
-    	        searchPlaceholder: "Nhập từ khóa...",
-    	        zeroRecords: "Không tìm thấy kết quả",
-    	        paginate: {
-    	            first: "Đầu",
-    	            last: "Cuối",
-    	            next: "<i class='fas fa-chevron-right'></i>",
-    	            previous: "<i class='fas fa-chevron-left'></i>"
-    	        },
-    	  },
-    	  "columnDefs": [
-    		    { "orderable": false, "width": "5%", "targets": 2 }
-    	  ]
-      });
-      
-      $('#search-box').prepend($("#tool-list-table_filter"));
-      $('#paging-box').append($("#tool-list-table_paginate"));
-      
+    <script>      
       $('#confirmModal').on('show.bs.modal', function(e) {
     	    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
       });
