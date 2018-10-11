@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+    <title>Quáº£n lÃ½ phÃ²ng thá»±c hÃ nh</title>
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Quáº£n lÃ½ phÃ²ng thá»±c hÃ nh</a>
+            </li>
+            <li class="breadcrumb-item">Danh má»¥c</li>
+            <li class="breadcrumb-item active">Pháº§n má»�m</li>
+          </ol>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="far fa-edit"></i>
+              Cáº­p nháº­t pháº§n má»�m
+              <div id="add-control-box" class="float-right">
+              	<a th:href="@{/admin/category/departments}" class="btn btn-sm btn-block btn-primary ml-1"><i class="fas fa-arrow-left"></i></a>
+              </div>
+              <div id="search-box" class="float-right"></div>
+            </div>
+            <div class="card-body">
+              <div>
+		        <form id="formDepartment" class="form-horizontal" th:object="${department}" th:action="@{/admin/category/departments}" method="post">
+		            <div class="form-group">
+		                <div class="col-sm-10">
+		                    <input type="hidden" class="form-control" th:field="*{id}"/>
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label class="col-sm-2 control-label">TÃªn pháº§n má»�m:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{name}" />
+		                </div>
+		            </div>		
+		        </form>
+		    </div>
+            </div>
+            <div class="card-footer small text-muted">
+            	<div id="form-control-box" class="float-right">
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-block btn-primary"><i class="far fa-save"></i></button>
+            	</div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright Â© Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">XÃ¡c nháº­n</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">Ã—</span>
+            </button>
+          </div>
+          <div class="modal-body">Báº¡n muá»‘n Ä‘Äƒng xuáº¥t khá»�i phiÃªn lÃ m viá»‡c hiá»‡n táº¡i ?</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Há»§y</button>
+            <form th:action="@{/logout}" method="POST">
+              <input type="submit" class="btn btn-danger" value="Ä�Äƒng xuáº¥t"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>
+	    $(document).ready(function() {    	
+	      $("#submitForm").click(function() {
+	            $("#formDepartment").submit();
+	      });  
+	    });
+    </script>
+  </body>
+
+</html>
