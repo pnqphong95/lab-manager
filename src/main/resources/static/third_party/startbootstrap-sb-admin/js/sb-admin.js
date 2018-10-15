@@ -6,6 +6,9 @@
     e.preventDefault();
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
+    if ($(window).width() <= 768) {
+      $(".sidebar.navbar-nav").css("display", "flex");
+    }
   });
 
   // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
@@ -36,5 +39,10 @@
     }, 1000, 'easeInOutExpo');
     event.preventDefault();
   });
+
+  if ($(window).width() <= 768) {
+    $("body").addClass("sidebar-toggled");
+    $(".sidebar").addClass("toggled");
+  }
 
 })(jQuery); // End of use strict

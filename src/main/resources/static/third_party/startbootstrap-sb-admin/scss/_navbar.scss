@@ -74,6 +74,9 @@
       }
     }
   }
+  @media (max-width: 767px) {
+    display: none;
+  }
   &.toggled {
     width: 0 !important;
     overflow: hidden;
