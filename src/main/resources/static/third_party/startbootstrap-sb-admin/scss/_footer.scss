@@ -18,9 +18,7 @@ footer.sticky-footer {
 body.sidebar-toggled {
   footer.sticky-footer {
     width: 100%;
-  }
-  @media (min-width: 768px) {
-    footer.sticky-footer {
+    @media (min-width: 768px) {
       width: calc(100% - #{$sidebar-collapsed-width});
     }
   }
