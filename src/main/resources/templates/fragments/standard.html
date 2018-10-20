@@ -10,8 +10,8 @@
 </head>
 <body id="page-top">
 	<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top" th:fragment="appNav">
-		<a class="navbar-brand mr-1 d-none d-sm-block" th:href="@{/admin}">Quản lý phòng thực hành</a>
-		<a class="navbar-brand ml-2 d-block d-sm-none" th:href="@{/admin}"><i class="fas fa-calendar-alt"></i></a>
+		<a class="navbar-brand mr-1 d-none d-sm-block" th:href="@{/admin}">&nbsp;&nbsp;HTQL PHÒNG THỰC HÀNH</a>
+		<a class="navbar-brand ml-2 d-block d-sm-none" th:href="@{/admin}">HTQL PHÒNG THỰC HÀNH</a>
 		<button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
 		<!-- Navbar Search -->
@@ -79,6 +79,16 @@
 				</div>
 			</li>
 		</ul>
+		<div id="content-wrapper">	
+	        <!-- Sticky Footer -->
+	        <footer class="sticky-footer" th:fragment="appFooter">
+	          <div class="container my-auto">
+	            <div class="copyright text-center my-auto">
+	              <span>Khoa Công nghệ Thông tin & Truyền thông - Trường Đại học Cần Thơ</span>
+	            </div>
+	          </div>
+	        </footer>
+	      </div>
 	</div>
 
 	<!-- Scroll to Top Button-->
@@ -88,8 +98,8 @@
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		aria-labelledby="exampleModalLabel" aria-hidden="true" th:fragment="appLogoutModal">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>

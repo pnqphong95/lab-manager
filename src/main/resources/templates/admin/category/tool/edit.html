@@ -20,7 +20,7 @@
         <div class="container-fluid">
 
           <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
+          <ol class="breadcrumb d-none d-sm-flex">
             <li class="breadcrumb-item">
               <a href="#">Quản lý phòng thực hành</a>
             </li>
@@ -32,10 +32,6 @@
             <div class="card-header">
               <i class="far fa-edit"></i>
               Cập nhật phần mềm
-              <div id="add-control-box" class="float-right">
-              	<a th:href="@{/admin/category/tools}" class="btn btn-sm btn-block btn-primary ml-1"><i class="fas fa-arrow-left"></i></a>
-              </div>
-              <div id="search-box" class="float-right"></div>
             </div>
             <div class="card-body">
               <div>
@@ -56,7 +52,8 @@
             </div>
             <div class="card-footer small text-muted">
             	<div id="form-control-box" class="float-right">
-            		<button type="submit" id="submitForm" class="btn btn-sm btn-block btn-primary"><i class="far fa-save"></i></button>
+            		<a th:href="@{/admin/category/tools}" class="btn btn-sm btn-secondary">Hủy</a>
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary">Lưu</button>
             	</div>
             </div>
           </div>
@@ -65,13 +62,7 @@
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
-            </div>
-          </div>
-        </footer>
+        <footer th:replace="fragments/standard :: appFooter"></footer>
 
       </div>
       <!-- /.content-wrapper -->
@@ -85,25 +76,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Bạn muốn đăng xuất khỏi phiên làm việc hiện tại ?</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-            <form th:action="@{/logout}" method="POST">
-              <input type="submit" class="btn btn-danger" value="Đăng xuất"/>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
 
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
