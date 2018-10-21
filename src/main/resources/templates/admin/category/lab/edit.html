@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top" class="sidebar-toggled">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb d-none d-sm-flex">
+            <li class="breadcrumb-item">
+              <a href="#">HTQL Phòng thực hành</a>
+            </li>
+            <li class="breadcrumb-item">Danh mục</li>
+            <li class="breadcrumb-item active">Phòng</li>
+          </ol>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="far fa-edit"></i>
+              Cập nhật phòng
+            </div>
+            <div class="card-body">
+              <div>
+		        <form id="formLab" class="form-horizontal" th:object="${lab}" th:action="@{/admin/category/labs}" method="post">
+		            <div class="form-group">
+		                <div class="col-sm-10">
+		                    <input type="hidden" class="form-control" th:field="*{id}"/>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">Tên phòng:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{name}" />
+		                </div>
+		            </div>
+		            <div class="form-group row">
+					    <label for="department-selection" class="col-sm-2 control-label">Bộ môn:</label>
+					    <div class="col-sm-10">
+						    <select class="form-control" id="department-selection" th:field="*{department}">
+						      <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
+						    </select>
+					    </div>
+					</div>
+					<div class="form-group row">
+						<label for="tool-selection" class="col-sm-2 control-label">Phần mềm hỗ trợ:</label>
+				      	<div class="col-sm-10">
+					      	<select multiple class="form-control" id="tool-selection" th:field="*{tools}">
+						        <option th:each="tool : ${tools}" th:value="${tool.id}" th:text="${tool.name}"></option>
+					      	</select>
+				      	</div>
+					</div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">Dung lượng RAM:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{ramCapacity}" />
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">Dung lượng ổ cứng:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{diskCapacity}" />
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">CPU:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{cpu}" />
+		                </div>
+		            </div>	
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">GPU:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{gpu}" />
+		                </div>
+		            </div>	
+		        </form>
+		    </div>
+            </div>
+            <div class="card-footer small text-muted">
+            	<div id="form-control-box" class="float-right">
+            		<a th:href="@{/admin/category/labs}" class="btn btn-sm btn-secondary">Hủy</a>
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary">Lưu</button>
+            	</div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer th:replace="fragments/standard :: appFooter"></footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>
+	    $(document).ready(function() {    	
+	      $("#submitForm").click(function() {
+	            $("#formLab").submit();
+	      });  
+	    });
+    </script>
+  </body>
+
+</html>

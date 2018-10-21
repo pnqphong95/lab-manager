@@ -2,18 +2,25 @@ package vn.cit.labmanager.app.shift;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Entity
 @Data
-public class Shift {
+@EqualsAndHashCode(callSuper = false)
+public class Shift extends AuditableEntity {
 	
 	@Id
-	@GeneratedValue
-	private long id;
-	
-	private String shift;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+	private String id;
+	private String name;
+	private String shortName;
 
 }
