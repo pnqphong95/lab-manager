@@ -21,7 +21,7 @@ public class DepartmentController {
     public String index(Model model) {
 		Optional<Department> lastModifiedDepartment = service.findTopByOrderByModifiedDesc();
 		String lastModification = lastModifiedDepartment.map(Department::getModified)
-				.map(modified -> modified.format(DateTimeFormatter.ofPattern("HH'h'mm 'ngày' dd/MM/yyyy")))
+				.map(modified -> modified.format(DateTimeFormatter.ofPattern("hh':'mm a',' dd/MM/yyyy")))
 				.orElse(StringUtils.EMPTY);
 		
 		model.addAttribute("departments", service.findAll());

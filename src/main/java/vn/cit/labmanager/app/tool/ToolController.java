@@ -21,7 +21,7 @@ public class ToolController {
     public String index(Model model) {
 		Optional<Tool> lastModifiedTool = service.findTopByOrderByModifiedDesc();
 		String lastModification = lastModifiedTool.map(Tool::getModified)
-				.map(modified -> modified.format(DateTimeFormatter.ofPattern("HH'h'mm 'ngày' dd/MM/yyyy")))
+				.map(modified -> modified.format(DateTimeFormatter.ofPattern("hh':'mm a',' dd/MM/yyyy")))
 				.orElse(StringUtils.EMPTY);
 		
 		model.addAttribute("tools", service.findAll());

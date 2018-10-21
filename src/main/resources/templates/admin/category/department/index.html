@@ -2,11 +2,10 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
   <head>
-	<meta th:include="fragments/standard :: appHead" th:remove="tag"/>
-    <title>Quản lý phòng thực hành</title>
-	<link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css" />
+	  <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+	  <link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/customize.css}" rel="stylesheet" />
-    <!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
     
@@ -35,16 +34,12 @@
     	        },
     	  },
     	  columnDefs: [
-    		    { "orderable": false, "width": "5%", "targets": 2 }
+    		    { "orderable": false, "width": "30px", "targets": 2 }
     	  ]
       });
       
       $('#search-box').prepend($("#department-list-table_filter"));
       $('#paging-box').append($("#department-list-table_paginate"));
-      
-      $('#confirmModal').on('show.bs.modal', function(e) {
-    	    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-      });
       
     });
     </script>
@@ -63,7 +58,7 @@
         <div class="container-fluid">
 
           <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
+          <ol class="breadcrumb d-none d-sm-flex">
             <li class="breadcrumb-item">
               <a href="#">Quản lý phòng thực hành</a>
             </li>
@@ -77,13 +72,13 @@
               <i class="fas fa-table"></i>
               Danh sách bộ môn
               <div id="add-control-box" class="float-right">
-              	<a th:href="${'departments/add'}" class="btn btn-sm btn-block btn-primary ml-1"><i class="fas fa-plus" ></i></a>
+              	<a th:href="${'departments/add'}" class="btn btn-sm btn-block btn-primary ml-1">Thêm</a>
               </div>
-              <div id="search-box" class="float-right"></div>
+              <div id="search-box" class="float-right d-none d-sm-block"></div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-sm table-bordered table-hover" id="department-list-table" width="100%" cellspacing="0">
+                <table class="table table-sm table-striped table-bordered table-hover" id="department-list-table" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>STT</th>
@@ -96,8 +91,8 @@
                       <td th:text="${departmentStat.index + 1}">Id</td>
                 	  <td th:text="${department.name}">Name</td>
                       <td>
-                      	<a th:href="${'departments/edit/' + department.id}"><i class="far fa-edit"></i></a>
-                      	<a href="#" th:data-href="${'departments/delete/' + department.id}" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+                      	<a th:href="${'departments/edit/' + department.id}" class="mr-1" title="Sửa"><i class="far fa-edit"></i></a>
+                      	<a href="#" th:data-href="${'departments/delete/' + department.id}" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -105,9 +100,9 @@
               </div>
             </div>
             <div class="card-footer small text-muted">
-            	<span th:if="${!#strings.isEmpty(lastModification)}" class="align-middle">Lần cập nhật cuối vào
+            	<span th:if="${!#strings.isEmpty(lastModification)}" class="align-middle">Cập nhật
             		<span th:text="${lastModification}"></span>
-            	</span>
+              </span>
             	<div id="paging-box" class="float-right"></div>
             </div>
           </div>
@@ -129,7 +124,7 @@
     
     <!-- Confirm Modal-->
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
@@ -152,8 +147,6 @@
       $('#confirmModal').on('show.bs.modal', function(e) {
     	    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
       });
-      
-    });
     </script>
   </body>
 
