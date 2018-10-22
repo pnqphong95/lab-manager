@@ -19,3 +19,35 @@ insert into department values(6, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12
 insert into shift values(1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Sáng', 'S');
 insert into shift values(2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Chiều', 'C');
 insert into shift values(3, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Tối', 'T');
+
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 1', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 3, 250, 'AMD', 'Phòng 2', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (3, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 500, 'AMD', 'Phòng 3', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (4, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 4', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (5, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i3', 3, 500, 'AMD', 'Phòng 5', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (6, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 6', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (7, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 7', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (8, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 1, 250, 'AMD', 'Phòng 8', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (9, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 9', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (10, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 1, 250, 'AMD', 'Phòng 10', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (11, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i3', 2, 250, 'AMD', 'Phòng 11', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (12, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 4, 250, 'AMD', 'Phòng 12', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (13, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 13', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (14, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 1, 250, 'AMD', 'Phòng 14', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (15, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 15', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (16, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i3', 6, 500, 'AMD', 'Phòng 16', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (17, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 17', 32);
+insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (18, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 1, 250, 'AMD', 'Phòng 18', 32);
+
+insert into lab_tools (lab_id, tool_id) values (1, 2);
+insert into lab_tools (lab_id, tool_id) values (1, 3);
+insert into lab_tools (lab_id, tool_id) values (5, 1);
+insert into lab_tools (lab_id, tool_id) values (6, 1);
+insert into lab_tools (lab_id, tool_id) values (6, 2);
+insert into lab_tools (lab_id, tool_id) values (4, 3);
+insert into lab_tools (lab_id, tool_id) values (2, 7);
+insert into lab_tools (lab_id, tool_id) values (10, 7);
+insert into lab_tools (lab_id, tool_id) values (15, 4);
+insert into lab_tools (lab_id, tool_id) values (12, 3);
+insert into lab_tools (lab_id, tool_id) values (13, 6);
+insert into lab_tools (lab_id, tool_id) values (13, 8);
