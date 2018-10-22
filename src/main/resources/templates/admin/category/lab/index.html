@@ -97,7 +97,9 @@
                     <tr th:each="lab, labStat : ${labs}">
                       <td th:text="${labStat.index + 1}">Id</td>
                 	  <td th:text="${lab.name}">Name</td>
-                	  <td th:text="${lab.department.name}">Department</td>
+                	  <td>
+                	  	<span th:if="${lab.department != null}" th:text="${lab.department.name}">Department</span>
+                	  </td>
                 	  <td>
                 	  	<span th:each="tool : ${lab.tools}" th:text="${tool.name}" class="badge badge-info mr-2"></span>
                 	  </td>
