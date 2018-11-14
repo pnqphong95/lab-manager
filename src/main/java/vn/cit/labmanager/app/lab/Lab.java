@@ -25,7 +25,7 @@ import vn.cit.labmanager.config.auditing.AuditableEntity;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false, exclude = {"department"})
-@ToString(exclude = {"department"})
+@ToString(exclude = {"department", "tools"})
 public class Lab extends AuditableEntity {
 
 	@Id
