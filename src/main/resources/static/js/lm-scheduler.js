@@ -1,20 +1,20 @@
 $(function () {
-//    $.ajax({
-//        url: 'api/periods',
-//        dataType: 'json',
-//        data: {
-//            now: moment().format('YYYY-MM-DD')
-//        },
-//        success: function (period) {
-//            $('#lm-scheduler').fullCalendar('option', 'validRange', {
-//                start: period.startDate,
-//                end: period.endDate
-//            });
-//        },
-//        error: function() {
-//        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
-//        }
-//    });
+    $.ajax({
+        url: 'api/periods',
+        dataType: 'json',
+        data: {
+            now: moment().format('YYYY-MM-DD')
+        },
+        success: function (period) {
+            $('#lm-scheduler').fullCalendar('option', 'validRange', {
+                start: period.startDate,
+                end: period.endDate
+            });
+        },
+        error: function() {
+        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
+        }
+    });
 
     $('#lm-scheduler').fullCalendar({
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
