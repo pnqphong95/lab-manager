@@ -18,7 +18,6 @@ insert into department values(6, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12
 
 insert into shift values(1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Sáng', 'S');
 insert into shift values(2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Chiều', 'C');
-insert into shift values(3, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Tối', 'T');
 
 insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 2, 250, 'AMD', 'Phòng 1', 32);
 insert into lab (id, created, created_by, modified, modified_by, cpu, department_id, disk_capacity, gpu, name, ram_capacity) values (2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Intel core i5', 3, 250, 'AMD', 'Phòng 2', 32);

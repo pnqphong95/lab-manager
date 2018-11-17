@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,15 +22,15 @@ public class WeekOfPeriodRestController {
 	private WeekOfPeriodService service;
 	
 	@GetMapping("/api/weekofperiods")
-	public WeekOfPeriodPublicDto findByDateRange(
+	public ResponseEntity<WeekOfPeriodPublicDto> findByDateRange(
 			@RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate to) {
 		Optional<WeekOfPeriod> weekOfPeriod = service.findByDateRange(from, to.minusDays(1));
 		if (weekOfPeriod.isPresent()) {
 			DtoConverter<WeekOfPeriod, WeekOfPeriodPublicDto> converter = WeekOfPeriodDtoConverter.createInstance();
-			return converter.toDto(weekOfPeriod.get());
+			return ResponseEntity.ok(converter.toDto(weekOfPeriod.get()));
 		}
-		return new WeekOfPeriodPublicDto();
+		return ResponseEntity.notFound().build();
 	}
 
 }

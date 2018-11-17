@@ -10,6 +10,9 @@ $(function () {
                 start: period.startDate,
                 end: period.endDate
             });
+        },
+        error: function() {
+        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
         }
     });
 
@@ -17,6 +20,7 @@ $(function () {
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         height: 'auto',
         header: false,
+        locale: 'vi',
         defaultView: 'timelineWeekCustom',
         views: {
             timelineWeekCustom: {
@@ -43,13 +47,12 @@ $(function () {
                     to: view.end.format('YYYY-MM-DD')
                 },
                 success: function (week) {
-                	console.log(week);
                     $('#lm-scheduler-control-select-week').text('Week No.' + week.numOrder);
                 }
             });
         },
         resourceGroupField: 'shift',
-        resourceAreaWidth: '80px',
+        resourceAreaWidth: '110px',
         resourceColumns: [{
                 labelText: ' ',
                 field: 'labName'
