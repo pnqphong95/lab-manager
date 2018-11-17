@@ -1,17 +1,17 @@
 $(function () {
-    $.ajax({
-        url: 'api/periods',
-        dataType: 'json',
-        data: {
-            now: moment().format('YYYY-MM-DD')
-        },
-        success: function (period) {
-            $('#lm-scheduler').fullCalendar('option', 'validRange', {
-                start: period.startDate,
-                end: period.endDate
-            });
-        }
-    });
+//    $.ajax({
+//        url: 'api/periods',
+//        dataType: 'json',
+//        data: {
+//            now: moment().format('YYYY-MM-DD')
+//        },
+//        success: function (period) {
+//            $('#lm-scheduler').fullCalendar('option', 'validRange', {
+//                start: period.startDate,
+//                end: period.endDate
+//            });
+//        }
+//    });
 
     $('#lm-scheduler').fullCalendar({
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
