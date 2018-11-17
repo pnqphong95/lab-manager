@@ -10,6 +10,9 @@ $(function () {
 //                start: period.startDate,
 //                end: period.endDate
 //            });
+//        },
+//        error: function() {
+//        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
 //        }
 //    });
 
@@ -64,7 +67,7 @@ $(function () {
             element.css("background-color", "#00abd2");
             element.css("line-height", "1.5");
         },
-        resources: 'api/shiftlabs',
+        resources: 'https://pnqphong-scheduler.getsandbox.com/api/shift_labs',
         events: function (start, end, timezone, callback) {
             $.ajax({
                 url: 'https://pnqphong-scheduler.getsandbox.com/api/lab_events',
