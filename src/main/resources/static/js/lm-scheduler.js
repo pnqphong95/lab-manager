@@ -10,9 +10,6 @@ $(function () {
                 start: period.startDate,
                 end: period.endDate
             });
-        },
-        error: function() {
-        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
         }
     });
 
