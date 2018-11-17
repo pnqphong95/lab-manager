@@ -57,6 +57,7 @@ public class PeriodServiceImpl implements PeriodService {
 			weekOfPeriod.setStartDate(startDate);
 			weekOfPeriod.setEndDate(startDate.with(DayOfWeek.SUNDAY));
 			weekOfPeriod.setPeriodBelongTo(period);
+			log(weekOfPeriod.getEndDate(), i, weekOfPeriod.getStartDate(), i);
 			period.getWeekOfPeriods().add(weekOfPeriod);
 			startDate = startDate.plusWeeks(1);
 		}
@@ -69,7 +70,12 @@ public class PeriodServiceImpl implements PeriodService {
 		weekOfPeriod.setStartDate(period.getStartDate());
 		weekOfPeriod.setEndDate(period.getStartDate().with(DayOfWeek.SUNDAY));
 		weekOfPeriod.setPeriodBelongTo(period);
+		log(weekOfPeriod.getEndDate(), 1, weekOfPeriod.getStartDate(), 1);
 		return weekOfPeriod;
+	}
+	
+	private void log(LocalDate end, int num, LocalDate start, int id) {
+		System.out.println("insert into week_of_period (created, created_by, modified, modified_by, end_date, num_order, period_belong_to_id, start_date, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', '"+ end +"', "+ num +", 1, '"+ start +"', "+ num +");");
 	}
 
 	@Override

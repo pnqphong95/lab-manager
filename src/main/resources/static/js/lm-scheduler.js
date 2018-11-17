@@ -52,7 +52,7 @@ $(function () {
         resourceAreaWidth: '80px',
         resourceColumns: [{
                 labelText: ' ',
-                field: 'labname'
+                field: 'labName'
         }],
         windowResize: function (view) {
             $('#lm-scheduler').fullCalendar('rerenderEvents');
@@ -64,7 +64,7 @@ $(function () {
             element.css("background-color", "#00abd2");
             element.css("line-height", "1.5");
         },
-        resources: 'https://pnqphong-scheduler.getsandbox.com/api/shift_labs',
+        resources: 'api/shiftlabs',
         events: function (start, end, timezone, callback) {
             $.ajax({
                 url: 'https://pnqphong-scheduler.getsandbox.com/api/lab_events',
