@@ -1,28 +1,35 @@
 package vn.cit.labmanager.app.weekofperiod;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import vn.cit.labmanager.app.period.Period;
+import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Entity
 @Data
-public class WeekOfPeriod {
+@EqualsAndHashCode(callSuper = false)
+public class WeekOfPeriod extends AuditableEntity {
 	
 	@Id
-	@GeneratedValue
-	private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+	private String id;
 	
 	private int numOrder;
 	
-	private LocalDateTime startDate;
+	private LocalDate startDate;
 	
-	private LocalDateTime endDate;
+	private LocalDate endDate;
 	
 	@ManyToOne
 	private Period periodBelongTo;

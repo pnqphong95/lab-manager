@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: 'https://pnqphong-scheduler.getsandbox.com/api/periods',
+        url: 'api/periods',
         dataType: 'json',
         data: {
             now: moment().format('YYYY-MM-DD')
@@ -36,13 +36,14 @@ $(function () {
         },
         viewRender: function (view) {
             $.ajax({
-                url: 'https://pnqphong-scheduler.getsandbox.com/api/week_of_periods',
+                url: 'api/weekofperiods',
                 dataType: 'json',
                 data: {
                     from: view.start.format('YYYY-MM-DD'),
                     to: view.end.format('YYYY-MM-DD')
                 },
                 success: function (week) {
+                	console.log(week);
                     $('#lm-scheduler-control-select-week').text('Week No.' + week.numOrder);
                 }
             });

@@ -1,5 +1,8 @@
 package vn.cit.labmanager.app.period;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -7,8 +10,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import vn.cit.labmanager.app.period.Period;
-import vn.cit.labmanager.app.period.PeriodServiceImpl;
+import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 
 @Service
 public class PeriodServiceImpl implements PeriodService {
@@ -44,7 +46,30 @@ public class PeriodServiceImpl implements PeriodService {
 
 	@Override
 	public Period save(Period period) {
+		period.setEndDate(period.getStartDate().with(DayOfWeek.SUNDAY).plusWeeks(period.getAmountOfWeek() - 1));
+		period.setWeekOfPeriods(new ArrayList<>());
+		period.getWeekOfPeriods().add(getFirstWeekOfPeriod(period));
+		
+		LocalDate startDate = period.getStartDate().with(DayOfWeek.SUNDAY).plusDays(1);
+		for(int i = 2; i <= period.getAmountOfWeek(); i++) {
+			WeekOfPeriod weekOfPeriod = new WeekOfPeriod();
+			weekOfPeriod.setNumOrder(i);
+			weekOfPeriod.setStartDate(startDate);
+			weekOfPeriod.setEndDate(startDate.with(DayOfWeek.SUNDAY));
+			weekOfPeriod.setPeriodBelongTo(period);
+			period.getWeekOfPeriods().add(weekOfPeriod);
+			startDate = startDate.plusWeeks(1);
+		}
 		return repo.save(period);
+	}
+
+	private WeekOfPeriod getFirstWeekOfPeriod(Period period) {
+		WeekOfPeriod weekOfPeriod = new WeekOfPeriod();
+		weekOfPeriod.setNumOrder(1);
+		weekOfPeriod.setStartDate(period.getStartDate());
+		weekOfPeriod.setEndDate(period.getStartDate().with(DayOfWeek.SUNDAY));
+		weekOfPeriod.setPeriodBelongTo(period);
+		return weekOfPeriod;
 	}
 
 	@Override
@@ -52,4 +77,9 @@ public class PeriodServiceImpl implements PeriodService {
 		return Optional.ofNullable(repo.findTopByOrderByModifiedDesc());
 	}
 
+	@Override
+	public Optional<Period> findBySpecifiedDate(LocalDate localDate) {
+		return Optional.ofNullable(repo.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(localDate, localDate));
+	}
+	
 }
