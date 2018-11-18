@@ -24,40 +24,48 @@
               <a href="#">HTQL Phòng thực hành</a>
             </li>
             <li class="breadcrumb-item">Danh mục</li>
-            <li class="breadcrumb-item active">Phần mềm</li>
+            <li class="breadcrumb-item active">Môn học</li>
           </ol>
 
           <div class="card mb-3">
             <div class="card-header">
               <i class="far fa-edit"></i>
-              Cập nhật phần mềm
+              Cập nhật môn học
             </div>
             <div class="card-body">
               <div class="container">
-		        <form id="formTool" class="form-horizontal" th:object="${tool}" th:action="@{/admin/category/tools}" method="post">
+		        <form id="formSubject" class="form-horizontal" th:object="${subject}" th:action="@{/admin/category/subjects}" method="post">
 		            <div class="form-group">
 		                <div class="col-sm-10">
 		                    <input type="hidden" class="form-control" th:field="*{id}"/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
-		                <label class="col-sm-2 control-label">Tên phần mềm:</label>
+		                <label class="col-sm-2 control-label">Mã môn học:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{subjectId}" />
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">Tên môn học:</label>
 		                <div class="col-sm-10">
 		                    <input type="text" class="form-control" th:field="*{name}" />
 		                </div>
 		            </div>
 		            <div class="form-group row">
-		                <label class="col-sm-2 control-label">Phiên bản:</label>
-		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{version}" />
-		                </div>
-		            </div>		
+						<label for="tool-selection" class="col-sm-2 control-label">Phần mềm cần thiết:</label>
+				      	<div class="col-sm-10">
+					      	<select multiple class="form-control" id="tool-selection" th:field="*{tools}">
+						        <option th:each="tool : ${tools}" th:value="${tool.id}" th:text="${tool.name}"></option>
+					      	</select>
+				      	</div>
+					</div>		
 		        </form>
 		    </div>
             </div>
             <div class="card-footer small text-muted">
             	<div id="form-control-box" class="float-right">
-            		<a th:href="@{/admin/category/tools}" class="btn btn-sm btn-secondary">Hủy</a>
+            		<a th:href="@{/admin/category/subjects}" class="btn btn-sm btn-secondary">Hủy</a>
             		<button type="submit" id="submitForm" class="btn btn-sm btn-primary">Lưu</button>
             	</div>
             </div>
@@ -95,7 +103,7 @@
     <script>
 	    $(document).ready(function() {    	
 	      $("#submitForm").click(function() {
-	            $("#formTool").submit();
+	            $("#formSubject").submit();
 	      });  
 	    });
     </script>

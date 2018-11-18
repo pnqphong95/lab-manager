@@ -1,13 +1,13 @@
-insert into tool values(1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Eclipse');
-insert into tool values(2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Netbeans');
-insert into tool values(3, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'IntelliJ');
-insert into tool values(4, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Spring Tool Suite');
-insert into tool values(5, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Visual Studio Code');
-insert into tool values(6, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'SQL Server 2012');
-insert into tool values(7, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Notepad++');
-insert into tool values(8, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Cisco Packet Tracer');
-insert into tool values(9, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Qt');
-insert into tool values(10, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:30:01Z', 'phong', 'XamPP');
+insert into tool values(1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Eclipse', 'Luna');
+insert into tool values(2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Netbeans', '7.0');
+insert into tool values(3, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'IntelliJ', 'Premium');
+insert into tool values(4, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Spring Tool Suite', '4.3');
+insert into tool values(5, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Visual Studio Code', '2018');
+insert into tool values(6, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'SQL Server 2012', '2012');
+insert into tool values(7, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Notepad++', '8.2');
+insert into tool values(8, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Cisco Packet Tracer', '7.2');
+insert into tool values(9, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Qt', '5.3');
+insert into tool values(10, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:30:01Z', 'phong', 'XamPP', '7.0');
 
 insert into department values(1, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Công nghệ thông tin');
 insert into department values(2, '2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'Tin học ứng dụng');

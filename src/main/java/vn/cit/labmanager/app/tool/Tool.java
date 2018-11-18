@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import vn.cit.labmanager.app.lab.Lab;
+import vn.cit.labmanager.app.subject.Subject;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Entity
@@ -27,14 +28,21 @@ public class Tool extends AuditableEntity {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String id;
 	private String name;
+	private String version;
 	
 	@ManyToMany(mappedBy="tools")
 	private List<Lab> labs = new ArrayList<>();
 	
+	@ManyToMany(mappedBy="tools")
+	private List<Subject> subjects = new ArrayList<>();
+	
 	@PreRemove
 	private void preRemove() {
 		for(Lab lab : labs) {
-			lab.getTools().clear();
+			lab.getTools().removeIf(this::equals);
+		}
+		for(Subject subject : subjects) {
+			subject.getTools().removeIf(this::equals);
 		}
 	}
 
