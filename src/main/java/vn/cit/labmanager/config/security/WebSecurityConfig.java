@@ -1,5 +1,6 @@
 package vn.cit.labmanager.config.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +13,24 @@ import org.springframework.security.ldap.userdetails.LdapAuthoritiesPopulator;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Value("${lm.ldap.ldap-server-url}")
+	private String ldapServerUrl;
+	
+	@Value("${lm.ldap.user-dn-patterns}")
+	private String userDnPatterns;
+	
+	@Value("${lm.ldap.user-search-base}")
+	private String userSearchBase;
+	
+	@Value("${lm.ldap.user-search-filter}")
+	private String userSearchFilter;
+	
+	@Value("${lm.ldap.group-search-base}")
+	private String groupSearchBase;
+	
+	@Value("${lm.ldap.group-search-filter}")
+	private String groupSearchFilter;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
@@ -32,12 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.ldapAuthentication().ldapAuthoritiesPopulator(getCustomAutoritiesPopulator())
-			.userDnPatterns("uid={0},ou=people")
-			.userSearchBase("ou=people")
-			.userSearchFilter("uid={0}")
-			.groupSearchBase("ou=groups")
-			.groupSearchFilter("uniqueMember={0}")
-			.contextSource().url("ldap://localhost:33389/dc=pnqphong,dc=com");
+			.userDnPatterns(userDnPatterns)
+			.userSearchBase(userSearchBase)
+			.userSearchFilter(userSearchFilter)
+			.groupSearchBase(groupSearchBase)
+			.groupSearchFilter(groupSearchFilter)
+			.contextSource().url(ldapServerUrl);
 	}
 	
 	@Bean
