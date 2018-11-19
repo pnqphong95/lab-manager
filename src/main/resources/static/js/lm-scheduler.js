@@ -85,18 +85,27 @@ $(function () {
 
     $('#lm-scheduler-control-prev').click(function () {
         $('#lm-scheduler').fullCalendar('prev');
+        var equalGoToSeletor = 'a[goto="'+ $('#lm-scheduler').fullCalendar('getView').start.format('YYYY-MM-DD')  +'"]';
+        $('.weekofperiod-item').removeClass('active');
+    	$(equalGoToSeletor).addClass('active');
+    	console.log(equalGoToSeletor);
+    	$('#select-week-dropdown').text($(equalGoToSeletor).text() + ', ');
         return false;
     });
 
     $('#lm-scheduler-control-next').click(function () {
         $('#lm-scheduler').fullCalendar('next');
+        var equalGoToSeletor = 'a[goto="'+ $('#lm-scheduler').fullCalendar('getView').start.format('YYYY-MM-DD')  +'"]';
+        $('.weekofperiod-item').removeClass('active');
+    	$(equalGoToSeletor).addClass('active');
+    	console.log(equalGoToSeletor);
+    	$('#select-week-dropdown').text($(equalGoToSeletor).text() + ', ');
         return false;
     });
     
     $('div[aria-labelledby="select-week-dropdown"]').on("click","a.weekofperiod-item", function(){
     	$('.weekofperiod-item').removeClass('active');
     	$(this).addClass('active');
-    	console.log($(this).text());
     	$('#select-week-dropdown').text($(this).text() + ', ');
     	$('#lm-scheduler').fullCalendar('gotoDate', $(this).attr('goto'));
     });
