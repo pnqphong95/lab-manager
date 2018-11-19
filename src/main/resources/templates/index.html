@@ -29,7 +29,8 @@
 		
 	  <div>
 	      <a class="navbar-brand mr-1 dropdown-toggle ml-1" id="select-week-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	      	<span th:if="${currentWop != null}">Tuần <span th:text="${currentWop.numOrder}"></span>,</span>
+	      	<span class="week-text" th:if="${currentWop != null}">Tuần <span th:text="${currentWop.numOrder}"></span></span>
+	      	<span th:if="${currentWop != null}">, </span>
 	      </a>
 	      <div class="dropdown-menu" style="left:inherit;" aria-labelledby="select-week-dropdown">
 	        <span th:each="wop : ${weekOfPeriods}">

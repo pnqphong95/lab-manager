@@ -89,7 +89,7 @@ $(function () {
         $('.weekofperiod-item').removeClass('active');
     	$(equalGoToSeletor).addClass('active');
     	console.log(equalGoToSeletor);
-    	$('#select-week-dropdown').text($(equalGoToSeletor).text() + ', ');
+    	$('#select-week-dropdown .week-text').text($(equalGoToSeletor).text());
         return false;
     });
 
@@ -99,14 +99,14 @@ $(function () {
         $('.weekofperiod-item').removeClass('active');
     	$(equalGoToSeletor).addClass('active');
     	console.log(equalGoToSeletor);
-    	$('#select-week-dropdown').text($(equalGoToSeletor).text() + ', ');
+    	$('#select-week-dropdown .week-text').text($(equalGoToSeletor).text());
         return false;
     });
     
     $('div[aria-labelledby="select-week-dropdown"]').on("click","a.weekofperiod-item", function(){
     	$('.weekofperiod-item').removeClass('active');
     	$(this).addClass('active');
-    	$('#select-week-dropdown').text($(this).text() + ', ');
+    	$('#select-week-dropdown .week-text').text($(this).text());
     	$('#lm-scheduler').fullCalendar('gotoDate', $(this).attr('goto'));
     });
     
@@ -129,7 +129,7 @@ $(function () {
             	});
             	var dom = $(listItem);
             	dom.first().addClass('active');
-            	$('#select-week-dropdown').text(dom.first().text() + ', ');
+            	$('#select-week-dropdown .week-text').text(dom.first().text());
             	$('div[aria-labelledby="select-week-dropdown"]').html(dom);
             },
             error: function() {

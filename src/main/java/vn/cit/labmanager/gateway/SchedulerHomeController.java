@@ -27,15 +27,12 @@ public class SchedulerHomeController {
     public String index(Model model) {
 		List<Period> periods = periodService.findAll();
 		Optional<Period> currentPeriod = periods.stream().filter(Period::isCurrent).findFirst();
-		List<WeekOfPeriod> weekOfPeriods = new ArrayList<>();
-		if (currentPeriod.isPresent()) {
-			weekOfPeriods = weekOfPeriodService.findByPeriod(currentPeriod.get());
-		}
-		model.addAttribute("weekOfPeriods", weekOfPeriods);
-		Optional<WeekOfPeriod> currentWeekOfPeriod = weekOfPeriods.stream().filter(WeekOfPeriod::isCurrent).findFirst();
-		model.addAttribute("currentPeriod", currentPeriod.get());
 		model.addAttribute("periods", periods);
-		model.addAttribute("currentWop", currentWeekOfPeriod.get());
+		model.addAttribute("currentPeriod", currentPeriod.isPresent() ? currentPeriod.get() : null);
+		List<WeekOfPeriod> weekOfPeriods = currentPeriod.isPresent() ? weekOfPeriodService.findByPeriod(currentPeriod.get()) : new ArrayList<>();
+		Optional<WeekOfPeriod> currentWeekOfPeriod = weekOfPeriods.stream().filter(WeekOfPeriod::isCurrent).findFirst();
+		model.addAttribute("weekOfPeriods", weekOfPeriods);
+		model.addAttribute("currentWop", currentWeekOfPeriod.isPresent() ? currentWeekOfPeriod.get() : null);
         return "index";
     }
 
