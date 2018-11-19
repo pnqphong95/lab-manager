@@ -40,7 +40,7 @@ $(function () {
         },
         viewRender: function (view) {
             $.ajax({
-                url: 'api/weekofperiods',
+                url: 'api/weekofperiods/inrange',
                 dataType: 'json',
                 data: {
                     from: view.start.format('YYYY-MM-DD'),
@@ -91,5 +91,46 @@ $(function () {
     $('#lm-scheduler-control-next').click(function () {
         $('#lm-scheduler').fullCalendar('next');
         return false;
+    });
+    
+    $('div[aria-labelledby="select-week-dropdown"]').on("click","a.weekofperiod-item", function(){
+    	$('.weekofperiod-item').removeClass('active');
+    	$(this).addClass('active');
+    	console.log($(this).text());
+    	$('#select-week-dropdown').text($(this).text() + ', ');
+    	$('#lm-scheduler').fullCalendar('gotoDate', $(this).attr('goto'));
+    });
+    
+    $('a.period-item').click(function() {
+    	$('.period-item').removeClass('active');
+    	$(this).addClass('active');
+    	$('#select-period-dropdown').text($(this).text());
+    	var startDate = $(this).attr('start');
+    	var endDate = $(this).attr('end');
+    	$.ajax({
+            url: 'api/weekofperiods',
+            dataType: 'json',
+            data: {
+            	startDate: startDate
+            },
+            success: function (weeks) {
+            	var listItem = "";
+            	$.each( weeks, function( index, value ) {
+            		listItem += '<a class="dropdown-item weekofperiod-item" href="#" goto="'+ value.startDate + '">Tuần ' + value.numOrder + '</a>';
+            	});
+            	var dom = $(listItem);
+            	dom.first().addClass('active');
+            	$('#select-week-dropdown').text(dom.first().text() + ', ');
+            	$('div[aria-labelledby="select-week-dropdown"]').html(dom);
+            },
+            error: function() {
+            	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
+            }
+        });
+    	$('#lm-scheduler').fullCalendar('option', 'validRange', {
+            start: startDate,
+            end: endDate
+        });
+    	return;
     });
 });

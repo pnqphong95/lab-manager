@@ -34,4 +34,9 @@ public class WeekOfPeriod extends AuditableEntity {
 	@ManyToOne
 	private Period periodBelongTo;
 	
+	public boolean isCurrent() {
+		LocalDate current = LocalDate.now();
+		return (startDate.isBefore(current) || startDate.isEqual(current)) && (endDate.isAfter(current) || endDate.isEqual(current));
+	}
+	
 }

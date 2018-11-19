@@ -30,3 +30,12 @@ html, body {
   text-transform: capitalize;
   font-weight: normal;
 }
+
+.dropdown-toggle::after {
+    display:none;
+}
+
+.dropdown-menu {
+	max-height:400px;
+	overflow-y:auto;
+}

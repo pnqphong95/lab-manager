@@ -1,6 +1,7 @@
 package vn.cit.labmanager.app.weekofperiod;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -8,11 +9,17 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vn.cit.labmanager.app.period.Period;
+import vn.cit.labmanager.app.period.PeriodService;
+
 @Service
 public class WeekOfPeriodServiceImpl implements WeekOfPeriodService {
 
 	@Autowired
 	private WeekOfPeriodRepository repo;
+	
+	@Autowired
+	private PeriodService periodService;
 
 	@Override
 	public List<WeekOfPeriod> findAll() {
@@ -53,6 +60,21 @@ public class WeekOfPeriodServiceImpl implements WeekOfPeriodService {
 	@Override
 	public Optional<WeekOfPeriod> findByDateRange(LocalDate from, LocalDate to) {
 		return Optional.ofNullable(repo.findByStartDateEqualsAndEndDateEquals(from, to));
+	}
+
+	@Override
+	public List<WeekOfPeriod> findByPeriod(Period period) {
+		return repo.findByPeriodBelongTo(period);
+	}
+
+	@Override
+	public List<WeekOfPeriod> findByPeriodStartDate(LocalDate startDate) {
+		List<WeekOfPeriod> weekOfPeriods = new ArrayList<>();
+		Optional<Period> period = periodService.findBySpecifiedDate(startDate);
+		if (period.isPresent()) {
+			weekOfPeriods = repo.findByPeriodBelongTo(period.get());
+		}
+		return weekOfPeriods;
 	}
 
 }

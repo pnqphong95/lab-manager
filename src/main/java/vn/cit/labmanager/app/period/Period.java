@@ -49,4 +49,9 @@ public class Period extends AuditableEntity {
 	@OneToMany(mappedBy = "periodBelongTo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private List<WeekOfPeriod> weekOfPeriods = new ArrayList<>();
 
+	public boolean isCurrent() {
+		LocalDate current = LocalDate.now();
+		return (startDate.isBefore(current) || startDate.isEqual(current)) && (endDate.isAfter(current) || endDate.isEqual(current));
+	}
+
 }

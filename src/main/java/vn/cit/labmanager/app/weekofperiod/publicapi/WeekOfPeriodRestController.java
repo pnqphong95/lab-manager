@@ -1,7 +1,9 @@
 package vn.cit.labmanager.app.weekofperiod.publicapi;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +23,7 @@ public class WeekOfPeriodRestController {
 	@Autowired
 	private WeekOfPeriodService service;
 	
-	@GetMapping("/api/weekofperiods")
+	@GetMapping("/api/weekofperiods/inrange")
 	public ResponseEntity<WeekOfPeriodPublicDto> findByDateRange(
 			@RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate to) {
@@ -31,6 +33,12 @@ public class WeekOfPeriodRestController {
 			return ResponseEntity.ok(converter.toDto(weekOfPeriod.get()));
 		}
 		return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/api/weekofperiods")
+	public List<WeekOfPeriodPublicDto> findByStartDate(@RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate startDate) {
+		DtoConverter<WeekOfPeriod, WeekOfPeriodPublicDto> converter = WeekOfPeriodDtoConverter.createInstance();
+		return service.findByPeriodStartDate(startDate).stream().map(converter::toDto).collect(Collectors.toList());
 	}
 
 }
