@@ -1,19 +1,36 @@
 package vn.cit.labmanager.app.user;
+import static org.springframework.ldap.query.LdapQueryBuilder.query;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
+
+import javax.naming.NamingException;
+import javax.naming.directory.Attributes;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ldap.core.AttributesMapper;
+import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
-
+	
+	@Value("lm.ldap.user-objectclass")
+	private String userLdapObjectClass;
+	
+	@Autowired
+	private LdapTemplate ldapTemplate;
+	
 	@Autowired
 	private UserService service;
 	
@@ -29,9 +46,23 @@ public class UserController {
         return "admin/category/user/index";
     }
 	
-	@RequestMapping(path = "/admin/category/users", method = RequestMethod.POST)
-    public String saveUser(User user) {
-		service.save(user);
+	@RequestMapping(path = "/admin/category/users/add", method = RequestMethod.POST)
+    public String saveUser(@Valid User user, BindingResult result,  Model model, RedirectAttributes redirAttrs) {
+		model.addAttribute("user", user);
+		model.addAttribute("roles", Role.values());
+		if (result.hasErrors()) {
+			return "admin/category/user/edit";
+		}
+		try {
+			if (getUserByUid(user.getUsername()).isEmpty()) {
+				model.addAttribute("message", "Tên tài khoản không tìm thấy trên hệ thống chứng thực.");
+				return "admin/category/user/edit";
+			}
+			service.save(user);
+		} catch (Exception e) {
+			model.addAttribute("message", "Tên tài khoản đã được thêm.");
+			return "admin/category/user/edit";
+		}
 		return "redirect:/admin/category/users";
     }
 	
@@ -57,5 +88,14 @@ public class UserController {
         service.delete(id);
         return "redirect:/admin/category/users";   
     }
+	
+	public List<String> getUserByUid(String uid) {
+		return ldapTemplate.search(
+			query().where("objectclass").is("person").and("uid").is(uid), new AttributesMapper<String>() {
+			public String mapFromAttributes(Attributes attrs) throws NamingException {
+				return attrs.get("cn").get().toString();
+			}
+		});
+	}
 
 }

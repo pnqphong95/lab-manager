@@ -14,8 +14,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,6 +33,8 @@ public class User extends AuditableEntity {
 	private String id;
 	
 	@Column(unique = true, nullable = false)
+	@NotBlank
+	@Length(max = 50)
 	private String username;
 	
 	@Enumerated(EnumType.STRING)
