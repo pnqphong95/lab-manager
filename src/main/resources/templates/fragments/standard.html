@@ -42,37 +42,37 @@
 	            <i class="fab fa-wpforms"></i>
 	            <span>Đặt phòng</span></a>
 	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" th:href="@{/create_issue}">
-	            <i class="fas fa-exclamation-triangle"></i>
-	            <span>Báo hỏng</span></a>
-	        </li>
-	        <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="listDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-play"></i>
-					<span>Xử lý</span>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="listDropdown">
-					<a class="dropdown-item" th:href="@{/bookrequests}">
-						<i class="fas fa-spinner"></i> Yêu cầu đặt phòng
-					</a>
-					<a class="dropdown-item" th:href="@{/issues}">
-						<i class="fas fa-spinner"></i> Báo cáo hư hỏng
-					</a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="saveDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>
-					<span>Lưu trữ</span>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="saveDropdown">
-					<a class="dropdown-item" th:href="@{/bookrequests}">
-						<i class="far fa-save"></i> Lịch sử đặt phòng
-					</a>
-					<a class="dropdown-item" th:href="@{/issues}">
-						<i class="far fa-save"></i> Lịch sử báo cáo
-					</a>
-				</div>
-			</li>
+<!-- 	        <li class="nav-item"> -->
+<!-- 	          <a class="nav-link" th:href="@{/create_issue}"> -->
+<!-- 	            <i class="fas fa-exclamation-triangle"></i> -->
+<!-- 	            <span>Báo hỏng</span></a> -->
+<!-- 	        </li> -->
+<!-- 	        <li class="nav-item dropdown"> -->
+<!-- 				<a class="nav-link dropdown-toggle" href="#" id="listDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-play"></i> -->
+<!-- 					<span>Xử lý</span> -->
+<!-- 				</a> -->
+<!-- 				<div class="dropdown-menu" aria-labelledby="listDropdown"> -->
+<!-- 					<a class="dropdown-item" th:href="@{/bookrequests}"> -->
+<!-- 						<i class="fas fa-spinner"></i> Yêu cầu đặt phòng -->
+<!-- 					</a> -->
+<!-- 					<a class="dropdown-item" th:href="@{/issues}"> -->
+<!-- 						<i class="fas fa-spinner"></i> Báo cáo hư hỏng -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li class="nav-item dropdown"> -->
+<!-- 				<a class="nav-link dropdown-toggle" href="#" id="saveDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i> -->
+<!-- 					<span>Lưu trữ</span> -->
+<!-- 				</a> -->
+<!-- 				<div class="dropdown-menu" aria-labelledby="saveDropdown"> -->
+<!-- 					<a class="dropdown-item" th:href="@{/bookrequests}"> -->
+<!-- 						<i class="far fa-save"></i> Lịch sử đặt phòng -->
+<!-- 					</a> -->
+<!-- 					<a class="dropdown-item" th:href="@{/issues}"> -->
+<!-- 						<i class="far fa-save"></i> Lịch sử báo cáo -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
 			
 			<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_SYS_ADMIN')">
 				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>

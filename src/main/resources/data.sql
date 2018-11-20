@@ -75,4 +75,12 @@ insert into week_of_period (created, created_by, modified, modified_by, end_date
 insert into week_of_period (created, created_by, modified, modified_by, end_date, num_order, period_belong_to_id, start_date, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', '2019-03-31', 20, 1, '2019-03-25', 20);
 
 insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'pnqphong', 1);
+insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'nttha', 2);
+insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'tcan', 3);
+insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'hnphat', 4);
+
 insert into user_roles (user_id, role_key) values (1, 'R1');
+insert into user_roles (user_id, role_key) values (2, 'R2');
+insert into user_roles (user_id, role_key) values (2, 'R3');
+insert into user_roles (user_id, role_key) values (3, 'R3');
+insert into user_roles (user_id, role_key) values (4, 'R3');

@@ -34,4 +34,5 @@ public class LabBookingTime {
 	
 	@ManyToOne
 	private WeekOfPeriod weekBelongTo;
+
 }

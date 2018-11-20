@@ -66,6 +66,16 @@ sn: Admin
 uid: admin
 userPassword: admin
 
+dn: uid=nopermission,ou=people,dc=ctu,dc=edu
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Co Quyen
+sn: Khong
+uid: nopermission
+userPassword: 1234
+
 # Create Groups
 dn: cn=users,ou=groups,dc=ctu,dc=edu
 objectclass: top
@@ -83,3 +93,4 @@ objectclass: groupOfUniqueNames
 cn: admins
 ou: admin
 uniqueMember: uid=admin,ou=people,dc=ctu,dc=edu
+uniqueMember: uid=nopermission,ou=people,dc=ctu,dc=edu
