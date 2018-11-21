@@ -5,12 +5,15 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.server.ResponseStatusException;
 
+import javassist.NotFoundException;
 import vn.cit.labmanager.app.department.DepartmentService;
 import vn.cit.labmanager.app.tool.ToolService;
 
@@ -37,6 +40,16 @@ public class LabController {
 		model.addAttribute("lastModification", lastModification);
         return "admin/category/lab/index";
     }
+	
+	@RequestMapping(path = "/admin/category/labs/{labId}", method=RequestMethod.GET)
+	public String detail(@PathVariable String labId, Model model) throws NotFoundException{
+		Optional<Lab> lab = labService.findOne(labId);
+		if (lab.isPresent()) {
+			model.addAttribute("lab", lab.get());
+        	return "admin/category/lab/detail";
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
 	
 	@RequestMapping(path = "/admin/category/labs", method = RequestMethod.POST)
     public String saveLab(Lab lab) {

@@ -15,9 +15,11 @@
     <script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
     <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
     
-    <script>
+    <script th:inline="javascript">
  	// Call the dataTables jQuery plugin
-    $(document).ready(function() {    	
+    $(document).ready(function() {
+    	
+      var controlIndex = 5;
       var table = $('#lab-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -35,12 +37,19 @@
     	  },
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
-    		  { "orderable": false, "width": "30px", "targets": 8 }
+    		  { "orderable": false, "width": "60px", "targets": controlIndex }
     	  ]
       });
       
       $('#search-box').prepend($("#lab-list-table_filter"));
       $('#paging-box').append($("#lab-list-table_paginate"));
+      
+      $('#lab-list-table tbody').on( 'click', 'tr', function (event) {
+    	  if ($(event.target).closest('td').index() == controlIndex) {
+    		  return;
+    	  }
+    	  window.location.href = $(this).children().first().attr('href');
+      });
       
     });
     </script>
@@ -86,16 +95,13 @@
                       <th>Tên phòng</th>
                       <th>Bộ môn</th>
                       <th>Phần mềm hỗ trợ</th>
-                      <th>Dung lượng RAM</th>
-                      <th>Dung lượng ổ cứng</th>
-                      <th>CPU</th>
-                      <th>GPU</th>
+                      <th>Số chỗ</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr th:each="lab, labStat : ${labs}">
-                      <td th:text="${labStat.index + 1}">Id</td>
+                      <td th:text="${labStat.index + 1}" th:href="${'labs/' + lab.id}">Id</td>
                 	  <td th:text="${lab.name}">Name</td>
                 	  <td>
                 	  	<span th:if="${lab.department != null}" th:text="${lab.department.name}">Department</span>
@@ -103,13 +109,10 @@
                 	  <td>
                 	  	<span th:each="tool : ${lab.tools}" th:text="${tool.name}" class="badge badge-info mr-2"></span>
                 	  </td>
-                	  <td th:text="${lab.ramCapacity}">RAM Capacity</td>
-                	  <td th:text="${lab.diskCapacity}">Disk Capacity</td>
-                	  <td th:text="${lab.cpu}">CPU</td>
-                	  <td th:text="${lab.gpu}">GPU</td>
+                	  <td th:text="${lab.capacity}">Capacity</td>
                       <td>
-                      	<a th:href="${'labs/edit/' + lab.id}" class="mr-1" title="Sửa"><i class="far fa-edit"></i></a>
-                      	<a href="#" th:data-href="${'labs/delete/' + lab.id}" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      	<a th:href="${'labs/edit/' + lab.id}" class="btn btn-sm btn-primary" title="Sửa"><i class="fas fa-edit"></i></a>
+	                      	<a href="#" th:data-href="${'labs/delete/' + lab.id}" class="btn btn-sm btn-danger" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
                       </td>
                     </tr>
                   </tbody>

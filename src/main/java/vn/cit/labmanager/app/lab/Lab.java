@@ -33,6 +33,7 @@ public class Lab extends AuditableEntity {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String id;
 	private String name;
+	private int capacity;
 	private int ramCapacity;
 	private int diskCapacity;
 	private String cpu;

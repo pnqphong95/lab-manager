@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top" class="sidebar-toggled">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb d-none d-sm-flex">
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+            <li class="breadcrumb-item"><a th:href="${'/admin/category/labs'}">Phòng</a></li>
+            <li class="breadcrumb-item active" th:text="${lab.name}"></li>
+          </ol>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="far fa-edit"></i>Chi tiết <span th:text="${lab.name}"></span>
+              <div id="add-control-box" class="float-right">
+              	<a th:href="${'/admin/category/labs'}" class="btn btn-sm btn-secondary ml-1">Quay lại</a>
+              	<a th:href="${'edit/' + lab.id}" class="btn btn-sm btn-primary ml-1">Sửa</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container">
+		        <div class="table-responsive">
+				  <table class="table table-sm">
+				  	<tbody>
+					    <tr>
+					      <td style="border-top:none;" scope="row">Tên phòng</td>
+					      <td style="border-top:none;" th:text="${lab.name}">Name</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Bộ môn</td>
+					      <td>
+	                	  	<span th:if="${lab.department != null}" th:text="${lab.department.name}">Department</span>
+	                	  </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Phần mềm hỗ trợ</td>
+					      <td>
+	                	  	<span th:each="tool : ${lab.tools}" th:text="${tool.name}" class="badge badge-info mr-2"></span>
+	                	  </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Số chỗ</td>
+					      <td>
+					      	<span th:text="${lab.capacity}">Capacity</span> chỗ
+					      </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Dung lượng RAM</td>
+					      <td>
+					      	<span th:text="${lab.ramCapacity}">Ram Capacity</span> (GB)
+					      </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Dung lượng ổ đĩa</td>
+					      <td>
+					      	<span th:text="${lab.diskCapacity}">Disk Capacity</span> (GB)
+					      </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Cấu hình CPU</td>
+					      <td th:text="${lab.cpu}">CPU</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Cấu hình GPU</td>
+					      <td th:text="${lab.gpu}">GPU</td>
+					    </tr>
+					  </tbody>
+				  </table>
+				</div>
+			  </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer th:replace="fragments/standard :: appFooter"></footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>
+	    $(document).ready(function() {    	
+	      $("#submitForm").click(function() {
+	            $("#formLab").submit();
+	      });  
+	    });
+    </script>
+  </body>
+
+</html>
