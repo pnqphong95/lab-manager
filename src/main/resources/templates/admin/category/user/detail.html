@@ -22,39 +22,37 @@
           <ol class="breadcrumb d-none d-sm-flex">
             <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
             <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
-            <li class="breadcrumb-item"><a th:href="${'/admin/category/departments'}">Bộ môn</a></li>
-            <li class="breadcrumb-item active">Cập nhật</li>
+            <li class="breadcrumb-item"><a th:href="${'/admin/category/users'}">Phòng</a></li>
+            <li class="breadcrumb-item active">Chi tiết</li>
           </ol>
 
           <div class="card mb-3">
             <div class="card-header">
-              <i class="far fa-edit"></i>
-              Cập nhật bộ môn
+              <i class="far fa-edit"></i>Chi tiết phòng
               <div id="add-control-box" class="float-right">
-              	<a th:href="@{/admin/category/departments}" class="btn btn-sm btn-secondary">Quay lại</a>
+              	<a th:href="${'/admin/category/users'}" class="btn btn-sm btn-secondary ml-1">Quay lại</a>
+              	<a th:href="${'edit/' + user.id}" class="btn btn-sm btn-primary ml-1">Sửa</a>
               </div>
             </div>
             <div class="card-body">
               <div class="container">
-		        <form id="formDepartment" class="form-horizontal" th:object="${department}" th:action="@{/admin/category/departments}" method="post">
-		            <div class="form-group">
-		                <div class="col-sm-10">
-		                    <input type="hidden" class="form-control" th:field="*{id}"/>
-		                </div>
-		            </div>
-		            <div class="form-group row">
-		                <label class="col-sm-2 control-label">Tên bộ môn:</label>
-		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{name}" />
-		                </div>
-		            </div>		
-		        </form>
-		    </div>
-            </div>
-            <div class="card-footer small text-muted">
-            	<div id="form-control-box" class="float-right">
-            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary">Lưu lại</button>
-            	</div>
+		        <div class="table-responsive">
+				  <table class="table table-sm">
+				  	<tbody>
+					    <tr>
+					      <td style="border-top:none;" scope="row">Tài khoản</td>
+					      <td style="border-top:none;" th:text="${user.username}">Name</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Quyền</td>
+					      <td>
+	                	  	<span th:each="role : ${user.roles}" th:text="${role.text}" class="badge badge-info mr-2"></span>
+	                	  </td>
+					    </tr>
+					  </tbody>
+				  </table>
+				</div>
+			  </div>
             </div>
           </div>
 
@@ -90,7 +88,7 @@
     <script>
 	    $(document).ready(function() {    	
 	      $("#submitForm").click(function() {
-	            $("#formDepartment").submit();
+	            $("#formLab").submit();
 	      });  
 	    });
     </script>

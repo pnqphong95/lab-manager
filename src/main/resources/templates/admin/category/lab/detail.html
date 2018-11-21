@@ -23,12 +23,12 @@
             <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
             <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
             <li class="breadcrumb-item"><a th:href="${'/admin/category/labs'}">Phòng</a></li>
-            <li class="breadcrumb-item active" th:text="${lab.name}"></li>
+            <li class="breadcrumb-item active">Chi tiết</li>
           </ol>
 
           <div class="card mb-3">
             <div class="card-header">
-              <i class="far fa-edit"></i>Chi tiết <span th:text="${lab.name}"></span>
+              <i class="far fa-edit"></i>Chi tiết phòng
               <div id="add-control-box" class="float-right">
               	<a th:href="${'/admin/category/labs'}" class="btn btn-sm btn-secondary ml-1">Quay lại</a>
               	<a th:href="${'edit/' + lab.id}" class="btn btn-sm btn-primary ml-1">Sửa</a>

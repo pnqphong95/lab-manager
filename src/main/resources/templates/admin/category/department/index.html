@@ -17,7 +17,8 @@
     
     <script>
  	// Call the dataTables jQuery plugin
-    $(document).ready(function() {    	
+    $(document).ready(function() {
+      var controlIndex = 2;
       var table = $('#department-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -35,7 +36,7 @@
     	  },
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
-    		  { "orderable": false, "width": "30px", "targets": 2 }
+    		  { "orderable": false, "width": "60px", "targets": controlIndex }
     	  ]
       });
       
@@ -60,10 +61,8 @@
 
           <!-- Breadcrumbs-->
           <ol class="breadcrumb d-none d-sm-flex">
-            <li class="breadcrumb-item">
-              <a href="#">Quản lý phòng thực hành</a>
-            </li>
-            <li class="breadcrumb-item">Danh mục</li>
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
             <li class="breadcrumb-item active">Bộ môn</li>
           </ol>
 
@@ -92,8 +91,8 @@
                       <td th:text="${departmentStat.index + 1}">Id</td>
                 	  <td th:text="${department.name}">Name</td>
                       <td>
-                      	<a th:href="${'departments/edit/' + department.id}" class="mr-1" title="Sửa"><i class="far fa-edit"></i></a>
-                      	<a href="#" th:data-href="${'departments/delete/' + department.id}" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+                      	<a th:href="${'departments/edit/' + department.id}" class="btn btn-sm btn-primary" title="Sửa"><i class="fas fa-edit"></i></a>
+	                    <a href="#" th:data-href="${'departments/delete/' + department.id}" class="btn btn-sm btn-danger" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
                       </td>
                     </tr>
                   </tbody>

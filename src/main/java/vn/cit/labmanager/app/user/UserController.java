@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javassist.NotFoundException;
+import vn.cit.labmanager.app.lab.Lab;
 
 @Controller
 public class UserController {
@@ -45,6 +50,16 @@ public class UserController {
 		model.addAttribute("lastModification", lastModification);
         return "admin/category/user/index";
     }
+	
+	@RequestMapping(path = "/admin/category/users/{userId}", method=RequestMethod.GET)
+	public String detail(@PathVariable String userId, Model model) throws NotFoundException{
+		Optional<User> user = service.findOne(userId);
+		if (user.isPresent()) {
+			model.addAttribute("user", user.get());
+        	return "admin/category/user/detail";
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
 	
 	@RequestMapping(path = "/admin/category/users/add", method = RequestMethod.POST)
     public String saveUser(@Valid User user, BindingResult result,  Model model, RedirectAttributes redirAttrs) {

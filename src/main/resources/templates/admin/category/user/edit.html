@@ -20,17 +20,19 @@
 
           <!-- Breadcrumbs-->
           <ol class="breadcrumb d-none d-sm-flex">
-            <li class="breadcrumb-item">
-              <a href="#">HTQL Phòng thực hành</a>
-            </li>
-            <li class="breadcrumb-item">Danh mục</li>
-            <li class="breadcrumb-item active">Giảng viên</li>
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+            <li class="breadcrumb-item"><a th:href="${'/admin/category/users'}">Giảng viên</a></li>
+            <li class="breadcrumb-item active">Cập nhật</li>
           </ol>
 
           <div class="card mb-3">
             <div class="card-header">
               <i class="far fa-edit"></i>
               Cập nhật giảng viên
+              <div id="add-control-box" class="float-right">
+              	<a th:href="@{/admin/category/users}" class="btn btn-sm btn-secondary">Quay lại</a>
+              </div>
             </div>
             <div class="card-body">
               <div class="container">
@@ -60,8 +62,7 @@
             </div>
             <div class="card-footer small text-muted">
             	<div id="form-control-box" class="float-right">
-            		<a th:href="@{/admin/category/users}" class="btn btn-sm btn-secondary">Hủy</a>
-            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary">Lưu</button>
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary">Lưu lại</button>
             	</div>
             </div>
           </div>

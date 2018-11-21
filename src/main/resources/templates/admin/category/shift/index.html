@@ -18,6 +18,7 @@
     <script>
  	// Call the dataTables jQuery plugin
     $(document).ready(function() {    	
+      var controlIndex = 3;
       var table = $('#shift-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -35,7 +36,7 @@
     	  },
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
-    		  { "orderable": false, "width": "30px", "targets": 3 }
+    		  { "orderable": false, "width": "60px", "targets": controlIndex }
     	  ]
       });
       
@@ -60,10 +61,8 @@
 
           <!-- Breadcrumbs-->
           <ol class="breadcrumb d-none d-sm-flex">
-            <li class="breadcrumb-item">
-              <a href="#">Quản lý phòng thực hành</a>
-            </li>
-            <li class="breadcrumb-item">Danh mục</li>
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
             <li class="breadcrumb-item active">Buổi học</li>
           </ol>
 
@@ -94,8 +93,8 @@
                 	  <td th:text="${shift.name}">Name</td>
                 	  <td th:text="${shift.shortName}">Short Name</td>
                       <td>
-                      	<a th:href="${'shifts/edit/' + shift.id}" class="mr-1" title="Sửa"><i class="far fa-edit"></i></a>
-                      	<a href="#" th:data-href="${'shifts/delete/' + shift.id}" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+                      	<a th:href="${'shifts/edit/' + shift.id}" class="btn btn-sm btn-primary" title="Sửa"><i class="fas fa-edit"></i></a>
+	                    <a href="#" th:data-href="${'shifts/delete/' + shift.id}" class="btn btn-sm btn-danger" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
                       </td>
                     </tr>
                   </tbody>
