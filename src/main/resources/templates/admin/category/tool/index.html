@@ -36,7 +36,7 @@
     	  },
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
-    		  { "orderable": false, "width": "60px", "targets": controlIndex }
+    		  { "orderable": false, "width": "20px", "targets": controlIndex }
     	  ]
       });
       
@@ -93,8 +93,10 @@
                 	  <td th:text="${tool.name}">Name</td>
                 	  <td th:text="${tool.version}">Version</td>
                       <td>
-                      	<a th:href="${'tools/edit/' + tool.id}" class="btn btn-sm btn-primary" title="Sửa"><i class="fas fa-edit"></i></a>
-	                    <a href="#" th:data-href="${'tools/delete/' + tool.id}" class="btn btn-sm btn-danger" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      <div style="display:inline-flex;">
+	                      	<a th:href="${'tools/edit/' + tool.id}" class="btn btn-sm btn-primary mr-1" title="Sửa"><i class="fas fa-edit"></i></a>
+		                    <a href="#" th:data-href="${'tools/delete/' + tool.id}" class="btn btn-sm btn-secondary" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      </div>
                       </td>
                     </tr>
                   </tbody>

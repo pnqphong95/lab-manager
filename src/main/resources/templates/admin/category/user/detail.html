@@ -22,13 +22,13 @@
           <ol class="breadcrumb d-none d-sm-flex">
             <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
             <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
-            <li class="breadcrumb-item"><a th:href="${'/admin/category/users'}">Phòng</a></li>
+            <li class="breadcrumb-item"><a th:href="${'/admin/category/users'}">Giảng viên</a></li>
             <li class="breadcrumb-item active">Chi tiết</li>
           </ol>
 
           <div class="card mb-3">
             <div class="card-header">
-              <i class="far fa-edit"></i>Chi tiết phòng
+              <i class="far fa-edit"></i>Chi tiết giảng viên
               <div id="add-control-box" class="float-right">
               	<a th:href="${'/admin/category/users'}" class="btn btn-sm btn-secondary ml-1">Quay lại</a>
               	<a th:href="${'edit/' + user.id}" class="btn btn-sm btn-primary ml-1">Sửa</a>
@@ -44,9 +44,40 @@
 					      <td style="border-top:none;" th:text="${user.username}">Name</td>
 					    </tr>
 					    <tr>
+					      <td scope="row">Mã giảng viên</td>
+					      <td th:text="${user.userId}">User Id</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Họ tên</td>
+					      <td th:text="${user.fullName}">Fullname</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Ngày sinh</td>
+					      <td th:text="${#temporals.format(user.dob,'dd-MM-yyyy')}">Date of birth</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Số điện thoại</td>
+					      <td th:text="${user.phoneNumber}">Phone Number</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Email</td>
+					      <td th:text="${user.email}">Email</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Bộ môn</td>
+					      <td th:text="${user.department.name}">Department</td>
+					    </tr>
+					    <tr>
 					      <td scope="row">Quyền</td>
 					      <td>
 	                	  	<span th:each="role : ${user.roles}" th:text="${role.text}" class="badge badge-info mr-2"></span>
+	                	  </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Trạng thái tài khoản</td>
+					      <td>
+	                	  	<span th:if="${user.active}" class="badge badge-success">Kích hoạt</span>
+	                	  	<span th:if="${!user.active}" class="badge badge-secondary">Vô hiệu hóa</span>
 	                	  </td>
 					    </tr>
 					  </tbody>

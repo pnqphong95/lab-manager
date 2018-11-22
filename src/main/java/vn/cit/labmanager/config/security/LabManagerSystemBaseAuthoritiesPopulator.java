@@ -25,10 +25,12 @@ public class LabManagerSystemBaseAuthoritiesPopulator implements LdapAuthorities
 		Collection<GrantedAuthority> gas = new HashSet<GrantedAuthority>();
 		Optional<User> loggedUser = userService.findByUsername(username);
 		loggedUser.ifPresent(item -> {
-			gas.addAll(item.getRoles().stream()
-					.map(Role::getName)
-					.map(SimpleGrantedAuthority::new)
-					.collect(Collectors.toSet()));
+			if (item.isActive()) {
+				gas.addAll(item.getRoles().stream()
+						.map(Role::getName)
+						.map(SimpleGrantedAuthority::new)
+						.collect(Collectors.toSet()));
+			}
 		});
 		gas.add(new SimpleGrantedAuthority(Role.R4.getName()));
         return gas;

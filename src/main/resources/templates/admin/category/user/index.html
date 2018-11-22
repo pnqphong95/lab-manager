@@ -18,7 +18,7 @@
     <script>
  	// Call the dataTables jQuery plugin
     $(document).ready(function() {
-      var controlIndex = 3;
+      var controlIndex = 6;
       var table = $('#user-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -36,7 +36,7 @@
     	  },
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
-    		  { "orderable": false, "width": "60px", "targets": controlIndex }
+    		  { "orderable": false, "width": "20px", "targets": controlIndex }
     	  ]
       });
       
@@ -90,6 +90,9 @@
                     <tr>
                       <th>STT</th>
                       <th>Tài khoản</th>
+                      <th>Mã GV</th>
+                      <th>Họ tên</th>
+                      <th>Trạng thái</th>
                       <th>Quyền</th>
                       <th></th>
                     </tr>
@@ -97,13 +100,21 @@
                   <tbody>
                     <tr th:each="user, userStat : ${users}">
                       <td th:text="${userStat.index + 1}" th:href="${'users/' + user.id}">Id</td>
-                	  <td th:text="${user.username}">Name</td>
+                      <td th:text="${user.username}">Name</td>
+                      <td th:text="${user.userId}">User Id</td>
+                      <td th:text="${user.fullName}">Fullname</td>
+                	  <td>
+                	  	<span th:if="${user.active}" class="badge badge-success">Kích hoạt</span>
+                	  	<span th:if="${!user.active}" class="badge badge-secondary">Vô hiệu hóa</span>
+                	  </td>
                 	  <td>
                 	  	<span th:each="role : ${user.roles}" th:text="${role.text}" class="badge badge-info mr-2"></span>
                 	  </td>
                       <td>
-                      	<a th:href="${'users/edit/' + user.id}" class="btn btn-sm btn-primary" title="Sửa"><i class="fas fa-edit"></i></a>
-	                    <a href="#" th:data-href="${'users/delete/' + user.id}" class="btn btn-sm btn-danger" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      <div style="display:inline-flex;">
+	                      	<a th:href="${'users/edit/' + user.id}" class="btn btn-sm btn-primary mr-1" title="Sửa"><i class="fas fa-edit"></i></a>
+		                    <a href="#" th:data-href="${'users/delete/' + user.id}" class="btn btn-sm btn-secondary" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      </div>
                       </td>
                     </tr>
                   </tbody>

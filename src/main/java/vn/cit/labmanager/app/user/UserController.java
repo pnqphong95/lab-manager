@@ -25,7 +25,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javassist.NotFoundException;
-import vn.cit.labmanager.app.lab.Lab;
+import vn.cit.labmanager.app.department.DepartmentService;
 
 @Controller
 public class UserController {
@@ -38,6 +38,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private DepartmentService departmentService;
 	
 	@RequestMapping(path = "/admin/category/users")
     public String index(Model model) {
@@ -84,6 +87,7 @@ public class UserController {
 	@RequestMapping(path = "/admin/category/users/add")
     public String createUser(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("departments", departmentService.findAll());
         model.addAttribute("roles", Role.values());
         return "admin/category/user/edit";   
     }
@@ -93,6 +97,7 @@ public class UserController {
         Optional<User> user = service.findOne(id);
         user.ifPresent(item -> {
         	model.addAttribute("user", item);
+        	model.addAttribute("departments", departmentService.findAll());
         	model.addAttribute("roles", Role.values());
         });
         return "admin/category/user/edit";   

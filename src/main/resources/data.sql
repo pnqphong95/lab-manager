@@ -74,10 +74,10 @@ insert into week_of_period (created, created_by, modified, modified_by, end_date
 insert into week_of_period (created, created_by, modified, modified_by, end_date, num_order, period_belong_to_id, start_date, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', '2019-03-24', 19, 1, '2019-03-18', 19);
 insert into week_of_period (created, created_by, modified, modified_by, end_date, num_order, period_belong_to_id, start_date, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', '2019-03-31', 20, 1, '2019-03-25', 20);
 
-insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'pnqphong', 1);
-insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'nttha', 2);
-insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'tcan', 3);
-insert into user (created, created_by, modified, modified_by, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 'hnphat', 4);
+insert into user (created, created_by, modified, modified_by, department_id, dob, email, full_name, active, phone_number, user_id, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 4, '1992-03-16', 'pnqphong@gmail.com', 'Phạm Phong', 1, '0939949095', '00150', 'pnqphong', 1);
+insert into user (created, created_by, modified, modified_by, department_id, dob, email, full_name, active, phone_number, user_id, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 2, '1992-05-04', 'nttha@gmail.com', 'Nguyễn Thị Tố Hà', 0, '0976848266', '00260', 'nttha', 2);
+insert into user (created, created_by, modified, modified_by, department_id, dob, email, full_name, active, phone_number, user_id, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 1, '1980-03-17', 'tcan@cit.ctu.edu.vn', 'Trần Công Án', 1, '0901922933', '00370', 'tcan', 3);
+insert into user (created, created_by, modified, modified_by, department_id, dob, email, full_name, active, phone_number, user_id, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 6, '1989-01-15', 'hnphat@gmail.com', 'Huỳnh Nhựt Phát', 1, '0376221223', '99480', 'hnphat', 4);
 
 insert into user_roles (user_id, role_key) values (1, 'R1');
 insert into user_roles (user_id, role_key) values (2, 'R2');
