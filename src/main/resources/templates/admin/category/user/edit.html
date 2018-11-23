@@ -46,7 +46,7 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Tên tài khoản:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{username}" required/>
+		                    <input type="text" class="form-control" th:field="*{username}" required maxlength="50"/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
@@ -64,19 +64,19 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Ngày sinh:</label>
 		                <div class="col-sm-10">
-		                    <input type="date" class="form-control" th:field="*{dob}"/>
+		                    <input type="date" class="form-control " th:field="*{dob}" required/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Số điện thoại:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{phoneNumber}" required/>
+		                    <input type="text" class="form-control" th:field="*{phoneNumber}" required maxlength="13"/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Email:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{email}" required/>
+		                    <input type="email" class="form-control" th:field="*{email}" required/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
@@ -136,33 +136,54 @@
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
     
     <!-- Core plugin JavaScript-->
     <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
     
     <!-- Custom scripts for all pages-->
     <script th:src="@{/js/sb-admin.min.js}"></script>
-    <script>
-	    $(document).ready(function() {    	
-	      $("#submitForm").click(function() {
-	            $("#formUserTrigger").click();
-	      });
-	      
-	      $('#formUser').validate({
-	    	    errorElement: "div",
-	    	    errorPlacement: function(error, element) {
-	    	    	error.addClass('invalid-feedback')
-	    	    	error.insertAfter(element);
-	    	    },
-	    	    highlight: function(element, errorClass) {
-	    	    	$(element).addClass('is-invalid');
-	    	    },
-	    	    unhighlight: function(element, errorClass) {
-	    	    	$(element).removeClass('is-invalid');
-	    	    }
-	      });
-	    });
-    </script>
-  </body>
+	<script>
+		$(document).ready(function() {
+			$("#submitForm").click(function() {
+				$("#formUserTrigger").click();
+			});
+
+			$('#formUser').validate({
+				rules : {
+					dob : {
+						dateLessThanEqualToday : true
+					},
+					username : {
+						remote : "/api/users/check_username"
+					},
+					email : {
+						remote : "/api/users/check_email"
+					}
+				},
+				messages : {
+					username : {
+						remote : "Tài khoản đã được sử dụng hoặc chưa đăng ký với hệ thống chứng thực"
+					},
+					email : {
+						remote : "Địa chỉ email đã được sử dụng"
+					}
+				},
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});
+		});
+	</script>
+</body>
 
 </html>

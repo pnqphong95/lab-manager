@@ -8,5 +8,5 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	public User findTopByOrderByModifiedDesc();
 	public User findByUsername(String username);
-
+	public User findByEmail(String email);
 }

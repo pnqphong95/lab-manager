@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService {
 		return Optional.ofNullable(repo.findByUsername(username));
 	}
 
+	@Override
+	public Optional<User> findByEmail(String email) {
+		return Optional.ofNullable(repo.findByEmail(email));
+	}
+
 }

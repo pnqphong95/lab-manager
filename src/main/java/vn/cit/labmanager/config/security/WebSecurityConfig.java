@@ -46,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(new LabManagerAuthenticationSuccessHandler())
 				.failureHandler(new LabManagerAuthenticationFailureHandler())
 				.and().logout().permitAll();
+		http.csrf().disable();
 	}
 
 	@Override
