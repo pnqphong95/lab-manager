@@ -46,6 +46,7 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Tên tài khoản:</label>
 		                <div class="col-sm-10">
+		                	<input type="hidden" th:value="${user.username}" id="origin-username"/>
 		                    <input type="text" class="form-control" th:field="*{username}" required maxlength="50"/>
 		                </div>
 		            </div>
@@ -76,6 +77,7 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Email:</label>
 		                <div class="col-sm-10">
+		                	<input type="hidden" th:value="${user.email}" id="origin-email"/>
 		                    <input type="email" class="form-control" th:field="*{email}" required/>
 		                </div>
 		            </div>
@@ -151,15 +153,30 @@
 			});
 
 			$('#formUser').validate({
+				onkeyup: false,
 				rules : {
 					dob : {
 						dateLessThanEqualToday : true
 					},
 					username : {
-						remote : "/api/users/check_username"
+						remote : {
+							param: {
+			                	url: "/api/users/check_username",
+				            },
+				            depends: function(element) {
+				                return ($(element).val() !== $('#origin-username').val());
+				            }
+						}
 					},
 					email : {
-						remote : "/api/users/check_email"
+						remote : {
+							param: {
+			                	url: "/api/users/check_email",
+				            },
+				            depends: function(element) {
+				                return ($(element).val() !== $('#origin-email').val());
+				            }
+						}
 					}
 				},
 				messages : {
