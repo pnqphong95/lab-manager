@@ -45,13 +45,19 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Mã môn học:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{subjectId}" />
+		                    <input type="text" class="form-control" th:field="*{subjectId}" required/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Tên môn học:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{name}" />
+		                    <input type="text" class="form-control" th:field="*{name}" required/>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">Số tín chỉ:</label>
+		                <div class="col-sm-10">
+		                    <input type="number" class="form-control" th:field="*{weight}" required/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
@@ -61,7 +67,8 @@
 						        <option th:each="tool : ${tools}" th:value="${tool.id}" th:text="${tool.name}"></option>
 					      	</select>
 				      	</div>
-					</div>		
+					</div>
+					<input type="submit" id="formSubjectTrigger" style="display:none;"/>	
 		        </form>
 		    </div>
             </div>
@@ -95,6 +102,9 @@
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
     
     <!-- Core plugin JavaScript-->
     <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
@@ -103,9 +113,44 @@
     <script th:src="@{/js/sb-admin.min.js}"></script>
     <script>
 	    $(document).ready(function() {    	
-	      $("#submitForm").click(function() {
-	            $("#formSubject").submit();
-	      });  
+	    	$("#submitForm").click(function() {
+				$("#formSubjectTrigger").click();
+			});
+
+			$('#formSubject').validate({
+				rules: {
+					subjectId: {
+						normalizer: function(value) {
+							return $.trim(value);
+					    }
+					},
+					name: {
+						normalizer: function(value) {
+							return $.trim(value);
+					    }
+					},
+					weight: {
+						min: 1
+					}
+				},
+				messages: {
+					weight: {
+						min: "Số tín chỉ phải lớn hơn hoặc bằng {0}."
+					}
+				},
+				onkeyup: false,
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});  
 	    });
     </script>
   </body>

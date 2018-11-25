@@ -18,7 +18,7 @@
     <script>
  	// Call the dataTables jQuery plugin
     $(document).ready(function() {
-      var controlIndex = 4;
+      var controlIndex = 5;
       var table = $('#subject-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -84,6 +84,7 @@
                       <th>STT</th>
                       <th>Mã môn học</th>
                       <th>Tên môn học</th>
+                      <th>Số tín chỉ</th>
                       <th>Phần mềm cần thiết</th>
                       <th></th>
                     </tr>
@@ -93,6 +94,7 @@
                       <td th:text="${subjectStat.index + 1}">Id</td>
                       <td th:text="${subject.subjectId}">SubjectId</td>
                 	  <td th:text="${subject.name}">Name</td>
+                	  <td th:text="${subject.weight}">Weight</td>
                 	  <td>
                 	  	<span th:each="tool : ${subject.tools}" th:text="${tool.name}" class="badge badge-info mr-2"></span>
                 	  </td>
