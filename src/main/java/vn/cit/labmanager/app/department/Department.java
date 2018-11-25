@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -28,6 +30,8 @@ public class Department extends AuditableEntity {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String id;
 
+	@Column(nullable = false)
+	@NotBlank
 	private String name;
 
 	@OneToMany(mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

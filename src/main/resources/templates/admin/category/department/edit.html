@@ -45,9 +45,10 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Tên bộ môn:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{name}" />
+		                    <input type="text" class="form-control" th:field="*{name}" required/>
 		                </div>
-		            </div>		
+		            </div>
+		            <input type="submit" id="formDepartmentTrigger" style="display:none;"/>	
 		        </form>
 		    </div>
             </div>
@@ -81,6 +82,9 @@
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
     
     <!-- Core plugin JavaScript-->
     <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
@@ -89,9 +93,24 @@
     <script th:src="@{/js/sb-admin.min.js}"></script>
     <script>
 	    $(document).ready(function() {    	
-	      $("#submitForm").click(function() {
-	            $("#formDepartment").submit();
-	      });  
+	    	$("#submitForm").click(function() {
+				$("#formDepartmentTrigger").click();
+			});
+
+			$('#formDepartment').validate({
+				onkeyup: false,
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});  
 	    });
     </script>
   </body>
