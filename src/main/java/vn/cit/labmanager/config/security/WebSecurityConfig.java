@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.ldap.userdetails.LdapAuthoritiesPopulator;
+import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.ldapAuthentication().ldapAuthoritiesPopulator(getCustomAutoritiesPopulator())
+			.userDetailsContextMapper(getUserDetailsContextMapper())
 			.userDnPatterns(userDnPatterns)
 			.userSearchBase(userSearchBase)
 			.userSearchFilter(userSearchFilter)
@@ -63,6 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	LdapAuthoritiesPopulator getCustomAutoritiesPopulator() {
 		return new LabManagerSystemBaseAuthoritiesPopulator();
+	}
+	
+	@Bean
+	UserDetailsContextMapper getUserDetailsContextMapper() {
+		return new LabManagerLdapUserDetailsMapper();
 	}
 
 }
