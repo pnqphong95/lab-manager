@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top" class="sidebar-toggled">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb d-none d-sm-flex">
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Thông tin cá nhân</a></li>
+          </ol>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="far fa-edit"></i>Chi tiết thông tin cá nhân
+              <div id="add-control-box" class="float-right">
+              	<a th:href="${'myprofile/edit'}" class="btn btn-sm btn-primary ml-1">Sửa</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container">
+		        <div class="table-responsive">
+				  <table class="table table-sm">
+				  	<tbody>
+					    <tr>
+					      <td style="border-top:none;" scope="row">Tài khoản</td>
+					      <td style="border-top:none;" th:text="${user.username}">Name</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Mã giảng viên</td>
+					      <td th:text="${user.userId}">User Id</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Họ tên</td>
+					      <td th:text="${user.fullName}">Fullname</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Ngày sinh</td>
+					      <td th:text="${#temporals.format(user.dob,'dd-MM-yyyy')}">Date of birth</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Số điện thoại</td>
+					      <td th:text="${user.phoneNumber}">Phone Number</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Email</td>
+					      <td th:text="${user.email}">Email</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Bộ môn</td>
+					      <td th:text="${user.department.name}">Department</td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Quyền</td>
+					      <td>
+	                	  	<span th:each="role : ${user.roles}" th:text="${role.text}" class="badge badge-info mr-2"></span>
+	                	  </td>
+					    </tr>
+					    <tr>
+					      <td scope="row">Trạng thái tài khoản</td>
+					      <td>
+	                	  	<span th:if="${user.active}" class="badge badge-success">Kích hoạt</span>
+	                	  	<span th:if="${!user.active}" class="badge badge-secondary">Vô hiệu hóa</span>
+	                	  </td>
+					    </tr>
+					  </tbody>
+				  </table>
+				</div>
+			  </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer th:replace="fragments/standard :: appFooter"></footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>
+	    $(document).ready(function() {    	
+	      $("#submitForm").click(function() {
+	            $("#formLab").submit();
+	      });  
+	    });
+    </script>
+  </body>
+
+</html>
