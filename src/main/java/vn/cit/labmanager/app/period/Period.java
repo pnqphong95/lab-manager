@@ -18,12 +18,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"weekOfPeriods"})
 public class Period extends AuditableEntity {
 	
 	@Id

@@ -9,4 +9,5 @@ public interface CourseService {
 	public Optional<Course> findOne(String id);
 	public Course save(Course course);
 	public Optional<Course> findTopByOrderByModifiedDesc();
+	public Optional<Course> findByCourseIdAndPeriodBelongTo(String id, String periodId);
 }

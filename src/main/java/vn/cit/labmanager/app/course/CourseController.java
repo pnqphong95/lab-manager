@@ -11,11 +11,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import vn.cit.labmanager.app.period.PeriodService;
+import vn.cit.labmanager.app.subject.SubjectService;
+import vn.cit.labmanager.app.user.UserService;
+
 @Controller
 public class CourseController {
 
 	@Autowired
 	private CourseService service;
+	
+	@Autowired
+	private SubjectService subjectService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private PeriodService periodService;
 	
 	@RequestMapping(path = "/admin/category/courses")
     public String index(Model model) {
@@ -38,6 +51,9 @@ public class CourseController {
 	@RequestMapping(path = "/admin/category/courses/add")
     public String createCourse(Model model) {
         model.addAttribute("course", new Course());
+        model.addAttribute("subjects", subjectService.findAll());
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("periods", periodService.findAll());
         return "admin/category/course/edit";   
     }
 	
@@ -46,6 +62,9 @@ public class CourseController {
         Optional<Course> course = service.findOne(id);
         course.ifPresent(item -> {
         	model.addAttribute("course", item);
+        	model.addAttribute("subjects", subjectService.findAll());
+            model.addAttribute("users", userService.findAll());
+            model.addAttribute("periods", periodService.findAll());
         });
         return "admin/category/course/edit";   
     }

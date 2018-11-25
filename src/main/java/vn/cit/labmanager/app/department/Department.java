@@ -18,6 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import vn.cit.labmanager.app.lab.Lab;
+import vn.cit.labmanager.app.user.User;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Entity
@@ -36,11 +37,17 @@ public class Department extends AuditableEntity {
 
 	@OneToMany(mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Lab> labs = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<User> users = new ArrayList<>();
 
 	@PreRemove
 	private void preRemove() {
 		for(Lab lab : labs) {
 			lab.setDepartment(null);
+		}
+		for(User user : users) {
+			user.setDepartment(null);
 		}
 	}
 

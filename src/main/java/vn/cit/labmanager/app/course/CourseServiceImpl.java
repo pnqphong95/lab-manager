@@ -7,11 +7,17 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vn.cit.labmanager.app.period.Period;
+import vn.cit.labmanager.app.period.PeriodRepository;
+
 @Service
 public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private CourseRepository repo;
+	
+	@Autowired
+	private PeriodRepository periodRepo;
 
 	@Override
 	public List<Course> findAll() {
@@ -47,6 +53,15 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public Optional<Course> findTopByOrderByModifiedDesc() {
 		return Optional.ofNullable(repo.findTopByOrderByModifiedDesc());
+	}
+
+	@Override
+	public Optional<Course> findByCourseIdAndPeriodBelongTo(String id, String periodId) {
+		Optional<Period> period = periodRepo.findById(periodId);
+		if (period.isPresent()) {
+			return Optional.ofNullable(repo.findByCourseIdAndPeriodBelongTo(id, period.get()));
+		}
+		return Optional.empty();
 	}
 	
 }

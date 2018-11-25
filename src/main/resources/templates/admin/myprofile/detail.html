@@ -62,7 +62,9 @@
 					    </tr>
 					    <tr>
 					      <td scope="row">Bộ môn</td>
-					      <td th:text="${user.department.name}">Department</td>
+					      <td>
+					      	<span th:if="${user.department != null}" th:text="${user.department.name}"></span>
+					      </td>
 					    </tr>
 					    <tr>
 					      <td scope="row">Quyền</td>
