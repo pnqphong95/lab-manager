@@ -11,4 +11,5 @@ public interface PeriodService {
 	public Period save(Period period);
 	public Optional<Period> findTopByOrderByModifiedDesc();
 	public Optional<Period> findBySpecifiedDate(LocalDate date);
+	public Optional<Period> findByStartYearAndSemester(int startYear, PeriodSemester semester);
 }

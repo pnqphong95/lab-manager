@@ -3,6 +3,7 @@ package vn.cit.labmanager.app.lab;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,11 +34,24 @@ public class Lab extends AuditableEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String id;
+	
+	@Column(nullable = false)
+	@NotBlank
 	private String name;
+	
+	@Column(nullable = false)
 	private int capacity;
+	
+	@Column(nullable = false)
 	private int ramCapacity;
+	
+	@Column(nullable = false)
 	private int diskCapacity;
+	
+	@Column(nullable = false)
 	private String cpu;
+	
+	@Column(nullable = false)
 	private String gpu;
 
 	@ManyToOne(fetch = FetchType.LAZY)

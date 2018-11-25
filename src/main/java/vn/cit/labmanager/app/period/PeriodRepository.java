@@ -10,5 +10,6 @@ public interface PeriodRepository extends JpaRepository<Period, String> {
 
 	public Period findTopByOrderByModifiedDesc();
 	public Period findByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate dateOne, LocalDate dateTwo);
+	public Period findByStartYearAndSemester(int startYear, PeriodSemester semester);
 
 }

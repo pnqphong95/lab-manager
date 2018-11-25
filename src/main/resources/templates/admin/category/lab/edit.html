@@ -45,13 +45,13 @@
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Tên phòng:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{name}" />
+		                    <input type="text" class="form-control" th:field="*{name}" required/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 					    <label for="department-selection" class="col-sm-2 control-label">Bộ môn:</label>
 					    <div class="col-sm-10">
-						    <select class="form-control" id="department-selection" th:field="*{department}">
+						    <select class="form-control" id="department-selection" th:field="*{department}" required>
 						      <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
 						    </select>
 					    </div>
@@ -67,33 +67,34 @@
 					<div class="form-group row">
 		                <label class="col-sm-2 control-label">Số chỗ ngồi:</label>
 		                <div class="col-sm-10">
-		                    <input type="number" class="form-control" th:field="*{capacity}" />
+		                    <input type="number" class="form-control" th:field="*{capacity}" required min="1"/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Dung lượng RAM:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{ramCapacity}" />
+		                    <input type="text" class="form-control" th:field="*{ramCapacity}" required min="1"/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">Dung lượng ổ cứng:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{diskCapacity}" />
+		                    <input type="text" class="form-control" th:field="*{diskCapacity}" required min="1"/>
 		                </div>
 		            </div>
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">CPU:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{cpu}" />
+		                    <input type="text" class="form-control" th:field="*{cpu}" required/>
 		                </div>
 		            </div>	
 		            <div class="form-group row">
 		                <label class="col-sm-2 control-label">GPU:</label>
 		                <div class="col-sm-10">
-		                    <input type="text" class="form-control" th:field="*{gpu}" />
+		                    <input type="text" class="form-control" th:field="*{gpu}" required/>
 		                </div>
-		            </div>	
+		            </div>
+		            <input type="submit" id="formLabTrigger" style="display:none;"/>
 		        </form>
 		    </div>
             </div>
@@ -127,6 +128,9 @@
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
     
     <!-- Core plugin JavaScript-->
     <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
@@ -135,9 +139,52 @@
     <script th:src="@{/js/sb-admin.min.js}"></script>
     <script>
 	    $(document).ready(function() {    	
-	      $("#submitForm").click(function() {
-	            $("#formLab").submit();
-	      });  
+	    	$("#submitForm").click(function() {
+				$("#formLabTrigger").click();
+			});
+
+			$('#formLab').validate({
+				rules: {
+					name: {
+						normalizer: function(value) {
+							return $.trim(value);
+					    }
+					},
+					cpu: {
+						normalizer: function(value) {
+							return $.trim(value);
+					    }
+					},
+					gpu: {
+						normalizer: function(value) {
+							return $.trim(value);
+					    }
+					}
+				},
+				messages: {
+					capacity: {
+						min: "Số chỗ ngồi lớn hơn hoặc bằng {0}."
+					},
+					ramCapacity: {
+						min: "Dung lượng ram lớn hơn hoặc bằng {0}."
+					},
+					diskCapacity: {
+						min: "Dung lượng ổ cứng lớn hơn hoặc bằng {0}."
+					}
+				},
+				onkeyup: false,
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});
 	    });
     </script>
   </body>

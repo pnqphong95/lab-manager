@@ -3,12 +3,14 @@ package vn.cit.labmanager.app.tool;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.PreRemove;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,6 +29,9 @@ public class Tool extends AuditableEntity {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String id;
+	
+	@Column(nullable = false)
+	@NotBlank
 	private String name;
 	private String version;
 	

@@ -45,15 +45,16 @@
 		            <div class="form-group row">
 					    <label for="semester-selection" class="col-sm-2 control-label">Học kỳ:</label>
 					    <div class="col-sm-10">
-						    <select class="form-control" id="semester-selection" th:field="*{semester}">
+						    <select class="form-control" id="semester-selection" th:field="*{semester}" required>
 						      <option th:each="semester : ${semesters}" th:value="${semester}" th:text="${semester.labelAsNumber}"></option>
 						    </select>
+						    <input type="hidden" id="original-semester" th:value="${period.semester}"/>
 					    </div>
 					</div>
 					<div class="form-group row">
 		                <label class="col-sm-2 control-label">Niên khóa:</label>
 		                <div class="col-sm-5">
-		                    <input type="number" class="form-control" th:field="*{startYear}"/><br>
+		                    <input type="number" class="form-control" th:field="*{startYear}" required/><br>
 		                </div>
 		                <div class="col-sm-5">
 		                	<input type="number" class="form-control" th:field="*{endYear}" readonly="true"/>
@@ -62,15 +63,16 @@
 					<div class="form-group row">
 		                <label class="col-sm-2 control-label">Ngày bắt đầu:</label>
 		                <div class="col-sm-10">
-		                    <input type="date" class="form-control" th:field="*{startDate}"/>
+		                    <input type="date" class="form-control" th:field="*{startDate}" required/>
 		                </div>
 		            </div>
 					<div class="form-group row">
 		                <label class="col-sm-2 control-label">Số tuần trong học kỳ:</label>
 		                <div class="col-sm-10">
-		                    <input type="number" class="form-control" th:field="*{amountOfWeek}" />
+		                    <input type="number" class="form-control" th:field="*{amountOfWeek}" required min="1"/>
 		                </div>
 		            </div>
+		            <input type="submit" id="formPeriodTrigger" style="display:none;"/>
 		        </form>
 		    </div>
             </div>
@@ -104,6 +106,9 @@
     <!-- Bootstrap core JavaScript-->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
     
     <!-- Core plugin JavaScript-->
     <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
@@ -111,14 +116,84 @@
     <!-- Custom scripts for all pages-->
     <script th:src="@{/js/sb-admin.min.js}"></script>
     <script>
-	    $(document).ready(function() {    	
-	      $("#submitForm").click(function() {
-	            $("#formPeriod").submit();
-	      });
+	    $(document).ready(function() {
+	    	
+	    	
+	    	$("#submitForm").click(function() {
+				$("#formPeriodTrigger").click();
+			});
+
+			$('#formPeriod').validate({
+				rules: {
+					semester: {
+						remote : {
+							param: {
+			                	url: "/api/periods/check_uniquePeriods",
+			                	data: {
+			                		semester: function() {
+			                			return $('#semester-selection').val();
+			                		},	                		
+			                		startYear: function() {
+			                			return $('#startYear').val();
+			                		}
+			                	}
+				            },
+				            depends: function(element) {
+				                return $(element).val() !== $('#original-semester').val();
+				            }
+						}
+					},
+					startYear: {
+						min: new Date().getFullYear() - 1
+					},
+					startDate: {
+						normalizer: function(value) {
+							return new Date(value).getFullYear().toString();
+						},
+						min: function() {
+	            			return $('#startYear').val();
+	            		},
+	            		max: function() {
+	            			return parseInt($('#startYear').val()) + 1;
+	            		}
+					}
+				},
+				messages: {
+					semester: {
+						remote: "Học kỳ niên khóa đã được tạo. Vui lòng kiểm tra lại."
+					},
+					startYear: {
+						min: "Năm bắt đầu phải từ {0}"
+					},
+					startDate: {
+						min: "Năm bắt đầu phải lớn hơn hoặc bằng {0}.",
+						max: "Năm bắt đầu phải nhỏ hơn hoặc bằng {0}."
+					},
+					amountOfWeek: {
+						min: "Số tuần phải lớn hơn hoặc bằng {0}."
+					}
+				},
+				onkeyup: false,
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});
 	      
 	      $("#formPeriod #startYear").focusout(function() {
 	    	  $("#formPeriod #endYear").val(parseInt($(this).val()) + 1);
+	    	  if ($(this).val() >= new Date().getFullYear() - 1) {
+	    		  $("#formPeriod #semester-selection").focusout();
+	    	  }
 	      });
+
 	    });
     </script>
   </body>

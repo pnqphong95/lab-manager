@@ -59,7 +59,11 @@ public class LabController {
 	
 	@RequestMapping(path = "/admin/category/labs/add")
     public String createLab(Model model) {
-        model.addAttribute("lab", new Lab());
+		Lab lab = new Lab();
+		lab.setCapacity(1);
+		lab.setRamCapacity(1);
+		lab.setDiskCapacity(1);
+        model.addAttribute("lab", lab);
         model.addAttribute("departments", departmentService.findAll());
         model.addAttribute("tools", toolService.findAll());
         return "admin/category/lab/edit";   

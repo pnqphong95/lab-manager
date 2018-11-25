@@ -87,5 +87,10 @@ public class PeriodServiceImpl implements PeriodService {
 	public Optional<Period> findBySpecifiedDate(LocalDate localDate) {
 		return Optional.ofNullable(repo.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(localDate, localDate));
 	}
+
+	@Override
+	public Optional<Period> findByStartYearAndSemester(int startYear, PeriodSemester semester) {
+		return Optional.ofNullable(repo.findByStartYearAndSemester(startYear, semester));
+	}
 	
 }
