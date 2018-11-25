@@ -17,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.user.User;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
@@ -24,6 +25,7 @@ import vn.cit.labmanager.config.auditing.AuditableEntity;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"users"})
 public class Department extends AuditableEntity {
 	
 	@Id
