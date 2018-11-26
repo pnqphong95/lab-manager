@@ -3,6 +3,8 @@ package vn.cit.labmanager.config.auditing;
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public enum CurrentAuditorProvider implements AuditorAware<String> {
 
@@ -10,7 +12,8 @@ public enum CurrentAuditorProvider implements AuditorAware<String> {
 
 	@Override
 	public Optional<String> getCurrentAuditor() {
-		return Optional.of("Anonymous");
+		UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return Optional.ofNullable(details.getUsername());
 	}
 	
 }

@@ -11,4 +11,5 @@ public interface UserService {
 	public Optional<User> findTopByOrderByModifiedDesc();
 	public Optional<User> findByUsername(String username);
 	public Optional<User> findByEmail(String email);
+	public Optional<User> getCurrentUser();
 }

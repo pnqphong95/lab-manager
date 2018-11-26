@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.user.User;
@@ -60,6 +62,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> findByEmail(String email) {
 		return Optional.ofNullable(repo.findByEmail(email));
+	}
+
+	@Override
+	public Optional<User> getCurrentUser() {
+		UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return Optional.ofNullable(repo.findByUsername(details.getUsername()));
 	}
 
 }
