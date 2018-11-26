@@ -1,11 +1,14 @@
 package vn.cit.labmanager.app.issue;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import vn.cit.labmanager.app.user.User;
 
 @Service
 public class IssueServiceImpl implements IssueService {
@@ -47,6 +50,22 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public Optional<Issue> findTopByOrderByModifiedDesc() {
 		return Optional.ofNullable(repo.findTopByOrderByModifiedDesc());
+	}
+
+	@Override
+	public List<Issue> findByCreatedUser(User user) {
+		if (user == null) {
+			return Collections.emptyList();
+		}
+		return repo.findByCreatedUser(user);
+	}
+
+	@Override
+	public List<Issue> findByCreatedUserAndTracks_StatusIn(User user, List<IssueStatus> status) {
+		if (user == null) {
+			return Collections.emptyList();
+		}
+		return repo.findByCreatedUserAndTracks_StatusIn(user, status);
 	}
 	
 }

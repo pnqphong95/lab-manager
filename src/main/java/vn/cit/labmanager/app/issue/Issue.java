@@ -1,7 +1,9 @@
 package vn.cit.labmanager.app.issue;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -11,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,9 +48,16 @@ public class Issue extends AuditableEntity {
 	private User createdUser;
 	
 	@ElementCollection
-	private Set<IssueHistory> histories = new HashSet<>();
+	private Set<IssueTracking> tracks = new HashSet<>();
 	
-	@Transient
-	private IssueHistory lastHistory;
+	public IssueTracking getLatestTrack() {
+		Optional<IssueTracking> latest = tracks.stream()
+				.max(Comparator.comparing(IssueTracking::getCreatedDate));
+		return latest.orElse(null);
+	}
 	
+	public void addTrack(IssueTracking track) {
+		tracks.add(track);
+	}
+
 }

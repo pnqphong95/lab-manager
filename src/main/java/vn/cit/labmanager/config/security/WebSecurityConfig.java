@@ -35,7 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/admin/**").hasAnyRole("SYS_ADMIN", "GRANTED_USER", "DEPT_ADMIN")
 				.antMatchers("/admin/category/**").hasAnyRole("SYS_ADMIN")
 				.antMatchers("/public/**", "/resources/**", "/resources/public/**").permitAll()
 				.antMatchers("/css/**", "/js/**", "/images/**", "/vendor/**/*", "**/favicon.ico").permitAll()
@@ -47,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(new LabManagerAuthenticationSuccessHandler())
 				.failureHandler(new LabManagerAuthenticationFailureHandler())
 				.and().logout().permitAll();
-		http.csrf().disable();
 	}
 
 	@Override

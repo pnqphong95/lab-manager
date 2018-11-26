@@ -12,14 +12,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import vn.cit.labmanager.app.user.User;
-import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Embeddable
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class IssueHistory extends AuditableEntity {
+public class IssueTracking {
 	
 	@Enumerated(EnumType.STRING)
     private IssueStatus status;
