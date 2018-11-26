@@ -18,7 +18,6 @@
     <script>
  	// Call the dataTables jQuery plugin
     $(document).ready(function() {
-      var controlIndex = 5;
       var table = $('#issue-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -36,7 +35,6 @@
     	  },
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
-    		  { "orderable": false, "width": "20px", "targets": controlIndex }
     	  ]
       });
       
@@ -62,7 +60,6 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb d-none d-sm-flex">
             <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
-            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
             <li class="breadcrumb-item active">Vấn đề</li>
           </ol>
 
@@ -70,10 +67,7 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Danh sách vấn đề
-              <div id="add-control-box" class="float-right">
-              	<a th:href="${'issues/add'}" class="btn btn-sm btn-block btn-primary ml-1">Thêm</a>
-              </div>
+              Lịch sử xử lý vấn đề toàn hệ thống
               <div id="search-box" class="float-right d-none d-sm-block"></div>
             </div>
             <div class="card-body">
@@ -84,9 +78,7 @@
                       <th>STT</th>
                       <th>Phòng</th>
                       <th>Tóm tắt vấn đề</th>
-                      <th>Tạo bởi</th>
                       <th>Ngày tạo</th>
-                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -94,14 +86,7 @@
                       <td th:text="${issueStat.index + 1}">Id</td>
                       <td th:text="${issue.lab.name}">Lab name</td>
                 	  <td th:text="${issue.summary}">Summary</td>
-                	  <td th:text="${issue.createdUser.fullName}">Created By</td>
                 	  <td th:text="${issue.createdDate}">Created At</td>
-                      <td>
-	                      <div style="display:inline-flex;">
-	                      	<a th:href="${'issues/edit/' + issue.id}" class="btn btn-sm btn-primary mr-1" title="Sửa"><i class="fas fa-edit"></i></a>
-		                    <a href="#" th:data-href="${'issues/delete/' + issue.id}" class="btn btn-sm btn-secondary" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
-	                      </div>
-                      </td>
                     </tr>
                   </tbody>
                 </table>

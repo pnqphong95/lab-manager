@@ -12,5 +12,6 @@ public interface IssueService {
 	public Issue save(Issue issue);
 	public Optional<Issue> findTopByOrderByModifiedDesc();
 	public List<Issue> findByCreatedUser(User user);
+	public List<Issue> findByTracks_StatusInAndTracks_StatusNotIn(List<IssueStatus> statusIn, List<IssueStatus> statusNotIn);
 	public List<Issue> findByCreatedUserAndTracks_StatusIn(User user, List<IssueStatus> status);
 }

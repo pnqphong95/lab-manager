@@ -12,6 +12,7 @@ public interface IssueRepository extends JpaRepository<Issue, String> {
 
 	public Issue findTopByOrderByModifiedDesc();
 	public List<Issue> findByCreatedUser(User user);
+	public List<Issue> findByTracks_StatusInAndTracks_StatusNotIn(List<IssueStatus> statusIn, List<IssueStatus> statusNotIn);
 	public List<Issue> findByCreatedUserAndTracks_StatusIn(User user, List<IssueStatus> status);
 	
 }

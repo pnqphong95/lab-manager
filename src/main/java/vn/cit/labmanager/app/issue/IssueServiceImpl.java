@@ -67,5 +67,10 @@ public class IssueServiceImpl implements IssueService {
 		}
 		return repo.findByCreatedUserAndTracks_StatusIn(user, status);
 	}
+
+	@Override
+	public List<Issue> findByTracks_StatusInAndTracks_StatusNotIn(List<IssueStatus> statusIn, List<IssueStatus> statusNotIn) {
+		return repo.findByTracks_StatusInAndTracks_StatusNotIn(statusIn, statusNotIn);
+	}
 	
 }
