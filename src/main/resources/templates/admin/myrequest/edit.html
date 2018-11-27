@@ -23,8 +23,14 @@
             <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
             <li class="breadcrumb-item active">Đặt phòng</li>
           </ol>
-
-          <div class="card mb-3">
+			
+		  <div class="card mb-3" th:unless="${isCurrentPeriodCreated}">
+	         <div class="card-body">
+	         	<p class="lead">Học kỳ hiện tại chưa được tạo. Liên hệ quản trị tạo học kỳ</p>
+	         </div>
+		  </div>
+		  
+          <div class="card mb-3" th:if="${isCurrentPeriodCreated}">
             <div class="card-header">
               <i class="far fa-edit"></i>
               Tạo yêu cầu đặt phòng
@@ -45,14 +51,44 @@
 						    </select>
 					    </div>
 					</div>
-					<div class="form-group row">
-					    <label for="lab-selection" class="col-sm-2 control-label">Phòng:</label>
-					    <div class="col-sm-10">
-						    <select class="form-control" id="lab-selection" th:field="*{lab}" required>
-						      <option th:each="lab : ${labs}" th:value="${lab.id}" th:text="${lab.name}"></option>
-						    </select>
-					    </div>
-					</div>
+					<div class="table-responsive">
+						<table class="table table-sm table-bordered table-hover" id="times-list-table" width="100%" cellspacing="0">
+		                  <thead>
+		                    <tr>
+		                      <th>Stt</th>
+		                      <th>Tuần</th>
+		                      <th>Ngày</th>
+		                      <th>Buổi</th>
+		                      <th>
+			                    <button formnovalidate="formnovalidate" type="submit" name="addRow" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></button>
+			                  </th>
+		                    </tr>
+		                  </thead>
+		                  <tbody>
+		                  	<tr th:each="time,timeStat : *{times}">
+			                  <td th:text="${timeStat.count}">1</td>
+			                  <td>
+			                    <select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].wop}" th:attr="time-index=${timeStat.index}" required>
+			                      <option th:value="${null}">Chọn tuần</option>
+			                      <option th:each="wop : ${wops}" th:value="${wop.id}" th:text="${'Tuần ' + wop.numOrder}" th:attr="date-max=${wop.endDate}, date-min=${wop.startDate}"></option>
+			                    </select>
+			                  </td>
+			                  <td>
+			                    <input type="date" class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].start}" required/>
+			                  </td>
+			                  <td>
+		                	  	<select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].shift}" required>
+							      <option th:each="shift : ${shifts}" th:value="${shift.id}" th:text="${shift.name}"></option>
+							    </select>
+		                	  </td>
+			                  <td>
+			                    <button type="submit" formnovalidate="formnovalidate" class="btn btn-sm btn-secondary" name="removeRow" th:value="${timeStat.index}" th:if="${timeStat.index != 0}"><i class="fas fa-trash-alt"></i></button>
+			                  </td>
+			                </tr>
+		                  </tbody>
+		                </table>
+		            </div>
+					
 		            <input type="submit" id="formRequestTrigger" style="display:none;"/>	
 		        </form>
 		    </div>
@@ -115,7 +151,15 @@
 				unhighlight : function(element, errorClass) {
 					$(element).removeClass('is-invalid');
 				}
-			});  
+			});
+			
+			$("select[id^='times'][id$='wop']").on('change',  function() {
+				var index = $(this).attr("time-index");
+				var max = $(this).children(":selected").attr("date-max");
+				var min = $(this).children(":selected").attr("date-min");
+				$("input[id='times" + index + ".start']").attr("max", max);
+				$("input[id='times" + index + ".start']").attr("min", min)
+			});
 	    });
     </script>
   </body>
