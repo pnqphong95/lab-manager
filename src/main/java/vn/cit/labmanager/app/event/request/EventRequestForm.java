@@ -10,6 +10,7 @@ import vn.cit.labmanager.app.course.Course;
 public class EventRequestForm {
 	private String id;
 	private Course course;
+	private String note;
 	private List<EventTimeForm> times = new ArrayList<>();
 	
 	public void addEvent(EventTimeForm time) {

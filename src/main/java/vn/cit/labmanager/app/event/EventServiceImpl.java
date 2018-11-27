@@ -8,6 +8,9 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vn.cit.labmanager.app.lab.Lab;
+import vn.cit.labmanager.app.shift.Shift;
+
 @Service
 public class EventServiceImpl implements EventService {
 
@@ -53,6 +56,16 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> findByStartDateBetween(LocalDate from, LocalDate to) {
 		return repo.findByStartDateGreaterThanEqualAndStartDateLessThanEqual(from, to);
+	}
+
+	@Override
+	public List<Event> findByLabInAndStartDateEqualsAndShiftEquals(List<Lab> labs, LocalDate startDate, Shift shift) {
+		return repo.findByLabInAndStartDateEqualsAndShiftEquals(labs, startDate, shift);
+	}
+
+	@Override
+	public List<Event> save(List<Event> events) {
+		return repo.saveAll(events);
 	}
 
 }

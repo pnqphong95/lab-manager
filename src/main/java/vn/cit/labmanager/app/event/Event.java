@@ -14,6 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import vn.cit.labmanager.app.course.Course;
+import vn.cit.labmanager.app.event.request.EventRequest;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
@@ -39,4 +40,12 @@ public class Event extends AuditableEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Shift shift;
 
+	public static Event from(EventRequest request) {
+		Event event = new Event();
+		event.setCourse(request.getCourse());
+		event.setLab(request.getLab());
+		event.setShift(request.getShift());
+		event.setStartDate(request.getStartDate());
+		return event;
+	}
 }
