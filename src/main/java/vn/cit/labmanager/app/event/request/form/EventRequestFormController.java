@@ -1,4 +1,4 @@
-package vn.cit.labmanager.app.event.request;
+package vn.cit.labmanager.app.event.request.form;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import vn.cit.labmanager.app.course.CourseService;
 import vn.cit.labmanager.app.event.Event;
 import vn.cit.labmanager.app.event.EventService;
+import vn.cit.labmanager.app.event.request.EventRequest;
+import vn.cit.labmanager.app.event.request.EventRequestInitializingService;
+import vn.cit.labmanager.app.event.request.EventRequestInitializingServiceImpl;
+import vn.cit.labmanager.app.event.request.EventRequestService;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.lab.LabService;
 import vn.cit.labmanager.app.period.Period;

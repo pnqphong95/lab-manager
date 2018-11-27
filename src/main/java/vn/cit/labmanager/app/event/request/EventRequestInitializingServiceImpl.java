@@ -3,6 +3,8 @@ package vn.cit.labmanager.app.event.request;
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.cit.labmanager.app.event.request.form.EventRequestForm;
+
 public class EventRequestInitializingServiceImpl implements EventRequestInitializingService {
 
 	@Override

@@ -12,7 +12,7 @@ $(function () {
             });
         },
         error: function() {
-        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
+        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào hoặc chưa tạo học kỳ niên khóa!");
         }
     });
 

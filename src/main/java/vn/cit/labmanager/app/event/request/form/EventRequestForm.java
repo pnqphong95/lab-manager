@@ -1,4 +1,4 @@
-package vn.cit.labmanager.app.event.request;
+package vn.cit.labmanager.app.event.request.form;
 
 import java.util.ArrayList;
 import java.util.List;

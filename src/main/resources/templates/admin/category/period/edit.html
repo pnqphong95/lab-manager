@@ -36,7 +36,7 @@
             </div>
             <div class="card-body">
               <div class="container">
-		        <form id="formPeriod" class="form-horizontal" th:object="${period}" th:action="@{/admin/category/periods}" method="post">
+		        <form onsubmit="return confirm('Học kỳ niên khóa có ảnh hưởng đến một số thực thể được tạo sau này. Hãy kiểm tra lại thông tin và xác nhận ?');" id="formPeriod" class="form-horizontal" th:object="${period}" th:action="@{/admin/category/periods}" method="post">
 		            <div class="form-group">
 		                <div class="col-sm-10">
 		                    <input type="hidden" class="form-control" th:field="*{id}"/>
@@ -72,7 +72,7 @@
 		                    <input type="number" class="form-control" th:field="*{amountOfWeek}" required min="1"/>
 		                </div>
 		            </div>
-		            <input type="submit" id="formPeriodTrigger" style="display:none;"/>
+		            <input type="submit" id="formPeriodTrigger"  data-toggle="modal" data-target="#confirmModal" style="display:none;"/>
 		        </form>
 		    </div>
             </div>

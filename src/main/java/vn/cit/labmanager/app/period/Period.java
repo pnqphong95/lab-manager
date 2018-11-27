@@ -19,13 +19,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import vn.cit.labmanager.app.course.Course;
 import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ToString(exclude = {"weekOfPeriods"})
+@ToString(exclude = {"weekOfPeriods", "courses"})
 public class Period extends AuditableEntity {
 	
 	@Id
@@ -50,6 +51,9 @@ public class Period extends AuditableEntity {
 	
 	@OneToMany(mappedBy = "periodBelongTo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private List<WeekOfPeriod> weekOfPeriods = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "periodBelongTo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	private List<Course> courses = new ArrayList<>();
 
 	public boolean isCurrent() {
 		LocalDate current = LocalDate.now();
