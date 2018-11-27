@@ -70,7 +70,7 @@ $(function () {
         resources: 'api/shiftlabs',
         events: function (start, end, timezone, callback) {
             $.ajax({
-                url: 'https://pnqphong-scheduler.getsandbox.com/api/lab_events',
+                url: 'api/events',
                 dataType: 'json',
                 data: {
                     from: start.format('YYYY-MM-DD'),

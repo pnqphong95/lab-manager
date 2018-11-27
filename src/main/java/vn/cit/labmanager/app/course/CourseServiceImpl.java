@@ -1,5 +1,7 @@
 package vn.cit.labmanager.app.course;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.period.PeriodRepository;
+import vn.cit.labmanager.app.user.User;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -62,6 +65,16 @@ public class CourseServiceImpl implements CourseService {
 			return Optional.ofNullable(repo.findByCourseIdAndPeriodBelongTo(id, period.get()));
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public List<Course> findByLecturerAndCurrentPeriod(User lecturer) {
+		LocalDate now = LocalDate.now();
+		Optional<Period> period = Optional.ofNullable(periodRepo.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(now, now));
+		if (period.isPresent()) {
+			return repo.findByLecturerAndPeriodBelongTo(lecturer, period.get());
+		}
+		return Collections.emptyList();
 	}
 	
 }

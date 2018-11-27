@@ -231,3 +231,6 @@ insert into course (created, created_by, modified, modified_by, amount_of_studen
 insert into course (created, created_by, modified, modified_by, amount_of_student, course_id, lecturer_id, period_belong_to_id, subject_id, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 35, 'CT44805', '2', '1', '116', 15);
 insert into course (created, created_by, modified, modified_by, amount_of_student, course_id, lecturer_id, period_belong_to_id, subject_id, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 28, 'TN21203', '1', '1', '67', 16);
 insert into course (created, created_by, modified, modified_by, amount_of_student, course_id, lecturer_id, period_belong_to_id, subject_id, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 35, 'CT44806', '1', '1', '116', 17);
+
+insert into event (created, created_by, modified, modified_by, course_id, lab_id, shift_id, start_date, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', '17', '5', '1', '2018-11-27', 1);
+insert into event (created, created_by, modified, modified_by, course_id, lab_id, shift_id, start_date, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', '16', '5', '2', '2018-11-27', 2);

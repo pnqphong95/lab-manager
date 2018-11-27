@@ -37,11 +37,16 @@
 	<div id="wrapper">
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav toggled" th:fragment="appSidebar">
-			<li class="nav-item">
-	          <a class="nav-link" th:href="@{/create_request}">
-	            <i class="fab fa-wpforms"></i>
-	            <span>Đặt phòng</span></a>
-	        </li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="requestsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>
+					<span>Lịch</span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="requestsDropdown">
+					<a class="dropdown-item" th:href="@{/admin/create_request}">
+						<i class="fab fa-wpforms"></i> Đặt phòng
+					</a>
+				</div>
+			</li>
 	        <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="issuesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>
 					<span>Vấn đề</span>
