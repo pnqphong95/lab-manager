@@ -2,7 +2,6 @@ package vn.cit.labmanager.app.issue;
 
 public enum IssueStatus {
 	Created("Đã nhận", "badge badge-secondary"),
-	Processing("Đang xử lý", "badge badge-info"),
 	Done("Đã sửa", "badge badge-success");
 	
 	private String text;

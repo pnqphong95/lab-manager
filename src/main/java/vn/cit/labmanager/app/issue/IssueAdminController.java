@@ -2,8 +2,6 @@ package vn.cit.labmanager.app.issue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,9 +35,7 @@ public class IssueAdminController {
 				.map(modified -> modified.format(DateTimeFormatter.ofPattern("hh':'mm a',' dd/MM/yyyy")))
 				.orElse(StringUtils.EMPTY);
 		
-		model.addAttribute("issues", service.findByTracks_StatusInAndTracks_StatusNotIn(
-				Arrays.asList(IssueStatus.Created, IssueStatus.Processing),
-				Arrays.asList(IssueStatus.Done)));
+		model.addAttribute("issues", service.findByCreatedIssue());
 		model.addAttribute("lastModification", lastModification);
         return "admin/issue/indexpending";
     }
@@ -51,9 +47,7 @@ public class IssueAdminController {
 				.map(modified -> modified.format(DateTimeFormatter.ofPattern("hh':'mm a',' dd/MM/yyyy")))
 				.orElse(StringUtils.EMPTY);
 		
-		model.addAttribute("issues", service.findByTracks_StatusInAndTracks_StatusNotIn(
-				Arrays.asList(IssueStatus.Done),
-				Collections.emptyList()));
+		model.addAttribute("issues", service.findByDoneIssue());
 		model.addAttribute("lastModification", lastModification);
         return "admin/issue/indexhistory";
     }
@@ -91,6 +85,37 @@ public class IssueAdminController {
         	model.addAttribute("labs", labService.findAll());
         });
         return "admin/issue/edit";   
+    }
+	
+	@RequestMapping(path = "/admin/issues/process/{id}")
+    public String processIssue(@PathVariable(name = "id") String id, Model model) {
+        Optional<Issue> issue = service.findOne(id);
+        issue.ifPresent(item -> {
+        	IssueProcessing processing = IssueProcessing.from(item);
+        	processing.setStatus(IssueStatus.Done);
+        	model.addAttribute("issue", item);
+        	model.addAttribute("processing", processing);
+        	model.addAttribute("statuses", IssueStatus.values());
+        	model.addAttribute("labs", labService.findAll());
+        });
+        return "admin/issue/process";   
+    }
+	
+	@RequestMapping(path = "/admin/issues/process", method = RequestMethod.POST)
+    public String processDoneIssue(IssueProcessing processing) {
+		Optional<Issue> issue = service.findOne(processing.getIssueId());
+		issue.ifPresent(item -> {
+			if (!item.getTracks().isEmpty()) {
+				IssueTracking track = new IssueTracking();
+				track.setStatus(processing.getStatus());
+				track.setNote(processing.getNote());
+				track.setCreatedDate(LocalDate.now());
+				track.setCreatedUser(userService.getCurrentUser().orElse(null));
+				item.addTrack(track);
+			}
+			service.save(item);
+		});
+		return "redirect:/admin/issues/pending";   
     }
 	
 	@RequestMapping(path = "/admin/issues/delete/{id}")

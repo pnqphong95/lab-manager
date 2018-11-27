@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/category/**").hasAnyRole("SYS_ADMIN")
 				.antMatchers("/public/**", "/resources/**", "/resources/public/**").permitAll()
 				.antMatchers("/css/**", "/js/**", "/images/**", "/vendor/**/*", "**/favicon.ico").permitAll()
-				.antMatchers("/registration", "/api/**").permitAll()
+				.antMatchers("/registration", "/api/**", "/h2-console/**").permitAll()
 				.antMatchers("/").permitAll()
 				.anyRequest().authenticated()
 			.and().formLogin()
@@ -46,6 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(new LabManagerAuthenticationSuccessHandler())
 				.failureHandler(new LabManagerAuthenticationFailureHandler())
 				.and().logout().permitAll();
+		http.csrf().disable();
+        http.headers().frameOptions().disable();
 	}
 
 	@Override

@@ -79,6 +79,7 @@
                       <th>Phòng</th>
                       <th>Tóm tắt vấn đề</th>
                       <th>Ngày tạo</th>
+                      <th>Tạo bởi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -87,6 +88,7 @@
                       <td th:text="${issue.lab.name}">Lab name</td>
                 	  <td th:text="${issue.summary}">Summary</td>
                 	  <td th:text="${issue.createdDate}">Created At</td>
+                	  <td th:text="${issue.createdUser.fullName}">Create By</td>
                     </tr>
                   </tbody>
                 </table>

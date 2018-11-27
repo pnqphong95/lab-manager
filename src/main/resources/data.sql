@@ -80,7 +80,7 @@ insert into user (created, created_by, modified, modified_by, department_id, dob
 insert into user (created, created_by, modified, modified_by, department_id, dob, email, full_name, active, phone_number, user_id, username, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 6, '1989-01-15', 'hnphat@gmail.com', 'Huỳnh Nhựt Phát', 1, '0376221223', '99480', 'hnphat', 4);
 
 insert into user_roles (user_id, role_key) values (1, 'R1');
-insert into user_roles (user_id, role_key) values (2, 'R2');
+insert into user_roles (user_id, role_key) values (1, 'R3');
 insert into user_roles (user_id, role_key) values (2, 'R3');
 insert into user_roles (user_id, role_key) values (3, 'R3');
 insert into user_roles (user_id, role_key) values (4, 'R3');

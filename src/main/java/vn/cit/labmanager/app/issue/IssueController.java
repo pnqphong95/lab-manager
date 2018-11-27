@@ -2,13 +2,13 @@ package vn.cit.labmanager.app.issue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,9 +35,7 @@ public class IssueController {
 				.map(modified -> modified.format(DateTimeFormatter.ofPattern("hh':'mm a',' dd/MM/yyyy")))
 				.orElse(StringUtils.EMPTY);
 		
-		model.addAttribute("issues", service.findByCreatedUserAndTracks_StatusIn(
-				userService.getCurrentUser().orElse(null),
-				Arrays.asList(IssueStatus.Created, IssueStatus.Processing)));
+		model.addAttribute("issues", service.findByCreatedUserAndCreatedIssue(userService.getCurrentUser().orElse(null)));
 		model.addAttribute("lastModification", lastModification);
         return "admin/myissue/indexpending";
     }
@@ -49,9 +47,7 @@ public class IssueController {
 				.map(modified -> modified.format(DateTimeFormatter.ofPattern("hh':'mm a',' dd/MM/yyyy")))
 				.orElse(StringUtils.EMPTY);
 		
-		model.addAttribute("issues", service.findByCreatedUserAndTracks_StatusIn(
-				userService.getCurrentUser().orElse(null),
-				Arrays.asList(IssueStatus.Done)));
+		model.addAttribute("issues", service.findByCreatedUserAndDoneIssue(userService.getCurrentUser().orElse(null)));
 		model.addAttribute("lastModification", lastModification);
         return "admin/myissue/indexhistory";
     }
@@ -79,6 +75,22 @@ public class IssueController {
         model.addAttribute("issue", new Issue());
         model.addAttribute("labs", labService.findAll());
         return "admin/myissue/edit";   
+    }
+	
+	@RequestMapping(path = "/admin/myissues/edit/{id}")
+    public String editIssue(@PathVariable(name = "id") String id, Model model) {
+        Optional<Issue> issue = service.findOne(id);
+        issue.ifPresent(item -> {
+        	model.addAttribute("issue", item);
+        	model.addAttribute("labs", labService.findAll());
+        });
+        return "admin/myissue/edit";   
+    }
+	
+	@RequestMapping(path = "/admin/myissues/delete/{id}")
+    public String deleteIssue(@PathVariable(name = "id") String id) {
+        service.delete(id);
+        return "redirect:/admin/myissues/pending";   
     }
 	
 }

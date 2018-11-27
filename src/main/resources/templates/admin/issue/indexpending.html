@@ -18,7 +18,7 @@
     <script>
  	// Call the dataTables jQuery plugin
     $(document).ready(function() {
-      var controlIndex = 5;
+      var controlIndex = 6;
       var table = $('#issue-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -70,6 +70,9 @@
             <div class="card-header">
               <i class="fas fa-table"></i>
               Danh sách chờ xử lý toàn hệ thống
+              <div id="add-control-box" class="float-right">
+              	<a th:href="${'add'}" class="btn btn-sm btn-block btn-primary ml-1">Thêm</a>
+              </div>
               <div id="search-box" class="float-right d-none d-sm-block"></div>
             </div>
             <div class="card-body">
@@ -81,6 +84,7 @@
                       <th>Phòng</th>
                       <th>Tóm tắt vấn đề</th>
                       <th>Ngày tạo</th>
+                      <th>Tạo bởi</th>
                       <th>Trạng thái</th>
                       <th></th>
                     </tr>
@@ -91,13 +95,15 @@
                       <td th:text="${issue.lab.name}">Lab name</td>
                 	  <td th:text="${issue.summary}">Summary</td>
                 	  <td th:text="${issue.createdDate}">Created At</td>
+                	  <td th:text="${issue.createdUser.fullName}">Create By</td>
                 	  <td>
                 	  	<span th:text="${issue.getLatestTrack().status.text}" th:classappend="${issue.getLatestTrack().status.bsLabelClass}">Status</span>
                 	  </td>
                       <td>
 	                      <div style="display:inline-flex;">
-	                      	<a th:href="${'issues/edit/' + issue.id}" class="btn btn-sm btn-primary mr-1" title="Sửa"><i class="fas fa-edit"></i></a>
-		                    <a href="#" th:data-href="${'issues/delete/' + issue.id}" class="btn btn-sm btn-secondary" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      <a th:href="${'process/' + issue.id}" class="btn btn-sm btn-success mr-1" title="Xong"><i class="fas fa-check"></i></a>
+	                      	<a th:href="${'edit/' + issue.id}" class="btn btn-sm btn-primary mr-1" title="Sửa"><i class="fas fa-edit"></i></a>
+		                    <a href="#" th:data-href="${'delete/' + issue.id}" class="btn btn-sm btn-secondary" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
 	                      </div>
                       </td>
                     </tr>

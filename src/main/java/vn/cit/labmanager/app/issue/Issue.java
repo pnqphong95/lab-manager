@@ -56,6 +56,16 @@ public class Issue extends AuditableEntity {
 		return latest.orElse(null);
 	}
 	
+	public boolean isContainDoneTracking() {
+		return this.tracks.stream()
+				.map(IssueTracking::getStatus)
+				.anyMatch(status -> status == IssueStatus.Done);
+	}
+	
+	public int getLatestIndexOfTrack() {
+		return tracks.size() - 1;
+	}
+	
 	public void addTrack(IssueTracking track) {
 		tracks.add(track);
 	}

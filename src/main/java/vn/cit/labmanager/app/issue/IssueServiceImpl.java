@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,24 +54,34 @@ public class IssueServiceImpl implements IssueService {
 	}
 
 	@Override
-	public List<Issue> findByCreatedUser(User user) {
+	public List<Issue> findByCreatedUserAndDoneIssue(User user) {
 		if (user == null) {
 			return Collections.emptyList();
 		}
-		return repo.findByCreatedUser(user);
+		return repo.findByCreatedUserAndTracks_Status(user, IssueStatus.Done);
 	}
 
 	@Override
-	public List<Issue> findByCreatedUserAndTracks_StatusIn(User user, List<IssueStatus> status) {
+	public List<Issue> findByCreatedUserAndCreatedIssue(User user) {
 		if (user == null) {
 			return Collections.emptyList();
 		}
-		return repo.findByCreatedUserAndTracks_StatusIn(user, status);
+		List<Issue> issues = repo.findByCreatedUserAndTracks_Status(user, IssueStatus.Created);
+		return issues.stream().filter(issue -> !issue.isContainDoneTracking()).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<Issue> findByTracks_StatusInAndTracks_StatusNotIn(List<IssueStatus> statusIn, List<IssueStatus> statusNotIn) {
-		return repo.findByTracks_StatusInAndTracks_StatusNotIn(statusIn, statusNotIn);
+	public List<Issue> findByDoneIssue() {
+		return repo.findByTracks_Status(IssueStatus.Done);
 	}
+
+	@Override
+	public List<Issue> findByCreatedIssue() {
+		List<Issue> issues = repo.findByTracks_Status(IssueStatus.Created);
+		return issues.stream().filter(issue -> !issue.isContainDoneTracking()).collect(Collectors.toList());
+	}
+
+	
+
 	
 }
