@@ -9,6 +9,6 @@
     </ol>
   <li>HK I, 2017-2018</li>
     <ol>
-      <li>Phạm Nguyễn Quang Phong (B1305005)</li>
+      <li>Phạm Nguyễn Quang Phong (B1305005, 0939949095)</li>
     </ol>
 </ul>  
