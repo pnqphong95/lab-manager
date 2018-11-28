@@ -67,12 +67,14 @@ public class EventRequestFormController {
     public String createEventRequestForm(Model model) {
 		Optional<Period> period = periodService.findBySpecifiedDate(LocalDate.now());
 		model.addAttribute("isCurrentPeriodCreated", period.isPresent());
-		EventRequestForm form = new EventRequestForm();
-		form.addEvent(new EventTimeForm());
-		model.addAttribute("requestForm", form);
-		model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
-		model.addAttribute("wops", wopService.findByPeriod(period.get()));
-		model.addAttribute("shifts", shiftService.findAll());
+		if (period.isPresent()) {
+			EventRequestForm form = new EventRequestForm();
+			form.addEvent(new EventTimeForm());
+			model.addAttribute("requestForm", form);
+			model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
+			model.addAttribute("wops", wopService.findByPeriod(period.get()));
+			model.addAttribute("shifts", shiftService.findAll());
+		}
 		return "admin/myrequest/edit";   
     }
 	
