@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import vn.cit.labmanager.app.event.Event;
 import vn.cit.labmanager.app.event.request.EventRequest;
 import vn.cit.labmanager.app.period.Period;
@@ -25,6 +26,7 @@ import vn.cit.labmanager.config.auditing.AuditableEntity;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"events"})
 public class Course extends AuditableEntity {
 
 	@Id
