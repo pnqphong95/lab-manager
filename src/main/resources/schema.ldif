@@ -1,22 +1,22 @@
-dn: dc=ctu,dc=edu
+dn: dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: domain
 objectclass: extensibleObject
 dc: ctu
 
 # Organizational Units
-dn: ou=groups,dc=ctu,dc=edu
+dn: ou=groups,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: organizationalUnit
 ou: groups
 
-dn: ou=people,dc=ctu,dc=edu
+dn: ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: organizationalUnit
-ou: people
+ou: CB
 
 # Create People
-dn: uid=tcan,ou=people,dc=ctu,dc=edu
+dn: uid=tcan,ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -26,7 +26,7 @@ sn: An
 uid: tcan
 userPassword: 1234
 
-dn: uid=pnqphong,ou=people,dc=ctu,dc=edu
+dn: uid=pnqphong,ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -36,7 +36,7 @@ sn: Phong
 uid: pnqphong
 userPassword: 1234
 
-dn: uid=hnphat,ou=people,dc=ctu,dc=edu
+dn: uid=hnphat,ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -46,7 +46,7 @@ sn: Phat
 uid: hnphat
 userPassword: 1234
 
-dn: uid=nttha,ou=people,dc=ctu,dc=edu
+dn: uid=nttha,ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -56,7 +56,7 @@ sn: Ha
 uid: nttha
 userPassword: 1234
 
-dn: uid=admin,ou=people,dc=ctu,dc=edu
+dn: uid=admin,ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -66,7 +66,7 @@ sn: Admin
 uid: admin
 userPassword: admin
 
-dn: uid=nopermission,ou=people,dc=ctu,dc=edu
+dn: uid=nopermission,ou=CB,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -77,20 +77,20 @@ uid: nopermission
 userPassword: 1234
 
 # Create Groups
-dn: cn=users,ou=groups,dc=ctu,dc=edu
+dn: cn=users,ou=groups,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: groupOfUniqueNames
 cn: users
 ou: user
-uniqueMember: uid=pnqphong,ou=people,dc=ctu,dc=edu
-uniqueMember: uid=tcan,ou=people,dc=ctu,dc=edu
-uniqueMember: uid=hnphat,ou=people,dc=ctu,dc=edu
-uniqueMember: uid=nttha,ou=people,dc=ctu,dc=edu
+uniqueMember: uid=pnqphong,ou=CB,dc=ctu,dc=edu,dc=vn
+uniqueMember: uid=tcan,ou=CB,dc=ctu,dc=edu,dc=vn
+uniqueMember: uid=hnphat,ou=CB,dc=ctu,dc=edu,dc=vn
+uniqueMember: uid=nttha,ou=CB,dc=ctu,dc=edu,dc=vn
 
-dn: cn=admins,ou=groups,dc=ctu,dc=edu
+dn: cn=admins,ou=groups,dc=ctu,dc=edu,dc=vn
 objectclass: top
 objectclass: groupOfUniqueNames
 cn: admins
 ou: admin
-uniqueMember: uid=admin,ou=people,dc=ctu,dc=edu
-uniqueMember: uid=nopermission,ou=people,dc=ctu,dc=edu
+uniqueMember: uid=admin,ou=CB,dc=ctu,dc=edu,dc=vn
+uniqueMember: uid=nopermission,ou=CB,dc=ctu,dc=edu,dc=vn

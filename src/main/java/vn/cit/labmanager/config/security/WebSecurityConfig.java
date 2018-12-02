@@ -26,11 +26,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Value("${lm.ldap.user-search-filter}")
 	private String userSearchFilter;
 	
-	@Value("${lm.ldap.group-search-base}")
-	private String groupSearchBase;
+	@Value("${lm.ldap.manager-dn}")
+	private String managerDn;
 	
-	@Value("${lm.ldap.group-search-filter}")
-	private String groupSearchFilter;
+	@Value("${lm.ldap.manager-password}")
+	private String managerPassword;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.userDnPatterns(userDnPatterns)
 			.userSearchBase(userSearchBase)
 			.userSearchFilter(userSearchFilter)
-			.groupSearchBase(groupSearchBase)
-			.groupSearchFilter(groupSearchFilter)
-			.contextSource().url(ldapServerUrl);
+			.contextSource().url(ldapServerUrl)
+			.managerDn(managerDn)
+			.managerPassword(managerPassword);
 	}
 	
 	@Bean
