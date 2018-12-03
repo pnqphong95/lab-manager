@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top" class="sidebar-toggled">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb d-none d-sm-flex">
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+            <li class="breadcrumb-item"><a th:href="${'/admin/mycourses'}">Lớp học phần</a></li>
+            <li class="breadcrumb-item active">Cập nhật</li>
+          </ol>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="far fa-edit"></i>
+              Cập nhật lớp học phần
+              <div id="add-control-box" class="float-right">
+              	<a th:href="@{/admin/mycourses}" class="btn btn-sm btn-secondary">Quay lại</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container" th:if="${isCurrentPeriodCreated}">
+		        <form id="formCourse" class="form-horizontal" th:object="${course}" th:action="@{/admin/mycourses}" method="post">
+		            <div class="form-group">
+		                <div class="col-sm-10">
+		                    <input type="hidden" class="form-control" th:field="*{id}"/>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label class="col-sm-2 control-label">Mã lớp học phần:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{courseId}" required/>
+		                    <input type="hidden" id="original-courseid" th:value="${course.courseId}"/>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+					    <label for="subject-selection" class="col-sm-2 control-label">Môn học:</label>
+					    <div class="col-sm-10">
+						    <select class="form-control" id="subject-selection" th:field="*{subject}" required>
+						      <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+						    </select>
+					    </div>
+					</div>
+					<div class="form-group row">
+					    <label for="user-selection" class="col-sm-2 control-label">Giảng viên:</label>
+					    <div class="col-sm-10">
+						    <select class="form-control" id="user-selection" th:field="*{lecturer}" required>
+						      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.fullName}"></option>
+						    </select>
+					    </div>
+					</div>
+					<div class="form-group row">
+					    <label for="period-selection" class="col-sm-2 control-label">Học kỳ niên khóa:</label>
+					    <div class="col-sm-10">
+						    <select class="form-control" id="period-selection" th:field="*{periodBelongTo}" required>
+						      <option th:each="period : ${periods}" th:value="${period.id}">
+						      	<span th:text="${period.semester.labelAsNumber}"/> (
+						      	<span th:text="${period.startYear}"/> - 
+						      	<span th:text="${period.endYear}"/>)
+						      </option>
+						    </select>
+					    </div>
+					</div>
+					<div class="form-group row">
+		                <label class="col-sm-2 control-label">Số lượng sinh viên:</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" th:field="*{amountOfStudent}" required min="1"/>
+		                </div>
+		            </div>
+		            <input type="submit" id="formCourseTrigger" style="display:none;"/>
+		        </form>
+		    </div>
+              <div th:if="${!isCurrentPeriodCreated}" style="text-align: center;">
+              	<p class="lead">Học kỳ hiện tại chưa được tạo. Liên hệ quản trị tạo học kỳ.</p>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">
+            	<div id="form-control-box" class="float-right">
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary" th:if="${isCurrentPeriodCreated}">Lưu lại</button>
+            	</div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer th:replace="fragments/standard :: appFooter"></footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>
+	    $(document).ready(function() {
+	    	
+	    	
+	    	$("#submitForm").click(function() {
+				$("#formCourseTrigger").click();
+			});
+
+			$('#formCourse').validate({
+				rules: {
+					courseId: {
+						remote: {
+							param: {
+								url: "/api/courses/check_uniqueCourses",
+			                	data: {
+			                		courseId: function() {
+			                			return $('#courseId').val();
+			                		},	                		
+			                		periodId: function() {
+			                			return $('#period-selection').val();
+			                		}
+			                	}
+							},
+							depends: function(element) {
+				                return $(element).val() !== $('#original-courseid').val();
+				            }
+						}
+					}
+				},
+				messages: {
+					courseId: {
+						remote: "Mã học phần đã tồn tại trong học kỳ niên khóa này."
+					},
+					amountOfStudent: {
+						min: "Số lượng sinh viên lớn hơn hoặc bằng {0}."
+					}
+				},
+				onkeyup: false,
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});
+	      
+	      $("#formCourse #period-selection").focusout(function() {
+	    		$("#formCourse #courseId").focusout();
+	      });
+
+	    });
+    </script>
+  </body>
+
+</html>

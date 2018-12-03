@@ -69,6 +69,19 @@
 					</a>
 				</div>
 			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>
+					<span>Lớp học phần</span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="coursesDropdown">
+					<a class="dropdown-item" th:href="@{/admin/mycourses}">
+						<i class="fab fa-wpforms"></i> Lớp học phần của tôi
+					</a>
+					<a class="dropdown-item" th:href="@{/admin/courses}" sec:authorize="hasRole('ROLE_SYS_ADMIN')">
+						<i class="fab fa-wpforms"></i> Lớp học phần của giảng viên
+					</a>
+				</div>
+			</li>
 			<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_SYS_ADMIN')">
 				<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>
 					<span>Danh mục</span>
