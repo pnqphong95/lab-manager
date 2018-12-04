@@ -12,4 +12,7 @@ public interface PeriodService {
 	public Optional<Period> findTopByOrderByModifiedDesc();
 	public Optional<Period> findBySpecifiedDate(LocalDate date);
 	public Optional<Period> findByStartYearAndSemester(int startYear, PeriodSemester semester);
+	public Optional<Period> findCurrentPeriod();
+	public List<Period> findUpComingPeriod();
+	public List<Period> findAvailablePeriod();
 }

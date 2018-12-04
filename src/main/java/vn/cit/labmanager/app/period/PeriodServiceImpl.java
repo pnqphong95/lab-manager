@@ -92,5 +92,23 @@ public class PeriodServiceImpl implements PeriodService {
 	public Optional<Period> findByStartYearAndSemester(int startYear, PeriodSemester semester) {
 		return Optional.ofNullable(repo.findByStartYearAndSemester(startYear, semester));
 	}
+
+	@Override
+	public Optional<Period> findCurrentPeriod() {
+		return this.findBySpecifiedDate(LocalDate.now());
+	}
+
+	@Override
+	public List<Period> findUpComingPeriod() {
+		return repo.findByStartDateGreaterThanOrderByStartDateAsc(LocalDate.now());
+	}
+
+	@Override
+	public List<Period> findAvailablePeriod() {
+		List<Period> periods = new ArrayList<>();
+		this.findCurrentPeriod().ifPresent(item -> periods.add(item));
+		periods.addAll(this.findUpComingPeriod());
+		return periods;
+	}
 	
 }
