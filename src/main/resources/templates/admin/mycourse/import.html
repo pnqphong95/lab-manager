@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+  </head>
+
+  <body id="page-top" class="sidebar-toggled">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb d-none d-sm-flex">
+            <li class="breadcrumb-item"><a th:href="${'/admin'}">HTQL Phòng thực hành</a></li>
+            <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+            <li class="breadcrumb-item"><a th:href="${'/admin/mycourses'}">Lớp học phần</a></li>
+            <li class="breadcrumb-item active">Nhập từ Excel</li>
+          </ol>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="far fa-edit"></i>
+              Nhập lớp học phần từ Excel
+              <div id="add-control-box" class="float-right">
+              	<a th:href="@{/admin/mycourses}" class="btn btn-sm btn-secondary">Quay lại</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container" th:if="${existAvailablePeriod}">
+		        <form id="formCourse" class="form-horizontal" enctype="multipart/form-data" th:action="@{/admin/mycourses/import}" method="post">
+				  	<div class="form-group row">
+					    <label class="col-sm-3 control-label">Học kỳ đang mở:</label>
+					    <div class="col-sm-9">
+						    <input type="text" class="form-control form-control-sm" th:value="${'HK ' + availablePeriod.semester.labelAsNumber + ' năm học ' + availablePeriod.startYear + ' - ' + availablePeriod.endYear}" readonly="readonly"/>
+					    </div>
+					</div>
+				  	<div class="form-group row">
+		                <label for="courses-file" class="col-sm-3 control-label">Tệp danh sách lớp học phần: </label>
+		                <div class="col-sm-9">
+		                    <input type="file" name="courseFile" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required/>
+		                </div>
+		            </div>
+		            <input type="submit" id="formCourseTrigger" style="display:none;"/>
+		        </form>
+		    </div>
+              <div th:if="${!existAvailablePeriod}" style="text-align: center;">
+              	<p class="lead">Học kỳ gần nhất chưa được tạo. Liên hệ quản trị tạo học kỳ.</p>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">
+            	<div id="form-control-box" class="float-right">
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary" th:if="${existAvailablePeriod}">Lưu lại</button>
+            	</div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer th:replace="fragments/standard :: appFooter"></footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/lm-additional-methods.min.js}"></script>
+    <script th:src="@{/vendor/jquery-validation/localization/messages_vi.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>
+	    $(document).ready(function() {
+	    	$("#submitForm").click(function() {
+				$("#formCourseTrigger").click();
+			});
+
+			$('#formCourse').validate({
+				onkeyup: false,
+				errorElement : "div",
+				errorPlacement : function(error, element) {
+					error.addClass('invalid-feedback')
+					error.insertAfter(element);
+				},
+				highlight : function(element, errorClass) {
+					$(element).addClass('is-invalid');
+				},
+				unhighlight : function(element, errorClass) {
+					$(element).removeClass('is-invalid');
+				}
+			});
+	    });
+    </script>
+  </body>
+
+</html>

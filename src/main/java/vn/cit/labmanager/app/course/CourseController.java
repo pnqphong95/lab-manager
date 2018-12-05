@@ -1,5 +1,7 @@
 package vn.cit.labmanager.app.course;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.period.PeriodService;
@@ -89,5 +96,26 @@ public class CourseController {
         service.delete(id);
         return "redirect:/admin/mycourses";   
     }
-
+	
+	@RequestMapping(path = "/admin/mycourses/import")
+	public String importView(Model model) {
+		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		if (!periods.isEmpty()) {
+			model.addAttribute("availablePeriod", periods.get(0));
+	        model.addAttribute("periods", periods);
+		}
+        return "admin/mycourse/import";   
+    }
+	
+	@RequestMapping(path = "/admin/mycourses/import", method = RequestMethod.POST)
+	public String handleUpload(@RequestParam("courseFile") MultipartFile file) {
+		try {
+			XSSFWorkbook workbook = XSSFWorkbookFactory.createWorkbook((File) file, true);
+			System.out.println(workbook.getNumberOfSheets());
+		} catch (InvalidFormatException | IOException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/admin/mycourses";   
+    }
 }
