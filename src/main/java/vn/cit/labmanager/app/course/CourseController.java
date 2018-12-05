@@ -62,7 +62,7 @@ public class CourseController {
 	        model.addAttribute("subjects", subjectService.findAll());
 	        Optional<User> user = userService.getCurrentUser();
 	        model.addAttribute("users", user.isPresent() ? Arrays.asList(user.get()) : new ArrayList<>());
-	        model.addAttribute("periods", periodService.findAll());
+	        model.addAttribute("periods", periodService.findAvailablePeriod());
 		}
         return "admin/mycourse/edit";   
     }
@@ -77,7 +77,7 @@ public class CourseController {
 	        	model.addAttribute("course", item);
 	        	model.addAttribute("subjects", subjectService.findAll());
 	            model.addAttribute("users", userService.findAll());
-	            model.addAttribute("periods", periodService.findAll());
+	            model.addAttribute("periods", periodService.findAvailablePeriod());
 	        });
 		}
         return "admin/mycourse/edit";   

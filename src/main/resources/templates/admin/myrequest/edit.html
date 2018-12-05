@@ -70,7 +70,7 @@
 			                  <td>
 			                    <select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].wop}" th:attr="time-index=${timeStat.index}" required>
 			                      <option th:value="${null}">Chọn tuần</option>
-			                      <option th:each="wop : ${wops}" th:value="${wop.id}" th:text="${'Tuần ' + wop.numOrder}" th:attr="date-max=${wop.endDate}, date-min=${wop.startDate}"></option>
+			                      <option th:each="wop : ${wops}" th:value="${wop.id}" th:text="${'Tuần ' + wop.numOrder + ' (' + wop.startDate + ' - ' + wop.endDate + ')'}" th:attr="date-max=${wop.endDate}, date-min=${wop.startDate}"></option>
 			                    </select>
 			                  </td>
 			                  <td>

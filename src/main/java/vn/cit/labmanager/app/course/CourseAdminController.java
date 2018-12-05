@@ -58,7 +58,7 @@ public class CourseAdminController {
 			model.addAttribute("course", new Course());
 	        model.addAttribute("subjects", subjectService.findAll());
 	        model.addAttribute("users", userService.findAll());
-	        model.addAttribute("periods", periodService.findAll());
+	        model.addAttribute("periods", periodService.findAvailablePeriod());
 		}
         return "admin/course/edit";   
     }
@@ -73,7 +73,7 @@ public class CourseAdminController {
 	        	model.addAttribute("course", item);
 	        	model.addAttribute("subjects", subjectService.findAll());
 	            model.addAttribute("users", userService.findAll());
-	            model.addAttribute("periods", periodService.findAll());
+	            model.addAttribute("periods", periodService.findAvailablePeriod());
 	        });
 		}
         return "admin/course/edit";   
