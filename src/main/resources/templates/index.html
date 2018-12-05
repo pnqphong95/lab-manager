@@ -29,8 +29,8 @@
 		
 	  <div>
 	      <a class="navbar-brand mr-1 dropdown-toggle ml-1" id="select-week-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	      	<span class="week-text" th:if="${currentWop != null}">Tuần <span th:text="${currentWop.numOrder}"></span></span>
-	      	<span th:if="${currentWop != null}">, </span>
+	      	<span class="week-text"><span  th:if="${currentWop != null}">Tuần <span th:text="${currentWop.numOrder}"></span></span></span>
+	      	<span class="week-separator"><span  th:if="${currentWop != null}">, </span></span>
 	      </a>
 	      <div class="dropdown-menu" style="left:inherit;" aria-labelledby="select-week-dropdown">
 	        <span th:each="wop : ${weekOfPeriods}">
@@ -42,6 +42,7 @@
 	  <div>
 	      <a class="navbar-brand mr-1 dropdown-toggle" href="#" id="select-period-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	      	<span th:if="${currentPeriod != null}">HK <span th:text="${currentPeriod.semester.labelAsNumber}"></span> (<span th:text="${currentPeriod.startYear}"></span>-<span th:text="${currentPeriod.endYear}"></span>)</span>
+	      	<span th:if="${currentPeriod == null}">HK chưa tạo</span>
 	      </a>
 	      <div class="dropdown-menu" style="left:inherit;" aria-labelledby="select-period-dropdown">
 	      	<span th:each="period : ${periods}">

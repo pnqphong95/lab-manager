@@ -1,21 +1,4 @@
 $(function () {
-    $.ajax({
-        url: 'api/periods',
-        dataType: 'json',
-        data: {
-            now: moment().format('YYYY-MM-DD')
-        },
-        success: function (period) {
-            $('#lm-scheduler').fullCalendar('option', 'validRange', {
-                start: period.startDate,
-                end: period.endDate
-            });
-        },
-        error: function() {
-        	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào hoặc chưa tạo học kỳ niên khóa!");
-        }
-    });
-
     $('#lm-scheduler').fullCalendar({
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         height: 'auto',
@@ -88,8 +71,12 @@ $(function () {
         var equalGoToSeletor = 'a[goto="'+ $('#lm-scheduler').fullCalendar('getView').start.format('YYYY-MM-DD')  +'"]';
         $('.weekofperiod-item').removeClass('active');
     	$(equalGoToSeletor).addClass('active');
-    	console.log(equalGoToSeletor);
-    	$('#select-week-dropdown .week-text').text($(equalGoToSeletor).text());
+    	$('#select-week-dropdown .week-text').text($.trim($(equalGoToSeletor).text()));
+    	if (!$.trim($(equalGoToSeletor).text()).length) {
+    		$('#select-week-dropdown .week-separator').text("");
+    	} else {
+    		$('#select-week-dropdown .week-separator').text(", ");
+    	}
         return false;
     });
 
@@ -98,8 +85,12 @@ $(function () {
         var equalGoToSeletor = 'a[goto="'+ $('#lm-scheduler').fullCalendar('getView').start.format('YYYY-MM-DD')  +'"]';
         $('.weekofperiod-item').removeClass('active');
     	$(equalGoToSeletor).addClass('active');
-    	console.log(equalGoToSeletor);
-    	$('#select-week-dropdown .week-text').text($(equalGoToSeletor).text());
+    	$('#select-week-dropdown .week-text').text($.trim($(equalGoToSeletor).text()));
+    	if (!$.trim($(equalGoToSeletor).text()).length) {
+    		$('#select-week-dropdown .week-separator').text("");
+    	} else {
+    		$('#select-week-dropdown .week-separator').text(", ");
+    	}
         return false;
     });
     
@@ -128,18 +119,17 @@ $(function () {
             		listItem += '<a class="dropdown-item weekofperiod-item" href="#" goto="'+ value.startDate + '">Tuần ' + value.numOrder + '</a>';
             	});
             	var dom = $(listItem);
+            	console.log(dom);
             	dom.first().addClass('active');
             	$('#select-week-dropdown .week-text').text(dom.first().text());
+            	$('#select-week-dropdown .week-separator').text(", ");
             	$('div[aria-labelledby="select-week-dropdown"]').html(dom);
             },
             error: function() {
             	alert("Thời điểm hiện tại thuộc học kỳ niên khóa nào! Hãy chọn học kỳ");
             }
         });
-    	$('#lm-scheduler').fullCalendar('option', 'validRange', {
-            start: startDate,
-            end: endDate
-        });
+    	$('#lm-scheduler').fullCalendar('gotoDate', startDate);
     	return;
     });
 });

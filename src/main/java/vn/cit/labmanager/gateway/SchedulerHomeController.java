@@ -25,7 +25,7 @@ public class SchedulerHomeController {
 	
 	@RequestMapping(path = "/")
     public String index(Model model) {
-		List<Period> periods = periodService.findAll();
+		List<Period> periods = periodService.findAvailablePeriod();
 		Optional<Period> currentPeriod = periods.stream().filter(Period::isCurrent).findFirst();
 		model.addAttribute("periods", periods);
 		model.addAttribute("currentPeriod", currentPeriod.isPresent() ? currentPeriod.get() : null);
