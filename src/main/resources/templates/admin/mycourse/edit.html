@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="container" th:if="${isCurrentPeriodCreated}">
+              <div class="container" th:if="${existAvailablePeriod}">
 		        <form id="formCourse" class="form-horizontal" th:object="${course}" th:action="@{/admin/mycourses}" method="post">
 		            <div class="form-group">
 		                <div class="col-sm-10">
@@ -86,13 +86,13 @@
 		            <input type="submit" id="formCourseTrigger" style="display:none;"/>
 		        </form>
 		    </div>
-              <div th:if="${!isCurrentPeriodCreated}" style="text-align: center;">
-              	<p class="lead">Học kỳ hiện tại chưa được tạo. Liên hệ quản trị tạo học kỳ.</p>
+              <div th:if="${!existAvailablePeriod}" style="text-align: center;">
+              	<p class="lead">Học kỳ gần nhất chưa được tạo. Liên hệ quản trị tạo học kỳ.</p>
               </div>
             </div>
             <div class="card-footer small text-muted">
             	<div id="form-control-box" class="float-right">
-            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary" th:if="${isCurrentPeriodCreated}">Lưu lại</button>
+            		<button type="submit" id="submitForm" class="btn btn-sm btn-primary" th:if="${existAvailablePeriod}">Lưu lại</button>
             	</div>
             </div>
           </div>

@@ -16,6 +16,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import vn.cit.labmanager.app.event.request.EventRequest;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.subject.Subject;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
@@ -23,6 +25,7 @@ import vn.cit.labmanager.config.auditing.AuditableEntity;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"eventRequests", "subjects", "labs"})
 public class Tool extends AuditableEntity {
 	
 	@Id
@@ -41,6 +44,9 @@ public class Tool extends AuditableEntity {
 	@ManyToMany(mappedBy="tools")
 	private List<Subject> subjects = new ArrayList<>();
 	
+	@ManyToMany(mappedBy="tools")
+	private List<EventRequest> eventRequests = new ArrayList<>();
+	
 	@PreRemove
 	private void preRemove() {
 		for(Lab lab : labs) {
@@ -48,6 +54,9 @@ public class Tool extends AuditableEntity {
 		}
 		for(Subject subject : subjects) {
 			subject.getTools().removeIf(this::equals);
+		}
+		for(EventRequest eventRequest : eventRequests) {
+			eventRequest.getTools().removeIf(this::equals);
 		}
 	}
 

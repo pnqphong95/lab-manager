@@ -1,11 +1,12 @@
 package vn.cit.labmanager.app.course;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,28 +53,28 @@ public class CourseAdminController {
 	
 	@RequestMapping(path = "/admin/courses/add")
     public String createCourse(Model model) {
-		Optional<Period> period = periodService.findBySpecifiedDate(LocalDate.now());
-		model.addAttribute("isCurrentPeriodCreated", period.isPresent());
-		if (period.isPresent()) {
+		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		if (!periods.isEmpty()) {
 			model.addAttribute("course", new Course());
 	        model.addAttribute("subjects", subjectService.findAll());
 	        model.addAttribute("users", userService.findAll());
-	        model.addAttribute("periods", periodService.findAvailablePeriod());
+	        model.addAttribute("periods", periods);
 		}
         return "admin/course/edit";   
     }
 	
 	@RequestMapping(path = "/admin/courses/edit/{id}")
     public String editCourse(@PathVariable(name = "id") String id, Model model) {
-		Optional<Period> period = periodService.findBySpecifiedDate(LocalDate.now());
-		model.addAttribute("isCurrentPeriodCreated", period.isPresent());
-		if (period.isPresent()) {
+		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		if (!periods.isEmpty()) {
 			Optional<Course> course = service.findOne(id);
 	        course.ifPresent(item -> {
 	        	model.addAttribute("course", item);
 	        	model.addAttribute("subjects", subjectService.findAll());
 	            model.addAttribute("users", userService.findAll());
-	            model.addAttribute("periods", periodService.findAvailablePeriod());
+	            model.addAttribute("periods", periods);
 	        });
 		}
         return "admin/course/edit";   

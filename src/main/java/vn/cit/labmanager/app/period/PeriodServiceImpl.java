@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
@@ -99,16 +100,13 @@ public class PeriodServiceImpl implements PeriodService {
 	}
 
 	@Override
-	public List<Period> findUpComingPeriod() {
-		return repo.findByStartDateGreaterThanOrderByStartDateAsc(LocalDate.now());
+	public List<Period> findAvailablePeriod(Sort sort) {
+		return repo.findByEndDateGreaterThanEqual(LocalDate.now(), sort);
 	}
 
 	@Override
 	public List<Period> findAvailablePeriod() {
-		List<Period> periods = new ArrayList<>();
-		this.findCurrentPeriod().ifPresent(item -> periods.add(item));
-		periods.addAll(this.findUpComingPeriod());
-		return periods;
+		return repo.findByEndDateGreaterThanEqual(LocalDate.now());
 	}
 	
 }

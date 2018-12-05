@@ -1,12 +1,17 @@
 package vn.cit.labmanager.app.event.request;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -16,6 +21,7 @@ import lombok.EqualsAndHashCode;
 import vn.cit.labmanager.app.course.Course;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
+import vn.cit.labmanager.app.tool.Tool;
 import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 import vn.cit.labmanager.config.auditing.AuditableEntity;
 
@@ -34,6 +40,12 @@ public class EventRequest extends AuditableEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Lab lab;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "request_tools",
+		joinColumns = { @JoinColumn(name = "request_id") },
+		inverseJoinColumns = { @JoinColumn(name = "tool_id") })
+	private Set<Tool> tools = new HashSet<>();
 
 	private LocalDate startDate;
 	
