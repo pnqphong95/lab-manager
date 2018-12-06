@@ -112,7 +112,6 @@ public class CourseController {
 	public String handleUpload(@RequestParam("courseFile") MultipartFile file) {
 		try {
 			XSSFWorkbook workbook = XSSFWorkbookFactory.createWorkbook((File) file, true);
-			System.out.println(workbook.getNumberOfSheets());
 		} catch (InvalidFormatException | IOException e) {
 			e.printStackTrace();
 		}

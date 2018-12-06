@@ -110,12 +110,22 @@
 					</a>
 				</div>
 			</li>
-			<li class="nav-item" sec:authorize="hasRole('ROLE_SYS_ADMIN')">
-	          <a class="nav-link" th:href="@{/admin/statistic}">
-	            <i class="fas fa-fw fa-tachometer-alt"></i>
-	            <span>Thống kê</span>
-	          </a>
-	        </li>
+			<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_SYS_ADMIN')">
+				<a class="nav-link dropdown-toggle" href="#" id="statisticDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-folder"></i>
+					<span>Thống kê</span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="statisticDropdown">
+					<a class="dropdown-item" th:href="@{/admin/wop-statistic}">
+						<i class="fas fa-fw fa-tachometer-alt"></i> Thống kê theo tuần của học kỳ gần nhất
+					</a>
+					<a class="dropdown-item" th:href="@{/admin/lab-statistic}">
+						<i class="fas fa-fw fa-tachometer-alt"></i> Thống kê tổng quan theo phòng
+					</a>
+					<a class="dropdown-item" th:href="@{/admin/department-statistic}">
+						<i class="fas fa-fw fa-tachometer-alt"></i> Thống kê tổng quan theo bộ môn
+					</a>
+				</div>
+			</li>
 		</ul>
 		<div id="content-wrapper">	
 	        <!-- Sticky Footer -->

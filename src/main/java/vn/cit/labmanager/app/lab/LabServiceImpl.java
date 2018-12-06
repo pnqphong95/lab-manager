@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.department.Department;
@@ -54,6 +55,11 @@ public class LabServiceImpl implements LabService {
 	@Override
 	public Optional<Lab> findByDepartment(Department department) {
 		return Optional.ofNullable(repo.findByDepartment(department));
+	}
+
+	@Override
+	public List<Lab> findAll(Sort sort) {
+		return repo.findAll(sort);
 	}
 	
 }

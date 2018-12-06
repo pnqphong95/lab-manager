@@ -21,12 +21,28 @@ public class LabManagerStatisticController {
 	@Autowired
 	private PeriodService periodService;
 	
-	@RequestMapping(path = "/admin/statistic")
-    public String index(Model model) {
+	@RequestMapping(path = "/admin/wop-statistic")
+    public String indexWop(Model model) {
 		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
 		model.addAttribute("events", eventService.findAll());
-        return "admin/statistic";
+        return "admin/wop-statistic";
+    }
+	
+	@RequestMapping(path = "/admin/department-statistic")
+    public String indexDepartment(Model model) {
+		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		model.addAttribute("events", eventService.findAll());
+        return "admin/department-statistic";
+    }
+	
+	@RequestMapping(path = "/admin/lab-statistic")
+    public String indexLab(Model model) {
+		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		model.addAttribute("events", eventService.findAll());
+        return "admin/lab-statistic";
     }
 
 }

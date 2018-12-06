@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+  	<meta th:include="fragments/standard :: appHead" th:remove="tag"/>
+  	<link th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/customize.css}" rel="stylesheet" />
+    <!-- Bootstrap core JavScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    
+    <script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+    
+    <script>
+ 	
+    </script>
+  </head>
+
+  <body id="page-top" class="sidebar-toggled">
+
+    <nav th:replace="fragments/standard :: appNav"></nav>
+    
+    <div id="wrapper">
+
+      <ul th:replace="fragments/standard :: appSidebar"></ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-chart-bar"></i>
+              Thống kê tổng quan theo phòng
+              <div id="add-control-box" class="float-right">
+              	<a id="chart-printer" class="btn btn-sm btn-primary">Tải PDF</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas id="labStatistic" width="100%" height="32"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Footer -->
+        <footer th:replace="fragments/standard :: appFooter"></footer>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/standard :: appLogoutModal"></div>
+    
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script th:src="@{/js/jspdf.min.js}"></script>
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+    <script th:src="@{/js/lab-statistic-chart-bar.js}"></script>
+  </body>
+
+</html>

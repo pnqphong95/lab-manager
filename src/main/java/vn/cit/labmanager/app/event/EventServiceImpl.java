@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vn.cit.labmanager.app.department.Department;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
 import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
@@ -73,6 +74,22 @@ public class EventServiceImpl implements EventService {
 	public long countByWeekOfPeriod(WeekOfPeriod weekOfPeriod) {
 		if (weekOfPeriod != null) {
 			return repo.countByWeekOfPeriod(weekOfPeriod);
+		}
+		return 0;
+	}
+
+	@Override
+	public long countByLabDepartment(Department department) {
+		if (department != null) {
+			return repo.countByLabDepartment(department);
+		}
+		return 0;
+	}
+
+	@Override
+	public long countByLab(Lab lab) {
+		if (lab != null) {
+			return repo.countByLab(lab);
 		}
 		return 0;
 	}
