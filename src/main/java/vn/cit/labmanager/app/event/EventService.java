@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
+import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 
 public interface EventService {
 	public List<Event> findAll();
@@ -16,5 +17,6 @@ public interface EventService {
 	public Optional<Event> findTopByOrderByModifiedDesc();
 	public List<Event> findByStartDateBetween(LocalDate from, LocalDate to);
 	public List<Event> findByLabInAndStartDateEqualsAndShiftEquals(List<Lab> labs, LocalDate startDate, Shift shift);
-
+	public long countByWeekOfPeriod(WeekOfPeriod weekOfPeriod);
+	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
+import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -66,6 +67,14 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> save(List<Event> events) {
 		return repo.saveAll(events);
+	}
+
+	@Override
+	public long countByWeekOfPeriod(WeekOfPeriod weekOfPeriod) {
+		if (weekOfPeriod != null) {
+			return repo.countByWeekOfPeriod(weekOfPeriod);
+		}
+		return 0;
 	}
 
 }

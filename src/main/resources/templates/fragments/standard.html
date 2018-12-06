@@ -110,6 +110,12 @@
 					</a>
 				</div>
 			</li>
+			<li class="nav-item" sec:authorize="hasRole('ROLE_SYS_ADMIN')">
+	          <a class="nav-link" th:href="@{/admin/statistic}">
+	            <i class="fas fa-fw fa-tachometer-alt"></i>
+	            <span>Thống kê</span>
+	          </a>
+	        </li>
 		</ul>
 		<div id="content-wrapper">	
 	        <!-- Sticky Footer -->

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
+import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, String> {
@@ -15,5 +16,6 @@ public interface EventRepository extends JpaRepository<Event, String> {
 	public Event findTopByOrderByModifiedDesc();
 	public List<Event> findByStartDateGreaterThanEqualAndStartDateLessThanEqual(LocalDate dateOne, LocalDate dateTwo);
 	public List<Event> findByLabInAndStartDateEqualsAndShiftEquals(List<Lab> labs, LocalDate startDate, Shift shift);
+	public long countByWeekOfPeriod(WeekOfPeriod weekOfPeriod);
 
 }

@@ -13,7 +13,7 @@ import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.period.PeriodService;
 
 @Controller
-public class LabManagerHomeController {
+public class LabManagerStatisticController {
 	
 	@Autowired
 	private EventService eventService;
@@ -21,12 +21,12 @@ public class LabManagerHomeController {
 	@Autowired
 	private PeriodService periodService;
 	
-	@RequestMapping(path = "/admin")
+	@RequestMapping(path = "/admin/statistic")
     public String index(Model model) {
 		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
 		model.addAttribute("events", eventService.findAll());
-        return "admin/index";
+        return "admin/statistic";
     }
 
 }
