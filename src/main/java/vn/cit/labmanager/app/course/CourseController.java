@@ -1,7 +1,5 @@
 package vn.cit.labmanager.app.course;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -110,11 +105,6 @@ public class CourseController {
 	
 	@RequestMapping(path = "/admin/mycourses/import", method = RequestMethod.POST)
 	public String handleUpload(@RequestParam("courseFile") MultipartFile file) {
-		try {
-			XSSFWorkbook workbook = XSSFWorkbookFactory.createWorkbook((File) file, true);
-		} catch (InvalidFormatException | IOException e) {
-			e.printStackTrace();
-		}
 		return "redirect:/admin/mycourses";   
     }
 }

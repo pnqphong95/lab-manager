@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vn.cit.labmanager.app.course.Course;
 import vn.cit.labmanager.app.event.Event;
 import vn.cit.labmanager.app.event.EventService;
 import vn.cit.labmanager.app.event.request.EventRequest;
@@ -70,6 +71,14 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 			return Collections.emptyList();
 		}
 		return lookUpLabs.stream().filter(lab -> !lab.getTools().containsAll(neededTools)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Lab> getAvailableLab(EventRequest request, Course course) {
+		List<Lab> availableLabs = labService.findAll().stream().filter(lab -> lab.getDepartment() == course.getLecturer().getDepartment()).collect(Collectors.toList());
+		availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
+		availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
+		return availableLabs;
 	}
 
 }

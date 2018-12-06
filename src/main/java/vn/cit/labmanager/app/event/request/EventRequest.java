@@ -15,10 +15,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import vn.cit.labmanager.app.course.Course;
+import vn.cit.labmanager.app.event.DayOfWeekVi;
 import vn.cit.labmanager.app.lab.Lab;
 import vn.cit.labmanager.app.shift.Shift;
 import vn.cit.labmanager.app.tool.Tool;
@@ -28,6 +32,7 @@ import vn.cit.labmanager.config.auditing.AuditableEntity;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"tools"})
 public class EventRequest extends AuditableEntity {
 	
 	@Id
@@ -47,6 +52,7 @@ public class EventRequest extends AuditableEntity {
 		inverseJoinColumns = { @JoinColumn(name = "tool_id") })
 	private Set<Tool> tools = new HashSet<>();
 
+	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate startDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -56,5 +62,9 @@ public class EventRequest extends AuditableEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private WeekOfPeriod weekOfPeriod;
+	
+	public DayOfWeekVi getDayOfWeekVi() {
+		return DayOfWeekVi.from(startDate.getDayOfWeek());
+	}
 
 }

@@ -26,7 +26,7 @@ import vn.cit.labmanager.config.auditing.AuditableEntity;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ToString(exclude = {"events"})
+@ToString(exclude = {"events", "eventRequests"})
 public class Course extends AuditableEntity {
 
 	@Id
