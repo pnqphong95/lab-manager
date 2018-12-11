@@ -41,13 +41,13 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 	public void delegate(EventRequestForm requestForm) {
 		List<EventRequest> requests = initService.from(requestForm);
 		
-		// Get labs the same department with user who request
-		List<Lab> labSameDepartments = labService.findAll().stream().filter(lab -> lab.getDepartment() == requestForm.getCourse().getLecturer().getDepartment()).collect(Collectors.toList());
+		// Get labs
+		List<Lab> labs = labService.findAll();
 		
 		List<EventRequest> pendingRequests = new ArrayList<>();
 		
 		requests.forEach(request -> {
-			List<Lab> availableLabs = new ArrayList<>(labSameDepartments);
+			List<Lab> availableLabs = new ArrayList<>(labs);
 			availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
 			availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
 			if (!availableLabs.isEmpty()) {
@@ -75,7 +75,7 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 
 	@Override
 	public List<Lab> getAvailableLab(EventRequest request, Course course) {
-		List<Lab> availableLabs = labService.findAll().stream().filter(lab -> lab.getDepartment() == course.getLecturer().getDepartment()).collect(Collectors.toList());
+		List<Lab> availableLabs = labService.findAll();
 		availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
 		availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
 		return availableLabs;
