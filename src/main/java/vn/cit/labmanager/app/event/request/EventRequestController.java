@@ -3,15 +3,20 @@ package vn.cit.labmanager.app.event.request;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.cit.labmanager.app.course.CourseService;
+import vn.cit.labmanager.app.event.DayOfWeekVi;
+import vn.cit.labmanager.app.event.request.handler.EventRequestDelegator;
 import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.period.PeriodService;
 import vn.cit.labmanager.app.shift.ShiftService;
@@ -43,6 +48,9 @@ public class EventRequestController {
 	@Autowired
 	private ToolService toolService;
 	
+	@Autowired
+	private EventRequestDelegator delegator;
+	
 	@RequestMapping(path = "/admin/myrequests/pending")
     public String index(Model model) {
 		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
@@ -53,8 +61,11 @@ public class EventRequestController {
 		return "admin/myrequest/pending";   
     }
 	
-	@RequestMapping(path = "/admin/myrequests/process", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/myrequests/process", params={"saveRequest"})
     public String saveRequest(EventRequest eventRequest) {
+		if (eventRequest.getDow() != null) {
+			eventRequest.setStartDate(eventRequest.getWeekOfPeriod().getStartDate().with(eventRequest.getDow().getDayOfWeek()));
+		}
 		eventRequestService.save(eventRequest);
 		return "redirect:/admin/myrequests/pending";
     }
@@ -66,11 +77,13 @@ public class EventRequestController {
 		if (!periods.isEmpty()) {
 			Optional<EventRequest> request = eventRequestService.findOne(id);
 	        request.ifPresent(item -> {
+	        	item.setDow(item.getDayOfWeekVi());
 	        	model.addAttribute("availablePeriod", periods.get(0));
 	        	model.addAttribute("request", item);
 	        	model.addAttribute("tools", toolService.findAll());
 				model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
 				model.addAttribute("wops", wopService.findByPeriod(periods.get(0)));
+				model.addAttribute("dows", DayOfWeekVi.values());
 				model.addAttribute("shifts", shiftService.findAll());
 	        });
 		}
@@ -83,6 +96,22 @@ public class EventRequestController {
         return "redirect:/admin/myrequests/pending";   
     }
 	
-	
+	@RequestMapping(value="/admin/myrequests/process", params={"checkAvalable"})
+    public String checkAvalable(@ModelAttribute("request") EventRequest request, BindingResult result, final HttpServletRequest req, Model model) {
+        boolean hasAvailableLab = !delegator.getAvailableLab(request).isEmpty();
+        request.setAvailable(hasAvailableLab);
+        List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		if (!periods.isEmpty()) {
+        	model.addAttribute("availablePeriod", periods.get(0));
+        	model.addAttribute("request", request);
+        	model.addAttribute("tools", toolService.findAll());
+			model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
+			model.addAttribute("wops", wopService.findByPeriod(periods.get(0)));
+			model.addAttribute("dows", DayOfWeekVi.values());
+			model.addAttribute("shifts", shiftService.findAll());
+		}
+		return "admin/myrequest/process";
+    }
 
 }

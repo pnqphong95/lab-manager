@@ -57,9 +57,12 @@
 					<div class="form-group row">
 						<label for="tool-selection" class="col-sm-2 control-label">Phần mềm cần thiết:</label>
 				      	<div class="col-sm-10">
-					      	<select multiple class="form-control" id="tool-selection" th:field="*{tools}">
-						        <option th:each="tool : ${tools}" th:value="${tool.id}" th:text="${tool.name}"></option>
-					      	</select>
+						  <div style="height:140px;overflow:scroll;">
+							  <div class="form-check form-check-inline col-lg-3" th:each="tool : ${tools}">
+							    <input class="form-check-input" type="checkbox" th:field="*{tools}" th:value="${tool.id}"/>
+							    <label class="form-check-label" th:for="${#ids.prev('tools')}" th:text="${tool.name}"></label>
+							  </div>
+						  </div>
 				      	</div>
 					</div>
 					<div class="form-group row">
@@ -73,9 +76,9 @@
 		                  <thead>
 		                    <tr>
 		                      <th>Tuần</th>
-		                      <th>Ngày</th>
+		                      <th>Thứ</th>
 		                      <th>Buổi</th>
-		                      <th><a href="#" class="btn btn-primary btn-sm">Kiểm tra</a></th>
+		                      <th></th>
 		                    </tr>
 		                  </thead>
 		                  <tbody>
@@ -87,21 +90,25 @@
 			                    </select>
 			                  </td>
 			                  <td>
-			                    <input type="date" class="form-control form-control-sm" th:field="*{startDate}" required/>
+			                    <select class="form-control form-control-sm" th:field="*{dow}">
+			                      <option th:value="${null}">Chọn thứ</option>
+			                      <option th:each="dow : ${dows}" th:value="${dow}" th:text="${dow.getViText()}"></option>
+			                    </select>
 			                  </td>
 			                  <td>
-		                	  	<select class="form-control form-control-sm" th:field="*{shift}" required>
+		                	  	<select class="form-control form-control-sm" th:field="*{shift}">
+		                	  	  <option th:value="${null}">Chọn buổi</option>
 							      <option th:each="shift : ${shifts}" th:value="${shift.id}" th:text="${shift.name}"></option>
 							    </select>
 		                	  </td>
 			                  <td>
-			                  	<span class="badge badge-success">OK</span>
+			                  	<button type="submit" class="btn btn-sm" th:classappend="${request.available} ? btn-success : btn-secondary" name="checkAvalable"><i class="fas fa-check"></i></button>
 			                  </td>
 			                </tr>
 		                  </tbody>
 		                </table>
 		            </div>
-		            <input type="submit" id="formRequestTrigger" style="display:none;"/>
+		            <input type="submit" id="formRequestTrigger" name="saveRequest" style="display:none;"/>
 		        </form>
 		      </div>
 		    </div>

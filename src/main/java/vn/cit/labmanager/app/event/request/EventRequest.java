@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -60,11 +61,17 @@ public class EventRequest extends AuditableEntity {
 
 	private String note;
 	
+	@Transient
+	private DayOfWeekVi dow;
+	
+	@Transient
+	private boolean available = false;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private WeekOfPeriod weekOfPeriod;
 	
 	public DayOfWeekVi getDayOfWeekVi() {
-		return DayOfWeekVi.from(startDate.getDayOfWeek());
+		return startDate != null ? DayOfWeekVi.from(startDate.getDayOfWeek()) : null;
 	}
 
 }

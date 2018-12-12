@@ -78,24 +78,30 @@
                   <thead>
                     <tr>
                       <th>STT</th>
-                      <th>Môn học</th>
-                      <th>Mã lớp học phần</th>
-                      <th>Buổi / Thứ / Ngày</th>
                       <th>Tuần</th>
+                      <th>Buổi, Thứ</th>
+                      <th>Ngày</th>
+                      <th>Lớp học phần</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr th:each="request, requestStat : ${requests}">
                       <td th:text="${requestStat.index + 1}">Id</td>
-                      <td th:text="${request.course.subject.name}">Subject name</td>
-                	  <td th:text="${request.course.courseId}">Course id</td>
+                      <td th:text="${request.weekOfPeriod.numOrder}">Num Order</td>
                 	  <td>
-                	  	<span th:text="${request.shift.name}">Shift</span>
+                	  	<span th:if="${request.shift != null}" th:text="${request.shift.name}"></span>
+                	  	<span th:unless="${request.shift != null}">Không nhập</span>
                 	  	<span th:if="${request.getDayOfWeekVi() != null}" th:text="${request.getDayOfWeekVi().viText}"></span>
-                	  	<span th:text="${request.startDate}">Date</span>
                 	  </td>
-                	  <td th:text="${request.weekOfPeriod.numOrder}">Num Order</td>
+                	  <td>
+                	  	<span th:if="${request.startDate != null}" th:text="${request.startDate}"></span>
+                	  	<span th:unless="${request.startDate != null}">Không nhập</span>
+                	  </td>
+                	  <td>
+                	  	<span th:text="${request.course.subject.name}">Subject name</span>
+                	  	<span th:text="${request.course.courseId}">Course id</span>
+                	  </td>
                       <td>
 	                      <div style="display:inline-flex;">
 	                      	<a th:href="${'process/' + request.id}" class="btn btn-sm btn-success mr-1" title="Xong"><i class="fas fa-cog"></i></a>
