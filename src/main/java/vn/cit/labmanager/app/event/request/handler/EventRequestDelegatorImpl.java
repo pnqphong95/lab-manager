@@ -119,4 +119,38 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 		return Collections.emptyList();
 	}
 
+	@Override
+	public void delegate(EventRequest request) {
+		// Get labs
+		List<Lab> labs = labService.findAll();
+		List<EventRequest> completeRequests = builder.build(request);
+		if (completeRequests.size() > 1) {
+			for(EventRequest completeRequest : completeRequests) {
+				List<Lab> availableLabs = new ArrayList<>(labs);
+				availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, completeRequest.getStartDate(), completeRequest.getShift()));
+				availableLabs.removeAll(getLabNotEnoughTool(availableLabs, completeRequest.getTools()));
+				if (!availableLabs.isEmpty()) {
+					completeRequest.setLab(availableLabs.get(0));
+					eventService.save(Event.from(completeRequest));
+					requestService.delete(request.getId());
+					break;
+				} else {
+					requestService.save(request);
+				}
+			}
+		} else {
+			List<Lab> availableLabs = new ArrayList<>(labs);
+			availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
+			availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
+			if (!availableLabs.isEmpty()) {
+				request.setLab(availableLabs.get(0));
+				eventService.save(Event.from(request));
+				requestService.delete(request.getId());
+			} else {
+				requestService.save(request);
+			}
+		}
+		
+	}
+
 }

@@ -8,5 +8,6 @@ import vn.cit.labmanager.app.lab.Lab;
 
 public interface EventRequestDelegator {
 	public void delegate(EventRequestForm requestForm);
+	public void delegate(EventRequest request);
 	public List<Lab> getAvailableLab(EventRequest request);
 }

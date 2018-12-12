@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vn.cit.labmanager.app.user.User;
+
 @Service
 public class EventRequestServiceImpl implements EventRequestService {
 
@@ -52,6 +54,14 @@ public class EventRequestServiceImpl implements EventRequestService {
 	@Override
 	public List<EventRequest> save(List<EventRequest> eventRequests) {
 		return repo.saveAll(eventRequests);
+	}
+
+	@Override
+	public List<EventRequest> findByCourseLecturer(User lecturer) {
+		if (lecturer == null) {
+			return null;
+		}
+		return repo.findByCourseLecturer(lecturer);
 	}
 
 }
