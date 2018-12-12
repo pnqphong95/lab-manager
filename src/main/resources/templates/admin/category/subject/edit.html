@@ -63,9 +63,12 @@
 		            <div class="form-group row">
 						<label for="tool-selection" class="col-sm-2 control-label">Phần mềm cần thiết:</label>
 				      	<div class="col-sm-10">
-					      	<select multiple class="form-control" id="tool-selection" th:field="*{tools}">
-						        <option th:each="tool : ${tools}" th:value="${tool.id}" th:text="${tool.name}"></option>
-					      	</select>
+							  <div style="height:140px;overflow:scroll;">
+								  <div class="form-check form-check-inline col-lg-3" th:each="tool : ${tools}">
+								    <input class="form-check-input" type="checkbox" th:field="*{tools}" th:value="${tool.id}" />
+								    <label class="form-check-label" th:for="${#ids.prev('tools')}" th:text="${tool.name}"></label>
+								  </div>
+							  </div>
 				      	</div>
 					</div>
 					<input type="submit" id="formSubjectTrigger" style="display:none;"/>

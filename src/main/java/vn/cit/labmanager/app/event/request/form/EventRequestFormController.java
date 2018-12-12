@@ -70,6 +70,7 @@ public class EventRequestFormController {
 	
 	@RequestMapping(value="/admin/create_request", params={"saveRequest"})
 	public String saveRequest(@ModelAttribute("requestForm") final EventRequestForm requestForm, BindingResult result, Model model) {
+		System.out.println(requestForm.getTools());
 		delegator.delegate(requestForm);
 		return "redirect:/admin";
 	}
@@ -77,6 +78,7 @@ public class EventRequestFormController {
 	@RequestMapping(value="/admin/create_request", params={"addRow"})
     public String addRow(@ModelAttribute("requestForm") EventRequestForm requestForm, BindingResult result, Model model) {
 		requestForm.getTimes().add(new EventTimeForm());
+		System.out.println(requestForm.getTools());
 		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
 		if (!periods.isEmpty()) {
@@ -92,6 +94,7 @@ public class EventRequestFormController {
 	@RequestMapping(value="/admin/create_request", params={"removeRow"})
     public String removeRow(@ModelAttribute("requestForm") EventRequestForm requestForm, BindingResult result, final HttpServletRequest req, Model model) {
         final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+        System.out.println(requestForm.getTools());
         requestForm.getTimes().remove(rowId.intValue());
         List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
