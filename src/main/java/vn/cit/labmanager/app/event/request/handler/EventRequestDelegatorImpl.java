@@ -37,6 +37,9 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 	@Autowired
 	private EventRequestService requestService;
 	
+	@Autowired
+	private AdditionalEventRequestBuilder builder;
+	
 	@Override
 	public void delegate(EventRequestForm requestForm) {
 		List<EventRequest> requests = initService.from(requestForm);
@@ -47,14 +50,33 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 		List<EventRequest> pendingRequests = new ArrayList<>();
 		
 		requests.forEach(request -> {
-			List<Lab> availableLabs = new ArrayList<>(labs);
-			availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
-			availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
-			if (!availableLabs.isEmpty()) {
-				request.setLab(availableLabs.get(0));
-				eventService.save(Event.from(request));
+			List<EventRequest> completeRequests = builder.build(request);
+			if (completeRequests.size() > 1) {
+				boolean successAtLeastOne = false;
+				for(EventRequest completeRequest : completeRequests) {
+					List<Lab> availableLabs = new ArrayList<>(labs);
+					availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, completeRequest.getStartDate(), completeRequest.getShift()));
+					availableLabs.removeAll(getLabNotEnoughTool(availableLabs, completeRequest.getTools()));
+					if (!availableLabs.isEmpty()) {
+						completeRequest.setLab(availableLabs.get(0));
+						eventService.save(Event.from(completeRequest));
+						successAtLeastOne = true;
+						break;
+					}
+				}
+				if (!successAtLeastOne) {
+					pendingRequests.add(request);
+				}
 			} else {
-				pendingRequests.add(request);
+				List<Lab> availableLabs = new ArrayList<>(labs);
+				availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
+				availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
+				if (!availableLabs.isEmpty()) {
+					request.setLab(availableLabs.get(0));
+					eventService.save(Event.from(request));
+				} else {
+					pendingRequests.add(request);
+				}
 			}
 		});
 

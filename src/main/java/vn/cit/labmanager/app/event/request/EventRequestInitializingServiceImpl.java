@@ -20,7 +20,9 @@ public class EventRequestInitializingServiceImpl implements EventRequestInitiali
 			request.setShift(time.getShift());
 			request.setNote(form.getNote());
 			request.setWeekOfPeriod(time.getWop());
-			request.setStartDate(time.getWop().getStartDate().with(time.getDow().getDayOfWeek()));
+			if (time.getDow() != null) {
+				request.setStartDate(time.getWop().getStartDate().with(time.getDow().getDayOfWeek()));
+			}
 			requests.add(request);
 		});
 		return requests;

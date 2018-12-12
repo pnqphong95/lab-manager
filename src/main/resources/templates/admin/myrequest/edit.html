@@ -97,7 +97,8 @@
 			                    </select>
 			                  </td>
 			                  <td>
-		                	  	<select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].shift}" required>
+		                	  	<select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].shift}">
+							      <option th:value="${null}">Chọn buổi</option>
 							      <option th:each="shift : ${shifts}" th:value="${shift.id}" th:text="${shift.name}"></option>
 							    </select>
 		                	  </td>
