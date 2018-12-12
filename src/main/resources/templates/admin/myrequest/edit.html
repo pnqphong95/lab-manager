@@ -103,6 +103,8 @@
 							    </select>
 		                	  </td>
 			                  <td>
+			                  	<input type="hidden" th:field="*{times[__${timeStat.index}__].available}"/>
+			                  	<button type="submit" class="btn btn-sm" th:classappend="${time.available} ? btn-success : btn-secondary" name="checkAvalable" th:value="${timeStat.index}"><i class="fas fa-check"></i></button>
 			                    <button type="submit" formnovalidate="formnovalidate" class="btn btn-sm btn-secondary" name="removeRow" th:value="${timeStat.index}" th:if="${timeStat.index != 0}"><i class="fas fa-trash-alt"></i></button>
 			                  </td>
 			                </tr>

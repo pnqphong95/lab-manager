@@ -58,6 +58,6 @@ public class Event extends AuditableEntity {
 	}
 	
 	public DayOfWeekVi getDayOfWeekVi() {
-		return DayOfWeekVi.from(startDate.getDayOfWeek());
+		return startDate != null ? DayOfWeekVi.from(startDate.getDayOfWeek()) : null;
 	}
 }

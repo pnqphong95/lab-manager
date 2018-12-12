@@ -10,4 +10,5 @@ public class EventTimeForm {
 	private WeekOfPeriod wop;
 	private DayOfWeekVi dow;
 	private Shift shift;
+	private boolean available = false;
 }

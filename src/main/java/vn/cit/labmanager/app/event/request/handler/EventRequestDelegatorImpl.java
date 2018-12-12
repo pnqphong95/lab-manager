@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import vn.cit.labmanager.app.course.Course;
 import vn.cit.labmanager.app.event.Event;
 import vn.cit.labmanager.app.event.EventService;
 import vn.cit.labmanager.app.event.request.EventRequest;
@@ -96,11 +95,28 @@ public class EventRequestDelegatorImpl implements EventRequestDelegator {
 	}
 
 	@Override
-	public List<Lab> getAvailableLab(EventRequest request, Course course) {
-		List<Lab> availableLabs = labService.findAll();
-		availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
-		availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
-		return availableLabs;
+	public List<Lab> getAvailableLab(EventRequest request) {
+		// Get labs
+		List<Lab> labs = labService.findAll();
+		List<EventRequest> completeRequests = builder.build(request);
+		if (completeRequests.size() > 1) {
+			for(EventRequest completeRequest : completeRequests) {
+				List<Lab> availableLabs = new ArrayList<>(labs);
+				availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, completeRequest.getStartDate(), completeRequest.getShift()));
+				availableLabs.removeAll(getLabNotEnoughTool(availableLabs, completeRequest.getTools()));
+				if (!availableLabs.isEmpty()) {
+					return availableLabs;
+				}
+			}
+		} else {
+			List<Lab> availableLabs = new ArrayList<>(labs);
+			availableLabs.removeAll(getLabsHaveBeenRegistered(availableLabs, request.getStartDate(), request.getShift()));
+			availableLabs.removeAll(getLabNotEnoughTool(availableLabs, request.getTools()));
+			if (!availableLabs.isEmpty()) {
+				return availableLabs;
+			}
+		}
+		return Collections.emptyList();
 	}
 
 }

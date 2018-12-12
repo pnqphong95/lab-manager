@@ -1,6 +1,7 @@
 package vn.cit.labmanager.app.event;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.department.Department;
 import vn.cit.labmanager.app.lab.Lab;
+import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.shift.Shift;
+import vn.cit.labmanager.app.user.User;
 import vn.cit.labmanager.app.weekofperiod.WeekOfPeriod;
 
 @Service
@@ -92,6 +95,14 @@ public class EventServiceImpl implements EventService {
 			return repo.countByLab(lab);
 		}
 		return 0;
+	}
+
+	@Override
+	public List<Event> findByCourseLecturerAndWeekOfPeriodPeriodBelongTo(User lecturer, Period period) {
+		if (lecturer == null || period == null) {
+			return Collections.emptyList();
+		}
+		return repo.findByCourseLecturerAndWeekOfPeriodPeriodBelongTo(lecturer, period);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import vn.cit.labmanager.app.event.request.form.EventRequestForm;
+import vn.cit.labmanager.app.event.request.form.EventTimeForm;
 
 @Service
 public class EventRequestInitializingServiceImpl implements EventRequestInitializingService {
@@ -14,18 +15,26 @@ public class EventRequestInitializingServiceImpl implements EventRequestInitiali
 	public List<EventRequest> from(EventRequestForm form) {
 		List<EventRequest> requests = new ArrayList<>();
 		form.getTimes().forEach(time -> {
-			EventRequest request = new EventRequest();
-			request.setCourse(form.getCourse());
-			request.setTools(form.getTools());
-			request.setShift(time.getShift());
-			request.setNote(form.getNote());
-			request.setWeekOfPeriod(time.getWop());
-			if (time.getDow() != null) {
-				request.setStartDate(time.getWop().getStartDate().with(time.getDow().getDayOfWeek()));
-			}
-			requests.add(request);
+			requests.add(this.from(form, time));
 		});
 		return requests;
+	}
+
+	@Override
+	public EventRequest from(EventRequestForm form, EventTimeForm time) {
+		if (time == null) {
+			return null;
+		}
+		EventRequest request = new EventRequest();
+		request.setCourse(form.getCourse());
+		request.setTools(form.getTools());
+		request.setShift(time.getShift());
+		request.setNote(form.getNote());
+		request.setWeekOfPeriod(time.getWop());
+		if (time.getDow() != null) {
+			request.setStartDate(time.getWop().getStartDate().with(time.getDow().getDayOfWeek()));
+		}
+		return request;
 	}
 
 }

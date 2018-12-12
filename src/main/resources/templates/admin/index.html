@@ -18,6 +18,7 @@
     <script>
  	// Call the dataTables jQuery plugin
     $(document).ready(function() {
+      var controlIndex = 6;
       var table = $('#schedule-list-table').DataTable({
     	  responsive: true,
     	  info: false,
@@ -36,7 +37,9 @@
     	  columnDefs: [
     		  { "width": "30px", "targets": 0 },
     		  { className: "search-week", "orderable": false, "targets": 1 },
-    		  { "orderable": false, "targets": 5 }
+    		  { "orderable": false, "targets": 2 },
+    		  { "orderable": false, "targets": 5 },
+    		  { "orderable": false, "width": "20px", "targets": controlIndex }
     	  ],
     	  initComplete: function () {
 	      		this.api().columns('.search-week').every( function () {
@@ -130,7 +133,7 @@
           	<div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Lịch giảng dạy trong học kỳ
+              Lịch giảng dạy của tôi
               <div id="week-filter-box" class="float-right d-none d-sm-block"></div>
               <div id="search-box" class="float-right d-none d-sm-block"></div>
             </div>
@@ -141,10 +144,11 @@
                     <tr>
                       <th>STT</th>
                       <th class="search-filter">Tuần</th>
-                      <th>Thứ</th>
+                      <th>Buổi, Thứ</th>
                       <th>Ngày</th>
                       <th>Lớp học phần</th>
                       <th>Phòng</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -152,12 +156,19 @@
                       <td th:text="${eventStat.index + 1}">Id</td>
                 	  <td th:text="${event.weekOfPeriod.numOrder}">Num Order</td>
                 	  <td>
+                	  	<span th:if="${event.shift != null}" th:text="${event.shift.name}"></span>
                 	  	<span th:if="${event.getDayOfWeekVi() != null}" th:text="${event.getDayOfWeekVi().viText}"></span>
                 	  </td>
                 	  <td th:text="${event.startDate}">Date</td>
                 	  <td th:text="${event.course.subject.name}">Subject name</td>
                 	  <td th:text="${event.lab.name}">Lab name</td>
+                	  <td>
+	                      <div style="display:inline-flex;">
+		                    <a href="#" th:data-href="${'admin/events/delete/' + event.id}" class="btn btn-sm btn-secondary" title="Xóa" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash-alt"></i></a>
+	                      </div>
+                      </td>
                     </tr>
+                    
                   </tbody>
                 </table>
               </div>
@@ -184,8 +195,32 @@
     <!-- Logout Modal-->
     <div th:replace="fragments/standard :: appLogoutModal"></div>
     
+    <!-- Confirm Modal-->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Bạn đã chắc chắn ?</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+            <a class="btn btn-danger btn-ok">Đồng ý</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <!-- Custom scripts for all pages-->
     <script th:src="@{/js/sb-admin.min.js}"></script>
+    <script>      
+      $('#confirmModal').on('show.bs.modal', function(e) {
+    	    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+      });
+    </script>
   </body>
 
 </html>

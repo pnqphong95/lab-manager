@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import vn.cit.labmanager.app.course.Course;
 import vn.cit.labmanager.app.course.CourseService;
 import vn.cit.labmanager.app.event.DayOfWeekVi;
+import vn.cit.labmanager.app.event.request.EventRequestInitializingService;
 import vn.cit.labmanager.app.event.request.handler.EventRequestDelegator;
 import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.period.PeriodService;
@@ -46,6 +47,9 @@ public class EventRequestFormController {
 	
 	@Autowired
 	private EventRequestDelegator delegator;
+	
+	@Autowired
+	private EventRequestInitializingService initService;
 	
 	@RequestMapping(path = "/admin/create_request")
     public String createEventRequestForm(Model model) {
@@ -96,6 +100,25 @@ public class EventRequestFormController {
     public String removeRow(@ModelAttribute("requestForm") EventRequestForm requestForm, BindingResult result, final HttpServletRequest req, Model model) {
         final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
         requestForm.getTimes().remove(rowId.intValue());
+        List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
+		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
+		if (!periods.isEmpty()) {
+	        model.addAttribute("availablePeriod", periods.get(0));
+	        model.addAttribute("tools", toolService.findAll());
+			model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
+			model.addAttribute("wops", wopService.findByPeriod(periods.get(0)));
+			model.addAttribute("dows", DayOfWeekVi.values());
+			model.addAttribute("shifts", shiftService.findAll());
+		}
+        return "admin/myrequest/edit";
+    }
+	
+	@RequestMapping(value="/admin/create_request", params={"checkAvalable"})
+    public String checkAvalable(@ModelAttribute("requestForm") EventRequestForm requestForm, BindingResult result, final HttpServletRequest req, Model model) {
+        final Integer rowId = Integer.valueOf(req.getParameter("checkAvalable"));
+        EventTimeForm time = requestForm.getTimes().get(rowId.intValue());
+        boolean hasAvailableLab = !delegator.getAvailableLab(initService.from(requestForm, time)).isEmpty();
+        time.setAvailable(hasAvailableLab);
         List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
 		if (!periods.isEmpty()) {
