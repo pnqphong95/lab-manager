@@ -74,7 +74,7 @@
 		                    <tr>
 		                      <th>Stt</th>
 		                      <th>Tuần</th>
-		                      <th>Ngày</th>
+		                      <th>Thứ</th>
 		                      <th>Buổi</th>
 		                      <th>
 			                    <button type="submit" name="addRow" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></button>
@@ -91,7 +91,10 @@
 			                    </select>
 			                  </td>
 			                  <td>
-			                    <input type="date" class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].start}" required/>
+			                  	<select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].dow}">
+			                      <option th:value="${null}">Chọn thứ</option>
+			                      <option th:each="dow : ${dows}" th:value="${dow}" th:text="${dow.getViText()}"></option>
+			                    </select>
 			                  </td>
 			                  <td>
 		                	  	<select class="form-control form-control-sm" th:field="*{times[__${timeStat.index}__].shift}" required>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import vn.cit.labmanager.app.course.Course;
 import vn.cit.labmanager.app.course.CourseService;
+import vn.cit.labmanager.app.event.DayOfWeekVi;
 import vn.cit.labmanager.app.event.request.handler.EventRequestDelegator;
 import vn.cit.labmanager.app.period.Period;
 import vn.cit.labmanager.app.period.PeriodService;
@@ -63,6 +64,7 @@ public class EventRequestFormController {
 			model.addAttribute("requestForm", form);
 			model.addAttribute("courses", courses);
 			model.addAttribute("wops", wopService.findByPeriod(periods.get(0)));
+			model.addAttribute("dows", DayOfWeekVi.values());
 			model.addAttribute("shifts", shiftService.findAll());
 		}
 		return "admin/myrequest/edit";   
@@ -70,7 +72,6 @@ public class EventRequestFormController {
 	
 	@RequestMapping(value="/admin/create_request", params={"saveRequest"})
 	public String saveRequest(@ModelAttribute("requestForm") final EventRequestForm requestForm, BindingResult result, Model model) {
-		System.out.println(requestForm.getTools());
 		delegator.delegate(requestForm);
 		return "redirect:/admin";
 	}
@@ -78,7 +79,6 @@ public class EventRequestFormController {
 	@RequestMapping(value="/admin/create_request", params={"addRow"})
     public String addRow(@ModelAttribute("requestForm") EventRequestForm requestForm, BindingResult result, Model model) {
 		requestForm.getTimes().add(new EventTimeForm());
-		System.out.println(requestForm.getTools());
 		List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
 		if (!periods.isEmpty()) {
@@ -86,6 +86,7 @@ public class EventRequestFormController {
 			model.addAttribute("tools", toolService.findAll());
 			model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
 			model.addAttribute("wops", wopService.findByPeriod(periods.get(0)));
+			model.addAttribute("dows", DayOfWeekVi.values());
 			model.addAttribute("shifts", shiftService.findAll());
 		}
         return "admin/myrequest/edit";
@@ -94,7 +95,6 @@ public class EventRequestFormController {
 	@RequestMapping(value="/admin/create_request", params={"removeRow"})
     public String removeRow(@ModelAttribute("requestForm") EventRequestForm requestForm, BindingResult result, final HttpServletRequest req, Model model) {
         final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
-        System.out.println(requestForm.getTools());
         requestForm.getTimes().remove(rowId.intValue());
         List<Period> periods = periodService.findAvailablePeriod(new Sort(Sort.Direction.ASC, "startDate"));
 		model.addAttribute("existAvailablePeriod", !periods.isEmpty());
@@ -103,6 +103,7 @@ public class EventRequestFormController {
 	        model.addAttribute("tools", toolService.findAll());
 			model.addAttribute("courses", courseService.findByLecturerAndCurrentPeriod(userService.getCurrentUser().orElse(null)));
 			model.addAttribute("wops", wopService.findByPeriod(periods.get(0)));
+			model.addAttribute("dows", DayOfWeekVi.values());
 			model.addAttribute("shifts", shiftService.findAll());
 		}
         return "admin/myrequest/edit";
