@@ -40,16 +40,25 @@ insert into lab (id, created, created_by, modified, modified_by, capacity, cpu, 
 
 insert into lab_tools (lab_id, tool_id) values (1, 2);
 insert into lab_tools (lab_id, tool_id) values (1, 3);
+insert into lab_tools (lab_id, tool_id) values (2, 7);
+insert into lab_tools (lab_id, tool_id) values (3, 10);
+insert into lab_tools (lab_id, tool_id) values (3, 1);
+insert into lab_tools (lab_id, tool_id) values (4, 3);
 insert into lab_tools (lab_id, tool_id) values (5, 1);
 insert into lab_tools (lab_id, tool_id) values (6, 1);
 insert into lab_tools (lab_id, tool_id) values (6, 2);
-insert into lab_tools (lab_id, tool_id) values (4, 3);
-insert into lab_tools (lab_id, tool_id) values (2, 7);
+insert into lab_tools (lab_id, tool_id) values (7, 9);
+insert into lab_tools (lab_id, tool_id) values (7, 5);
+insert into lab_tools (lab_id, tool_id) values (8, 1);
+insert into lab_tools (lab_id, tool_id) values (8, 2);
+insert into lab_tools (lab_id, tool_id) values (8, 7);
+insert into lab_tools (lab_id, tool_id) values (9, 5);
+insert into lab_tools (lab_id, tool_id) values (9, 1);
 insert into lab_tools (lab_id, tool_id) values (10, 7);
-insert into lab_tools (lab_id, tool_id) values (15, 4);
 insert into lab_tools (lab_id, tool_id) values (12, 3);
 insert into lab_tools (lab_id, tool_id) values (13, 6);
 insert into lab_tools (lab_id, tool_id) values (13, 8);
+insert into lab_tools (lab_id, tool_id) values (15, 4);
 
 insert into period (created, created_by, modified, modified_by, amount_of_week, end_date, end_year, semester, start_date, start_year, id) values ('2018-10-21T12:28:01Z', 'phong', '2018-10-21T12:28:01Z', 'phong', 20, '2019-03-31', 2019, 'First', '2018-11-12', 2018, 1);
 

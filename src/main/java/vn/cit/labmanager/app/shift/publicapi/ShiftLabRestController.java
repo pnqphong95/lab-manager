@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class ShiftLabRestController {
 	public List<ShiftLabPublicDto> findAll() {
 		List<ShiftLabPublicDto> dtos = new ArrayList<>();
 		List<Shift> shifts = shiftService.findAll();
-		List<Lab> labs = labService.findAll();
+		List<Lab> labs = labService.findAll(new Sort(Sort.Direction.ASC, "created"));
 		for(Shift shift : shifts) {
 			for(Lab lab : labs) {
 				ShiftLabPublicDto dto = new ShiftLabPublicDto();
